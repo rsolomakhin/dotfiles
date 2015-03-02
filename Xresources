@@ -1,0 +1,68 @@
+! Copyright 2015 Rouslan Solomakhin
+!
+! Licensed under the Apache License, Version 2.0 (the "License");
+! you may not use this file except in compliance with the License.
+! You may obtain a copy of the License at
+!
+!     http://www.apache.org/licenses/LICENSE-2.0
+!
+! Unless required by applicable law or agreed to in writing, software
+! distributed under the License is distributed on an "AS IS" BASIS,
+! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+! See the License for the specific language governing permissions and
+! limitations under the License.
+
+xterm*locale: true
+xterm*metaSendsEscape: true
+xterm*saveLines: 4096
+xterm*termName: xterm-256color
+xterm*utf8: 1
+xterm*faceName: Source Code Pro Medium:size=10:style=Medium,Regular
+
+!BLK Cursor
+#define _color0        black
+#define _color8        black
+!RED Tag
+#define _color1        brown
+#define _color9        brown
+!GRN SpecialKey
+#define _color2        DarkGreen
+#define _color10       DarkGreen
+!YEL Keyword
+#define _color3        DarkGoldenrod
+#define _color11       DarkGoldenrod
+!BLU Number
+#define _color4        MidnightBlue
+#define _color12       MidnightBlue
+!MAG Precondit
+#define _color5        BlueViolet
+#define _color13       BlueViolet
+!CYN Float
+#define _color6        SteelBlue3
+#define _color14       SteelBlue3
+!WHT Search
+#define _color7        Grey89
+#define _color15       Grey89
+!TXT Normal, Normal, Cursor
+#define _foreground    black
+#define _background    white
+#define _cursorColor   black
+XTerm*color0         : _color0
+XTerm*color1         : _color1
+XTerm*color2         : _color2
+XTerm*color3         : _color3
+XTerm*color4         : _color4
+XTerm*color5         : _color5
+XTerm*color6         : _color6
+XTerm*color7         : _color7
+XTerm*color8         : _color8
+XTerm*color9         : _color9
+XTerm*color10        : _color10
+XTerm*color11        : _color11
+XTerm*color12        : _color12
+XTerm*color13        : _color13
+XTerm*color14        : _color14
+XTerm*color15        : _color15
+XTerm*foreground     : _foreground
+XTerm*background     : _background
+XTerm*cursorColor    : _cursorColor
