@@ -17,7 +17,7 @@ xterm*metaSendsEscape: true
 xterm*saveLines: 4096
 xterm*termName: xterm-256color
 xterm*utf8: 1
-xterm*faceName: Source Code Pro Medium:size=10:style=Medium,Regular
+xterm*faceName: Source Code Pro:style=Regular:size=10:antialias=false
 
 !BLK Cursor
 #define _color0        black
