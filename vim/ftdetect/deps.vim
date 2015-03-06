@@ -12,5 +12,4 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-set textwidth=80
-set shiftwidth=2
+au BufRead,BufNewFile *.DEPS    set filetype=python

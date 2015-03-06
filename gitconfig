@@ -34,3 +34,4 @@
 	can = commit -a --amend --no-edit
 	du = diff @{u}
 	dus = diff @{u} --stat
+	sub = submodule update --init --recursive

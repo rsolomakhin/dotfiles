@@ -12,6 +12,4 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-set textwidth=80
 set cinoptions=N-s,g.5s,h.5s
-set shiftwidth=2
