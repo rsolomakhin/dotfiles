@@ -24,14 +24,10 @@
 [push]
 	default = simple
 [alias]
-	ci = commit
 	co = checkout
 	ls = ls-files
-	reup = rebase-update
 	st = status
 	br = branch
 	brv = branch -vv
 	can = commit -a --amend --no-edit
-	du = diff @{u}
-	dus = diff @{u} --stat
 	sub = submodule update --init --recursive
