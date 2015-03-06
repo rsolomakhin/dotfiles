@@ -26,8 +26,6 @@ silent! if plug#begin('~/.vim/plugged')
         \ 'do': './install.sh --clang-completer',
         \ 'for': ['c', 'cpp'] }
   call plug#end()
-
-  let g:gitgutter_highlight_lines = 1
 endif
 
 set autoindent
@@ -42,6 +40,7 @@ set incsearch
 set laststatus=2
 set nocompatible
 set nojoinspaces
+set nospell
 set ruler
 set shiftwidth=2
 set showcmd
@@ -63,17 +62,20 @@ au BufReadPost *
 
 if has("win32")
   set viminfo='10,\"100,:20,%,n~/_viminfo
+  set directory=~/_vim/swap,.
 else
   set viminfo='10,\"100,:20,%,n~/.viminfo
+  set directory=~/.vim/swap,.
 endif
 
 if isdirectory(expand('~/chrome'))
   source ~/chrome/src/tools/vim/clang-format.vim
   source ~/chrome/src/tools/vim/filetypes.vim
-  source ~/chrome/src/tools/vim/ninja-build.vim
-  let g:ycm_global_ycm_extra_conf =
-        \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 endif
+
+let g:gitgutter_highlight_lines = 1
+let g:ycm_global_ycm_extra_conf =
+      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 
 " Colors from http://pln.jonas.me/xterm-colors
 hi DiffAdd ctermbg=193
