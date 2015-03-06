@@ -56,3 +56,7 @@ if isdirectory(expand('~/chrome'))
   source ~/chrome/src/tools/vim/filetypes.vim
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
+
+if isdirectory(expand('~/.fzf'))
+  set rtp+=~/.fzf
+endif

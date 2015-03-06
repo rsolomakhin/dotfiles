@@ -39,6 +39,8 @@ if [ -n "$PS1" ]; then
   source ~/chrome/src/tools/cr/cr-bash-helpers.sh
   (cd && source ~/config-chrome/android.sh > /dev/null)
 
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
   COLOR_PARAM="--color=auto"
   source ~/.bash_aliases
 fi
