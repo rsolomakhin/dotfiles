@@ -13,6 +13,7 @@
 " limitations under the License.
 
 silent! if plug#begin('~/.vim/plugged')
+  Plug 'airblade/vim-gitgutter'
   Plug 'junegunn/fzf', {
         \ 'dir': '~/.fzf',
         \ 'do': 'yes \| ./install',
@@ -25,9 +26,10 @@ silent! if plug#begin('~/.vim/plugged')
         \ 'do': './install.sh --clang-completer',
         \ 'for': ['c', 'cpp'] }
   call plug#end()
+
+  let g:gitgutter_highlight_lines = 1
 endif
 
-hi ColorColumn ctermbg=gray
 set autoindent
 set backspace=indent,eol,start
 set colorcolumn=+1
@@ -48,6 +50,7 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=2
+set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 set tabstop=2
 set textwidth=80
 set wildmenu
@@ -71,3 +74,14 @@ if isdirectory(expand('~/chrome'))
   let g:ycm_global_ycm_extra_conf =
         \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 endif
+
+" Colors from http://pln.jonas.me/xterm-colors
+hi DiffAdd ctermbg=193
+hi DiffChange ctermbg=229
+hi DiffDelete ctermbg=223
+hi DiffText ctermbg=228
+hi GitGutterAdd          ctermbg=255 ctermfg=2
+hi GitGutterChange       ctermbg=255 ctermfg=3
+hi GitGutterDelete       ctermbg=255 ctermfg=1
+hi ColorColumn           ctermbg=255
+hi SignColumn            ctermbg=255
