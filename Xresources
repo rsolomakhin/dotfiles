@@ -12,57 +12,59 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
+xterm*colorBDMode: true
+xterm*faceName: Source Code Pro:style=Regular:size=10:antialias=false
 xterm*locale: true
 xterm*metaSendsEscape: true
 xterm*saveLines: 4096
 xterm*termName: xterm-256color
 xterm*utf8: 1
-xterm*faceName: Source Code Pro:style=Regular:size=10:antialias=false
 
+! Color names from http://pln.jonas.me/xterm-colors
 !BLK Cursor
-#define _color0        black
-#define _color8        black
+#define _color0        Black
+#define _color8        Grey11
 !RED Tag
-#define _color1        brown
-#define _color9        brown
+#define _color1        Brown
+#define _color9        LightPink4
 !GRN SpecialKey
 #define _color2        DarkGreen
-#define _color10       DarkGreen
+#define _color10       Chartreuse4
 !YEL Keyword
 #define _color3        DarkGoldenrod
-#define _color11       DarkGoldenrod
+#define _color11       LightSalmon3
 !BLU Number
 #define _color4        MidnightBlue
-#define _color12       MidnightBlue
+#define _color12       DarkBlue
 !MAG Precondit
-#define _color5        BlueViolet
+#define _color5        Purple3
 #define _color13       BlueViolet
 !CYN Float
-#define _color6        SteelBlue3
+#define _color6        SteelBlue
 #define _color14       SteelBlue3
 !WHT Search
 #define _color7        Grey89
-#define _color15       Grey89
+#define _color15       Grey93
 !TXT Normal, Normal, Cursor
 #define _foreground    black
 #define _background    white
 #define _cursorColor   black
-XTerm*color0         : _color0
-XTerm*color1         : _color1
-XTerm*color2         : _color2
-XTerm*color3         : _color3
-XTerm*color4         : _color4
-XTerm*color5         : _color5
-XTerm*color6         : _color6
-XTerm*color7         : _color7
-XTerm*color8         : _color8
-XTerm*color9         : _color9
-XTerm*color10        : _color10
-XTerm*color11        : _color11
-XTerm*color12        : _color12
-XTerm*color13        : _color13
-XTerm*color14        : _color14
-XTerm*color15        : _color15
-XTerm*foreground     : _foreground
-XTerm*background     : _background
-XTerm*cursorColor    : _cursorColor
+xterm*color0         : _color0
+xterm*color1         : _color1
+xterm*color2         : _color2
+xterm*color3         : _color3
+xterm*color4         : _color4
+xterm*color5         : _color5
+xterm*color6         : _color6
+xterm*color7         : _color7
+xterm*color8         : _color8
+xterm*color9         : _color9
+xterm*color10        : _color10
+xterm*color11        : _color11
+xterm*color12        : _color12
+xterm*color13        : _color13
+xterm*color14        : _color14
+xterm*color15        : _color15
+xterm*foreground     : _foreground
+xterm*background     : _background
+xterm*cursorColor    : _cursorColor
