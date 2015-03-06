@@ -34,6 +34,8 @@ if [ -n "$PS1" ]; then
   export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
   export CHROMIUM=$HOME/chrome/src
   export EDITOR='vim'
+  export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\
+\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
   source /etc/bash_completion
   source ~/chrome/src/tools/cr/cr-bash-helpers.sh
