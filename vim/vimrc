@@ -12,17 +12,21 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', {
-      \ 'dir': '~/.fzf',
-      \ 'do': 'yes \| ./install',
-      \ 'on': 'FZF' }
-Plug 'Valloric/YouCompleteMe', {
-      \ 'do': './install.sh --clang-completer',
-      \ 'for': ['c', 'cpp'] }
-call plug#end()
+silent! if plug#begin('~/.vim/plugged')
+  Plug 'junegunn/fzf', {
+        \ 'dir': '~/.fzf',
+        \ 'do': 'yes \| ./install',
+        \ 'on': 'FZF' }
+  Plug 'junegunn/vim-oblique'
+  Plug 'junegunn/vim-peekaboo'
+  Plug 'junegunn/vim-pseudocl'
+  Plug 'tpope/vim-fugitive'
+  Plug 'Valloric/YouCompleteMe', {
+        \ 'do': './install.sh --clang-completer',
+        \ 'for': ['c', 'cpp'] }
+  call plug#end()
+endif
 
-filetype plugin indent on
 hi ColorColumn ctermbg=gray
 set autoindent
 set backspace=indent,eol,start
@@ -47,7 +51,6 @@ set softtabstop=2
 set tabstop=2
 set textwidth=80
 set wildmenu
-syntax on
 
 au BufNewFile,BufRead */WebKit/*
       \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth&
