@@ -12,4 +12,46 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source ~/.bashrc
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PATH=$PATH:$HOME/android-sdk-linux/platform-tools
+PATH=$PATH:$HOME/android-sdk-linux/tools
+PATH=$PATH:$HOME/depot_tools
+PATH=$PATH:$HOME/bin
+export PATH
+
+if [ -n "$PS1" ]; then
+  # Resume SSH agent.
+  [ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh > /dev/null 2>&1
+  if ! ssh-add -l > /dev/null 2>&1; then
+    killall -9 ssh-agent > /dev/null 2>&1
+    ssh-agent -s > ~/.ssh_agent.sh
+    source ~/.ssh_agent.sh > /dev/null 2>&1
+    for file in ~/.ssh/*.pub; do
+      ssh-add ${file/.pub}
+    done
+  fi
+
+  export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
+  export CHROMIUM=$HOME/chrome/src
+  export EDITOR='vim'
+  export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\
+\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+  [ -f /etc/bash_completion ] && source /etc/bash_completion
+
+  [ -f ~/chrome/src/tools/cr/cr-bash-helpers.sh ] && \
+      source ~/chrome/src/tools/cr/cr-bash-helpers.sh
+
+  [ -f ~/config-chrome/android.sh ] && \
+      source ~/config-chrome/android.sh > /dev/null
+
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+  alias e="emacs"
+  alias em="emacs"
+  alias grep="grep --color=auto"
+  alias ls="ls --color=auto --group-directories-first"
+  alias so="source"
+  alias vi="vim"
+  alias v="vim"
+fi
