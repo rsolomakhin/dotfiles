@@ -12,19 +12,21 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-silent! if plug#begin('~/.vim/plugged')
+silent! if plug#begin()
+  if !has("win32")
+    Plug 'junegunn/fzf', {
+          \ 'dir': '~/.fzf',
+          \ 'do': 'yes \| ./install',
+          \ 'on': 'FZF' }
+    Plug 'Valloric/YouCompleteMe', {
+          \ 'do': './install.sh --clang-completer',
+          \ 'for': ['c', 'cpp'] }
+  endif
   Plug 'airblade/vim-gitgutter'
-  Plug 'junegunn/fzf', {
-        \ 'dir': '~/.fzf',
-        \ 'do': 'yes \| ./install',
-        \ 'on': 'FZF' }
   Plug 'junegunn/vim-oblique'
   Plug 'junegunn/vim-peekaboo'
   Plug 'junegunn/vim-pseudocl'
   Plug 'tpope/vim-fugitive'
-  Plug 'Valloric/YouCompleteMe', {
-        \ 'do': './install.sh --clang-completer',
-        \ 'for': ['c', 'cpp'] }
   call plug#end()
 endif
 
@@ -49,7 +51,8 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=2
-set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ %m%r\ %=%-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
+      \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 set tabstop=2
 set textwidth=80
 set wildmenu
@@ -62,7 +65,7 @@ au BufReadPost *
 
 if has("win32")
   set viminfo='10,\"100,:20,%,n~/_viminfo
-  set directory=~/_vim/swap,.
+  set directory=~/_vimfiles/swap,.
 else
   set viminfo='10,\"100,:20,%,n~/.viminfo
   set directory=~/.vim/swap,.
@@ -78,12 +81,12 @@ let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 
 " Colors from http://pln.jonas.me/xterm-colors
-hi DiffAdd ctermbg=193
-hi DiffChange ctermbg=229
-hi DiffDelete ctermbg=223
-hi DiffText ctermbg=228
-hi GitGutterAdd          ctermbg=255 ctermfg=2
-hi GitGutterChange       ctermbg=255 ctermfg=3
-hi GitGutterDelete       ctermbg=255 ctermfg=1
-hi ColorColumn           ctermbg=255
-hi SignColumn            ctermbg=255
+hi DiffAdd               ctermbg=193 guibg=#d7ffaf
+hi DiffChange            ctermbg=229 guibg=#ffffaf
+hi DiffDelete            ctermbg=223 guibg=#ffd7af
+hi DiffText              ctermbg=228 guibg=#ffff87
+hi GitGutterAdd          ctermbg=255 guibg=#eeeeee ctermfg=2 guifg=#008000
+hi GitGutterChange       ctermbg=255 guibg=#eeeeee ctermfg=3 guifg=#808000
+hi GitGutterDelete       ctermbg=255 guibg=#eeeeee ctermfg=1 guifg=#800000
+hi ColorColumn           ctermbg=255 guibg=#eeeeee
+hi SignColumn            ctermbg=255 guibg=#eeeeee
