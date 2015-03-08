@@ -65,7 +65,7 @@ au BufReadPost *
 
 if has("win32")
   set viminfo='10,\"100,:20,%,n~/_viminfo
-  set directory=~/_vimfiles/swap,.
+  set directory=~/vimfiles/swap,.
 else
   set viminfo='10,\"100,:20,%,n~/.viminfo
   set directory=~/.vim/swap,.
