@@ -12,4 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source ~/.bashrc
+alias e="emacs"
+alias em="emacs"
+alias grep="grep $COLOR_PARAM"
+alias lla="ls $COLOR_PARAM -lha --group-directories-first"
+alias ll="ls $COLOR_PARAM -lh --group-directories-first"
+alias l="ls $COLOR_PARAM --group-directories-first"
+alias ls="ls $COLOR_PARAM --group-directories-first"
+alias so="source"
+alias vi="vim"
+alias v="vim"

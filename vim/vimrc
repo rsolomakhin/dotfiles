@@ -51,26 +51,11 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=2
+set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
+      \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 set tabstop=2
 set textwidth=80
 set wildmenu
-
-set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
-      \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
-
-au BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
-au BufRead,BufNewFile *.gyp                set filetype=python
-au BufRead,BufNewFile *.gypi               set filetype=python
-au BufRead,BufNewFile DEPS                 set filetype=python
-
-au BufRead,BufNewFile * if &ft == 'cpp' |
-      \ setlocal cinoptions=N-s,g.5s,h.5s
-
-au BufRead,BufNewFile * if &ft == 'java' |
-      \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=100
-
-au BufRead,BufNewFile * if &ft == 'gitcommit' |
-      \ setlocal spell textwidth=72
 
 au BufNewFile,BufRead */WebKit/*
       \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth&
@@ -105,11 +90,3 @@ hi GitGutterChange       ctermbg=255 guibg=#eeeeee ctermfg=3 guifg=#808000
 hi GitGutterDelete       ctermbg=255 guibg=#eeeeee ctermfg=1 guifg=#800000
 hi ColorColumn           ctermbg=255 guibg=#eeeeee
 hi SignColumn            ctermbg=255 guibg=#eeeeee
-
-if has("gui_running")
-  if has("win32")
-    set guifont=Source\ Code\ Pro:h10
-  else
-    set guifont=Source\ Code\ Pro\ 10
-  endif
-endif
