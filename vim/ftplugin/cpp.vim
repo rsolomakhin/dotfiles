@@ -12,4 +12,5 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-set cinoptions=N-s,g.5s,h.5s
+setlocal cinoptions=N-s,g.5s,h.5s
+setlocal textwidth=80

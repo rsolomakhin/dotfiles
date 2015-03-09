@@ -12,7 +12,7 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set textwidth=100
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal softtabstop=4
+setlocal textwidth=100

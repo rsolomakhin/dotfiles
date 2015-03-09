@@ -53,7 +53,6 @@ set softtabstop=2
 set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
       \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 set tabstop=2
-set textwidth=80
 set wildmenu
 
 au BufNewFile,BufRead */WebKit/*
