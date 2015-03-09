@@ -90,3 +90,11 @@ hi GitGutterChange       ctermbg=255 guibg=#eeeeee ctermfg=3 guifg=#808000
 hi GitGutterDelete       ctermbg=255 guibg=#eeeeee ctermfg=1 guifg=#800000
 hi ColorColumn           ctermbg=255 guibg=#eeeeee
 hi SignColumn            ctermbg=255 guibg=#eeeeee
+
+if has("gui_running")
+  if has("win32")
+    set guifont=Source\ Code\ Pro:h10
+  else
+    set guifont=Source\ Code\ Pro\ 10
+  endif
+endif
