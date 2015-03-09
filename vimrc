@@ -36,7 +36,6 @@ set colorcolumn=+1
 set encoding=utf-8
 set expandtab
 set hidden
-set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
