@@ -43,6 +43,11 @@ if [ -n "$PS1" ]; then
 
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-  COLOR_PARAM="--color=auto"
-  source ~/.bash_aliases
+  alias e="emacs"
+  alias em="emacs"
+  alias grep="grep --color=auto"
+  alias ls="ls --color=auto --group-directories-first"
+  alias so="source"
+  alias vi="vim"
+  alias v="vim"
 fi
