@@ -31,8 +31,8 @@ xterm*utf8: 1
 #define _color2        DarkGreen
 #define _color10       Chartreuse4
 !YEL Keyword
-#define _color3        DarkGoldenrod
-#define _color11       LightSalmon3
+#define _color3        Gold1
+#define _color11       Yellow1
 !BLU Number
 #define _color4        MidnightBlue
 #define _color12       DarkBlue
