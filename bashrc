@@ -50,4 +50,7 @@ if [ -n "$PS1" ]; then
   alias so="source"
   alias vi="vim"
   alias v="vim"
+
+  # Disable flow control (Ctrl-S).
+  stty -ixon
 fi
