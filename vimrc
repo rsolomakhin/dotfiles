@@ -52,7 +52,7 @@ set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
       \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 set tabstop=2
 set wildmenu
-set viminfo='10,\"100,:20,%,n~/.viminfo
+set viminfo='100,<100,:20,%,n~/.viminfo
 
 if !has("win32")
   set directory=~/.vim/swap,.
