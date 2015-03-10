@@ -13,3 +13,8 @@
 " limitations under the License.
 
 setlocal textwidth=80
+
+if !exists("clang_format_loaded") && isdirectory(expand('~/chrome'))
+  source ~/chrome/src/tools/vim/clang-format.vim
+  let clang_format_loaded = 1
+endif

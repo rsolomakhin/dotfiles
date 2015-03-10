@@ -54,29 +54,26 @@ set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
       \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 set tabstop=2
 set wildmenu
+set viminfo='10,\"100,:20,%,n~/.viminfo
 
-au BufNewFile,BufRead */WebKit/*
-      \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth&
-
-au BufReadPost *
-      \ call setpos(".", getpos("'\""))
-
-if has("win32")
-  set viminfo='10,\"100,:20,%,n~/_viminfo
-  set directory=~/vimfiles/swap,.
-else
-  set viminfo='10,\"100,:20,%,n~/.viminfo
+if !has("win32")
   set directory=~/.vim/swap,.
-endif
-
-if isdirectory(expand('~/chrome'))
-  source ~/chrome/src/tools/vim/clang-format.vim
-  source ~/chrome/src/tools/vim/filetypes.vim
+  set guifont=Source\ Code\ Pro\ 10
+else
+  set directory=~/vimfiles/swap,.
+  set guifont=Source\ Code\ Pro:h10
 endif
 
 let g:gitgutter_highlight_lines = 1
 let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
+
+if !exists("autocommands_loaded")
+  let autocommands_loaded = 1
+  au BufNewFile,BufRead */WebKit/*
+        \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth&
+  au BufReadPost * call setpos(".", getpos("'\""))
+endif
 
 " Colors from http://pln.jonas.me/xterm-colors
 hi DiffAdd               ctermbg=193 guibg=#d7ffaf
@@ -88,11 +85,3 @@ hi GitGutterChange       ctermbg=255 guibg=#eeeeee ctermfg=3 guifg=#808000
 hi GitGutterDelete       ctermbg=255 guibg=#eeeeee ctermfg=1 guifg=#800000
 hi ColorColumn           ctermbg=255 guibg=#eeeeee
 hi SignColumn            ctermbg=255 guibg=#eeeeee
-
-if has("gui_running")
-  if has("win32")
-    set guifont=Source\ Code\ Pro:h10
-  else
-    set guifont=Source\ Code\ Pro\ 10
-  endif
-endif

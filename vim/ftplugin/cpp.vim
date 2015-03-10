@@ -14,3 +14,8 @@
 
 setlocal cinoptions=N-s,g.5s,h.5s
 setlocal textwidth=80
+
+if !exists("clang_format_loaded") && isdirectory(expand('~/chrome'))
+  source ~/chrome/src/tools/vim/clang-format.vim
+  let clang_format_loaded = 1
+endif
