@@ -76,7 +76,7 @@ let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 let g:ycm_complete_in_strings = 1
 
-map g<C-]> :YcmCompleter GoTo<CR>
+map <C-]> :YcmCompleter GoTo<CR>
 
 " Colors from http://pln.jonas.me/xterm-colors
 hi DiffAdd               ctermbg=193 guibg=#d7ffaf
