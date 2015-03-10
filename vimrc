@@ -16,11 +16,9 @@ silent! if plug#begin()
   if !has("win32")
     Plug 'junegunn/fzf', {
           \ 'dir': '~/.fzf',
-          \ 'do': 'yes \| ./install',
-          \ 'on': 'FZF' }
+          \ 'do': 'yes \| ./install' }
     Plug 'Valloric/YouCompleteMe', {
-          \ 'do': './install.sh --clang-completer',
-          \ 'for': ['c', 'cpp'] }
+          \ 'do': './install.sh --clang-completer' }
   endif
   Plug 'airblade/vim-gitgutter'
   Plug 'junegunn/vim-oblique'
@@ -76,7 +74,26 @@ let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 let g:ycm_complete_in_strings = 1
 
-map <C-]> :YcmCompleter GoTo<CR>
+" List of buffers
+function! BufList()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! BufOpen(e)
+  execute 'buffer '. matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader>b :call fzf#run({
+\   'source':  reverse(BufList()),
+\   'sink':    function('BufOpen'),
+\   'options': '+m',
+\   'down':    '40%'
+\ })<CR>
+
+nnoremap <silent> <Leader>t :FZF<CR>
 
 " Colors from http://pln.jonas.me/xterm-colors
 hi DiffAdd               ctermbg=193 guibg=#d7ffaf

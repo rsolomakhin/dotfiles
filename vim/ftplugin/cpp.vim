@@ -14,6 +14,7 @@
 
 setlocal cinoptions=N-s,g.5s,h.5s
 setlocal textwidth=80
+nnoremap <buffer><silent> <C-]> :YcmCompleter GoTo<CR>
 
 if !exists("clang_format_loaded") && isdirectory(expand('~/chrome'))
   source ~/chrome/src/tools/vim/clang-format.vim
