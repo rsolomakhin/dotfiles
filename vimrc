@@ -64,16 +64,19 @@ else
   set guifont=Source\ Code\ Pro:h10
 endif
 
-let g:gitgutter_highlight_lines = 1
-let g:ycm_global_ycm_extra_conf =
-      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
   au BufNewFile,BufRead */WebKit/*
         \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth&
   au BufReadPost * call setpos(".", getpos("'\""))
 endif
+
+let g:gitgutter_highlight_lines = 1
+let g:ycm_global_ycm_extra_conf =
+      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
+let g:ycm_complete_in_strings = 1
+
+map g<C-]> :YcmCompleter GoTo<CR>
 
 " Colors from http://pln.jonas.me/xterm-colors
 hi DiffAdd               ctermbg=193 guibg=#d7ffaf
