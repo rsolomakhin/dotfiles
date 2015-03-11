@@ -12,8 +12,14 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-xterm*colorBDMode: true
-xterm*faceName: Source Code Pro:style=Regular:size=10:antialias=false
+xterm*boldFont: terminus-bold-16
+xterm*font1: terminus-12
+xterm*font2: terminus-14
+xterm*font3: terminus-18
+xterm*font4: terminus-20
+xterm*font5: terminus-22
+xterm*font6: terminus-24
+xterm*font: terminus-16
 xterm*locale: true
 xterm*metaSendsEscape: true
 xterm*saveLines: 4096
@@ -23,32 +29,32 @@ xterm*utf8: 1
 ! Color names from http://pln.jonas.me/xterm-colors
 !BLK Cursor
 #define _color0        Black
-#define _color8        Grey11
+#define _color8        Black
 !RED Tag
 #define _color1        Brown
-#define _color9        LightPink4
+#define _color9        Brown
 !GRN SpecialKey
 #define _color2        DarkGreen
-#define _color10       Chartreuse4
+#define _color10       DarkGreen
 !YEL Keyword
 #define _color3        Gold1
-#define _color11       Yellow1
+#define _color11       Gold1
 !BLU Number
 #define _color4        MidnightBlue
-#define _color12       DarkBlue
+#define _color12       MidnightBlue
 !MAG Precondit
 #define _color5        Purple3
-#define _color13       BlueViolet
+#define _color13       Purple3
 !CYN Float
 #define _color6        SteelBlue
-#define _color14       SteelBlue3
+#define _color14       SteelBlue
 !WHT Search
 #define _color7        Grey89
-#define _color15       Grey93
+#define _color15       Grey89
 !TXT Normal, Normal, Cursor
-#define _foreground    black
-#define _background    white
-#define _cursorColor   black
+#define _foreground    Black
+#define _background    White
+#define _cursorColor   Black
 xterm*color0         : _color0
 xterm*color1         : _color1
 xterm*color2         : _color2
