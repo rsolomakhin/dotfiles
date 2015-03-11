@@ -72,7 +72,7 @@ endif
 let g:gitgutter_highlight_lines = 1
 let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_strings = 0
 
 " Shortcuts from https://github.com/junegunn/fzf/wiki/Examples-(vim)
 " \-b - buffers.
