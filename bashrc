@@ -20,6 +20,12 @@ PATH=$PATH:$HOME/bin
 export PATH
 
 if [ -n "$PS1" ]; then
+  export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
+  export CHROMIUM=$HOME/chrome/src
+  export EDITOR='vim'
+  export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\
+\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
   # Resume SSH agent.
   [ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh > /dev/null 2>&1
   if ! ssh-add -l > /dev/null 2>&1; then
@@ -31,30 +37,8 @@ if [ -n "$PS1" ]; then
     done
   fi
 
-  export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
-  export CHROMIUM=$HOME/chrome/src
-  export EDITOR='vim'
-  export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\
-\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
   source /etc/bash_completion
-  source ~/chrome/src/tools/cr/cr-bash-helpers.sh
-  (cd && source ~/config-chrome/android.sh > /dev/null)
-
-  if [ -f ~/.fzf.bash ]; then
-    source ~/.fzf.bash
-    # Examples from https://github.com/junegunn/fzf/wiki/examples
-    # ftags - search ctags
-    ftags() {
-      local line
-      [ -e tags ] &&
-      line=$(
-        awk 'BEGIN { FS="\t" } !/^!/ {print toupper($4)"\t"$1"\t"$2"\t"$3}' tags |
-        cut -c1-80 | fzf --nth=1,2
-      ) && $EDITOR $(cut -f3 <<< "$line") -c "set nocst" \
-                                          -c "silent tag $(cut -f2 <<< "$line")"
-    }
-  fi
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
   alias e="emacs"
   alias em="emacs"
