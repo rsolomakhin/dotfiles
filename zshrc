@@ -44,6 +44,7 @@ alias ls="ls --color=auto"
 alias so="source"
 alias vi="vim"
 alias v="vim"
+alias xterm='xterm -e zsh'
 alias zshrc='vim ~/.zshrc'
 
 alias -s cc=vim
