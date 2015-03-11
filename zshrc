@@ -82,7 +82,6 @@ else
   export HISTFILE=~/.history
 fi
 export SAVEHIST=1000
-setopt SHARE_HISTORY
 
 # Use emacs editing mode on command line.
 bindkey -e
