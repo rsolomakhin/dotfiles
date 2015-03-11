@@ -76,7 +76,7 @@ let g:ycm_complete_in_strings = 1
 
 " Shortcuts from https://github.com/junegunn/fzf/wiki/Examples-(vim)
 " \-b - buffers.
-" \-f - find files.
+" \-t - find files.
 " \-r - recent files.
 " \-s - search text within all open files.
 
@@ -98,7 +98,7 @@ nnoremap <silent> <Leader>b :call fzf#run({
       \ 'options': '+m',
       \ 'down'   : '40%' })<CR>
 
-nnoremap <silent> <Leader>f :FZF<CR>
+nnoremap <silent> <Leader>t :FZF<CR>
 
 nnoremap <silent> <Leader>r :call fzf#run({
       \ 'source': v:oldfiles,
