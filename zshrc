@@ -37,9 +37,6 @@ if ! ssh-add -l > /dev/null 2>&1; then
   done
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
-
 alias e="emacs"
 alias em="emacs"
 alias grep="grep --color=auto"
@@ -89,3 +86,6 @@ setopt SHARE_HISTORY
 
 # Use emacs editing mode on command line.
 bindkey -e
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
