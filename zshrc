@@ -86,3 +86,21 @@ else
 fi
 export SAVEHIST=1000
 setopt SHARE_HISTORY
+
+# Show VIM editing mode.
+precmd() {
+  RPROMPT=""
+}
+zle-keymap-select() {
+  RPROMPT=""
+  [[ $KEYMAP = vicmd ]] && RPROMPT="(CMD)"
+  () { return $__prompt_status }
+  zle reset-prompt
+}
+zle-line-init() {
+  typeset -g __prompt_status="$?"
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+bindkey -a u undo
+bindkey -a '^R' redo
