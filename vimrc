@@ -74,6 +74,12 @@ let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 let g:ycm_complete_in_strings = 1
 
+" Shortcuts from https://github.com/junegunn/fzf/wiki/Examples-(vim)
+" \-b - buffers.
+" \-f - find files.
+" \-r - recent files.
+" \-s - search text within all open files.
+
 " List of buffers
 function! BufList()
   redir => ls
@@ -87,13 +93,38 @@ function! BufOpen(e)
 endfunction
 
 nnoremap <silent> <Leader>b :call fzf#run({
-\   'source':  reverse(BufList()),
-\   'sink':    function('BufOpen'),
-\   'options': '+m',
-\   'down':    '40%'
-\ })<CR>
+      \ 'source' : reverse(BufList()),
+      \ 'sink'   : function('BufOpen'),
+      \ 'options': '+m',
+      \ 'down'   : '40%' })<CR>
 
-nnoremap <silent> <Leader>t :FZF<CR>
+nnoremap <silent> <Leader>f :FZF<CR>
+
+nnoremap <silent> <Leader>r :call fzf#run({
+      \ 'source': v:oldfiles,
+      \ 'sink' : 'e ',
+      \ 'options' : '-m' })<CR>
+
+function! s:line_handler(l)
+  let keys = split(a:l, ':\t')
+  exec 'buf ' . keys[0]
+  exec keys[1]
+  normal! ^zz
+endfunction
+
+function! s:buffer_lines()
+  let res = []
+  for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
+    call extend(res, map(getbufline(b,0,"$"), 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
+  endfor
+  return res
+endfunction
+
+nnoremap <silent> <Leader>s :call fzf#run({
+      \ 'source' : <sid>buffer_lines(),
+      \ 'sink'   : function('<sid>line_handler'),
+      \ 'options': '--extended --nth=3..',
+      \ 'down'   : '60%' })<CR>
 
 " Colors from http://pln.jonas.me/xterm-colors
 hi DiffAdd               ctermbg=193 guibg=#d7ffaf

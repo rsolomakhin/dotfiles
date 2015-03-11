@@ -41,7 +41,20 @@ if [ -n "$PS1" ]; then
   source ~/chrome/src/tools/cr/cr-bash-helpers.sh
   (cd && source ~/config-chrome/android.sh > /dev/null)
 
-  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+  if [ -f ~/.fzf.bash ]; then
+    source ~/.fzf.bash
+    # Examples from https://github.com/junegunn/fzf/wiki/examples
+    # ftags - search ctags
+    ftags() {
+      local line
+      [ -e tags ] &&
+      line=$(
+        awk 'BEGIN { FS="\t" } !/^!/ {print toupper($4)"\t"$1"\t"$2"\t"$3}' tags |
+        cut -c1-80 | fzf --nth=1,2
+      ) && $EDITOR $(cut -f3 <<< "$line") -c "set nocst" \
+                                          -c "silent tag $(cut -f2 <<< "$line")"
+    }
+  fi
 
   alias e="emacs"
   alias em="emacs"
