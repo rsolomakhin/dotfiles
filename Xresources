@@ -12,14 +12,7 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-xterm*boldFont: terminus-bold-16
-xterm*font1: terminus-12
-xterm*font2: terminus-14
-xterm*font3: terminus-18
-xterm*font4: terminus-20
-xterm*font5: terminus-22
-xterm*font6: terminus-24
-xterm*font: terminus-16
+xterm*faceName: Source Code Pro:style=Regular:size=10
 xterm*locale: true
 xterm*metaSendsEscape: true
 xterm*saveLines: 4096

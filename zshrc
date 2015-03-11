@@ -40,7 +40,7 @@ fi
 alias e="emacs"
 alias em="emacs"
 alias grep="grep --color=auto"
-alias ls="ls --color=auto --group-directories-first"
+alias ls="ls --color=auto"
 alias so="source"
 alias vi="vim"
 alias v="vim"
