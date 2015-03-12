@@ -137,3 +137,4 @@ hi GitGutterChange       ctermbg=255 guibg=#eeeeee ctermfg=3 guifg=#808000
 hi GitGutterDelete       ctermbg=255 guibg=#eeeeee ctermfg=1 guifg=#800000
 hi ColorColumn           ctermbg=255 guibg=#eeeeee
 hi SignColumn            ctermbg=255 guibg=#eeeeee
+hi StatusLine            ctermfg=67  guifg=#5f87af
