@@ -28,9 +28,9 @@ silent! if plug#begin()
   call plug#end()
 endif
 
+let &colorcolumn="+" . join(range(1, 200), ",+")
 set autoindent
 set backspace=indent,eol,start
-set colorcolumn=+1
 set encoding=utf-8
 set expandtab
 set hidden
@@ -115,7 +115,8 @@ endfunction
 function! s:buffer_lines()
   let res = []
   for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-    call extend(res, map(getbufline(b,0,"$"), 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
+    call extend(res, map(getbufline(b,0,"$"),
+          \ 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
   endfor
   return res
 endfunction
