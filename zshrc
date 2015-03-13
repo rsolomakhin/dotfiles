@@ -16,7 +16,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 PATH=$PATH:$HOME/android-sdk-linux/platform-tools
 PATH=$PATH:$HOME/android-sdk-linux/tools
 PATH=$PATH:$HOME/depot_tools
-PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/software/bin
 export PATH
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
