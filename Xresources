@@ -28,8 +28,8 @@ xterm*utf8: 1
 #define _color1        Brown
 #define _color9        Brown
 !GRN SpecialKey
-#define _color2        SeaGreen
-#define _color10       SeaGreen
+#define _color2        DarkGreen
+#define _color10       DarkGreen
 !YEL Keyword
 #define _color3        Gold1
 #define _color11       Gold1
