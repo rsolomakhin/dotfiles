@@ -55,6 +55,7 @@ alias -s html=vim
 alias -s h=vim
 alias -s java=vim
 alias -s js=vim
+alias -s xml=vim
 
 # Disable flow control (Ctrl-S).
 stty -ixon
