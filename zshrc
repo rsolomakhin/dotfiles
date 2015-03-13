@@ -40,7 +40,7 @@ fi
 alias e="emacs"
 alias em="emacs"
 alias grep="grep --color=auto"
-alias ls="ls --color=auto"
+ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto"
 alias so="source"
 alias vi="vim"
 alias v="vim"
