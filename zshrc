@@ -84,8 +84,22 @@ else
 fi
 export SAVEHIST=1000
 
-# Use emacs editing mode on command line.
-bindkey -e
+# Vi editing mode.
+precmd() {
+  RPROMPT=""
+}
+zle-keymap-select() {
+  RPROMPT=""
+  [[ $KEYMAP = vicmd ]] && RPROMPT="(CMD)"
+  () { return $__prompt_status }
+  zle reset-prompt
+}
+zle-line-init() {
+  typeset -g __prompt_status="$?"
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+bindkey -v
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
