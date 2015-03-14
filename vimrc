@@ -17,8 +17,10 @@ silent! if plug#begin()
     Plug 'junegunn/fzf', {
           \ 'dir': '~/.fzf',
           \ 'do': 'yes \| ./install' }
-    Plug 'Valloric/YouCompleteMe', {
-          \ 'do': './install.sh --clang-completer' }
+    if !has("win32unix")
+      Plug 'Valloric/YouCompleteMe', {
+            \ 'do': './install.sh --clang-completer' }
+    endif
   endif
   Plug 'airblade/vim-gitgutter'
   Plug 'junegunn/vim-oblique'
