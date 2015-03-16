@@ -30,7 +30,7 @@ silent! if plug#begin()
   call plug#end()
 endif
 
-let &colorcolumn="+" . join(range(1, 200), ",+")
+let &colorcolumn="+" . join(range(1, 300), ",+")
 set autoindent
 set backspace=indent,eol,start
 set encoding=utf-8
