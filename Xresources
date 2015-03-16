@@ -22,29 +22,29 @@ xterm*utf8: 1
 
 ! Color names from http://pln.jonas.me/xterm-colors
 !BLK Cursor
-#define _color0        Black
-#define _color8        Black
+#define _color0        Gray30
+#define _color8        Gray50
 !RED Tag
 #define _color1        Brown
-#define _color9        Brown
+#define _color9        Red3
 !GRN SpecialKey
 #define _color2        DarkGreen
-#define _color10       DarkGreen
+#define _color10       Green4
 !YEL Keyword
-#define _color3        Gold1
-#define _color11       Gold1
+#define _color3        DarkOrange
+#define _color11       Orange1
 !BLU Number
-#define _color4        MidnightBlue
-#define _color12       MidnightBlue
+#define _color4        NavyBlue
+#define _color12       Blue3
 !MAG Precondit
-#define _color5        Purple3
-#define _color13       Purple3
+#define _color5        Purple4
+#define _color13       BlueViolet
 !CYN Float
-#define _color6        SteelBlue
-#define _color14       SteelBlue
+#define _color6        SteelBlue3
+#define _color14       SteelBlue1
 !WHT Search
-#define _color7        Grey89
-#define _color15       Grey89
+#define _color7        Grey58
+#define _color15       Grey66
 !TXT Normal, Normal, Cursor
 #define _foreground    Black
 #define _background    White
