@@ -23,6 +23,7 @@ silent! if plug#begin()
     endif
   endif
   Plug 'airblade/vim-gitgutter'
+  Plug 'gorodinskiy/vim-coloresque'
   Plug 'junegunn/vim-oblique'
   Plug 'junegunn/vim-peekaboo'
   Plug 'junegunn/vim-pseudocl'
