@@ -56,6 +56,7 @@ set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
 set tabstop=2
 set wildmenu
 set viminfo='100,<100,:20,%,n~/.viminfo
+set completeopt=
 
 if !has("win32")
   set directory=~/.vim/swap,.
@@ -72,7 +73,7 @@ if !exists("autocommands_loaded")
   au BufReadPost * call setpos(".", getpos("'\""))
 endif
 
-let g:gitgutter_highlight_lines = 1
+let g:gitgutter_highlight_lines = 0
 let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 let g:ycm_complete_in_strings = 0
