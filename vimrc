@@ -23,6 +23,7 @@ silent! if plug#begin()
     endif
   endif
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-unimpaired'
   call plug#end()
 endif
 
@@ -32,6 +33,7 @@ set backspace=indent,eol,start
 set encoding=utf-8
 set expandtab
 set hidden
+set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
