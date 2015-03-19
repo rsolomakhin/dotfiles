@@ -22,7 +22,6 @@ silent! if plug#begin()
             \ 'do': './install.sh --clang-completer' }
     endif
   endif
-  Plug 'airblade/vim-gitgutter'
   Plug 'gorodinskiy/vim-coloresque'
   Plug 'junegunn/vim-oblique'
   Plug 'junegunn/vim-peekaboo'
@@ -59,11 +58,67 @@ set viminfo='100,<100,:20,%,n~/.viminfo
 set completeopt=
 
 if !has("win32")
+  let g:ycm_global_ycm_extra_conf =
+        \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
+  let g:ycm_complete_in_strings = 0
+
+  " Shortcuts from https://github.com/junegunn/fzf/wiki/Examples-(vim)
+  " \-b - buffers.
+  " \-t - find files.
+  " \-r - recent files.
+  " \-s - search text within all open files.
+
+  " List of buffers
+  function! BufList()
+    redir => ls
+    silent ls
+    redir END
+    return split(ls, '\n')
+  endfunction
+
+  function! BufOpen(e)
+    execute 'buffer '. matchstr(a:e, '^[ 0-9]*')
+  endfunction
+
+  nnoremap <silent> <Leader>b :call fzf#run({
+        \ 'source' : reverse(BufList()),
+        \ 'sink'   : function('BufOpen'),
+        \ 'options': '+m',
+        \ 'down'   : '40%' })<CR>
+
+  nnoremap <silent> <Leader>t :FZF<CR>
+
+  nnoremap <silent> <Leader>r :call fzf#run({
+        \ 'source': v:oldfiles,
+        \ 'sink' : 'e ',
+        \ 'options' : '-m' })<CR>
+
+  function! s:line_handler(l)
+    let keys = split(a:l, ':\t')
+    exec 'buf ' . keys[0]
+    exec keys[1]
+    normal! ^zz
+  endfunction
+
+  function! s:buffer_lines()
+    let res = []
+    for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
+      call extend(res, map(getbufline(b,0,"$"),
+            \ 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
+    endfor
+    return res
+  endfunction
+
+  nnoremap <silent> <Leader>s :call fzf#run({
+        \ 'source' : <sid>buffer_lines(),
+        \ 'sink'   : function('<sid>line_handler'),
+        \ 'options': '--extended --nth=3..',
+        \ 'down'   : '60%' })<CR>
   set directory=~/.vim/swap,.
-  set guifont=Source\ Code\ Pro\ 10
+  set guifont=Ubuntu\ Mono\ 10
 else
   set directory=~/vimfiles/swap,.
-  set guifont=Source\ Code\ Pro:h10
+  set guifont=Consolas:h10
 endif
 
 if !exists("autocommands_loaded")
@@ -73,72 +128,11 @@ if !exists("autocommands_loaded")
   au BufReadPost * call setpos(".", getpos("'\""))
 endif
 
-let g:gitgutter_highlight_lines = 0
-let g:ycm_global_ycm_extra_conf =
-      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-let g:ycm_complete_in_strings = 0
-
-" Shortcuts from https://github.com/junegunn/fzf/wiki/Examples-(vim)
-" \-b - buffers.
-" \-t - find files.
-" \-r - recent files.
-" \-s - search text within all open files.
-
-" List of buffers
-function! BufList()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! BufOpen(e)
-  execute 'buffer '. matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-nnoremap <silent> <Leader>b :call fzf#run({
-      \ 'source' : reverse(BufList()),
-      \ 'sink'   : function('BufOpen'),
-      \ 'options': '+m',
-      \ 'down'   : '40%' })<CR>
-
-nnoremap <silent> <Leader>t :FZF<CR>
-
-nnoremap <silent> <Leader>r :call fzf#run({
-      \ 'source': v:oldfiles,
-      \ 'sink' : 'e ',
-      \ 'options' : '-m' })<CR>
-
-function! s:line_handler(l)
-  let keys = split(a:l, ':\t')
-  exec 'buf ' . keys[0]
-  exec keys[1]
-  normal! ^zz
-endfunction
-
-function! s:buffer_lines()
-  let res = []
-  for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-    call extend(res, map(getbufline(b,0,"$"),
-          \ 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
-  endfor
-  return res
-endfunction
-
-nnoremap <silent> <Leader>s :call fzf#run({
-      \ 'source' : <sid>buffer_lines(),
-      \ 'sink'   : function('<sid>line_handler'),
-      \ 'options': '--extended --nth=3..',
-      \ 'down'   : '60%' })<CR>
-
 " Colors from http://pln.jonas.me/xterm-colors
 hi DiffAdd               ctermbg=193 guibg=#d7ffaf
 hi DiffChange            ctermbg=229 guibg=#ffffaf
 hi DiffDelete            ctermbg=223 guibg=#ffd7af
 hi DiffText              ctermbg=228 guibg=#ffff87
-hi GitGutterAdd          ctermbg=255 guibg=#eeeeee ctermfg=2 guifg=#008000
-hi GitGutterChange       ctermbg=255 guibg=#eeeeee ctermfg=3 guifg=#808000
-hi GitGutterDelete       ctermbg=255 guibg=#eeeeee ctermfg=1 guifg=#800000
 hi ColorColumn           ctermbg=255 guibg=#eeeeee
 hi SignColumn            ctermbg=255 guibg=#eeeeee
 hi StatusLine            ctermfg=67  guifg=#5f87af
