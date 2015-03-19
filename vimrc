@@ -22,10 +22,6 @@ silent! if plug#begin()
             \ 'do': './install.sh --clang-completer' }
     endif
   endif
-  Plug 'gorodinskiy/vim-coloresque'
-  Plug 'junegunn/vim-oblique'
-  Plug 'junegunn/vim-peekaboo'
-  Plug 'junegunn/vim-pseudocl'
   Plug 'tpope/vim-fugitive'
   call plug#end()
 endif
