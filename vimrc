@@ -115,10 +115,10 @@ if !has("win32")
         \ 'options': '--extended --nth=3..',
         \ 'down'   : '60%' })<CR>
   set directory=~/.vim/swap,.
-  set guifont=Ubuntu\ Mono\ 10
+  set guifont=Ubuntu\ Mono\ 11
 else
   set directory=~/vimfiles/swap,.
-  set guifont=Consolas:h10
+  set guifont=Consolas:h11
 endif
 
 if !exists("autocommands_loaded")
