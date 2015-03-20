@@ -22,10 +22,6 @@ export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
 export EDITOR='vim'
 
-autoload -U colors && colors
-export PS1="%{$fg[green]%}%n@%m%{$reset_color%}:\
-%{$fg[blue]%}%~%{$reset_color%}%% "
-
 # Resume SSH agent.
 [ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh > /dev/null 2>&1
 if ! ssh-add -l > /dev/null 2>&1; then
@@ -86,12 +82,15 @@ fi
 export SAVEHIST=1000
 
 # Vi editing mode.
+bindkey -v
+autoload -U colors && colors
+_INS="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%% "
+_NRM="%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}: "
 precmd() {
-  RPROMPT=""
+  PROMPT=$_INS
 }
 zle-keymap-select() {
-  RPROMPT=""
-  [[ $KEYMAP = vicmd ]] && RPROMPT="(NORMAL)"
+  [[ $KEYMAP = vicmd ]] && PROMPT=$_NRM || PROMPT=$_INS
   () { return $__prompt_status }
   zle reset-prompt
 }
@@ -100,7 +99,8 @@ zle-line-init() {
 }
 zle -N zle-keymap-select
 zle -N zle-line-init
-bindkey -v
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
 export KEYTIMEOUT=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
