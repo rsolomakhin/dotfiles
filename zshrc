@@ -100,7 +100,10 @@ zle-line-init() {
 zle -N zle-keymap-select
 zle -N zle-line-init
 bindkey '^?' backward-delete-char
+bindkey '^G' what-cursor-position
 bindkey '^h' backward-delete-char
+bindkey -a '^R' redo
+bindkey -a u undo
 export KEYTIMEOUT=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
