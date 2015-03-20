@@ -91,7 +91,7 @@ precmd() {
 }
 zle-keymap-select() {
   RPROMPT=""
-  [[ $KEYMAP = vicmd ]] && RPROMPT="(CMD)"
+  [[ $KEYMAP = vicmd ]] && RPROMPT="(NORMAL)"
   () { return $__prompt_status }
   zle reset-prompt
 }
@@ -101,6 +101,7 @@ zle-line-init() {
 zle -N zle-keymap-select
 zle -N zle-line-init
 bindkey -v
+export KEYTIMEOUT=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found

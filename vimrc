@@ -30,6 +30,7 @@ endif
 let &colorcolumn="+" . join(range(1, 300), ",+")
 set autoindent
 set backspace=indent,eol,start
+set completeopt=
 set encoding=utf-8
 set expandtab
 set hidden
@@ -48,12 +49,15 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=2
+set tabstop=2
+set timeout
+set timeoutlen=1000
+set ttimeoutlen=0
+set viminfo='100,<100,:20,%,n~/.viminfo
+set wildmenu
+
 set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
       \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
-set tabstop=2
-set wildmenu
-set viminfo='100,<100,:20,%,n~/.viminfo
-set completeopt=
 
 if !has("win32")
   let g:ycm_global_ycm_extra_conf =
