@@ -87,4 +87,3 @@ hi DiffDelete            ctermbg=223 guibg=#ffd7af
 hi DiffText              ctermbg=228 guibg=#ffff87
 hi ColorColumn           ctermbg=255 guibg=#eeeeee
 hi SignColumn            ctermbg=255 guibg=#eeeeee
-hi StatusLine            ctermfg=67  guifg=#5f87af

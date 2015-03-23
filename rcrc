@@ -13,4 +13,4 @@
 # limitations under the License.
 
 EXCLUDES="README.md LICENSE install.bat"
-SYMLINK_DIRS="ftplugin ftdetect fonts third_party"
+SYMLINK_DIRS="ftplugin ftdetect third_party"
