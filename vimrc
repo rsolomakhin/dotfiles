@@ -67,7 +67,7 @@ if !has("win32")
   let g:ycm_global_ycm_extra_conf =
         \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
   set directory=~/.vim/swap,.
-  set guifont=Ubuntu\ Mono\ 12
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
 else
   set directory=~/vimfiles/swap,.
   set guifont=Consolas:h12
