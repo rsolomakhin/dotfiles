@@ -17,6 +17,7 @@ PATH=$PATH:$HOME/android-sdk-linux/platform-tools
 PATH=$PATH:$HOME/android-sdk-linux/tools
 PATH=$PATH:$HOME/depot_tools
 PATH=$PATH:$HOME/software/bin
+PATH=$PATH:$HOME/quickopen
 export PATH
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
@@ -105,6 +106,3 @@ bindkey '^h' backward-delete-char
 bindkey -a '^R' redo
 bindkey -a u undo
 export KEYTIMEOUT=1
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found

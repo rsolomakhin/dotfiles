@@ -14,14 +14,12 @@
 
 silent! if plug#begin()
   if !has("win32")
-    Plug 'junegunn/fzf', {
-          \ 'dir': '~/.fzf',
-          \ 'do': 'yes \| ./install' }
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
     if !has("win32unix")
-      Plug 'Valloric/YouCompleteMe', {
-            \ 'do': './install.sh --clang-completer' }
+      Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
     endif
   endif
+  Plug 'natduca/quickopen', { 'dir': '~/quickopen' }
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-unimpaired'
   call plug#end()
@@ -59,13 +57,15 @@ set wildmenu
 set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
       \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 
+" \-t - find files.
+nnoremap <silent> <Leader>t :O<CR>
+
 if !has("win32")
   let g:ycm_global_ycm_extra_conf =
         \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 
   " Shortcuts from https://github.com/junegunn/fzf/wiki/Examples-(vim)
   " \-b - buffers.
-  " \-t - find files.
   " \-r - recent files.
   " \-s - search text within all open files.
 
@@ -86,8 +86,6 @@ if !has("win32")
         \ 'sink'   : function('BufOpen'),
         \ 'options': '+m',
         \ 'down'   : '40%' })<CR>
-
-  nnoremap <silent> <Leader>t :FZF<CR>
 
   nnoremap <silent> <Leader>r :call fzf#run({
         \ 'source': v:oldfiles,
