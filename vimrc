@@ -16,6 +16,7 @@ silent! if plug#begin()
   if !has("win32") && !has("win32unix")
     Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
   endif
+  Plug 'bling/vim-airline'
   Plug 'kien/ctrlp.vim'
   Plug 'natduca/quickopen', { 'dir': '~/quickopen' }
   Plug 'tpope/vim-fugitive'
@@ -39,8 +40,6 @@ set nojoinspaces
 set nospell
 set ruler
 set shiftwidth=2
-set showcmd
-set showmode
 set smartcase
 set smartindent
 set smarttab
@@ -51,9 +50,6 @@ set timeoutlen=1000
 set ttimeoutlen=0
 set viminfo='100,<100,:20,%,n~/.viminfo
 set wildmenu
-
-set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
-      \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 
 " \-t - find files with quickopen.
 nnoremap <silent> <Leader>t :O<CR>
