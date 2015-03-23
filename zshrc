@@ -103,4 +103,5 @@ zle -N zle-line-init
 bindkey '^?' backward-delete-char
 bindkey '^G' what-cursor-position
 bindkey '^h' backward-delete-char
+bindkey "^R" history-incremental-search-backward
 export KEYTIMEOUT=1
