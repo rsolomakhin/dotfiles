@@ -13,12 +13,10 @@
 " limitations under the License.
 
 silent! if plug#begin()
-  if !has("win32")
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-    if !has("win32unix")
-      Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
-    endif
+  if !has("win32") && !has("win32unix")
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
   endif
+  Plug 'kien/ctrlp.vim'
   Plug 'natduca/quickopen', { 'dir': '~/quickopen' }
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-unimpaired'
@@ -57,62 +55,21 @@ set wildmenu
 set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}
       \\ %m%r\ %=%-14.(%l,%c%V%)\ %P
 
-" \-t - find files.
+" \-t - find files with quickopen.
 nnoremap <silent> <Leader>t :O<CR>
+
+" \-b - buffers.
+nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
+
+" \-r - recent files.
+nnoremap <silent> <Leader>r :CtrlPMRU<CR>
+
+" \-s - search text within all open files.
+nnoremap <silent> <Leader>s :CtrlPLine<CR>
 
 if !has("win32")
   let g:ycm_global_ycm_extra_conf =
         \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-
-  " Shortcuts from https://github.com/junegunn/fzf/wiki/Examples-(vim)
-  " \-b - buffers.
-  " \-r - recent files.
-  " \-s - search text within all open files.
-
-  " List of buffers
-  function! BufList()
-    redir => ls
-    silent ls
-    redir END
-    return split(ls, '\n')
-  endfunction
-
-  function! BufOpen(e)
-    execute 'buffer '. matchstr(a:e, '^[ 0-9]*')
-  endfunction
-
-  nnoremap <silent> <Leader>b :call fzf#run({
-        \ 'source' : reverse(BufList()),
-        \ 'sink'   : function('BufOpen'),
-        \ 'options': '+m',
-        \ 'down'   : '40%' })<CR>
-
-  nnoremap <silent> <Leader>r :call fzf#run({
-        \ 'source': v:oldfiles,
-        \ 'sink' : 'e ',
-        \ 'options' : '-m' })<CR>
-
-  function! s:line_handler(l)
-    let keys = split(a:l, ':\t')
-    exec 'buf ' . keys[0]
-    exec keys[1]
-    normal! ^zz
-  endfunction
-
-  function! s:buffer_lines()
-    let res = []
-    for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-      call extend(res, map(getbufline(b,0,"$"),
-            \ 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
-    endfor
-    return res
-  endfunction
-
-  nnoremap <silent> <Leader>s :call fzf#run({
-        \ 'source' : <sid>buffer_lines(),
-        \ 'sink'   : function('<sid>line_handler'),
-        \ 'options': '--extended --nth=3..',
-        \ 'down'   : '60%' })<CR>
   set directory=~/.vim/swap,.
   set guifont=Ubuntu\ Mono\ 12
 else

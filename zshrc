@@ -103,6 +103,4 @@ zle -N zle-line-init
 bindkey '^?' backward-delete-char
 bindkey '^G' what-cursor-position
 bindkey '^h' backward-delete-char
-bindkey -a '^R' redo
-bindkey -a u undo
 export KEYTIMEOUT=1
