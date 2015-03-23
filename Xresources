@@ -29,7 +29,7 @@ xterm*utf8: 1
 #define _color9        Red3
 !GRN SpecialKey
 #define _color2        DarkGreen
-#define _color10       PaleGreen1
+#define _color10       DarkGreen
 !YEL Keyword
 #define _color3        DarkOrange
 #define _color11       Yellow
