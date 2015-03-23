@@ -85,8 +85,8 @@ export SAVEHIST=1000
 # Vi editing mode.
 bindkey -v
 autoload -U colors && colors
-_INS="%{$bg_bold[cyan]%}%{$fg[white]%} INSERT %{$reset_color%}%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%% "
-_NRM="%{$bg_bold[green]%}%{$fg[white]%} NORMAL %{$reset_color%}%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%% "
+_INS="%{$bg_bold[cyan]%}%{$fg[white]%} INSERT %{$reset_color%}%{$fg[cyan]%}%{$reset_color%}%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%% "
+_NRM="%{$bg_bold[green]%}%{$fg[white]%} NORMAL %{$reset_color%}%{$fg[green]%}%{$reset_color%}%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%% "
 precmd() {
   PROMPT=$_INS
 }
