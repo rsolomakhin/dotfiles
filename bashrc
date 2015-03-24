@@ -16,7 +16,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 PATH=$PATH:$HOME/android-sdk-linux/platform-tools
 PATH=$PATH:$HOME/android-sdk-linux/tools
 PATH=$PATH:$HOME/depot_tools
-PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/software/bin
+PATH=$PATH:$HOME/quickopen
 export PATH
 
 if [ -n "$PS1" ]; then
@@ -37,13 +38,10 @@ if [ -n "$PS1" ]; then
     done
   fi
 
-  source /etc/bash_completion
-  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+  [ -f /etc/bash_completion] && source /etc/bash_completion
 
   alias e="emacs"
   alias em="emacs"
-  alias grep="grep --color=auto"
-  alias ls="ls --color=auto --group-directories-first"
   alias so="source"
   alias vi="vim"
   alias v="vim"

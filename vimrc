@@ -17,7 +17,7 @@ silent! if plug#begin()
     Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
   endif
   Plug 'bling/vim-airline'
-  Plug 'edkolev/promptline.vim', { 'on': 'PromptlineSnapshot' }
+  Plug 'edkolev/promptline.vim'
   Plug 'kien/ctrlp.vim'
   Plug 'natduca/quickopen', { 'dir': '~/quickopen' }
   Plug 'tpope/vim-fugitive'
@@ -64,14 +64,14 @@ nnoremap <silent> <Leader>r :CtrlPMRU<CR>
 " \-s - search text within all open files.
 nnoremap <silent> <Leader>s :CtrlPLine<CR>
 
-
 let g:promptline_preset = {
       \'a': [ promptline#slices#user() ],
       \'b': [ promptline#slices#user() ],
       \'c': [ promptline#slices#cwd() ],
-      \'z': [ promptline#slices#vcs_branch() ],
+      \'warn': [ promptline#slices#vcs_branch() ],
       \'options': {
-      \'left_sections': ['a', 'b', 'c', 'z' ]}}
+      \'left_sections': ['a', 'b', 'c', 'warn' ],
+      \'right_sections': []}}
 
 if !has("win32")
   let g:ycm_global_ycm_extra_conf =
