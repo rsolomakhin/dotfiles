@@ -52,17 +52,20 @@ set ttimeoutlen=0
 set viminfo='100,<100,:20,%,n~/.viminfo
 set wildmenu
 
-" \-t - find files with quickopen.
-nnoremap <silent> <Leader>t :O<CR>
-
 " \-b - buffers.
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
+
+" \-q - search quickfix list.
+nnoremap <silent> <Leader>q :CtrlPQuickfix<CR>
 
 " \-r - recent files.
 nnoremap <silent> <Leader>r :CtrlPMRU<CR>
 
 " \-s - search text within all open files.
 nnoremap <silent> <Leader>s :CtrlPLine<CR>
+
+" \-t - find files with quickopen.
+nnoremap <silent> <Leader>t :O<CR>
 
 let g:promptline_preset = {
       \'a': [ promptline#slices#user() ],
