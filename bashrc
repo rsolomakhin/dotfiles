@@ -38,7 +38,7 @@ if [ -n "$PS1" ]; then
     done
   fi
 
-  [ -f /etc/bash_completion] && source /etc/bash_completion
+  [ -f /etc/bash_completion ] && source /etc/bash_completion
 
   alias e="emacs"
   alias em="emacs"
