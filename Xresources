@@ -20,35 +20,45 @@ xterm*saveLines: 4096
 xterm*termName: xterm-256color
 xterm*utf8: 1
 
-! Color names from http://pln.jonas.me/xterm-colors
+! Color names from http://en.wikipedia.org/wiki/X11_color_names#Color_variations
+
 !BLK Cursor
 #define _color0        Black
 #define _color8        Grey3
+
 !RED Tag
 #define _color1        Brown
 #define _color9        Red3
-!GRN SpecialKey
+
+!GRN SpecialKey - Both can be foregournds, but _color2 is also background.
 #define _color2        DarkGreen
 #define _color10       DarkGreen
-!YEL Keyword
-#define _color3        Orange4
-#define _color11       Yellow
+
+!YEL Keyword - Both can be backgrounds, but _color3 is also foreground.
+#define _color3        Gold3
+#define _color11       Gold
+
 !BLU Number
 #define _color4        NavyBlue
 #define _color12       Blue3
+
 !MAG Precondit
 #define _color5        Purple4
 #define _color13       BlueViolet
-!CYN Float
-#define _color6        SteelBlue3
-#define _color14       Turquoise2
-!WHT Search - _color7 is used for highlighting text in visual mode.
+
+!CYN Float - _color6 is cyan background. _color14 is cyan foreground.
+#define _color6        DeepSkyBlue2
+#define _color14       DeepSkyBlue4
+
+!WHT Search - _color7 is grey background. _color15 is white foreground.
 #define _color7        Grey93
 #define _color15       White
+
 !TXT Normal, Normal, Cursor
 #define _foreground    Black
 #define _background    White
 #define _cursorColor   Black
+
 xterm*color0         : _color0
 xterm*color1         : _color1
 xterm*color2         : _color2

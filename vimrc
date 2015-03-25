@@ -68,12 +68,11 @@ nnoremap <silent> <Leader>s :CtrlPLine<CR>
 nnoremap <silent> <Leader>t :O<CR>
 
 let g:promptline_preset = {
-      \'a': [ promptline#slices#user() ],
-      \'b': [ promptline#slices#user() ],
-      \'c': [ promptline#slices#cwd() ],
-      \'warn': [ promptline#slices#vcs_branch() ],
+      \'a': [ '$(print INSERT)' ],
+      \'b': [ promptline#slices#cwd() ],
+      \'c': [ promptline#slices#vcs_branch() ],
       \'options': {
-      \'left_sections': ['a', 'b', 'c', 'warn' ],
+      \'left_sections': ['a', 'b', 'c' ],
       \'right_sections': []}}
 
 if !has("win32")

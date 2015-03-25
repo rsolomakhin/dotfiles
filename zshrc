@@ -84,24 +84,9 @@ export SAVEHIST=1000
 
 # Vi editing mode.
 bindkey -v
-autoload -U colors && colors
-_INS="%{$bg_bold[cyan]%}%{$fg[white]%} INSERT %{$reset_color%}%{$fg[cyan]%}%{$reset_color%}%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%% "
-_NRM="%{$bg_bold[green]%}%{$fg[white]%} NORMAL %{$reset_color%}%{$fg[green]%}%{$reset_color%}%{$fg[green]%}%n@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%% "
-precmd() {
-  PROMPT=$_INS
-}
-zle-keymap-select() {
-  [[ $KEYMAP = vicmd ]] && PROMPT=$_NRM || PROMPT=$_INS
-  () { return $__prompt_status }
-  zle reset-prompt
-}
-zle-line-init() {
-  typeset -g __prompt_status="$?"
-}
-zle -N zle-keymap-select
-zle -N zle-line-init
 bindkey '^?' backward-delete-char
 bindkey '^G' what-cursor-position
 bindkey '^h' backward-delete-char
 bindkey "^R" history-incremental-search-backward
 export KEYTIMEOUT=1
+[ -f ~/.prompt.sh ] && source ~/.prompt.sh

@@ -8,7 +8,11 @@ function __promptline_ps1 {
   slice_prefix="${a_bg}${sep}${a_fg}${a_bg}${space}" slice_suffix="$space${a_sep_fg}" slice_joiner="${a_fg}${a_bg}${alt_sep}${space}" slice_empty_prefix="${a_fg}${a_bg}${space}"
   [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
   # section "a" slices
-  __promptline_wrapper "" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  if [[ $KEYMAP = vicmd ]]; then
+    __promptline_wrapper "$(print NORMAL)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  else
+    __promptline_wrapper "$(print INSERT)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  fi
 
   # section "b" header
   slice_prefix="${b_bg}${sep}${b_fg}${b_bg}${space}" slice_suffix="$space${b_sep_fg}" slice_joiner="${b_fg}${b_bg}${alt_sep}${space}" slice_empty_prefix="${b_fg}${b_bg}${space}"
@@ -40,12 +44,12 @@ function __promptline_vcs_branch {
   return 1
 }
 function __promptline_cwd {
-  local dir_limit="3"
-  local truncation="⋯"
+  local dir_limit="10"
+  local truncation=""
   local first_char
   local part_count=0
   local formatted_cwd=""
-  local dir_sep="  "
+  local dir_sep="/"
   local tilde="~"
 
   local cwd="${PWD/#$HOME/$tilde}"
@@ -76,7 +80,11 @@ function __promptline_left_prompt {
   slice_prefix="${a_bg}${sep}${a_fg}${a_bg}${space}" slice_suffix="$space${a_sep_fg}" slice_joiner="${a_fg}${a_bg}${alt_sep}${space}" slice_empty_prefix="${a_fg}${a_bg}${space}"
   [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
   # section "a" slices
-  __promptline_wrapper "" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  if [[ $KEYMAP = vicmd ]]; then
+    __promptline_wrapper "$(print NORMAL)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  else
+    __promptline_wrapper "$(print INSERT)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
+  fi
 
   # section "b" header
   slice_prefix="${b_bg}${sep}${b_fg}${b_bg}${space}" slice_suffix="$space${b_sep_fg}" slice_joiner="${b_fg}${b_bg}${alt_sep}${space}" slice_empty_prefix="${b_fg}${b_bg}${space}"
@@ -122,15 +130,27 @@ function __promptline {
   local alt_rsep=""
   local reset="${wrap}0${end_wrap}"
   local reset_bg="${wrap}49${end_wrap}"
-  local a_fg="${wrap}38;5;17${end_wrap}"
-  local a_bg="${wrap}48;5;45${end_wrap}"
-  local a_sep_fg="${wrap}38;5;45${end_wrap}"
-  local b_fg="${wrap}38;5;255${end_wrap}"
-  local b_bg="${wrap}48;5;27${end_wrap}"
-  local b_sep_fg="${wrap}38;5;27${end_wrap}"
-  local c_fg="${wrap}38;5;15${end_wrap}"
-  local c_bg="${wrap}48;5;17${end_wrap}"
-  local c_sep_fg="${wrap}38;5;17${end_wrap}"
+  if [[ $KEYMAP = vicmd ]]; then
+    local a_fg="${wrap}38;5;17${end_wrap}"
+    local a_bg="${wrap}48;5;190${end_wrap}"
+    local a_sep_fg="${wrap}38;5;190${end_wrap}"
+    local b_fg="${wrap}38;5;255${end_wrap}"
+    local b_bg="${wrap}48;5;238${end_wrap}"
+    local b_sep_fg="${wrap}38;5;238${end_wrap}"
+    local c_fg="${wrap}38;5;85${end_wrap}"
+    local c_bg="${wrap}48;5;234${end_wrap}"
+    local c_sep_fg="${wrap}38;5;234${end_wrap}"
+  else
+    local a_fg="${wrap}38;5;17${end_wrap}"
+    local a_bg="${wrap}48;5;45${end_wrap}"
+    local a_sep_fg="${wrap}38;5;45${end_wrap}"
+    local b_fg="${wrap}38;5;255${end_wrap}"
+    local b_bg="${wrap}48;5;27${end_wrap}"
+    local b_sep_fg="${wrap}38;5;27${end_wrap}"
+    local c_fg="${wrap}38;5;15${end_wrap}"
+    local c_bg="${wrap}48;5;17${end_wrap}"
+    local c_sep_fg="${wrap}38;5;17${end_wrap}"
+  fi
   if [[ -n ${ZSH_VERSION-} ]]; then
     PROMPT="$(__promptline_left_prompt)"
     RPROMPT="$(__promptline_right_prompt)"
@@ -156,3 +176,13 @@ else
     PROMPT_COMMAND='__promptline;'$'\n'"$PROMPT_COMMAND"
   fi
 fi
+zle-keymap-select() {
+  __promptline
+  () { return $__prompt_status }
+  zle reset-prompt
+}
+zle-line-init() {
+  typeset -g __prompt_status="$?"
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
