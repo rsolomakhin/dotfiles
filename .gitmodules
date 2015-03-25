@@ -1,3 +1,6 @@
 [submodule "third_party/fonts"]
 	path = third_party/fonts
 	url = https://github.com/powerline/fonts.git
+[submodule "third_party/opp.zsh"]
+	path = third_party/opp.zsh
+	url = https://github.com/hchbaw/opp.zsh.git

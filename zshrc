@@ -92,3 +92,8 @@ export KEYTIMEOUT=1
 if [ -f ~/.third_party/promptline.vim/prompt.sh ]; then
   source ~/.third_party/promptline.vim/prompt.sh
 fi
+
+# Text objects.
+if [ -f ~/.third_party/opp.zsh/opp.zsh ]; then
+  source ~/.third_party/opp.zsh/opp.zsh
+fi
