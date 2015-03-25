@@ -89,4 +89,6 @@ bindkey '^G' what-cursor-position
 bindkey '^h' backward-delete-char
 bindkey "^R" history-incremental-search-backward
 export KEYTIMEOUT=1
-[ -f ~/.prompt.sh ] && source ~/.prompt.sh
+if [ -f ~/.third_party/promptline.vim/prompt.sh ]; then
+  source ~/.third_party/promptline.vim/prompt.sh
+fi
