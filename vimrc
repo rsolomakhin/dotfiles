@@ -23,6 +23,7 @@ silent! if plug#begin()
   Plug 'natduca/quickopen', { 'dir': '~/quickopen' }
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-unimpaired'
+  Plug 'vim-scripts/argtextobj.vim'
   call plug#end()
 endif
 
