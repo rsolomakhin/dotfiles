@@ -81,6 +81,8 @@ let g:tmuxline_preset = {
       \'win'  : '#I #W',
       \'cwin' : '#I #W'}
 
+let g:airline_powerline_fonts = 1
+
 if !has("win32")
   let g:ycm_global_ycm_extra_conf =
         \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
