@@ -18,6 +18,7 @@ silent! if plug#begin()
   endif
   Plug 'bling/vim-airline'
   Plug 'edkolev/promptline.vim'
+  Plug 'edkolev/tmuxline.vim'
   Plug 'kien/ctrlp.vim'
   Plug 'natduca/quickopen', { 'dir': '~/quickopen' }
   Plug 'tpope/vim-fugitive'
@@ -74,6 +75,11 @@ let g:promptline_preset = {
       \'options': {
       \'left_sections': ['a', 'b', 'c' ],
       \'right_sections': []}}
+let g:tmuxline_preset = {
+      \'b'    : '#(whoami)',
+      \'c'    : '#h',
+      \'win'  : '#I #W',
+      \'cwin' : '#I #W'}
 
 if !has("win32")
   let g:ycm_global_ycm_extra_conf =
