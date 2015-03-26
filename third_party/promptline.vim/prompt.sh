@@ -1,34 +1,6 @@
 #
 # This shell prompt config file was created by promptline.vim
 #
-function __promptline_ps1 {
-  local slice_prefix slice_empty_prefix slice_joiner slice_suffix is_prompt_empty=1
-
-  # section "a" header
-  slice_prefix="${a_bg}${sep}${a_fg}${a_bg}${space}" slice_suffix="$space${a_sep_fg}" slice_joiner="${a_fg}${a_bg}${alt_sep}${space}" slice_empty_prefix="${a_fg}${a_bg}${space}"
-  [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
-  # section "a" slices
-  if [[ $KEYMAP = vicmd ]]; then
-    __promptline_wrapper "$(print NORMAL)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
-  else
-    __promptline_wrapper "$(print INSERT)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
-  fi
-
-  # section "b" header
-  slice_prefix="${b_bg}${sep}${b_fg}${b_bg}${space}" slice_suffix="$space${b_sep_fg}" slice_joiner="${b_fg}${b_bg}${alt_sep}${space}" slice_empty_prefix="${b_fg}${b_bg}${space}"
-  [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
-  # section "b" slices
-  __promptline_wrapper "$(__promptline_cwd)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
-
-  # section "c" header
-  slice_prefix="${c_bg}${sep}${c_fg}${c_bg}${space}" slice_suffix="$space${c_sep_fg}" slice_joiner="${c_fg}${c_bg}${alt_sep}${space}" slice_empty_prefix="${c_fg}${c_bg}${space}"
-  [ $is_prompt_empty -eq 1 ] && slice_prefix="$slice_empty_prefix"
-  # section "c" slices
-  __promptline_wrapper "$(__promptline_vcs_branch)" "$slice_prefix" "$slice_suffix" && { slice_prefix="$slice_joiner"; is_prompt_empty=0; }
-
-  # close sections
-  printf "%s" "${reset_bg}${sep}$reset$space"
-}
 function __promptline_vcs_branch {
   local branch
   local branch_symbol=" "
@@ -108,9 +80,6 @@ function __promptline_wrapper {
   [[ -n "$1" ]] || return 1
   printf "%s" "${2}${1}${3}"
 }
-function __promptline_right_prompt {
-  return
-}
 function __promptline {
   local last_exit_code="${PROMPTLINE_LAST_EXIT_CODE:-$?}"
 
@@ -151,30 +120,11 @@ function __promptline {
     local c_bg="${wrap}48;5;17${end_wrap}"
     local c_sep_fg="${wrap}38;5;17${end_wrap}"
   fi
-  if [[ -n ${ZSH_VERSION-} ]]; then
-    PROMPT="$(__promptline_left_prompt)"
-    RPROMPT="$(__promptline_right_prompt)"
-  elif [[ -n ${FISH_VERSION-} ]]; then
-    if [[ -n "$1" ]]; then
-      [[ "$1" = "left" ]] && __promptline_left_prompt || __promptline_right_prompt
-    else
-      __promptline_ps1
-    fi
-  else
-    PS1="$(__promptline_ps1)"
-  fi
+  PROMPT="$(__promptline_left_prompt)"
 }
 
-if [[ -n ${ZSH_VERSION-} ]]; then
-  if [[ ! ${precmd_functions[(r)__promptline]} == __promptline ]]; then
-    precmd_functions+=(__promptline)
-  fi
-elif [[ -n ${FISH_VERSION-} ]]; then
-  __promptline "$1"
-else
-  if [[ ! "$PROMPT_COMMAND" == *__promptline* ]]; then
-    PROMPT_COMMAND='__promptline;'$'\n'"$PROMPT_COMMAND"
-  fi
+if [[ ! ${precmd_functions[(r)__promptline]} == __promptline ]]; then
+  precmd_functions+=(__promptline)
 fi
 zle-keymap-select() {
   __promptline
