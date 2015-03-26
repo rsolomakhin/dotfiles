@@ -91,7 +91,7 @@ if !has("win32")
   set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
 else
   set directory=~/vimfiles/swap,.
-  set guifont=Consolas:h12
+  set guifont=Ubuntu_Mono_derivative_Powerlin:h12:cANSI
 endif
 
 if !exists("autocommands_loaded")
