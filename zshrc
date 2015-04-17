@@ -87,7 +87,6 @@ bindkey -v
 bindkey '^?' backward-delete-char
 bindkey '^G' what-cursor-position
 bindkey '^h' backward-delete-char
-bindkey "^R" history-incremental-search-backward
 export KEYTIMEOUT=1
 if [ -f ~/.third_party/promptline.vim/prompt.sh ]; then
   source ~/.third_party/promptline.vim/prompt.sh
@@ -97,3 +96,6 @@ fi
 if [ -f ~/.third_party/opp.zsh/opp.zsh ]; then
   source ~/.third_party/opp.zsh/opp.zsh
 fi
+
+# Fuzzy file finder and history lookup.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

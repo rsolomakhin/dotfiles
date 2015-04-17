@@ -13,6 +13,9 @@
 " limitations under the License.
 
 silent! if plug#begin()
+  if !has("win32")
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  endif
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
     Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
   endif
@@ -20,7 +23,6 @@ silent! if plug#begin()
   Plug 'edkolev/promptline.vim'
   Plug 'edkolev/tmuxline.vim'
   Plug 'kien/ctrlp.vim'
-  Plug 'natduca/quickopen', { 'dir': '~/quickopen' }
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-unimpaired'
   Plug 'vim-scripts/argtextobj.vim'
@@ -66,8 +68,8 @@ nnoremap <silent> <Leader>r :CtrlPMRU<CR>
 " \-s - search text within all open files.
 nnoremap <silent> <Leader>s :CtrlPLine<CR>
 
-" \-t - find files with quickopen.
-nnoremap <silent> <Leader>t :O<CR>
+" \-t - find files.
+nnoremap <silent> <Leader>t :FZF<CR>
 
 let g:promptline_preset = {
       \'a': [ '$(print INSERT)' ],
