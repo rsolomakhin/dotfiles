@@ -13,7 +13,7 @@
 " limitations under the License.
 
 silent! if plug#begin()
-  if !has("win32") && !has("win32unix")
+  if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
     Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
   endif
   Plug 'bling/vim-airline'
