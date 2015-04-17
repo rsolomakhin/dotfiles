@@ -17,7 +17,6 @@ PATH=$PATH:$HOME/android-sdk-linux/platform-tools
 PATH=$PATH:$HOME/android-sdk-linux/tools
 PATH=$PATH:$HOME/depot_tools
 PATH=$PATH:$HOME/software/bin
-PATH=$PATH:$HOME/quickopen
 export PATH
 
 if [ -n "$PS1" ]; then

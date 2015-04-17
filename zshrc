@@ -17,7 +17,6 @@ PATH=$PATH:$HOME/android-sdk-linux/platform-tools
 PATH=$PATH:$HOME/android-sdk-linux/tools
 PATH=$PATH:$HOME/depot_tools
 PATH=$PATH:$HOME/software/bin
-PATH=$PATH:$HOME/quickopen
 export PATH
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
