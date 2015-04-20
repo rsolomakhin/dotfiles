@@ -103,8 +103,18 @@ if !exists("autocommands_loaded")
   au BufReadPost * call setpos(".", getpos("'\""))
 endif
 
+set background=dark
+
 " Colors from http://pln.jonas.me/xterm-colors
-if &background == "light"
+if &background == "dark"
+  hi ColorColumn ctermbg=234 guibg=#1c1c1c
+  hi DiffAdd     ctermbg=28  guibg=#008700
+  hi DiffChange  ctermbg=101 guibg=#87875f
+  hi DiffDelete  ctermbg=52  guibg=#5f0000
+  hi DiffText    ctermbg=100 guibg=#878700
+  hi SignColumn  ctermbg=234 guibg=#1c1c1c
+  hi Visual      ctermbg=237 guibg=#3a3a3a
+else  " light
   hi ColorColumn ctermbg=255 guibg=#eeeeee
   hi DiffAdd     ctermbg=193 guibg=#d7ffaf
   hi DiffChange  ctermbg=229 guibg=#ffffaf
@@ -112,12 +122,4 @@ if &background == "light"
   hi DiffText    ctermbg=228 guibg=#ffff87
   hi SignColumn  ctermbg=255 guibg=#eeeeee
   hi Visual      ctermbg=255 guibg=#eeeeee
-else  " dark
-  hi ColorColumn ctermbg=236 guibg=#303030
-  hi DiffAdd     ctermbg=28  guibg=#008700
-  hi DiffChange  ctermbg=101 guibg=#87875f
-  hi DiffDelete  ctermbg=52  guibg=#5f0000
-  hi DiffText    ctermbg=100 guibg=#878700
-  hi SignColumn  ctermbg=236 guibg=#303030
-  hi Visual      ctermbg=237 guibg=#3a3a3a
 endif
