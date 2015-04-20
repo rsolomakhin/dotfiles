@@ -4,3 +4,6 @@
 [submodule "third_party/opp.zsh"]
 	path = third_party/opp.zsh
 	url = https://github.com/hchbaw/opp.zsh.git
+[submodule "third_party/ctrl-zsh"]
+	path = third_party/ctrl-zsh
+	url = https://github.com/Peeja/ctrl-zsh.git

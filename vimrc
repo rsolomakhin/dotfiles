@@ -104,9 +104,12 @@ if !exists("autocommands_loaded")
 endif
 
 " Colors from http://pln.jonas.me/xterm-colors
-hi DiffAdd               ctermbg=193 guibg=#d7ffaf
-hi DiffChange            ctermbg=229 guibg=#ffffaf
-hi DiffDelete            ctermbg=223 guibg=#ffd7af
-hi DiffText              ctermbg=228 guibg=#ffff87
-hi ColorColumn           ctermbg=255 guibg=#eeeeee
-hi SignColumn            ctermbg=255 guibg=#eeeeee
+if &background == "light"
+  hi DiffAdd     ctermbg=193 guibg=#d7ffaf
+  hi DiffChange  ctermbg=229 guibg=#ffffaf
+  hi DiffDelete  ctermbg=223 guibg=#ffd7af
+  hi DiffText    ctermbg=228 guibg=#ffff87
+  hi ColorColumn ctermbg=255 guibg=#eeeeee
+  hi SignColumn  ctermbg=255 guibg=#eeeeee
+else  " dark
+endif
