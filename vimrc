@@ -105,11 +105,19 @@ endif
 
 " Colors from http://pln.jonas.me/xterm-colors
 if &background == "light"
+  hi ColorColumn ctermbg=255 guibg=#eeeeee
   hi DiffAdd     ctermbg=193 guibg=#d7ffaf
   hi DiffChange  ctermbg=229 guibg=#ffffaf
   hi DiffDelete  ctermbg=223 guibg=#ffd7af
   hi DiffText    ctermbg=228 guibg=#ffff87
-  hi ColorColumn ctermbg=255 guibg=#eeeeee
   hi SignColumn  ctermbg=255 guibg=#eeeeee
+  hi Visual      ctermbg=255 guibg=#eeeeee
 else  " dark
+  hi ColorColumn ctermbg=236 guibg=#303030
+  hi DiffAdd     ctermbg=28  guibg=#008700
+  hi DiffChange  ctermbg=101 guibg=#87875f
+  hi DiffDelete  ctermbg=52  guibg=#5f0000
+  hi DiffText    ctermbg=100 guibg=#878700
+  hi SignColumn  ctermbg=236 guibg=#303030
+  hi Visual      ctermbg=237 guibg=#3a3a3a
 endif
