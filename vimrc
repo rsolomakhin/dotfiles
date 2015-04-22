@@ -40,6 +40,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
+set mouse=a
 set nocompatible
 set nojoinspaces
 set nospell

@@ -17,7 +17,8 @@ setlocal shiftwidth=4
 setlocal softtabstop=4
 setlocal textwidth=100
 
-if !exists("clang_format_loaded") && isdirectory(expand('~/chrome'))
+if !exists("chrome_tools_loaded") && isdirectory(expand('~/chrome'))
   source ~/chrome/src/tools/vim/clang-format.vim
-  let clang_format_loaded = 1
+  source ~/chrome/src/tools/vim/ninja-build.vim
+  let chrome_tools_loaded = 1
 endif

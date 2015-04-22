@@ -15,7 +15,8 @@
 setlocal textwidth=80
 nnoremap <buffer><silent> <C-]> :YcmCompleter GoTo<CR>
 
-if !exists("clang_format_loaded") && isdirectory(expand('~/chrome'))
+if !exists("chrome_tools_loaded") && isdirectory(expand('~/chrome'))
   source ~/chrome/src/tools/vim/clang-format.vim
-  let clang_format_loaded = 1
+  source ~/chrome/src/tools/vim/ninja-build.vim
+  let chrome_tools_loaded = 1
 endif
