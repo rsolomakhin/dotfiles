@@ -35,9 +35,9 @@ xterm*utf8: 1
 #define _color2        DarkSeaGreen3
 #define _color10       DarkSeaGreen3
 
-!YEL Keyword - Both can be backgrounds, but _color3 is also foreground.
-#define _color3        Yellow
-#define _color11       Gold
+!YEL Keyword - Both can be backgrounds and foregrounds.
+#define _color3        Brown4
+#define _color11       LightGoldenrod
 
 !BLU Number
 #define _color4        LightSkyBlue2
