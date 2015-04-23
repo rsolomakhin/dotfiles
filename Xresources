@@ -27,9 +27,9 @@ xterm*utf8: 1
 #define _color0        Black
 #define _color8        Grey3
 
-!RED Tag
+!RED Tag - _color1 is foreground, _color9 is background.
 #define _color1        LightCoral
-#define _color9        Orchid2
+#define _color9        Red4
 
 !GRN SpecialKey - Both can be foregournds, but _color2 is also background.
 #define _color2        DarkSeaGreen
