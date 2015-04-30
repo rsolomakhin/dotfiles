@@ -23,6 +23,7 @@ silent! if plug#begin()
   Plug 'edkolev/promptline.vim'
   Plug 'edkolev/tmuxline.vim'
   Plug 'kien/ctrlp.vim'
+  Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-unimpaired'
   Plug 'vim-scripts/argtextobj.vim'
@@ -42,8 +43,10 @@ set incsearch
 set laststatus=2
 set mouse=a
 set nocompatible
+set nocursorline
 set nojoinspaces
 set nospell
+set number
 set ruler
 set shiftwidth=2
 set smartcase
@@ -73,7 +76,7 @@ nnoremap <silent> <Leader>s :CtrlPLine<CR>
 nnoremap <silent> <Leader>t :FZF<CR>
 
 let g:promptline_preset = {
-      \'a': [ '$(print INSERT)' ],
+      \'a': [ 'INSERT' ],
       \'b': [ promptline#slices#cwd() ],
       \'c': [ promptline#slices#vcs_branch() ],
       \'options': {
@@ -105,22 +108,28 @@ if !exists("autocommands_loaded")
 endif
 
 set background=dark
-
-" Colors from http://pln.jonas.me/xterm-colors
+" Colors from http://pln.jonas.me/xterm-colors to fix up 'default' colorscheme.
 if &background == "dark"
   hi ColorColumn ctermbg=234 guibg=#1c1c1c
+  hi CursorLine  ctermbg=235 guibg=#262626 cterm=none term=none
   hi DiffAdd     ctermbg=28  guibg=#008700
   hi DiffChange  ctermbg=101 guibg=#87875f
   hi DiffDelete  ctermbg=52  guibg=#5f0000
   hi DiffText    ctermbg=100 guibg=#878700
+  hi LineNr      ctermfg=239 guifg=#4e4e4e
+  hi NonText     ctermbg=234 guibg=#1c1c1c ctermfg=234 guifg=#1c1c1c
   hi SignColumn  ctermbg=234 guibg=#1c1c1c
   hi Visual      ctermbg=237 guibg=#3a3a3a
 else  " light
   hi ColorColumn ctermbg=255 guibg=#eeeeee
+  hi CursorLine  ctermbg=256 guibg=#262626 cterm=none term=none
   hi DiffAdd     ctermbg=193 guibg=#d7ffaf
   hi DiffChange  ctermbg=229 guibg=#ffffaf
   hi DiffDelete  ctermbg=223 guibg=#ffd7af
   hi DiffText    ctermbg=228 guibg=#ffff87
+  hi LineNr      ctermfg=239 guifg=#4e4e4e
+  hi NonText     ctermbg=255 guibg=#eeeeee ctermfg=255 guifg=#eeeeee
   hi SignColumn  ctermbg=255 guibg=#eeeeee
+  hi VertSplit   ctermbg=255 guibg=#eeeeee ctermfg=255 guifg=#eeeeee
   hi Visual      ctermbg=255 guibg=#eeeeee
 endif
