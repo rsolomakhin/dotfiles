@@ -42,6 +42,7 @@ alias vi="vim"
 alias v="vim"
 alias xterm='xterm -e zsh'
 alias zshrc='vim ~/.zshrc'
+alias j='jobs'
 
 alias -s cc=vim
 alias -s cpp=vim
