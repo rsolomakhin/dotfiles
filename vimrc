@@ -76,11 +76,10 @@ nnoremap <silent> <Leader>s :CtrlPLine<CR>
 nnoremap <silent> <Leader>t :FZF<CR>
 
 let g:promptline_preset = {
-      \'a': [ 'INSERT' ],
       \'b': [ promptline#slices#cwd() ],
       \'c': [ promptline#slices#vcs_branch() ],
       \'options': {
-      \'left_sections': ['a', 'b', 'c' ],
+      \'left_sections': ['b', 'c' ],
       \'right_sections': []}}
 let g:tmuxline_preset = {
       \'b'    : '#(whoami)',

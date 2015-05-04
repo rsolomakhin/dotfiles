@@ -39,16 +39,14 @@ if ! ssh-add -l > /dev/null 2>&1; then
   done
 fi
 
-alias e="emacs"
-alias em="emacs"
 alias grep="grep --color=auto"
-ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto"
+alias j='jobs'
 alias so="source"
-alias vi="vim"
 alias v="vim"
+alias vi="vim"
 alias xterm='xterm -e zsh'
 alias zshrc='$EDITOR ~/.zshrc'
-alias j='jobs'
+ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto"
 
 alias -s cc=$EDITOR
 alias -s cpp=$EDITOR
@@ -88,12 +86,16 @@ if [[ $EDITOR == v* ]]; then
   if [ -f ~/.third_party/opp.zsh/opp.zsh ]; then
     source ~/.third_party/opp.zsh/opp.zsh
   fi
+  alias e="emacs"
+  alias em="emacs"
 else
   # Emacs editing mode.
   bindkey -e
   if [ -f ~/.third_party/promptline.vim/prompt_emacs.sh ]; then
     source ~/.third_party/promptline.vim/prompt_emacs.sh
   fi
+  alias e="$EDITOR"
+  alias em="$EDITOR"
 fi
 
 # Control-Z to resume current job.
