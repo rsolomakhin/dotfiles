@@ -24,3 +24,6 @@
 ;; Remember my place in the file.
 (require 'saveplace)
 (setq-default save-place t)
+
+;; Automatic indentation.
+(electric-indent-mode t)
