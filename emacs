@@ -17,13 +17,22 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
-;; Helm.
-(require 'helm-config)
-(helm-mode 1)
-
 ;; Remember my place in the file.
 (require 'saveplace)
 (setq-default save-place t)
 
 ;; Automatic indentation.
 (electric-indent-mode t)
+
+;; Google style formatting for C-like languages.
+(add-to-list 'load-path "~/.third_party/google-styleguide")
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+
+;; .h files are C++.
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;; .gyp, .gypi, and .gn files are python.
+(add-to-list 'auto-mode-alist '("\\.gyp\\'"  . python-mode))
+(add-to-list 'auto-mode-alist '("\\.gypi\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.gn\\'"   . python-mode))
