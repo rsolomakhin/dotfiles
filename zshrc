@@ -58,7 +58,6 @@ alias -s java=$EDITOR
 alias -s js=$EDITOR
 alias -s proto=$EDITOR
 alias -s xml=$EDITOR
-alias -s py=$EDITOR
 
 # Disable flow control (Ctrl-S).
 stty -ixon

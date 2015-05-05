@@ -20,7 +20,6 @@
 ;; Helm.
 (require 'helm-config)
 (helm-mode 1)
-(helm-autoresize-mode 1)
 
 ;; Remember my place in the file.
 (require 'saveplace)
