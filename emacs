@@ -36,3 +36,34 @@
 (add-to-list 'auto-mode-alist '("\\.gyp\\'"  . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gypi\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gn\\'"   . python-mode))
+
+;; Clang-format files by issuing 'clang-format-region' command.
+(add-to-list 'load-path "~/chrome/src/buildtools/clang_format")
+(require 'clang-format)
+
+;; Indicate the location of the fill column.
+(require 'fill-column-indicator)
+(add-hook 'after-change-major-mode-hook 'fci-mode)
+
+;; By default fill to 80 chars.
+(setq-default fill-column 80)
+
+;; Autocorrection.
+(setq-default abbrev-mode t)
+(read-abbrev-file "~/.abbrev_defs")
+(setq save-abbrves t)
+
+;; Standard indent is 2 chars.
+(setq standard-indent 2)
+
+;; Use spaces to indent.
+(setq-default indent-tabs-mode nil)
+
+;; Use mouse to scroll in xterm.
+(xterm-mouse-mode t)
+
+;; Git saves history, so no need for backsup.
+(setq make-backup-files nil)
+
+;; Show the colum in the status line.
+(column-number-mode 1)
