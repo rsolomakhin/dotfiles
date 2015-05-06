@@ -41,8 +41,8 @@
 (add-to-list 'auto-mode-alist '("\\.gn\\'"   . python-mode))
 
 ;; Clang-format files by issuing 'clang-format-region' command.
-(add-to-list 'load-path "~/chrome/src/buildtools/clang_format")
-(add-to-list 'load-path "/src/chrome/src/buildtools/clang_format")
+(add-to-list 'load-path "~/chrome/src/buildtools/clang_format/script")
+(add-to-list 'load-path "/src/chrome/src/buildtools/clang_format/script")
 (require 'clang-format)
 
 ;; Indicate the location of the fill column.
