@@ -49,17 +49,17 @@ alias xterm='xterm -e zsh'
 alias zshrc='$EDITOR ~/.zshrc'
 ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto"
 
-alias -s cc=$EDITOR
-alias -s cpp=$EDITOR
-alias -s gn=$EDITOR
-alias -s gyp=$EDITOR
-alias -s gypi=$EDITOR
-alias -s h=$EDITOR
-alias -s html=$EDITOR
-alias -s java=$EDITOR
-alias -s js=$EDITOR
-alias -s proto=$EDITOR
-alias -s xml=$EDITOR
+alias -s cc="$EDITOR"
+alias -s cpp="$EDITOR"
+alias -s gn="$EDITOR"
+alias -s gyp="$EDITOR"
+alias -s gypi="$EDITOR"
+alias -s h="$EDITOR"
+alias -s html="$EDITOR"
+alias -s java="$EDITOR"
+alias -s js="$EDITOR"
+alias -s proto="$EDITOR"
+alias -s xml="$EDITOR"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
