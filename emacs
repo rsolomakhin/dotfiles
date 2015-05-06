@@ -73,3 +73,6 @@
 ;; Save recent files.
 (recentf-mode 1)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+;; No need to type out yes or no.
+(defalias 'yes-or-no-p 'y-or-n-p)
