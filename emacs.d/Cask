@@ -4,3 +4,4 @@
 (depends-on "fill-column-indicator")
 (depends-on "google-c-style")
 (depends-on "pallet")
+(depends-on "yasnippet")

@@ -67,12 +67,13 @@
 ;; Show the colum in the status line.
 (column-number-mode 1)
 
-;; Hippie expand.
-(global-set-key "\M-/" 'hippie-expand)
-
 ;; Save recent files.
 (recentf-mode 1)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;; No need to type out yes or no.
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Snippets.
+(require 'yasnippet)
+(yas-global-mode 1)
