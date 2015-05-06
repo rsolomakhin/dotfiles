@@ -69,3 +69,7 @@
 
 ;; Hippie expand.
 (global-set-key "\M-/" 'hippie-expand)
+
+;; Save recent files.
+(recentf-mode 1)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
