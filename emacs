@@ -12,13 +12,11 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-;; Packages.
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-(package-initialize)
+;; Package management.
+(require 'cask "~/.third_party/cask/cask.el")
+(cask-initialize)
+(require 'pallet)
+(pallet-mode t)
 
 ;; Remember my place in the file.
 (require 'saveplace)

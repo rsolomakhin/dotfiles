@@ -1,0 +1,4 @@
+(source melpa)
+
+(depends-on "fill-column-indicator")
+(depends-on "pallet")

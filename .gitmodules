@@ -7,3 +7,6 @@
 [submodule "third_party/ctrl-zsh"]
 	path = third_party/ctrl-zsh
 	url = https://github.com/Peeja/ctrl-zsh.git
+[submodule "third_party/cask"]
+	path = third_party/cask
+	url = https://github.com/cask/cask.git
