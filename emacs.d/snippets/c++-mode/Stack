@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Stack
+# key: stack
+# binding: direct-keybinding
+# --
+base::debug::StackTrace().Print();

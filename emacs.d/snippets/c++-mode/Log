@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Log
+# key: log
+# binding: direct-keybinding
+# --
+LOG(${1:ERROR}) << ${2:__FUNCTION__};
