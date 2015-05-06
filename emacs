@@ -15,6 +15,9 @@
 ;; Packages.
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
 ;; Remember my place in the file.
@@ -45,13 +48,16 @@
 (require 'fill-column-indicator)
 (add-hook 'after-change-major-mode-hook 'fci-mode)
 
+;; Workaround for fill column indicator causing C-p to skip lines in Emacs 24.3.
+(when (and (= 24 emacs-major-version) (= 3 emacs-minor-version))
+  (make-variable-buffer-local 'line-move-visual)
+  (defadvice previous-line (around avoid-jumpy-fci activate)
+    (if (and (symbol-value 'fci-mode) (> (count-lines 1 (point)) 0))
+        (prog (fci-mode -1) ad-do-it (fci-mode 1))
+      ad-do-it)))
+
 ;; By default fill to 80 chars.
 (setq-default fill-column 80)
-
-;; Autocorrection.
-(setq-default abbrev-mode t)
-(read-abbrev-file "~/.abbrev_defs")
-(setq save-abbrves t)
 
 ;; Standard indent is 2 chars.
 (setq standard-indent 2)
@@ -61,9 +67,6 @@
 
 ;; Use mouse to scroll in xterm.
 (xterm-mouse-mode t)
-
-;; Git saves history, so no need for backsup.
-(setq make-backup-files nil)
 
 ;; Show the colum in the status line.
 (column-number-mode 1)
