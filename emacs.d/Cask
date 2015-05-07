@@ -1,7 +1,7 @@
 (source melpa)
 
 (depends-on "clang-format")
-(depends-on "fill-column-indicator")
+(depends-on "company")
 (depends-on "google-c-style")
 (depends-on "pallet")
 (depends-on "yasnippet")

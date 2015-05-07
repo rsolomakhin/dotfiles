@@ -42,10 +42,6 @@
 ;; Clang-format files by issuing 'clang-format-region' command.
 (require 'clang-format)
 
-;; Indicate the location of the fill column.
-(require 'fill-column-indicator)
-(add-hook 'after-change-major-mode-hook 'fci-mode)
-
 ;; Workaround for fill column indicator causing C-p to skip lines in Emacs 24.3.
 (when (and (= 24 emacs-major-version) (= 3 emacs-minor-version))
   (make-variable-buffer-local 'line-move-visual)
@@ -79,3 +75,20 @@
 ;; Snippets.
 (require 'yasnippet)
 (yas-global-mode 1)
+
+;; Show matching paren.
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+
+;; Complete anything.
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(define-key company-active-map (kbd "\C-n") 'company-select-next)
+(define-key company-active-map (kbd "\C-p") 'company-select-previous)
+(define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
+(define-key company-active-map (kbd "<tab>") 'company-complete)
+
+;; Highlight long lines.
+(require 'whitespace)
+(setq whitespace-style '(face indentation trailing empty lines-tail))
+(global-whitespace-mode 1)
