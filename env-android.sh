@@ -17,6 +17,11 @@ if [[ $- != *i* ]]; then
   exit 1
 fi
 
+if [ ! -e ../.gclient ]; then
+  echo "You're not in a Chromium repository"
+  return
+fi
+
 export GYP_DEFINES="component=shared_library OS=android clang=1"
 source build/android/envsetup.sh
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh

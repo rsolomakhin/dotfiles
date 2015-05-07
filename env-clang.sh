@@ -17,6 +17,11 @@ if [[ $- != *i* ]]; then
   exit 1
 fi
 
+if [ ! -e ../.gclient ]; then
+  echo "You're not in a Chromium repository"
+  return
+fi
+
 export GYP_DEFINES="component=shared_library clang=1"
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 echo $GYP_DEFINES
