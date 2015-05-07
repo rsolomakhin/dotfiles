@@ -26,3 +26,6 @@
 [submodule "third_party/cask"]
 	path = third_party/cask
 	url = https://github.com/cask/cask.git
+[submodule "third_party/gnome-terminal-colors-solarized"]
+	path = third_party/gnome-terminal-colors-solarized
+	url = https://github.com/Anthony25/gnome-terminal-colors-solarized.git
