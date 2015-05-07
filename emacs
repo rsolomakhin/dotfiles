@@ -51,9 +51,6 @@
 ;; Use spaces to indent.
 (setq-default indent-tabs-mode nil)
 
-;; Use mouse to scroll in xterm.
-(xterm-mouse-mode t)
-
 ;; Show the colum in the status line.
 (column-number-mode 1)
 
