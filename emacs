@@ -12,13 +12,15 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-;; Package management.
+;; Manage package dependencies in cask.
 (require 'cask "~/.third_party/cask/cask.el")
 (cask-initialize)
+
+;; Update the cask file when installing packages.
 (require 'pallet)
 (pallet-mode t)
 
-;; Remember my place in the file.
+;; Remember my place in file.
 (require 'saveplace)
 (setq-default save-place t)
 
