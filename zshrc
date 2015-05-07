@@ -12,42 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-PATH=$PATH:$HOME/android-sdk-linux/platform-tools
-PATH=$PATH:$HOME/android-sdk-linux/tools
-PATH=$PATH:$HOME/depot_tools
-PATH=$PATH:$HOME/software/bin
-PATH=$PATH:$HOME/.third_party/cask/bin
-export PATH
-export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
-export CHROMIUM=$HOME/chrome/src
-export ALTERNATE_EDITOR=''
-if [ -e ~/.editor.sh ]; then
-  source ~/.editor.sh
-fi
-if [ -z "$EDITOR" ]; then
-  export EDITOR='vim'
-fi
-
-# Resume SSH agent.
-[ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh > /dev/null 2>&1
-if ! ssh-add -l > /dev/null 2>&1; then
-  killall -9 ssh-agent > /dev/null 2>&1
-  ssh-agent -s > ~/.ssh_agent.sh
-  source ~/.ssh_agent.sh > /dev/null 2>&1
-  for file in ~/.ssh/*.pub; do
-    ssh-add ${file/.pub}
-  done
-fi
-
-alias grep="grep --color=auto"
-alias j='jobs'
-alias so="source"
-alias v="vim"
-alias vi="vim"
-alias xterm='xterm -e zsh'
-alias zshrc='$EDITOR ~/.zshrc'
-ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto"
+source ~/.common.sh
 
 alias -s cc="$EDITOR"
 alias -s cpp="$EDITOR"
@@ -60,9 +25,6 @@ alias -s java="$EDITOR"
 alias -s js="$EDITOR"
 alias -s proto="$EDITOR"
 alias -s xml="$EDITOR"
-
-# Disable flow control (Ctrl-S).
-stty -ixon
 
 # Save and share history.
 export HISTSIZE=1000
@@ -87,16 +49,12 @@ if [[ $EDITOR == v* ]]; then
   if [ -f ~/.third_party/opp.zsh/opp.zsh ]; then
     source ~/.third_party/opp.zsh/opp.zsh
   fi
-  alias e="emacs"
-  alias em="emacs"
 else
   # Emacs editing mode.
   bindkey -e
   if [ -f ~/.third_party/promptline.vim/prompt_emacs.sh ]; then
     source ~/.third_party/promptline.vim/prompt_emacs.sh
   fi
-  alias e="$EDITOR"
-  alias em="$EDITOR"
 fi
 
 # Control-Z to resume current job.

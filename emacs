@@ -42,14 +42,6 @@
 ;; Clang-format files by issuing 'clang-format-region' command.
 (require 'clang-format)
 
-;; Workaround for fill column indicator causing C-p to skip lines in Emacs 24.3.
-(when (and (= 24 emacs-major-version) (= 3 emacs-minor-version))
-  (make-variable-buffer-local 'line-move-visual)
-  (defadvice previous-line (around avoid-jumpy-fci activate)
-    (if (and (symbol-value 'fci-mode) (> (count-lines 1 (point)) 0))
-        (prog (fci-mode -1) ad-do-it (fci-mode 1))
-      ad-do-it)))
-
 ;; By default fill to 80 chars.
 (setq-default fill-column 80)
 
