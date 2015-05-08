@@ -24,9 +24,6 @@
 (require 'saveplace)
 (setq-default save-place t)
 
-;; Automatic indentation.
-(electric-indent-mode t)
-
 ;; Google style formatting for C-like languages.
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
@@ -65,10 +62,6 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
-;; Show matching paren.
-(setq show-paren-delay 0)
-(show-paren-mode 1)
-
 ;; Complete anything.
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
@@ -77,7 +70,5 @@
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "<tab>") 'company-complete)
 
-;; Highlight long lines.
-(require 'whitespace)
-(setq whitespace-style '(face indentation trailing empty lines-tail))
-(global-whitespace-mode 1)
+;; Automatic indentation.
+(electric-indent-mode t)
