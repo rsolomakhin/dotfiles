@@ -72,3 +72,9 @@
 
 ;; Automatic indentation.
 (electric-indent-mode t)
+
+;; Do not put tilde files everywhere.
+(setq make-backup-files nil)
+
+;; Do not put hashtag files everywhere.
+(auto-save-mode 0)
