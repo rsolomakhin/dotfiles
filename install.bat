@@ -23,6 +23,6 @@ git config --global --replace-all core.autocrlf false
 git config --global --replace-all core.excludesfile %USERPROFILE%\.cvsignore
 git config --global --replace-all core.filemode false
 git config --global --replace-all http.cookiefile %USERPROFILE%\.gitcookies
-git config --global --replace-all path.default simple
+git config --global --replace-all push.default simple
 git config --global --replace-all user.name "Rouslan Solomakhin"
 git config --global --replace-all user.email "rouslan.solomakhin@gmail.com"

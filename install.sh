@@ -34,7 +34,7 @@ git config --global --replace-all core.autocrlf false || die "Cannot set git aut
 git config --global --replace-all core.excludesfile ~/.cvsignore || die "Cannot set git excludes file"
 git config --global --replace-all core.filemode false || die "Cannot disable git filemode"
 git config --global --replace-all http.cookiefile ~/.gitcookies || die "Cannot set git cookie file"
-git config --global --replace-all path.default simple || die "Cannot set git path default"
+git config --global --replace-all push.default simple || die "Cannot set git push settings"
 git config --global --replace-all user.name "Rouslan Solomakhin" || die "Cannot set git user name"
 cd ~/.emacs.d/ || die "Cannot change dir to ~/.emacs.d/"
 cask install || die "Cannot install cask deps"
