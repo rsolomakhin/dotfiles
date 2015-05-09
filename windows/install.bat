@@ -12,12 +12,12 @@
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
 
-setlocal
+copy /Y env.bat c:\src\
+call c:\src\env.bat
 
-environment.reg
-
+pushd c:\src\dotfiles\
 mkdir %APPDATA\Console\
-copy  /Y     third_party\console2\console.xml %APPDATA%\Console\
+copy /Y third_party\console2\console.xml %APPDATA%\Console\
 
 copy  /Y     cvsignore    %USERPROFILE%\.cvsignore
 copy  /Y     emacs        %USERPROFILE%\.emacs
@@ -28,6 +28,7 @@ copy  /Y     zshrc        %USERPROFILE%\.zshrc
 xcopy /Y/S/I emacs.d      %USERPROFILE%\.emacs.d
 xcopy /Y/S/I third_party  %USERPROFILE%\.third_party
 xcopy /Y/S/I vim          %USERPROFILE%\vimfiles
+popd
 
 git config --global --replace-all alias.br branch
 git config --global --replace-all alias.brv "branch -vv"
@@ -45,10 +46,7 @@ git config --global --replace-all push.default simple
 git config --global --replace-all user.name "Rouslan Solomakhin"
 
 setlocal
-
 pushd %USERPROFILE%\.emacs.d
 cask install
 popd
-
-endlocal
 endlocal
