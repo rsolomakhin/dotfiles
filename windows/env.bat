@@ -16,5 +16,6 @@ set EDITOR=runemacs
 set GYP_DEFINES="component=shared_library fastbuild=2"
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
-set PATH=%PATH%;%SYSTEMDRIVE%\emacs\bin;%SYSTEMDRIVE%\console2;%SYSTEMDRIVE%\src\depot_tools;%USERPROFILE%\.third_party\cask\bin;%SYSTEMDRIVE%\java\jdk\bin;%SYSTEMDRIVE%\maven\bin
+set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
+set PATH=%PATH%;%SYSTEMDRIVE%\emacs\bin;%SYSTEMDRIVE%\console2;%SYSTEMDRIVE%\src\depot_tools;%HOME%\.third_party\cask\bin;%SYSTEMDRIVE%\maven\bin;%JAVA_HOME%\bin
 call "%ProgramFiles(x86)%\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
