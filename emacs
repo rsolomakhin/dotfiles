@@ -12,21 +12,14 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-;; Manage package dependencies in cask.
-(require 'cask "~/.third_party/cask/cask.el")
-(cask-initialize)
+;;;;;;;;;;;;;;;;;;;;;;;
+;; Built-in settings ;;
+;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Update the cask file when installing packages.
-(require 'pallet)
-(pallet-mode t)
-
-;; Remember my place in file.
-(require 'saveplace)
-(setq-default save-place t)
-
-;; Google style formatting for C-like languages.
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
+;; Turn off the menu bar, menu bar, and scrollbar.
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
 
 ;; .h files are C++.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -35,9 +28,6 @@
 (add-to-list 'auto-mode-alist '("\\.gyp\\'"  . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gypi\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gn\\'"   . python-mode))
-
-;; Clang-format files by issuing 'clang-format-region' command.
-(require 'clang-format)
 
 ;; By default fill to 80 chars.
 (setq-default fill-column 80)
@@ -49,7 +39,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Show the colum in the status line.
-(column-number-mode 1)
+(column-number-mode)
 
 ;; Save recent files.
 (recentf-mode 1)
@@ -58,9 +48,45 @@
 ;; No need to type out yes or no.
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Automatic indentation.
+(electric-indent-mode)
+
+;; Do not put tilde files everywhere.
+(setq make-backup-files nil)
+
+;; Do not put hashtag files everywhere.
+(auto-save-mode 0)
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;; Built-in packages ;;
+;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Remember my place in file.
+(require 'saveplace)
+(setq-default save-place t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Downloaded packages ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Manage package dependencies in cask.
+(require 'cask "~/.third_party/cask/cask.el")
+(cask-initialize)
+
+;; Update the cask file when installing packages.
+(require 'pallet)
+(pallet-mode t)
+
+;; Google style formatting for C-like languages.
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+
+;; Clang-format files by issuing 'clang-format-region' command.
+(require 'clang-format)
+
 ;; Snippets.
 (require 'yasnippet)
-(yas-global-mode 1)
+(yas-global-mode)
 
 ;; Complete anything.
 (require 'company)
@@ -70,11 +96,16 @@
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "<tab>") 'company-complete)
 
-;; Automatic indentation.
-(electric-indent-mode t)
+;; Highlight pasted files.
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
 
-;; Do not put tilde files everywhere.
-(setq make-backup-files nil)
+;; Be smart with paren pairs.
+(require 'smartparens-config)
+(smartparens-global-mode)
 
-;; Do not put hashtag files everywhere.
-(auto-save-mode 0)
+;; Enable editing .proto files.
+(require 'protobuf-mode)
+
+;; Zenburn theme.
+(load-theme 'zenburn t)

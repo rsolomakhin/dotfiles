@@ -59,10 +59,5 @@ else
   fi
 fi
 
-# Control-Z to resume current job.
-if [ -f ~/.third_party/ctrl-zsh/ctrl-zsh.plugin.zsh ]; then
-  source ~/.third_party/ctrl-zsh/ctrl-zsh.plugin.zsh
-fi
-
 # Fuzzy file finder and history lookup.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
