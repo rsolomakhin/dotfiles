@@ -21,6 +21,10 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; Set the font.
+(add-to-list 'default-frame-alist
+             '(font . "Source Code Pro for Powerline Medium 10"))
+
 ;; .h files are C++.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
@@ -109,3 +113,7 @@
 
 ;; Zenburn theme.
 (load-theme 'zenburn t)
+
+;; Git.
+(require 'magit)
+(setq magit-last-seen-setup-instructions "1.4.0")

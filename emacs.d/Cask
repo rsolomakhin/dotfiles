@@ -19,6 +19,7 @@
 (depends-on "clang-format")
 (depends-on "company")
 (depends-on "google-c-style")
+(depends-on "magit")
 (depends-on "pallet")
 (depends-on "protobuf-mode")
 (depends-on "smartparens")
