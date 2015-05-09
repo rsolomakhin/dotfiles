@@ -14,5 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-EXCLUDES="README.md LICENSE install.bat install.sh"
+EXCLUDES="README.md LICENSE install.bat environment.reg install.sh"
 SYMLINK_DIRS="ftplugin ftdetect third_party"

@@ -1,3 +1,5 @@
+;; -*- lisp -*-
+;;
 ;; Copyright 2015 Rouslan Solomakhin
 ;;
 ;; Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,14 +18,23 @@
 ;; Built-in settings ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Don't show the welcome screen.
+(setq inhibit-startup-message t)
+
 ;; Turn off the menu bar, menu bar, and scrollbar.
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
 ;; Set the font.
-(add-to-list 'default-frame-alist
-             '(font . "Source Code Pro for Powerline Medium 10"))
+(cond
+ ((string-equal system-type "gnu/linux")
+  (add-to-list 'default-frame-alist
+               '(font . "Source Code Pro for Powerline Medium 10")))
+ ((string-equal system-type "windows-nt")
+  (custom-set-faces
+   '(default ((t (:family "Consolas" :foundry "outline" :slant normal
+                          :weight normal :height 120 :width normal)))))))
 
 ;; .h files are C++.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
