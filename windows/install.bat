@@ -45,6 +45,10 @@ git.exe config --global --replace-all core.filemode false
 git.exe config --global --replace-all http.cookiefile %USERPROFILE%\.gitcookies
 git.exe config --global --replace-all push.default simple
 git.exe config --global --replace-all user.name "Rouslan Solomakhin"
+git.exe config --global --get user.email > NUL 2>&1
+if errorlevel 1 (
+  git.exe config --global --replace-all user.email "rouslan.solomakhin@gmail.com"
+)
 
 pushd %USERPROFILE%\.emacs.d\
 emacs.exe -Q --script %HOME%\.third_party\cask\cask-cli.el -- install
