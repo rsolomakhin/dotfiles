@@ -15,5 +15,5 @@
 call env.bat
 set GYP_DEFINES=component=shared_library build_for_tool=drmemory
 if exist local-env.bat (
-call local-env.bat
+  call local-env.bat
 )
