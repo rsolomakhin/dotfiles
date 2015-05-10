@@ -47,5 +47,5 @@ git.exe config --global --replace-all push.default simple
 git.exe config --global --replace-all user.name "Rouslan Solomakhin"
 
 pushd %USERPROFILE%\.emacs.d\
-call cask.bat install
+emacs.exe -Q --script %HOME%\.third_party\cask\cask-cli.el -- install
 popd
