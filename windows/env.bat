@@ -22,6 +22,7 @@ if not "%PATH%" == "%PATH:depot_tools=%" (
   goto skip_path
 )
 
+for /d %%g in (%SYSTEMDRIVE%\src\depot_tools\git*chromium*) do set PATH=%PATH%;%%g\cmd
 set PATH=%PATH%;%HOME%\.third_party\cask\bin
 set PATH=%PATH%;%JAVA_HOME%\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\console2

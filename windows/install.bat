@@ -31,20 +31,20 @@ xcopy /Y/S/I third_party  %USERPROFILE%\.third_party
 xcopy /Y/S/I vim          %USERPROFILE%\vimfiles
 popd
 
-call git config --global --replace-all alias.br branch
-call git config --global --replace-all alias.brv "branch -vv"
-call git config --global --replace-all alias.can "commit -a --amend --no-edit"
-call git config --global --replace-all alias.co checkout
-call git config --global --replace-all alias.ls ls-files
-call git config --global --replace-all alias.st status
-call git config --global --replace-all alias.sub "submodule update --init --recursive"
-call git config --global --replace-all color.ui true
-call git config --global --replace-all core.autocrlf false
-call git config --global --replace-all core.excludesfile %USERPROFILE%\.cvsignore
-call git config --global --replace-all core.filemode false
-call git config --global --replace-all http.cookiefile %USERPROFILE%\.gitcookies
-call git config --global --replace-all push.default simple
-call git config --global --replace-all user.name "Rouslan Solomakhin"
+git.exe config --global --replace-all alias.br branch
+git.exe config --global --replace-all alias.brv "branch -vv"
+git.exe config --global --replace-all alias.can "commit -a --amend --no-edit"
+git.exe config --global --replace-all alias.co checkout
+git.exe config --global --replace-all alias.ls ls-files
+git.exe config --global --replace-all alias.st status
+git.exe config --global --replace-all alias.sub "submodule update --init --recursive"
+git.exe config --global --replace-all color.ui true
+git.exe config --global --replace-all core.autocrlf false
+git.exe config --global --replace-all core.excludesfile %USERPROFILE%\.cvsignore
+git.exe config --global --replace-all core.filemode false
+git.exe config --global --replace-all http.cookiefile %USERPROFILE%\.gitcookies
+git.exe config --global --replace-all push.default simple
+git.exe config --global --replace-all user.name "Rouslan Solomakhin"
 
 pushd %USERPROFILE%\.emacs.d\
 call cask.bat install
