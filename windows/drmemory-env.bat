@@ -12,27 +12,8 @@
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
 
-set EDITOR=runemacs
-set GYP_DEFINES=component=shared_library fastbuild=2
-set GYP_GENERATORS=ninja
-set HOME=%USERPROFILE%
-set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
-
-set PATH=%PATH%;%HOME%\.third_party\cask\bin
-set PATH=%PATH%;%JAVA_HOME%\bin
-set PATH=%PATH%;%SYSTEMDRIVE%\console2
-set PATH=%PATH%;%SYSTEMDRIVE%\emacs\bin
-set PATH=%PATH%;%SYSTEMDRIVE%\maven\bin
-set PATH=%PATH%;%SYSTEMDRIVE%\src\depot_tools
-
-set VCVARSALL=%ProgramFiles(x86)%\Microsoft Visual Studio 12.0\VC\vcvarsall.bat
-if exist %VCVARSALL% (
-set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-call %VCVARSALL%
-) else (
-set DEPOT_TOOLS_WIN_TOOLCHAIN=1
-)
-
+call env.bat
+set GYP_DEFINES=component=shared_library build_for_tool=drmemory
 if exist local-env.bat (
 call local-env.bat
 )

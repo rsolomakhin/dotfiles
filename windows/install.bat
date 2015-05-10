@@ -12,19 +12,21 @@
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
 
-copy /Y env.bat c:\src\
-call c:\src\env.bat
+copy /Y drmemory-env.bat c:\src\
+copy /Y env.bat          c:\src\
+
+pushd c:\src
+env.bat
+popd
 
 pushd c:\src\dotfiles\
 mkdir %APPDATA\Console\
 copy /Y third_party\console2\console.xml %APPDATA%\Console\
-
 copy  /Y     cvsignore    %USERPROFILE%\.cvsignore
 copy  /Y     emacs        %USERPROFILE%\.emacs
 copy  /Y     gitconfig    %USERPROFILE%\.gitconfig
 copy  /Y     vimrc        %USERPROFILE%\.vimrc
 copy  /Y     zshrc        %USERPROFILE%\.zshrc
-
 xcopy /Y/S/I emacs.d      %USERPROFILE%\.emacs.d
 xcopy /Y/S/I third_party  %USERPROFILE%\.third_party
 xcopy /Y/S/I vim          %USERPROFILE%\vimfiles
@@ -45,8 +47,6 @@ git config --global --replace-all http.cookiefile %USERPROFILE%\.gitcookies
 git config --global --replace-all push.default simple
 git config --global --replace-all user.name "Rouslan Solomakhin"
 
-setlocal
-pushd %USERPROFILE%\.emacs.d
-cask install
+pushd %USERPROFILE%\.emacs.d\
+call cask.bat install
 popd
-endlocal
