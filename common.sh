@@ -12,21 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-PATH=$PATH:$HOME/android-sdk-linux/platform-tools
-PATH=$PATH:$HOME/android-sdk-linux/tools
-PATH=$PATH:$HOME/depot_tools
-PATH=$PATH:$HOME/software/bin
-PATH=$PATH:$HOME/.third_party/cask/bin
-export PATH
+
+if [[ $PATH != *depot_tools* ]]; then
+  PATH=$PATH:$HOME/android-sdk-linux/platform-tools
+  PATH=$PATH:$HOME/android-sdk-linux/tools
+  PATH=$PATH:$HOME/depot_tools
+  PATH=$PATH:$HOME/software/bin
+  PATH=$PATH:$HOME/.third_party/cask/bin
+  export PATH
+fi
+
 export ALTERNATE_EDITOR=""
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
 export GYP_DEFINES="component=shared_library"
 export GYP_GENERATORS="ninja"
+
 if [ -e ~/.editor.sh ]; then
   source ~/.editor.sh
 fi
+
 if [ -z "$EDITOR" ]; then
   export EDITOR="vim"
 fi

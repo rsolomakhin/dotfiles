@@ -30,7 +30,7 @@
 (cond
  ((string-equal system-type "gnu/linux")
   (add-to-list 'default-frame-alist
-               '(font . "Source Code Pro for Powerline Medium 10")))
+               '(font . "Ubuntu Mono:pixelsize=15")))
  ((string-equal system-type "windows-nt")
   (custom-set-faces
    '(default ((t (:family "Consolas" :foundry "outline" :slant normal
