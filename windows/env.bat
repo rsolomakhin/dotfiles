@@ -12,11 +12,14 @@
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
 
-set EDITOR=emacsclient
+set ALTERNATE_EDITOR=emacs
+set EDITOR=start /b emacsclient
 set GYP_DEFINES=component=shared_library fastbuild=2
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
+
+doskey e=%EDITOR% $*
 
 if not "%PATH%" == "%PATH:depot_tools=%" (
   goto skip_path
