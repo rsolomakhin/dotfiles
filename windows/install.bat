@@ -15,12 +15,17 @@
 copy /Y drmemory-env.bat c:\src\
 copy /Y env.bat          c:\src\
 
-pushd c:\src
-call env.bat
-popd
+where git.exe > NUL 2>&1
+if errorlevel 1 (
+  pushd c:\src
+  call env.bat
+  popd
+  git.exe pull --rebase
+  install.bat
+)
 
 pushd c:\src\dotfiles\
-mkdir %APPDATA\Console\
+mkdir %APPDATA%\Console\
 copy  /Y third_party\console2\console.xml %APPDATA%\Console\
 copy  /Y     cvsignore    %USERPROFILE%\.cvsignore
 copy  /Y     emacs        %USERPROFILE%\.emacs
@@ -51,5 +56,7 @@ if errorlevel 1 (
 )
 
 pushd %USERPROFILE%\.emacs.d\
-emacs.exe -Q --script %HOME%\.third_party\cask\cask-cli.el -- install
+emacs.exe -Q --script %USERPROFILE%\.third_party\cask\cask-cli.el -- install
 popd
+
+reg add HKCU\Environment /v HOME /d %USERPROFILE% /f
