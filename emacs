@@ -72,14 +72,14 @@
 ;; Do not put hashtag files everywhere.
 (auto-save-mode 0)
 
-;; Start in server mode on Windows.
-(cond
- ((string-equal system-type "windows-nt")
-  (server-start)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Built-in packages ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Enable server mode everywhere.
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;; Remember my place in file.
 (require 'saveplace)
