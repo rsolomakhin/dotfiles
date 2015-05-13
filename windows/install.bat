@@ -59,5 +59,3 @@ git.exe config --replace-all user.email "rouslan.solomakhin@gmail.com"
 pushd %USERPROFILE%\.emacs.d\
 emacs.exe -Q --script %USERPROFILE%\.third_party\cask\cask-cli.el -- install
 popd
-
-reg add HKCU\Environment /v HOME /d %USERPROFILE% /f
