@@ -54,6 +54,7 @@ git.exe config --global --get user.email > NUL 2>&1
 if errorlevel 1 (
   git.exe config --global --replace-all user.email "rouslan.solomakhin@gmail.com"
 )
+git.exe config --replace-all user.email "rouslan.solomakhin@gmail.com"
 
 pushd %USERPROFILE%\.emacs.d\
 emacs.exe -Q --script %USERPROFILE%\.third_party\cask\cask-cli.el -- install

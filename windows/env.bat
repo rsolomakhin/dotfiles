@@ -14,7 +14,7 @@
 
 set ALTERNATE_EDITOR=emacs
 set EDITOR=start /b emacsclient
-set GYP_DEFINES=component=shared_library fastbuild=2
+set GYP_DEFINES=component=shared_library fastbuild=2 disable_nacl=1 disable_pnacl=1
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
