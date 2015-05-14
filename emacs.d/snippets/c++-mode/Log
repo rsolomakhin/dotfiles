@@ -18,4 +18,4 @@
 # key: log
 # binding: direct-keybinding
 # --
-LOG(${1:ERROR}) << ${2:__FUNCTION__};
+LOG(ERROR) << __FUNCTION__ << ": $0";
