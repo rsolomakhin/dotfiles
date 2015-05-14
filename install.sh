@@ -19,9 +19,9 @@ die() {
   exit 1
 }
 
+git config user.email "rouslan.solomakhin@gmail.com" || die "Cannot set git user email for this repository"
 cd || die "Cannot change dir to home"
 rcup -v || die "Cannot install dotfiles"
-git config user.email "rouslan.solomakhin@gmail.com" || dir "Cannot set git user email for this repository"
 git config --global --get user.email || git config --global user.email "rouslan.solomakhin@gmail.com" || die "Cannot set global git user email"
 git config --global --replace-all alias.br branch || die "Cannot alias git br"
 git config --global --replace-all alias.brv "branch -vv" || die "Cannot alias git brv"
