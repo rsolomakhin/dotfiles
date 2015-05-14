@@ -13,13 +13,13 @@
 :: limitations under the License.
 
 set ALTERNATE_EDITOR=emacs
-set EDITOR=start /b emacsclient
+set EDITOR=emacs
 set GYP_DEFINES=component=shared_library fastbuild=2 disable_nacl=1 disable_pnacl=1
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
 
-doskey e=%EDITOR% $*
+doskey e=start /b emacsclient $*
 
 if not "%PATH%" == "%PATH:depot_tools=%" (
   goto skip_path

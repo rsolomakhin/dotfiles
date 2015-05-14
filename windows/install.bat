@@ -24,6 +24,10 @@ if errorlevel 1 (
   install.bat
 )
 
+pushd c:\src
+call env.bat
+popd
+
 pushd c:\src\dotfiles\
 mkdir %APPDATA%\Console\
 copy  /Y third_party\console2\console.xml %APPDATA%\Console\
