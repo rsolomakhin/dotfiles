@@ -16,7 +16,7 @@
 
 source ~/.common.sh
 
-if [ -f ~/.third_party/promptline.vim/prompt_emacs.sh ]; then
+if [ -z "$SSH_CLIENT" -a -f ~/.third_party/promptline.vim/prompt_emacs.sh ]; then
   source ~/.third_party/promptline.vim/prompt_emacs.sh
 fi
 
