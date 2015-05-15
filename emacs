@@ -22,9 +22,9 @@
 (setq inhibit-startup-message t)
 
 ;; Turn off the menu bar, menu bar, and scrollbar.
-(menu-bar-mode nil)
-(tool-bar-mode nil)
-(scroll-bar-mode nil)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
 
 ;; Set the font.
 (cond
@@ -51,7 +51,7 @@
 (setq standard-indent 2)
 
 ;; Use spaces to indent.
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode 0)
 
 ;; Show the colum in the status line.
 (column-number-mode)
@@ -67,10 +67,10 @@
 (electric-indent-mode)
 
 ;; Do not put tilde files everywhere.
-(setq make-backup-files nil)
+(setq make-backup-files 0)
 
 ;; Do not put hashtag files everywhere.
-(auto-save-mode nil)
+(auto-save-mode 0)
 
 ;; Remove trailing whitespace.
 (add-hook 'write-file-hooks #'delete-trailing-whitespace)
