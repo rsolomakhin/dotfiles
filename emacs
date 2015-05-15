@@ -22,9 +22,9 @@
 (setq inhibit-startup-message t)
 
 ;; Turn off the menu bar, menu bar, and scrollbar.
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
+(menu-bar-mode nil)
+(tool-bar-mode nil)
+(scroll-bar-mode nil)
 
 ;; Set the font.
 (cond
@@ -70,7 +70,10 @@
 (setq make-backup-files nil)
 
 ;; Do not put hashtag files everywhere.
-(auto-save-mode 0)
+(auto-save-mode nil)
+
+;; Remove trailing whitespace.
+(add-hook 'write-file-hooks #'delete-trailing-whitespace)
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Built-in packages ;;
