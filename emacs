@@ -75,6 +75,16 @@
 ;; Remove trailing whitespace.
 (add-hook 'write-file-hooks #'delete-trailing-whitespace)
 
+;; Revert any buffer asociated with a file when the file changes on disk.
+(global-auto-revert-mode)
+
+;;;;;;;;;;;;;;;;;;
+;; Key bindings ;;
+;;;;;;;;;;;;;;;;;;
+
+(global-set-key [(C-f5)] 'compile)
+(global-set-key [(f5)] 'recompile)
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Built-in packages ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -119,7 +129,7 @@
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "<tab>") 'company-complete)
 
-;; Highlight pasted files.
+;; Highlight pasted lines.
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
 
@@ -130,8 +140,10 @@
 ;; Enable editing .proto files.
 (require 'protobuf-mode)
 
-;; Zenburn theme.
-(load-theme 'zenburn t)
+;; Theme.
+;; (load-theme 'zenburn t)
+;; (load-theme 'solarized-dark t)
+(load-theme 'wombat t)
 
 ;; Git.
 (require 'magit)
