@@ -23,4 +23,6 @@ if [ ! -e ../.gclient ]; then
 fi
 
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
-ln -svfT out_gn out
+
+mkdir -pv out_gn/Default
+ln -svfT out_gn/Default out
