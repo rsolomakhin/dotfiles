@@ -53,7 +53,7 @@
 ;; Use spaces to indent.
 (setq-default indent-tabs-mode 0)
 
-;; Show the colum in the status line.
+;; Show the column in the status line.
 (column-number-mode)
 
 ;; Save recent files.
@@ -75,13 +75,14 @@
 ;; Remove trailing whitespace.
 (add-hook 'write-file-hooks #'delete-trailing-whitespace)
 
-;; Revert any buffer asociated with a file when the file changes on disk.
+;; Revert any buffer associated with a file when the file changes on disk.
 (global-auto-revert-mode)
 
 ;;;;;;;;;;;;;;;;;;
 ;; Key bindings ;;
 ;;;;;;;;;;;;;;;;;;
 
+;; Compilation.
 (global-set-key [(C-f5)] 'compile)
 (global-set-key [(f5)] 'recompile)
 
@@ -97,6 +98,10 @@
 ;; Remember my place in file.
 (require 'saveplace)
 (setq-default save-place t)
+
+;; Move quickly between windows.
+(require 'windmove)
+(windmove-default-keybindings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Downloaded packages ;;
@@ -140,11 +145,21 @@
 ;; Enable editing .proto files.
 (require 'protobuf-mode)
 
-;; Theme.
-;; (load-theme 'zenburn t)
-;; (load-theme 'solarized-dark t)
-(load-theme 'wombat t)
-
 ;; Git.
 (require 'magit)
 (setq magit-last-seen-setup-instructions "1.4.0")
+
+;; Move the buffer around.
+(require 'buffer-move)
+(global-set-key [(C-S-up)] 'buf-move-up)
+(global-set-key [(C-S-down)] 'buf-move-down)
+(global-set-key [(C-S-left)] 'buf-move-left)
+(global-set-key [(C-S-right)] 'buf-move-right)
+
+;;;;;;;;;;;
+;; Theme ;;
+;;;;;;;;;;;
+
+;; (load-theme 'zenburn t)
+;; (load-theme 'solarized-dark t)
+(load-theme 'wombat t)

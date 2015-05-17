@@ -16,6 +16,7 @@
 
 (source melpa)
 
+(depends-on "buffer-move")
 (depends-on "clang-format")
 (depends-on "company")
 (depends-on "google-c-style")
