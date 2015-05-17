@@ -44,7 +44,7 @@ if [[ $EDITOR == v* ]]; then
   bindkey '^G' what-cursor-position
   bindkey '^h' backward-delete-char
   export KEYTIMEOUT=1
-  if [ -z "$SSH_CLIENT" -a -f ~/.third_party/promptline.vim/prompt_vim.sh ]; then
+  if [ -z "$SSH_CLIENT" -a -z "$INSIDE_EMACS" -a -f ~/.third_party/promptline.vim/prompt_vim.sh ]; then
     source ~/.third_party/promptline.vim/prompt_vim.sh
   fi
   # Vim text objects.
@@ -54,7 +54,7 @@ if [[ $EDITOR == v* ]]; then
 else
   # Emacs editing mode.
   bindkey -e
-  if [ -z "$SSH_CLIENT" -a -f ~/.third_party/promptline.vim/prompt_emacs.sh ]; then
+  if [ -z "$SSH_CLIENT" -a -z "$INSIDE_EMACS" -a -f ~/.third_party/promptline.vim/prompt_emacs.sh ]; then
     source ~/.third_party/promptline.vim/prompt_emacs.sh
   fi
 fi
