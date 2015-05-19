@@ -23,7 +23,7 @@ if [ ! -e ../.gclient ]; then
 fi
 
 export GYP_DEFINES="component=shared_library OS=android clang=1"
-source build/android/envsetup.sh
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
+source build/android/envsetup.sh
 echo $GYP_DEFINES
 ln -svfT out_android out
