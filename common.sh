@@ -27,14 +27,7 @@ export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
 export GYP_DEFINES="component=shared_library"
 export GYP_GENERATORS="ninja"
-
-if [ -e ~/.editor.sh ]; then
-  source ~/.editor.sh
-fi
-
-if [ -z "$EDITOR" ]; then
-  export EDITOR="vim"
-fi
+export EDITOR="emacsclient"
 
 # Resume SSH agent.
 [ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh > /dev/null 2>&1

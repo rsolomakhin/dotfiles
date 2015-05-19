@@ -146,8 +146,7 @@
 (require 'protobuf-mode)
 
 ;; Git.
-(require 'magit)
-(setq magit-last-seen-setup-instructions "1.4.0")
+(require 'egg)
 
 ;; Move the buffer around.
 (require 'buffer-move)
@@ -160,6 +159,6 @@
 ;; Theme ;;
 ;;;;;;;;;;;
 
-;; (load-theme 'zenburn t)
+(load-theme 'zenburn t)
 ;; (load-theme 'solarized-dark t)
-(load-theme 'wombat t)
+;; (load-theme 'wombat t)
