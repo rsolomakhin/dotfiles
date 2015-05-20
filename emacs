@@ -146,7 +146,7 @@
 (require 'protobuf-mode)
 
 ;; Git.
-(require 'egg)
+(require 'magit)
 
 ;; Move the buffer around.
 (require 'buffer-move)
