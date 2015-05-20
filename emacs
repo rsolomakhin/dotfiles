@@ -159,6 +159,7 @@
 ;; Theme ;;
 ;;;;;;;;;;;
 
-(load-theme 'zenburn t)
 ;; (load-theme 'solarized-dark t)
+(load-theme 'tango-dark t)
 ;; (load-theme 'wombat t)
+;; (load-theme 'zenburn t)
