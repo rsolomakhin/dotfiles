@@ -57,3 +57,7 @@ else
   alias e="$EDITOR"
   alias em="$EDITOR"
 fi
+
+if [ -n "$INSIDE_EMACS" ]; then
+  export PAGER=cat
+fi

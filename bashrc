@@ -16,9 +16,5 @@
 
 source ~/.common.sh
 
-if [ -z "$SSH_CLIENT" -a -z "$INSIDE_EMACS" -a -f ~/.third_party/promptline.vim/prompt_emacs.sh ]; then
-  source ~/.third_party/promptline.vim/prompt_emacs.sh
-fi
-
 # Fuzzy file finder and history lookup.
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
