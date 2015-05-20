@@ -84,7 +84,14 @@
 
 ;; Compilation.
 (global-set-key [(C-f5)] 'compile)
-(global-set-key [(f5)] 'recompile)
+(global-set-key
+ [(f5)]
+ (lambda ()
+   (interactive)
+   (recompile)
+   (switch-to-buffer "*compilation*")
+   (delete-other-windows)
+   (end-of-buffer)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Built-in packages ;;
