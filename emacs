@@ -78,6 +78,14 @@
 ;; Revert any buffer associated with a file when the file changes on disk.
 (global-auto-revert-mode)
 
+;; Save minibuffer history across sessions.
+(savehist-mode)
+
+;; Save the state of Emacs across sessions.
+(desktop-save-mode)
+(add-to-list 'desktop-globals-to-save 'compile-command)
+(setq desktop-restore-eager 10)
+
 ;;;;;;;;;;;;;;;;;;
 ;; Key bindings ;;
 ;;;;;;;;;;;;;;;;;;
@@ -154,6 +162,7 @@
 
 ;; Git.
 (require 'magit)
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Move the buffer around.
 (require 'buffer-move)
