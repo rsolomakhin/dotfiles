@@ -81,11 +81,6 @@
 ;; Save minibuffer history across sessions.
 (savehist-mode)
 
-;; Save the state of Emacs across sessions.
-(desktop-save-mode)
-(add-to-list 'desktop-globals-to-save 'compile-command)
-(setq desktop-restore-eager 10)
-
 ;;;;;;;;;;;;;;;;;;
 ;; Key bindings ;;
 ;;;;;;;;;;;;;;;;;;
