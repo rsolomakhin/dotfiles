@@ -95,20 +95,37 @@
 				     (buffer-file-name))
 	   (line-number-at-pos))))
 
+;; Relaunch the last compile command and see the compile progress.
+(defun recompile-in-full-screen ()
+  (interactive)
+  (recompile)
+  (switch-to-buffer "*compilation*")
+  (delete-other-windows)
+  (end-of-buffer))
+
+;; Open the header, source, and tests side-by-side.
+(defun split-related-files-from-header ()
+  (interactive)
+  (delete-other-windows)
+  (split-window-right)
+  (windmove-right)
+  (find-file (replace-regexp-in-string
+	      ".h$" ".cc" (buffer-file-name)))
+  (split-window-right)
+  (windmove-right)
+  (find-file (replace-regexp-in-string
+	      ".cc$" "_unittest.cc" (buffer-file-name)))
+  (balance-windows)
+  (windmove-left)
+  (windmove-left))
+
 ;;;;;;;;;;;;;;;;;;
 ;; Key bindings ;;
 ;;;;;;;;;;;;;;;;;;
 
 ;; Compilation.
 (global-set-key [(C-f5)] 'compile)
-(global-set-key
- [(f5)]
- (lambda ()
-   (interactive)
-   (recompile)
-   (switch-to-buffer "*compilation*")
-   (delete-other-windows)
-   (end-of-buffer)))
+(global-set-key [(f5)] 'recompile-in-full-screen);
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Built-in packages ;;
@@ -196,6 +213,7 @@
 ;; Theme ;;
 ;;;;;;;;;;;
 
+;; (load-theme 'molokai t)
 ;; (load-theme 'solarized-dark t)
 ;; (load-theme 'tango-dark t)
 ;; (load-theme 'wombat t)

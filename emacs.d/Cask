@@ -22,6 +22,7 @@
 (depends-on "company-ycmd")
 (depends-on "google-c-style")
 (depends-on "magit")
+(depends-on "molokai-theme")
 (depends-on "pallet")
 (depends-on "protobuf-mode")
 (depends-on "smartparens")
