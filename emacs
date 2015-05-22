@@ -81,6 +81,20 @@
 ;; Save minibuffer history across sessions.
 (savehist-mode)
 
+;;;;;;;;;;;;;;;;;;;;;;
+;; Custom functions ;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+;; Open chromium source code browser at the current cursor position.
+(defun open-chromium-src ()
+  (interactive)
+  (browse-url
+   (format "https://code.google.com/p/chromium/codesearch#chromium/src/%s&l=%s"
+	   (replace-regexp-in-string ".*chrome/src/"
+				     ""
+				     (buffer-file-name))
+	   (line-number-at-pos))))
+
 ;;;;;;;;;;;;;;;;;;
 ;; Key bindings ;;
 ;;;;;;;;;;;;;;;;;;
