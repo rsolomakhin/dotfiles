@@ -163,8 +163,10 @@
  ((string-equal system-type "gnu/linux")
   (require 'ycmd)
   (add-hook 'after-init-hook #'global-ycmd-mode)
-  (set-variable 'ycmd-server-command '("python" "~/.third_party/ycmd/ycmd"))
-  (set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
+  (set-variable 'ycmd-server-command '("python"))
+  (add-to-list 'ycmd-server-command (expand-file-name "~/.third_party/ycmd/ycmd") t)
+  (set-variable 'ycmd-global-config
+		"~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
   (require 'company-ycmd)
   (company-ycmd-setup)))
 
