@@ -149,6 +149,16 @@
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "<tab>") 'company-complete)
 
+;; Semantic completion server.
+(cond
+ ((string-equal system-type "gnu/linux")
+  (require 'ycmd)
+  (add-hook 'after-init-hook #'global-ycmd-mode)
+  (set-variable 'ycmd-server-command '("python" "~/.third_party/ycmd/ycmd"))
+  (set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
+  (require 'company-ycmd)
+  (company-ycmd-setup)))
+
 ;; Highlight pasted lines.
 (require 'volatile-highlights)
 (volatile-highlights-mode t)

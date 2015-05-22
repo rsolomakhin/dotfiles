@@ -14,8 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+.dir-locals.el
+.emacs.desktop
+.emacs.desktop.lock
+.tags
 .ycm_extra_conf.py
 .ycm_extra_conf.pyc
-.dir-locals.el
 workbench.xmi
-.tags
