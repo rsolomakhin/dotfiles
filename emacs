@@ -132,7 +132,7 @@
 (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
 (define-key company-active-map (kbd "<tab>") 'company-complete)
 
-;; Semantic completion server.
+;; Semantic completion server and on-the-fly checking.
 (cond
  ((string-equal system-type "gnu/linux")
   (require 'ycmd)
@@ -142,7 +142,10 @@
   (set-variable 'ycmd-global-config
 		"~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
   (require 'company-ycmd)
-  (company-ycmd-setup)))
+  (company-ycmd-setup)
+  (require 'flycheck-ycmd)
+  (flycheck-ycmd-setup)
+  (add-hook 'after-init-hook #'global-flycheck-mode)))
 
 ;; Highlight pasted lines.
 (require 'volatile-highlights)
@@ -183,19 +186,15 @@
 				     (buffer-file-name))
 	   (line-number-at-pos))))
 
-(defun compile-in-full-screen ()
-  "Launch a compile command and see the compilation progress."
+(defun compile-from-root ()
+  "Launch a compile command from the project root."
   (interactive)
-  (with-ftf-project-root (call-interactively 'compile))
-  (switch-to-buffer "*compilation*")
-  (delete-other-windows))
+  (with-ftf-project-root (call-interactively 'compile)))
 
-(defun recompile-in-full-screen ()
-  "Relaunch the last compile command and see the compilation progress."
+(defun recompile-from-root ()
+  "Relaunch the last compile command from the project root."
   (interactive)
-  (with-ftf-project-root (recompile))
-  (switch-to-buffer "*compilation*")
-  (delete-other-windows))
+  (with-ftf-project-root (recompile)))
 
 (defun split-related-files-from-header ()
   "Open the header, source, and tests side-by-side."
@@ -218,8 +217,8 @@
 ;;;;;;;;;;;;;;;;;;
 
 ;; Compilation.
-(global-set-key [(C-f5)] 'compile-in-full-screen)
-(global-set-key [(f5)] 'recompile-in-full-screen)
+(global-set-key [(C-f5)] 'compile-from-root)
+(global-set-key [(f5)] 'recompile-from-root)
 
 ;;;;;;;;;;;
 ;; Theme ;;
