@@ -81,51 +81,8 @@
 ;; Save minibuffer history across sessions.
 (savehist-mode)
 
-;;;;;;;;;;;;;;;;;;;;;;
-;; Custom functions ;;
-;;;;;;;;;;;;;;;;;;;;;;
-
-;; Open chromium source code browser at the current cursor position.
-(defun open-chromium-src ()
-  (interactive)
-  (browse-url
-   (format "https://code.google.com/p/chromium/codesearch#chromium/src/%s&l=%s"
-	   (replace-regexp-in-string ".*chrome/src/"
-				     ""
-				     (buffer-file-name))
-	   (line-number-at-pos))))
-
-;; Relaunch the last compile command and see the compile progress.
-(defun recompile-in-full-screen ()
-  (interactive)
-  (recompile)
-  (switch-to-buffer "*compilation*")
-  (delete-other-windows)
-  (end-of-buffer))
-
-;; Open the header, source, and tests side-by-side.
-(defun split-related-files-from-header ()
-  (interactive)
-  (delete-other-windows)
-  (split-window-right)
-  (windmove-right)
-  (find-file (replace-regexp-in-string
-	      ".h$" ".cc" (buffer-file-name)))
-  (split-window-right)
-  (windmove-right)
-  (find-file (replace-regexp-in-string
-	      ".cc$" "_unittest.cc" (buffer-file-name)))
-  (balance-windows)
-  (windmove-left)
-  (windmove-left))
-
-;;;;;;;;;;;;;;;;;;
-;; Key bindings ;;
-;;;;;;;;;;;;;;;;;;
-
-;; Compilation.
-(global-set-key [(C-f5)] 'compile)
-(global-set-key [(f5)] 'recompile-in-full-screen);
+;; Scroll compilation buffer until the first error.
+(setq compilation-scroll-output 'first-error)
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Built-in packages ;;
@@ -208,6 +165,61 @@
 (global-set-key [(C-S-down)] 'buf-move-down)
 (global-set-key [(C-S-left)] 'buf-move-left)
 (global-set-key [(C-S-right)] 'buf-move-right)
+
+;; Search files in git.
+(require 'find-things-fast)
+
+;;;;;;;;;;;;;;;;;;;;;;
+;; Custom functions ;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+(defun open-chromium-src ()
+  "Open chromium source code browser at the current cursor position."
+  (interactive)
+  (browse-url
+   (format "https://code.google.com/p/chromium/codesearch#chromium/src/%s&l=%s"
+	   (replace-regexp-in-string ".*chrome/src/"
+				     ""
+				     (buffer-file-name))
+	   (line-number-at-pos))))
+
+(defun compile-in-full-screen ()
+  "Launch a compile command and see the compilation progress."
+  (interactive)
+  (with-ftf-project-root (call-interactively 'compile))
+  (switch-to-buffer "*compilation*")
+  (delete-other-windows))
+
+(defun recompile-in-full-screen ()
+  "Relaunch the last compile command and see the compilation progress."
+  (interactive)
+  (with-ftf-project-root (recompile))
+  (switch-to-buffer "*compilation*")
+  (delete-other-windows))
+
+(defun split-related-files-from-header ()
+  "Open the header, source, and tests side-by-side."
+  (interactive)
+  (delete-other-windows)
+  (split-window-right)
+  (windmove-right)
+  (find-file (replace-regexp-in-string
+	      ".h$" ".cc" (buffer-file-name)))
+  (split-window-right)
+  (windmove-right)
+  (find-file (replace-regexp-in-string
+	      ".cc$" "_unittest.cc" (buffer-file-name)))
+  (balance-windows)
+  (windmove-left)
+  (windmove-left))
+
+;;;;;;;;;;;;;;;;;;
+;; Key bindings ;;
+;;;;;;;;;;;;;;;;;;
+
+;; Compilation.
+(global-set-key [(C-f5)] 'compile-in-full-screen)
+(global-set-key [(f5)] 'recompile-in-full-screen)
 
 ;;;;;;;;;;;
 ;; Theme ;;
