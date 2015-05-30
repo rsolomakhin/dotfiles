@@ -47,7 +47,7 @@ git.exe config --global --replace-all alias.co checkout
 git.exe config --global --replace-all alias.ls ls-files
 git.exe config --global --replace-all alias.st status
 git.exe config --global --replace-all alias.sub "submodule update --init --recursive"
-git.exe config --global --replace-all color.ui true
+git.exe config --global --replace-all color.ui auto
 git.exe config --global --replace-all core.autocrlf false
 git.exe config --global --replace-all core.excludesfile %USERPROFILE%\.cvsignore
 git.exe config --global --replace-all core.filemode false
