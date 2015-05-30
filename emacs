@@ -204,9 +204,9 @@
   (find-file  (get-source-file-name))
   (insert ".")
   (save-buffer)
-  (undo)
+  (backward-delete-char 1)
   (save-buffer)
-  (replace-regexp-in-string ".*clang\\+\\+ " "-std=c++11 -x c++ -I../.. "
+  (replace-regexp-in-string ".*clang\\+\\+ " "-Wno-unknown-warning-option -std=c++11 -x c++ -I../.. "
 			    (car
 			     (last
 			      (split-string
