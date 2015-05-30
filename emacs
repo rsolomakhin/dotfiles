@@ -177,7 +177,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 
 (defun open-chromium-src ()
-  "Open chromium source code browser at the current cursor position."
+  "Opens chromium source code browser at the current cursor position."
   (interactive)
   (browse-url
    (format "https://code.google.com/p/chromium/codesearch#chromium/src/%s&l=%s"
@@ -185,6 +185,39 @@
 				     ""
 				     (buffer-file-name))
 	   (line-number-at-pos))))
+
+(defun get-source-file-name ()
+  "Returns the source file name that can be compiled."
+  (replace-regexp-in-string ".h$" ".cc" (buffer-file-name)))
+
+(defun ninja-build ()
+  "Builds the current buffer using ninja."
+  (interactive)
+  (with-ftf-project-root (compile (concat "ninja -Cout/Release "
+					  (replace-regexp-in-string ".*chrome/src/"
+								    "../../"
+								    (get-source-file-name))
+					  "^"))))
+
+(defun get-clang-flags ()
+  "Returns the flags to pass to clang++ to correctly compile the current-buffer from out/Release/."
+  (find-file  (get-source-file-name))
+  (insert ".")
+  (save-buffer)
+  (undo)
+  (save-buffer)
+  (replace-regexp-in-string ".*clang\\+\\+ " "-std=c++11 -x c++ -I../.. "
+			    (car
+			     (last
+			      (split-string
+			       (with-ftf-project-root
+				(shell-command-to-string
+				 (concat "ninja -n -v -Cout/Release " (replace-regexp-in-string ".*chrome/src/" "../../" (buffer-file-name)) "^"))) "\n" t)))))
+
+(defun include-what-you-use ()
+  "Diagnose unused or missing headers."
+  (interactive)
+  (compile (concat "cd ~/chrome/src/out/Release && include-what-you-use " (get-clang-flags))))
 
 (defun compile-from-root ()
   "Launch a compile command from the project root."
@@ -199,11 +232,13 @@
 (defun split-related-files-from-header ()
   "Open the header, source, and tests side-by-side."
   (interactive)
+  (find-file (replace-regexp-in-string
+	      ".cc$" ".h" (replace-regexp-in-string
+			   "_unittest.cc$" ".h" (buffer-file-name))))
   (delete-other-windows)
   (split-window-right)
   (windmove-right)
-  (find-file (replace-regexp-in-string
-	      ".h$" ".cc" (buffer-file-name)))
+  (find-file (get-source-file-name))
   (split-window-right)
   (windmove-right)
   (find-file (replace-regexp-in-string
