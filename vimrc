@@ -19,9 +19,6 @@ silent! if plug#begin()
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
     Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
   endif
-  Plug 'bling/vim-airline'
-  Plug 'edkolev/promptline.vim'
-  Plug 'edkolev/tmuxline.vim'
   Plug 'kien/ctrlp.vim'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-fugitive'
@@ -74,20 +71,6 @@ nnoremap <silent> <Leader>s :CtrlPLine<CR>
 
 " \-t - find files.
 nnoremap <silent> <Leader>t :FZF<CR>
-
-let g:promptline_preset = {
-      \'b': [ promptline#slices#cwd() ],
-      \'c': [ promptline#slices#vcs_branch() ],
-      \'options': {
-      \'left_sections': ['b', 'c' ],
-      \'right_sections': []}}
-let g:tmuxline_preset = {
-      \'b'    : '#(whoami)',
-      \'c'    : '#h',
-      \'win'  : '#I #W',
-      \'cwin' : '#I #W'}
-
-let g:airline_powerline_fonts = 1
 
 if !has("win32")
   let g:ycm_global_ycm_extra_conf =
