@@ -19,6 +19,7 @@ silent! if plug#begin()
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
     Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
   endif
+  Plug 'jnurmine/Zenburn'
   Plug 'kien/ctrlp.vim'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-fugitive'
@@ -26,6 +27,24 @@ silent! if plug#begin()
   Plug 'vim-scripts/argtextobj.vim'
   call plug#end()
 endif
+
+" \-b - buffers.
+nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
+
+" \-q - search quickfix list.
+nnoremap <silent> <Leader>q :CtrlPQuickfix<CR>
+
+" \-r - recent files.
+nnoremap <silent> <Leader>r :CtrlPMRU<CR>
+
+" \-s - search text within all open files.
+nnoremap <silent> <Leader>s :CtrlPLine<CR>
+
+" \-t - find files.
+nnoremap <silent> <Leader>t :FZF<CR>
+
+command! ChromiumSource :exec '!google-chrome-unstable
+      \ https://code.google.com/p/chromium/codesearch\#chromium/src/%'
 
 let &colorcolumn="+" . join(range(1, 300), ",+")
 set autoindent
@@ -57,29 +76,14 @@ set ttimeoutlen=0
 set viminfo='100,<100,:20,%,n~/.viminfo
 set wildmenu
 
-" \-b - buffers.
-nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
-
-" \-q - search quickfix list.
-nnoremap <silent> <Leader>q :CtrlPQuickfix<CR>
-
-" \-r - recent files.
-nnoremap <silent> <Leader>r :CtrlPMRU<CR>
-
-" \-s - search text within all open files.
-nnoremap <silent> <Leader>s :CtrlPLine<CR>
-
-" \-t - find files.
-nnoremap <silent> <Leader>t :FZF<CR>
-
 if !has("win32")
   let g:ycm_global_ycm_extra_conf =
         \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
   set directory=~/.vim/swap,.
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+  set guifont=Ubuntu\ Mono\ 12
 else
   set directory=~/vimfiles/swap,.
-  set guifont=Ubuntu_Mono_derivative_Powerlin:h12:cANSI
+  set guifont=Consolas:h12:cANSI
 endif
 
 if !exists("autocommands_loaded")
@@ -89,29 +93,7 @@ if !exists("autocommands_loaded")
   au BufReadPost * call setpos(".", getpos("'\""))
 endif
 
-set background=dark
-" Colors from http://pln.jonas.me/xterm-colors to fix up 'default' colorscheme.
-if &background == "dark"
-  hi ColorColumn ctermbg=234 guibg=#1c1c1c
-  hi CursorLine  ctermbg=235 guibg=#262626 cterm=none term=none
-  hi DiffAdd     ctermbg=28  guibg=#008700
-  hi DiffChange  ctermbg=101 guibg=#87875f
-  hi DiffDelete  ctermbg=52  guibg=#5f0000
-  hi DiffText    ctermbg=100 guibg=#878700
-  hi LineNr      ctermfg=239 guifg=#4e4e4e
-  hi NonText     ctermbg=234 guibg=#1c1c1c ctermfg=234 guifg=#1c1c1c
-  hi SignColumn  ctermbg=234 guibg=#1c1c1c
-  hi Visual      ctermbg=237 guibg=#3a3a3a
-else  " light
-  hi ColorColumn ctermbg=255 guibg=#eeeeee
-  hi CursorLine  ctermbg=256 guibg=#262626 cterm=none term=none
-  hi DiffAdd     ctermbg=193 guibg=#d7ffaf
-  hi DiffChange  ctermbg=229 guibg=#ffffaf
-  hi DiffDelete  ctermbg=223 guibg=#ffd7af
-  hi DiffText    ctermbg=228 guibg=#ffff87
-  hi LineNr      ctermfg=239 guifg=#4e4e4e
-  hi NonText     ctermbg=255 guibg=#eeeeee ctermfg=255 guifg=#eeeeee
-  hi SignColumn  ctermbg=255 guibg=#eeeeee
-  hi VertSplit   ctermbg=255 guibg=#eeeeee ctermfg=255 guifg=#eeeeee
-  hi Visual      ctermbg=255 guibg=#eeeeee
+if $TERM == "xterm"
+  set t_Co=256
 endif
+colorscheme zenburn
