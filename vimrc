@@ -75,7 +75,6 @@ silent! if plug#begin()
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-fugitive'
-  Plug 'vim-scripts/argtextobj.vim'
   call plug#end()
 endif
 
