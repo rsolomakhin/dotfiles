@@ -41,7 +41,7 @@ set tabstop=2
 set timeout
 set timeoutlen=1000
 set ttimeoutlen=0
-set viminfo='100,<100,:20,%,n~/.viminfo
+set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
 
 if $TERM == "xterm"
