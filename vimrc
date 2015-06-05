@@ -62,6 +62,8 @@ let g:ycm_global_ycm_extra_conf =
 silent! if plug#begin()
   if !has("win32")
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  else
+    Plug 'kien/ctrlp.vim'
   endif
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
     Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
@@ -71,7 +73,6 @@ silent! if plug#begin()
   Plug 'google/vim-glaive'
   Plug 'google/vim-maktaba'
   Plug 'jnurmine/Zenburn'
-  Plug 'kien/ctrlp.vim'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-fugitive'
@@ -83,11 +84,28 @@ Glaive codefmt plugin[mappings]
 
 colorscheme zenburn
 
-nnoremap <silent> <Leader>t :FZF<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
-nnoremap <Leader>q :CtrlPQuickfix<CR>
-nnoremap <Leader>r :CtrlPMRU<CR>
-nnoremap <Leader>s :CtrlPLine<CR>
+if has("win32")
+  nnoremap <Leader>b :CtrlPBuffer<CR>
+  nnoremap <Leader>q :CtrlPQuickfix<CR>
+  nnoremap <Leader>r :CtrlPMRU<CR>
+  nnoremap <Leader>s :CtrlPLine<CR>
+else
+  function! s:buflist()
+    redir => ls
+    silent ls
+    redir END
+    return split(ls, '\n')
+  endfunction
+  function! s:bufopen(e)
+    execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+  endfunction
+  nnoremap <silent> <Leader>b :call fzf#run({
+        \ 'source': reverse(<sid>buflist()),
+        \ 'sink': function('<sid>bufopen')})<CR>
+  nnoremap <silent> <Leader>r
+        \ :call fzf#run({'source': v:oldfiles, 'sink': 'e '})<CR>
+  nnoremap <silent> <Leader>t :FZF<CR>
+endif
 
 if exists(":CrBuild") != 2 && isdirectory(expand('~/chrome/src'))
   source ~/chrome/src/tools/vim/ninja-build.vim
