@@ -75,6 +75,7 @@ silent! if plug#begin()
   Plug 'jnurmine/Zenburn'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'scrooloose/nerdcommenter'
+  Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
   call plug#end()
 endif
