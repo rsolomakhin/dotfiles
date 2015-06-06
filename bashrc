@@ -35,3 +35,13 @@ __fzf_select__() {
   done
   echo
 }
+__fzf_select_tmux__() {
+  local height
+  height=${FZF_TMUX_HEIGHT:-40%}
+  if [[ $height =~ %$ ]]; then
+    height="-p ${height%\%}"
+  else
+    height="-l $height"
+  fi
+  tmux split-window $height "cd $(printf %q "$PWD");bash -c 'source ~/.bashrc; tmux send-keys -t $TMUX_PANE \"\$(__fzf_select__)\"'"
+}
