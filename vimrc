@@ -108,18 +108,7 @@ else
         \ 'source': v:oldfiles,
         \ 'down': '20%',
         \ 'sink': 'e '})<CR>
-  nnoremap <silent> <Leader>t :call fzf#run({
-        \ 'source': 'find -L . \(
-        \     -path "*/\.*" -o
-        \     -path "\./out*" -o
-        \     -fstype "dev" -o
-        \     -fstype "proc"
-        \   \) -prune -o
-        \   -type f -print -o
-        \   -type d -print -o
-        \   -type l -print',
-        \ 'down': '20%',
-        \ 'sink': 'e '})<CR>
+  nnoremap <silent> <Leader>t :FZF<CR>
 endif
 
 if exists(":CrBuild") != 2 && isdirectory(expand('~/chrome/src'))
