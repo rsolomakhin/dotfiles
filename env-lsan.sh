@@ -23,7 +23,7 @@ if [ ! -e ../.gclient ]; then
 fi
 
 alias ninja='env ASAN_OPTIONS="" ninja'
-export ASAN_OPTIONS="detect_leaks=1 symbolize=1 external_symbolizer_path=$HOME/chrome/src/third_party/llvm-build/Release+Asserts/bin/llvm-symbolizer"
+export ASAN_OPTIONS="detect_leaks=1 symbolize=1 external_symbolizer_path=$PWD/third_party/llvm-build/Release+Asserts/bin/llvm-symbolizer"
 export GYP_DEFINES="component=shared_library clang=1 asan=1 lsan=1"
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 echo $GYP_DEFINES
