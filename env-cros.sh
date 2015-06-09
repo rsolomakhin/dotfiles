@@ -25,4 +25,5 @@ fi
 export GYP_DEFINES="component=shared_library clang=1 chromeos=1"
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 echo $GYP_DEFINES
+mkdir -p out_cros
 ln -svfT out_cros out

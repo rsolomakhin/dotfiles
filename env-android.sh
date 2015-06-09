@@ -26,4 +26,5 @@ export GYP_DEFINES="component=shared_library OS=android clang=1 create_standalon
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 source build/android/envsetup.sh
 echo $GYP_DEFINES
+mkdir -p out_android
 ln -svfT out_android out
