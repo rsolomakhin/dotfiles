@@ -31,6 +31,8 @@ popd
 pushd c:\src\dotfiles\
 mkdir %APPDATA%\Console\
 copy  /Y third_party\console2\console.xml %APPDATA%\Console\
+copy  /Y     bash_profile %USERPROFILE%\.bash_profile
+copy  /Y     bashrc       %USERPROFILE%\.bashrc
 copy  /Y     cvsignore    %USERPROFILE%\.cvsignore
 copy  /Y     emacs        %USERPROFILE%\.emacs
 copy  /Y     vimrc        %USERPROFILE%\.vimrc

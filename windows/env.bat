@@ -37,8 +37,8 @@ set PATH=%PATH%;%SYSTEMDRIVE%\src\depot_tools
 
 where cl > NUL 2>&1
 if errorlevel 1 (
-  if exist "%ProgramFiles(x86)%\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" (
-    call "%ProgramFiles(x86)%\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
+  if exist "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" (
+    call "%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
   )
 )
 
