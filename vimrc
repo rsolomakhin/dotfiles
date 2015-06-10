@@ -57,6 +57,8 @@ endif
 
 let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
+let g:DiffUnit = 'Word1'
+let g:DiffUpdate = 1
 
 silent! if plug#begin()
   if !has("win32")
@@ -76,6 +78,7 @@ silent! if plug#begin()
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
+  Plug 'vim-scripts/diffchar.vim'
   call plug#end()
 endif
 
