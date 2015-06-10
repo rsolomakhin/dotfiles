@@ -36,7 +36,6 @@ set smartcase
 set smartindent
 set smarttab
 set softtabstop=2
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set tabstop=2
 set timeout
 set timeoutlen=1000
@@ -80,10 +79,19 @@ silent! if plug#begin()
   call plug#end()
 endif
 
-call glaive#Install()
-Glaive codefmt plugin[mappings]
+if exists("+glaive#Install") == 2
+  call glaive#Install()
+  Glaive codefmt plugin[mappings]
+endif
 
-colorscheme zenburn
+if exists("+fugitive#statusline") == 2
+  set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+endif
+
+try
+  colorscheme zenburn
+catch
+endtry
 
 if has("win32")
   nnoremap <Leader>b :CtrlPBuffer<CR>
