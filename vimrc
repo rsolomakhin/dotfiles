@@ -131,23 +131,28 @@ if exists(":ChromiumSource") != 2
         \ https://code.google.com/p/chromium/codesearch\#chromium/src/%'
 endif
 
-if !exists("autocommands_loaded")
-  let autocommands_loaded = 1
+augroup custom
+  autocmd!
+  autocmd BufRead,BufNewFile *.DEPS set filetype=python
+  autocmd BufRead,BufNewFile *.gypi set filetype=python
+  autocmd BufRead,BufNewFile *.gyp  set filetype=python
+  autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
-  au FileType cpp nnoremap <buffer><silent> <C-]> :YcmCompleter GoTo<CR>
-  au FileType cpp setlocal textwidth=80 cinoptions=N-s,g.5s,h.5s
-  au FileType c setlocal textwidth=80
-  au FileType gitcommit setlocal textwidth=72 spell
-  au FileType html setlocal textwidth=80
-  au FileType java let b:codefmt_formatter = 'clang-format'
-  au FileType javascript setlocal textwidth=80
-  au FileType java setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth=100
-  au FileType sh setlocal textwidth=80
-  au FileType vim setlocal textwidth=80
-  au FileType zsh setlocal textwidth=80
+  autocmd FileType cpp,c,html,javascript,sh,zsh,vim set textwidth=80
+  autocmd FileType cpp nnoremap <buffer><silent> <C-]> :YcmCompleter GoTo<CR>
+  autocmd FileType cpp set cinoptions=N-s,g.5s,h.5s
+  autocmd FileType gitcommit set spell
+  autocmd FileType gitcommit set textwidth=72
+  autocmd FileType java let b:codefmt_formatter = 'clang-format'
+  autocmd FileType java set shiftwidth=4
+  autocmd FileType java set softtabstop=4
+  autocmd FileType java set tabstop=4
+  autocmd FileType java set textwidth=100
 
-  au BufNewFile,BufRead */WebKit/*
-        \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 textwidth&
+  autocmd BufNewFile,BufRead */WebKit/* setlocal shiftwidth=4
+  autocmd BufNewFile,BufRead */WebKit/* setlocal softtabstop=4
+  autocmd BufNewFile,BufRead */WebKit/* setlocal tabstop=4
+  autocmd BufNewFile,BufRead */WebKit/* setlocal textwidth&
 
-  au BufReadPost * call setpos(".", getpos("'\""))
-endif
+  autocmd BufReadPost * call setpos(".", getpos("'\""))
+augroup end
