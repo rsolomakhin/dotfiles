@@ -20,6 +20,7 @@ set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
 
 doskey e=start /b emacsclient $*
+doskey v=start /b gvim $*
 
 if not "%PATH%" == "%PATH:depot_tools=%" (
   goto skip_path
