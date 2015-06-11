@@ -23,7 +23,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-set mouse=a
+set mouse=
 set nocompatible
 set nocursorline
 set nojoinspaces
@@ -55,53 +55,55 @@ else
   set guifont=Ubuntu\ Mono\ 12
 endif
 
-let g:ycm_global_ycm_extra_conf =
-      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-let g:DiffUnit = 'Word1'
-let g:DiffUpdate = 1
+let g:codefmt_languages = [
+      \ 'c',
+      \ 'cpp',
+      \ 'go',
+      \ 'java',
+      \ 'javascript',
+      \ 'python',
+      \ ]
+
+let g:programming_languages = [
+      \ 'c',
+      \ 'cpp',
+      \ 'go',
+      \ 'java',
+      \ 'javascript',
+      \ 'objc',
+      \ 'objcpp',
+      \ 'python',
+      \ 'sh',
+      \ 'vim',
+      \ 'zsh'
+      \ ]
 
 silent! if plug#begin()
   if !has("win32")
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+    Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
   else
-    Plug 'kien/ctrlp.vim'
+    Plug 'kien/ctrlp.vim' {'on': ['CtrlPBuffer', 'CtrlPQuickfix', 'CtrlPMRU',
+          \ 'CtrlPLine', 'CtrlP']}
   endif
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+    Plug 'Valloric/YouCompleteMe', {'do': './install.sh --clang-completer',
+          \ 'for': g:programming_languages}
   endif
+  Plug 'google/vim-glaive', {'for': g:codefmt_languages} |
+        \ Plug 'google/vim-maktaba', {'for': g:codefmt_languages} |
+        \ Plug 'google/vim-codefmt', {'for': g:codefmt_languages}
   Plug 'altercation/vim-colors-solarized'
-  Plug 'google/vim-codefmt'
-  Plug 'google/vim-glaive'
-  Plug 'google/vim-maktaba'
   Plug 'jnurmine/Zenburn'
-  Plug 'ntpeters/vim-better-whitespace'
-  Plug 'scrooloose/nerdcommenter'
-  Plug 'tpope/vim-dispatch'
+  Plug 'ntpeters/vim-better-whitespace', {'for': g:programming_languages}
+  Plug 'scrooloose/nerdcommenter', {'for': g:programming_languages}
+  Plug 'tpope/vim-dispatch', {'for': ['cpp', 'java']}
   Plug 'tpope/vim-fugitive'
   Plug 'vim-scripts/diffchar.vim'
   call plug#end()
 endif
 
-if exists("+glaive#Install") == 2
-  call glaive#Install()
-  Glaive codefmt plugin[mappings]
-endif
-
-if exists("+fugitive#statusline") == 2
-  set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-endif
-
-try
-  colorscheme zenburn
-catch
-endtry
-
-if has("win32")
-  nnoremap <Leader>b :CtrlPBuffer<CR>
-  nnoremap <Leader>q :CtrlPQuickfix<CR>
-  nnoremap <Leader>r :CtrlPMRU<CR>
-  nnoremap <Leader>s :CtrlPLine<CR>
-else
+" FZF/ctrlp.vim
+if !has("win32")
   function! s:buflist()
     redir => ls
     silent ls
@@ -120,16 +122,44 @@ else
         \ 'down': '20%',
         \ 'sink': 'e '})<CR>
   nnoremap <silent> <Leader>t :FZF<CR>
+else
+  nnoremap <Leader>b :CtrlPBuffer<CR>
+  nnoremap <Leader>q :CtrlPQuickfix<CR>
+  nnoremap <Leader>r :CtrlPMRU<CR>
+  nnoremap <Leader>s :CtrlPLine<CR>
 endif
 
-if exists(":CrBuild") != 2 && isdirectory(expand('~/chrome/src'))
-  source ~/chrome/src/tools/vim/ninja-build.vim
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf =
+      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
+autocmd! User YouCompleteMe call youcompleteme#Enable()
+
+" vim-codefmt
+if exists("+glaive#Install") == 2
+  call glaive#Install()
+  Glaive codefmt plugin[mappings]
 endif
 
-if exists(":ChromiumSource") != 2
-  command ChromiumSource :exec '!google-chrome-unstable
-        \ https://code.google.com/p/chromium/codesearch\#chromium/src/%'
+" zenburn
+try
+  colorscheme zenburn
+catch
+endtry
+
+" vim-better-whitespace
+highlight ExtraWhitespace ctermbg=red
+
+" vim-fugitive
+if exists("+fugitive#statusline") == 2
+  set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 endif
+
+" diffchar.vim
+let g:DiffUnit = 'Word1'
+let g:DiffUpdate = 1
+
+command! ChromiumSource :exec '!google-chrome-unstable
+      \ https://code.google.com/p/chromium/codesearch\#chromium/src/%'
 
 augroup custom
   autocmd!
@@ -138,16 +168,20 @@ augroup custom
   autocmd BufRead,BufNewFile *.gyp  set filetype=python
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
-  autocmd FileType cpp,c,html,javascript,sh,zsh,vim set textwidth=80
+  autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python setlocal textwidth=80
+  autocmd FileType cpp,c,html,javascript,java,python
+        \ if exists(":CrBuild") != 2 && isdirectory(expand('~/chrome/src'))
+        \ | source ~/chrome/src/tools/vim/ninja-build.vim
+        \ | endif
   autocmd FileType cpp nnoremap <buffer><silent> <C-]> :YcmCompleter GoTo<CR>
-  autocmd FileType cpp set cinoptions=N-s,g.5s,h.5s
-  autocmd FileType gitcommit set spell
-  autocmd FileType gitcommit set textwidth=72
+  autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
+  autocmd FileType gitcommit setlocal spell
+  autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType java let b:codefmt_formatter = 'clang-format'
-  autocmd FileType java set shiftwidth=4
-  autocmd FileType java set softtabstop=4
-  autocmd FileType java set tabstop=4
-  autocmd FileType java set textwidth=100
+  autocmd FileType java setlocal shiftwidth=4
+  autocmd FileType java setlocal softtabstop=4
+  autocmd FileType java setlocal tabstop=4
+  autocmd FileType java setlocal textwidth=100
 
   autocmd BufNewFile,BufRead */WebKit/* setlocal shiftwidth=4
   autocmd BufNewFile,BufRead */WebKit/* setlocal softtabstop=4
