@@ -19,8 +19,8 @@ set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
 
-doskey e=start /b emacsclient $*
-doskey v=start /b gvim $*
+doskey e=start /b emacsclient.exe $*
+doskey v=start /b gvim.exe $*
 
 if not "%PATH%" == "%PATH:depot_tools=%" (
   goto skip_path
@@ -33,6 +33,7 @@ set PATH=%PATH%;%SYSTEMDRIVE%\console2
 set PATH=%PATH%;%SYSTEMDRIVE%\emacs\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\maven\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\src\depot_tools
+set PATH=%PATH%;C:\Program Files (x86)\Vim\vim74
 
 :skip_path
 
