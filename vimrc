@@ -82,7 +82,7 @@ silent! if plug#begin()
   if !has("win32")
     Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
   else
-    Plug 'kien/ctrlp.vim' {'on': ['CtrlPBuffer', 'CtrlPQuickfix', 'CtrlPMRU',
+    Plug 'kien/ctrlp.vim', {'on': ['CtrlPBuffer', 'CtrlPQuickfix', 'CtrlPMRU',
           \ 'CtrlPLine', 'CtrlP']}
   endif
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
@@ -124,9 +124,8 @@ if !has("win32")
   nnoremap <silent> <Leader>t :FZF<CR>
 else
   nnoremap <Leader>b :CtrlPBuffer<CR>
-  nnoremap <Leader>q :CtrlPQuickfix<CR>
   nnoremap <Leader>r :CtrlPMRU<CR>
-  nnoremap <Leader>s :CtrlPLine<CR>
+  nnoremap <Leader>t :CtrlP<CR>
 endif
 
 " YouCompleteMe
