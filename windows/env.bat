@@ -12,8 +12,8 @@
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
 
-set ALTERNATE_EDITOR=emacs
-set EDITOR=emacs
+set ALTERNATE_EDITOR=emacs.exe
+set EDITOR=gvim.exe
 set GYP_DEFINES=component=shared_library fastbuild=2 disable_nacl=1 disable_pnacl=1
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
@@ -36,8 +36,8 @@ set PATH=%PATH%;%SYSTEMDRIVE%\emacs\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\Go\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\go_appengine
 set PATH=%PATH%;%SYSTEMDRIVE%\maven\bin
-set PATH=%PATH%;%SYSTEMDRIVE%\Program Files (x86)\Vim\vim74
 set PATH=%PATH%;%SYSTEMDRIVE%\src\depot_tools
+set PATH=%PATH%;%SYSTEMDRIVE%\vim
 
 :skip_path
 

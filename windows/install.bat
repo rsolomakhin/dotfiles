@@ -35,7 +35,7 @@ copy  /Y     bash_profile %USERPROFILE%\.bash_profile
 copy  /Y     bashrc       %USERPROFILE%\.bashrc
 copy  /Y     cvsignore    %USERPROFILE%\.cvsignore
 copy  /Y     emacs        %USERPROFILE%\.emacs
-copy  /Y     vimrc        %USERPROFILE%\.vimrc
+copy  /Y     vimrc        %USERPROFILE%\_vimrc
 copy  /Y     zshrc        %USERPROFILE%\.zshrc
 xcopy /Y/S/I emacs.d      %USERPROFILE%\.emacs.d
 xcopy /Y/S/I third_party  %USERPROFILE%\.third_party

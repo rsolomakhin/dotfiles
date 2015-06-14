@@ -92,6 +92,9 @@ silent! if plug#begin()
     autocmd! User YouCompleteMe call youcompleteme#Enable()
     let g:ycm_global_ycm_extra_conf =
           \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
+  elseif has("win32") && has("lua") && v:version >=703 && has("patch885")
+    Plug 'Shougo/neocomplete.vim'
+    autocmd! User neocomplete.vim NeoCompleteEnable
   endif
 
   Plug 'google/vim-glaive', {'for': g:codefmt_languages} |
@@ -169,7 +172,8 @@ augroup custom
   autocmd BufRead,BufNewFile *.gyp  set filetype=python
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
-  autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python setlocal textwidth=80
+  autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go
+        \ setlocal textwidth=80
   autocmd FileType cpp,c,html,javascript,java,python
         \ if exists(":CrBuild") != 2 && isdirectory(expand('~/chrome/src'))
         \ | source ~/chrome/src/tools/vim/ninja-build.vim
