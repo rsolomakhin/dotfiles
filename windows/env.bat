@@ -31,9 +31,11 @@ set PATH=%PATH%;%HOME%\.third_party\cask\bin
 set PATH=%PATH%;%JAVA_HOME%\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\console2
 set PATH=%PATH%;%SYSTEMDRIVE%\emacs\bin
+set PATH=%PATH%;%SYSTEMDRIVE%\Go\bin
+set PATH=%PATH%;%SYSTEMDRIVE%\go_appengine
 set PATH=%PATH%;%SYSTEMDRIVE%\maven\bin
+set PATH=%PATH%;%SYSTEMDRIVE%\Program Files (x86)\Vim\vim74
 set PATH=%PATH%;%SYSTEMDRIVE%\src\depot_tools
-set PATH=%PATH%;C:\Program Files (x86)\Vim\vim74
 
 :skip_path
 
