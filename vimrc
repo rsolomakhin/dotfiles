@@ -117,6 +117,8 @@ silent! if plug#begin()
   let g:DiffUnit = 'Word1'
   let g:DiffUpdate = 1
 
+  Plug 'fatih/vim-go', {'for': 'go'}
+
   call plug#end()
 endif
 
