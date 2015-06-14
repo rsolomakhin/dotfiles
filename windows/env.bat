@@ -18,6 +18,7 @@ set GYP_DEFINES=component=shared_library fastbuild=2 disable_nacl=1 disable_pnac
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
+set GOPATH=%SYSTEMDRIVE%\src\go
 
 doskey e=start /b emacsclient.exe $*
 doskey v=start /b gvim.exe $*
@@ -27,6 +28,7 @@ if not "%PATH%" == "%PATH:depot_tools=%" (
 )
 
 for /d %%g in (%SYSTEMDRIVE%\src\depot_tools\git*chromium*) do set PATH=%PATH%;%%g\cmd
+set PATH=%PATH%;%GOPATH%\bin
 set PATH=%PATH%;%HOME%\.third_party\cask\bin
 set PATH=%PATH%;%JAVA_HOME%\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\console2
