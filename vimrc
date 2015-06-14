@@ -118,6 +118,12 @@ silent! if plug#begin()
   let g:DiffUpdate = 1
 
   Plug 'fatih/vim-go', {'for': 'go'}
+  if has("win32")
+    Plug 'Blackrush/vim-gocode', {'for': 'go'}
+  else
+    Plug 'nsf/gocode', {'rtp': 'vim', 'for': 'go',
+          \ 'do': '~/.vim/plugged/gocode/vim/symlink.sh'}
+  endif
 
   call plug#end()
 endif
