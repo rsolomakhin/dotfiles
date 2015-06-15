@@ -13,16 +13,6 @@
 # limitations under the License.
 
 
-if [[ $PATH != *depot_tools* ]]; then
-  PATH=$PATH:$HOME/android-sdk-linux/platform-tools
-  PATH=$PATH:$HOME/android-sdk-linux/tools
-  PATH=$PATH:$HOME/depot_tools
-  PATH=$PATH:$HOME/gradle/bin
-  PATH=$PATH:$HOME/software/bin
-  PATH=$PATH:$HOME/.third_party/cask/bin
-  export PATH
-fi
-
 export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/android-sdk-linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
@@ -39,8 +29,20 @@ export FZF_DEFAULT_COMMAND="find -L . \( \
     -type l -print 2> /dev/null | \
         sed 1d | cut -b3- "
 export FZF_DEFAULT_OPTS="--color=bw"
+export GOPATH=$HOME/go
 export GYP_DEFINES="component=shared_library"
 export GYP_GENERATORS="ninja"
+
+if [[ $PATH != *depot_tools* ]]; then
+  PATH=$PATH:$GOPATH/bin
+  PATH=$PATH:$HOME/android-sdk-linux/platform-tools
+  PATH=$PATH:$HOME/android-sdk-linux/tools
+  PATH=$PATH:$HOME/depot_tools
+  PATH=$PATH:$HOME/gradle/bin
+  PATH=$PATH:$HOME/software/bin
+  PATH=$PATH:$HOME/.third_party/cask/bin
+  export PATH
+fi
 
 # Resume SSH agent.
 [ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh > /dev/null 2>&1
