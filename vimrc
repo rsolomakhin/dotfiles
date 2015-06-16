@@ -108,10 +108,7 @@ silent! if plug#begin()
 
   Plug 'scrooloose/nerdcommenter', {'for': g:programming_languages}
   Plug 'tpope/vim-dispatch', {'for': ['cpp', 'java']}
-
   Plug 'tpope/vim-fugitive'
-  autocmd! User vim-fugitive set
-        \ statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
   Plug 'vim-scripts/diffchar.vim'
   let g:DiffUnit = 'Word1'
@@ -158,6 +155,10 @@ try
   colorscheme zenburn
 catch
 endtry
+
+if exists("*fugitive#statusline")
+  set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+endif
 
 command! ChromiumSource :exec '!google-chrome-unstable
       \ https://code.google.com/p/chromium/codesearch\#chromium/src/%'
