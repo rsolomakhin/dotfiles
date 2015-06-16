@@ -66,4 +66,4 @@ pushd %USERPROFILE%\.emacs.d\
 emacs.exe -Q --script %USERPROFILE%\.third_party\cask\cask-cli.el -- install
 popd
 
-call gvim -c ":PlugInstall" -c ":qa"
+vim.exe -c ":PlugInstall" -c ":qa"
