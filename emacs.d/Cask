@@ -20,9 +20,7 @@
 (depends-on "buffer-move")
 (depends-on "clang-format")
 (depends-on "company")
-(depends-on "company-ycmd")
 (depends-on "find-things-fast")
-(depends-on "flycheck-ycmd")
 (depends-on "google-c-style")
 (depends-on "magit")
 (depends-on "molokai-theme")
@@ -33,3 +31,7 @@
 (depends-on "volatile-highlights")
 (depends-on "yasnippet")
 (depends-on "zenburn-theme")
+(cond
+ ((string-equal system-type "gnu/linux")
+  (depends-on "company-ycmd")
+  (depends-on "flycheck-ycmd")))
