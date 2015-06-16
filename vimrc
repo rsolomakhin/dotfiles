@@ -55,29 +55,6 @@ else
   set guifont=Ubuntu\ Mono\ 12
 endif
 
-let g:codefmt_languages = [
-      \ 'c',
-      \ 'cpp',
-      \ 'go',
-      \ 'java',
-      \ 'javascript',
-      \ 'python',
-      \ ]
-
-let g:programming_languages = [
-      \ 'c',
-      \ 'cpp',
-      \ 'go',
-      \ 'java',
-      \ 'javascript',
-      \ 'objc',
-      \ 'objcpp',
-      \ 'python',
-      \ 'sh',
-      \ 'vim',
-      \ 'zsh'
-      \ ]
-
 silent! if plug#begin()
   if !has("win32")
     Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
@@ -87,38 +64,30 @@ silent! if plug#begin()
   endif
 
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
-    Plug 'Valloric/YouCompleteMe', {'do': './install.sh --clang-completer',
-          \ 'for': g:programming_languages}
+    Plug 'Valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
     autocmd! User YouCompleteMe call youcompleteme#Enable()
     let g:ycm_global_ycm_extra_conf =
           \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
   endif
 
-  Plug 'google/vim-glaive', {'for': g:codefmt_languages} |
-        \ Plug 'google/vim-maktaba', {'for': g:codefmt_languages} |
-        \ Plug 'google/vim-codefmt', {'for': g:codefmt_languages}
-  autocmd! User vim-glaive call glaive#Install()
-  autocmd! User vim-codefmt Glaive codefmt plugin[mappings]
-
+  Plug 'google/vim-maktaba' | Plug 'google/vim-glaive' |
+        \ Plug 'google/vim-codefmt'
   Plug 'altercation/vim-colors-solarized'
   Plug 'jnurmine/Zenburn'
-
-  Plug 'ntpeters/vim-better-whitespace', {'for': g:programming_languages}
-  autocmd! User vim-better-whitespace highlight ExtraWhitespace ctermbg=red
-
-  Plug 'scrooloose/nerdcommenter', {'for': g:programming_languages}
-  Plug 'tpope/vim-dispatch', {'for': ['cpp', 'java']}
+  Plug 'ntpeters/vim-better-whitespace'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
 
   Plug 'vim-scripts/diffchar.vim'
   let g:DiffUnit = 'Word1'
   let g:DiffUpdate = 1
 
-  Plug 'fatih/vim-go', {'for': 'go'}
+  Plug 'fatih/vim-go'
   if has("win32")
-    Plug 'Blackrush/vim-gocode', {'for': 'go'}
+    Plug 'Blackrush/vim-gocode'
   else
-    Plug 'nsf/gocode', {'rtp': 'vim', 'for': 'go',
+    Plug 'nsf/gocode', {'rtp': 'vim',
           \ 'do': '~/.vim/plugged/gocode/vim/symlink.sh'}
   endif
 
@@ -151,11 +120,22 @@ else
   nnoremap <Leader>t :CtrlP<CR>
 endif
 
+" Zenburn
 try
   colorscheme zenburn
 catch
 endtry
 
+" vim-better-whitespace
+highlight ExtraWhitespace ctermbg=red
+
+" vim-codefmt
+if exists("*glaive#Install")
+  call glaive#Install()
+  Glaive codefmt plugin[mappings]
+endif
+
+" vim-fugitive
 if exists("*fugitive#statusline")
   set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 endif
