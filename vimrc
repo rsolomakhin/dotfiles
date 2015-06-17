@@ -170,3 +170,8 @@ augroup custom
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
+
+hi DiffAdd     ctermbg=22 ctermfg=white
+hi DiffChange  ctermbg=58 ctermfg=white
+hi DiffDelete  ctermbg=52 ctermfg=white
+hi DiffText    ctermbg=100 ctermfg=white
