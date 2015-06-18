@@ -40,10 +40,11 @@ xterm*saveLines: 4096
 xterm*termName: xterm-256color
 xterm*utf8: 1
 
-xterm*font: -*-terminus-medium-r-*-*-16-*-*-*-*-*-iso10646-*
-xterm*font1: -*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-*
-xterm*font2: -*-terminus-medium-r-*-*-18-*-*-*-*-*-iso10646-*
-xterm*font3: -*-terminus-medium-r-*-*-20-*-*-*-*-*-iso10646-*
-xterm*font4: -*-terminus-medium-r-*-*-22-*-*-*-*-*-iso10646-*
-xterm*font5: -*-terminus-medium-r-*-*-24-*-*-*-*-*-iso10646-*
-xterm*font6: -*-terminus-medium-r-*-*-32-*-*-*-*-*-iso10646-*
+xterm*faceName: Ubuntu Mono:style=Regular:antialias=false
+xterm*faceSize: 12
+xterm*faceSize1: 4
+xterm*faceSize2: 6
+xterm*faceSize3: 10
+xterm*faceSize4: 16
+xterm*faceSize5: 24
+xterm*faceSize6: 32
