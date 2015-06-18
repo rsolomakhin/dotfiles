@@ -18,6 +18,7 @@ set backspace=indent,eol,start
 set completeopt=
 set encoding=utf-8
 set expandtab
+set guioptions=
 set hidden
 set hlsearch
 set ignorecase
