@@ -13,29 +13,37 @@
 ! limitations under the License.
 
 xterm*color0: black
-xterm*color1: red3
-xterm*color2: green3
-xterm*color3: yellow3
-xterm*color4: blue3
-xterm*color5: magenta3
-xterm*color6: cyan3
+xterm*color1: red4
+xterm*color2: green4
+xterm*color3: yellow4
+xterm*color4: blue4
+xterm*color5: magenta4
+xterm*color6: cyan4
 xterm*color7: gray90
 xterm*color8: gray30
-xterm*color9: red
-xterm*color10: green
-xterm*color11: yellow
-xterm*color12: blue
-xterm*color13: magenta
-xterm*color14: cyan
+xterm*color9: red3
+xterm*color10: green3
+xterm*color11: yellowe
+xterm*color12: blue3
+xterm*color13: magenta3
+xterm*color14: cyan3
 xterm*color15: white
 
 xterm*background: white
-xterm*cursorColor: red
-xterm*foreground: black
+xterm*cursorColor: red3
+redxterm*foreground: black
 
-xterm*font: -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-1
+xterm*allowBoldFonts: false
 xterm*locale: true
 xterm*metaSendsEscape: true
 xterm*saveLines: 4096
 xterm*termName: xterm-256color
 xterm*utf8: 1
+
+xterm*font: -*-terminus-medium-r-*-*-16-*-*-*-*-*-iso10646-*
+xterm*font1: -*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-*
+xterm*font2: -*-terminus-medium-r-*-*-18-*-*-*-*-*-iso10646-*
+xterm*font3: -*-terminus-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xterm*font4: -*-terminus-medium-r-*-*-22-*-*-*-*-*-iso10646-*
+xterm*font5: -*-terminus-medium-r-*-*-24-*-*-*-*-*-iso10646-*
+xterm*font6: -*-terminus-medium-r-*-*-32-*-*-*-*-*-iso10646-*
