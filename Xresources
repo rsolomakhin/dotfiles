@@ -29,9 +29,9 @@ xterm*color13: magenta
 xterm*color14: cyan
 xterm*color15: white
 
-xterm*background: rgb:19/10/50
-xterm*cursorColor: #ffdd70
-xterm*foreground: rgb:ff/dd/70
+xterm*background: white
+xterm*cursorColor: red
+xterm*foreground: black
 
 xterm*font: -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-1
 xterm*locale: true
