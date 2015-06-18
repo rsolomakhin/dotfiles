@@ -12,5 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -g default-terminal "screen-256color"
-set -g status-position top
+escape ^Oo
