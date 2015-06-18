@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/android-sdk-linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
-export EDITOR="vim"
+export EDITOR="emacs -nw"
 export FZF_DEFAULT_COMMAND="find -L . \( \
       -path '*/\.*' -o \
       -path '\./out*' -o \
@@ -34,12 +33,12 @@ export GYP_DEFINES="component=shared_library"
 export GYP_GENERATORS="ninja"
 
 if [[ $PATH != *depot_tools* ]]; then
+  PATH=$HOME/software/bin:$PATH
   PATH=$PATH:$GOPATH/bin
   PATH=$PATH:$HOME/android-sdk-linux/platform-tools
   PATH=$PATH:$HOME/android-sdk-linux/tools
   PATH=$PATH:$HOME/depot_tools
   PATH=$PATH:$HOME/gradle/bin
-  PATH=$PATH:$HOME/software/bin
   PATH=$PATH:$HOME/.third_party/cask/bin
   export PATH
 fi
@@ -69,8 +68,8 @@ fi
 stty -ixon
 
 if [[ $EDITOR == v* ]]; then
-  alias e="emacs"
-  alias em="emacs"
+  alias e="emacs -nw"
+  alias em="emacs -nw"
 else
   alias e="$EDITOR"
   alias em="$EDITOR"

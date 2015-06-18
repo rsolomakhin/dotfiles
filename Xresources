@@ -13,7 +13,7 @@
 ! limitations under the License.
 
 xterm*allowBoldFonts: false
-xterm*faceName: Ubuntu Mono derivative Powerline:size=12:antialias=false
+xterm*faceName: Ubuntu Mono:size=11:antialias=false
 xterm*locale: true
 xterm*metaSendsEscape: true
 xterm*saveLines: 4096
