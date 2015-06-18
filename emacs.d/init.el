@@ -56,9 +56,17 @@
 ;; Scroll compilation buffer until the first error.
 (setq compilation-scroll-output 'first-error)
 
-;;;;;;;;;;;;;;
-;; Packages ;;
-;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;
+;; Builtin packages ;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+;; Remember my place in file.
+(require 'saveplace)
+(setq-default save-place t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Downloaded packages ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -71,3 +79,6 @@
 
 ;; Clang format.
 (require 'clang-format)
+(add-hook 'c-mode-common-hook
+	  (function (lambda ()
+		      (local-set-key (kbd "TAB") 'clang-format-region))))
