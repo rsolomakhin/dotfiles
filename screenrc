@@ -13,3 +13,6 @@
 # limitations under the License.
 
 escape ^Oo
+term xterm-256color
+utf8 on
+vbell off
