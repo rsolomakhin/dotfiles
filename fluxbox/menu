@@ -15,14 +15,7 @@
 [begin] (Fluxbox)
   [exec] (chrome) {google-chrome-unstable} </opt/google/chrome-unstable/product_logo_32.xpm>
   [exec] (xterm) {xterm} </usr/share/pixmaps/xterm-color_32x32.xpm>
-  [config] (config)
-  [submenu] (style) {}
-    [stylesdir] (~/.fluxbox/styles)
-    [stylesdir] (/usr/share/fluxbox/styles)
-  [end]
-  [workspaces] (workspace)
   [reconfig] (reconfig)
-  [restart] (restart)
   [exec] (lock) {xscreensaver-command -lock} <>
   [exit] (exit)
 [end]
