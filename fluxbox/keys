@@ -36,7 +36,7 @@ Mod1 Tab :NextWindow {groups} (workspace=[current])
 
 Mod4 Up :Maximize
 Mod4 Left :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopLeft}
-Mod4 Left :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopRight}
+Mod4 Right :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopRight}
 Mod4 :ClientMenu
 Mod4 1 :Exec google-chrome-unstable --show-app-list
 
