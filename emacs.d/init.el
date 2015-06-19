@@ -20,13 +20,18 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x b") 'bs-show)
 (savehist-mode)
-
-(require 'package)
-(package-initialize)
-(require 'google-c-style)
-(require 'clang-format)
-(require 'windmove)
 (windmove-default-keybindings)
+
+(defun install-my-packages ()
+  (interactive)
+  (package-initialize)
+  (package-refresh-contents)
+  (mapc
+   (lambda (p)
+     (or (package-installed-p p)
+         (package-install p)))
+   '(clang-format go-mode google-c-style))
+  (message "Done."))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
