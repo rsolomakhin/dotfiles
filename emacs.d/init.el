@@ -1,5 +1,3 @@
-;; -*- lisp -*-
-;;
 ;; Copyright 2015 Rouslan Solomakhin
 ;;
 ;; Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,75 +12,64 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-;;;;;;;;;;;;;;;;;;;;;;;
-;; Built-in settings ;;
-;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Don't show the welcome screen.
-(setq inhibit-startup-message t)
-
-;; Turn off the menu bar, menu bar, and scrollbar.
-(menu-bar-mode 0)
 (tool-bar-mode 0)
+(menu-bar-mode 0)
 (scroll-bar-mode 0)
 
-;; .h files are C++.
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-
-;; By default fill to 80 chars.
-(setq-default fill-column 80)
-
-;; Standard indent is 2 chars.
-(setq standard-indent 2)
-
-;; Use spaces to indent.
-(setq-default indent-tabs-mode 0)
-
-;; Show the column in the status line.
-(column-number-mode)
-
-;; No need to type out yes or no.
+(add-hook 'find-file-hook 'elide-head)
 (defalias 'yes-or-no-p 'y-or-n-p)
-
-;; Do not put tilde files everywhere.
-(setq make-backup-files 0)
-
-;; Do not put hashtag files everywhere.
-(auto-save-mode 0)
-
-;; Save minibuffer history across sessions.
+(global-set-key (kbd "C-x b") 'bs-show)
 (savehist-mode)
 
-;; Scroll compilation buffer until the first error.
-(setq compilation-scroll-output 'first-error)
-
-;;;;;;;;;;;;;;;;;;;;;;
-;; Builtin packages ;;
-;;;;;;;;;;;;;;;;;;;;;;
-
-;; Remember my place in file.
-(require 'saveplace)
-(setq-default save-place t)
-
-;; Move between windows easilyt.
+(require 'package)
+(package-initialize)
+(require 'google-c-style)
+(require 'clang-format)
 (require 'windmove)
 (windmove-default-keybindings)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Downloaded packages ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(package-initialize)
-
-;; Google
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
-;; Clang format.
-(require 'clang-format)
-(add-hook 'c-mode-common-hook
-	  (function (lambda ()
-		      (local-set-key (kbd "TAB") 'clang-format-region))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(bs-default-sort-name "by filename")
+ '(c-mode-common-hook (quote (google-set-c-style)))
+ '(column-number-mode t)
+ '(compilation-always-kill t)
+ '(compilation-ask-about-save nil)
+ '(compilation-auto-jump-to-first-error t)
+ '(compilation-scroll-output (quote first-error))
+ '(compilation-window-height 20)
+ '(compile-command "ninja -Cout/Debug -l10 -j10")
+ '(electric-indent-mode t)
+ '(elide-head-headers-to-hide
+   (quote
+    (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.")
+     ("Copyright" . "limitations under the License\\."))))
+ '(fill-column 80)
+ '(global-linum-mode t)
+ '(global-whitespace-mode t)
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(kill-whole-line t)
+ '(linum-delay t)
+ '(package-archives
+   (quote
+    (("melpa" . "http://melpa.org/packages/")
+     ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(require-final-newline t)
+ '(save-place t nil (saveplace))
+ '(sentence-end-double-space nil)
+ '(show-trailing-whitespace t)
+ '(standard-indent 2)
+ '(tab-width 2)
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(whitespace-style (quote (trailing space-before-tab empty space-after-tab))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(mode-line ((t (:background "grey75" :foreground "black"))))
+ '(mode-line-inactive ((t (:inherit mode-line :background "grey90" :foreground "grey20" :weight light)))))
