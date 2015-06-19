@@ -34,8 +34,7 @@ copy  /Y third_party\console2\console.xml %APPDATA%\Console\
 copy  /Y     bash_profile %USERPROFILE%\.bash_profile
 copy  /Y     bashrc       %USERPROFILE%\.bashrc
 copy  /Y     cvsignore    %USERPROFILE%\.cvsignore
-copy  /Y     emacs        %USERPROFILE%\.emacs
-copy  /Y     vimrc        %USERPROFILE%\_vimrc
+copy  /Y     vimrc        %USERPROFILE%\.vimrc
 copy  /Y     zshrc        %USERPROFILE%\.zshrc
 xcopy /Y/S/I emacs.d      %USERPROFILE%\.emacs.d
 xcopy /Y/S/I third_party  %USERPROFILE%\.third_party
@@ -61,9 +60,5 @@ if errorlevel 1 (
   git.exe config --global --replace-all user.email "rouslan.solomakhin@gmail.com"
 )
 git.exe config --replace-all user.email "rouslan.solomakhin@gmail.com"
-
-pushd %USERPROFILE%\.emacs.d\
-emacs.exe -Q --script %USERPROFILE%\.third_party\cask\cask-cli.el -- install
-popd
 
 vim.exe -c ":PlugInstall" -c ":qa"
