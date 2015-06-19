@@ -13,14 +13,14 @@
 :: limitations under the License.
 
 set ALTERNATE_EDITOR=emacs.exe
-set EDITOR=emacs.exe -nw
+set EDITOR=emacs.exe
 set GYP_DEFINES=component=shared_library fastbuild=2 disable_nacl=1 disable_pnacl=1
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
 set GOPATH=%SYSTEMDRIVE%\src\go
 
-doskey e=start /b emacs.exe -nw $*
+doskey e=start /b emacs.exe $*
 doskey v=start /b gvim.exe $*
 
 if not "%PATH%" == "%PATH:depot_tools=%" (
