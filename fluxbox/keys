@@ -1,0 +1,51 @@
+# Copyright 2015 Rouslan Solomakhin
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+OnDesktop Mouse1 :RootMenu
+OnDesktop Mouse3 :HideMenus
+
+OnToolbar Mouse4 :PrevWindow {static groups} (iconhidden=no)
+OnToolbar Mouse5 :NextWindow {static groups} (iconhidden=no)
+
+OnWindow Mod1 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+
+OnWindowBorder Move1 :StartMoving
+
+OnLeftGrip Move1 :StartResizing bottomleft
+OnRightGrip Move1 :StartResizing bottomright
+
+OnTitlebar Double Mouse1 :Maximize
+OnTitlebar Mouse1 :MacroCmd {Raise} {Focus}
+OnTitlebar Mouse3 :WindowMenu
+OnTitlebar Move1 :StartMoving
+
+Mod1 Shift Tab :PrevWindow {groups} (workspace=[current])
+Mod1 Tab :NextWindow {groups} (workspace=[current])
+
+Mod4 Up :Maximize
+Mod4 Left :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopLeft}
+Mod4 Left :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopRight}
+Mod4 :ClientMenu
+Mod4 1 :Exec google-chrome-unstable --show-app-list
+
+176 :Exec amixer sset Master,0 1+
+174 :Exec amixer sset Master,0 1-
+160 :Exec amixer sset Master,0 toggle
+
+Control Mod1 Left :PrevWorkspace
+Control Mod1 Right :NextWorkspace
+
+Shift Control Mod1 Left :TakeToPrevWorkspace
+Shift Control Mod1 Right :TakeToNextWorkspace
