@@ -64,6 +64,10 @@
 (require 'saveplace)
 (setq-default save-place t)
 
+;; Move between windows easilyt.
+(require 'windmove)
+(windmove-default-keybindings)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Downloaded packages ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
