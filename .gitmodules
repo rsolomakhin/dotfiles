@@ -14,21 +14,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[submodule "third_party/fonts"]
-	path = third_party/fonts
-	url = https://github.com/powerline/fonts.git
-[submodule "third_party/opp.zsh"]
-	path = third_party/opp.zsh
-	url = https://github.com/hchbaw/opp.zsh.git
-[submodule "third_party/ctrl-zsh"]
-	path = third_party/ctrl-zsh
-	url = https://github.com/Peeja/ctrl-zsh.git
-[submodule "third_party/cask"]
-	path = third_party/cask
-	url = https://github.com/cask/cask.git
-[submodule "third_party/gnome-terminal-colors-solarized"]
-	path = third_party/gnome-terminal-colors-solarized
-	url = https://github.com/Anthony25/gnome-terminal-colors-solarized.git
-[submodule "third_party/ycmd"]
-	path = third_party/ycmd
-	url = https://github.com/Valloric/ycmd.git
