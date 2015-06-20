@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-OnDesktop Mouse1 :RootMenu
-OnDesktop Mouse3 :HideMenus
+OnDesktop Mouse3 :RootMenu
+OnDesktop Mouse1 :HideMenus
 
 OnToolbar Mouse4 :PrevWindow {static groups} (iconhidden=no)
 OnToolbar Mouse5 :NextWindow {static groups} (iconhidden=no)
@@ -39,10 +39,10 @@ Mod4 Up :Maximize
 Mod4 Down :MacroCmd {ResizeTo 50% 50%} {MoveTo 0 0 Center}
 Mod4 Left :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopLeft}
 Mod4 Right :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopRight}
-Mod4 f :RootMenu
+
+Mod4 t :Exec xterm
 Mod4 l :Exec xscreensaver-command --lock
 Mod4 s :Exec google-chrome-unstable --show-app-list
-Mod4 w :ClientMenu
 
 123 :Exec amixer sset Master,0 1+
 122 :Exec amixer sset Master,0 1-
