@@ -61,4 +61,5 @@ if errorlevel 1 (
 )
 git.exe config --replace-all user.email "rouslan.solomakhin@gmail.com"
 
+emacs -nw -f install-my-packages --kill
 vim.exe -c ":PlugInstall" -c ":qa"
