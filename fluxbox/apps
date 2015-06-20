@@ -13,14 +13,21 @@
 # limitations under the License.
 
 [app] (name=fbrun)
-  [IconHidden] {true}
+  [IconHidden] {yes}
   [Layer] {2}
-  [Position] (WINCENTER) {0 0}
+  [Position] (WinCenter) {0 0}
 [end]
 
 [app] (name=crx_knipolnnllmklapflnccelgolnpehhpl)
-  [Deco] {NONE}
-  [IconHidden] {true}
+  [Deco] {None}
+  [IconHidden] {yes}
   [Layer] {6}
-  [Sticky] {true}
+  [Sticky] {yes}
+[end]
+
+[app] (name=chrome_app_list)
+  [IconHidden] {yes}
+  [Layer] {2}
+  [Position] (TopRight) {0 0}
+  [Deco] {None}
 [end]
