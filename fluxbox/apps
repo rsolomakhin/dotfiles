@@ -13,11 +13,14 @@
 # limitations under the License.
 
 [app] (name=fbrun)
-  [Position] (WINCENTER) {0 0}
+  [IconHidden] {true}
   [Layer] {2}
+  [Position] (WINCENTER) {0 0}
 [end]
+
 [app] (name=crx_knipolnnllmklapflnccelgolnpehhpl)
+  [Deco] {NONE}
+  [IconHidden] {true}
   [Layer] {6}
   [Sticky] {true}
-  [Deco] {NONE}
 [end]
