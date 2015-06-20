@@ -18,6 +18,7 @@
 
 (add-hook 'find-file-hook 'elide-head)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(electric-pair-mode)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 (global-set-key (kbd "C-x b") 'bs-show)
 (recentf-mode)
