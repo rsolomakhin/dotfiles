@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[begin] (Fluxbox)
+[begin] (fluxbox)
   [exec] (chrome) {google-chrome-unstable} </opt/google/chrome-unstable/product_logo_32.xpm>
   [exec] (xterm) {xterm} </usr/share/pixmaps/xterm-color_32x32.xpm>
-  [reconfig] (reconfig)
-  [exec] (lock) {xscreensaver-command -lock} <>
+  [exec] (lock) {xscreensaver-command -lock} </usr/share/pixmaps/xscreensaver.xpm>
   [exit] (exit)
 [end]
