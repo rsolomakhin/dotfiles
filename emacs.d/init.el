@@ -50,10 +50,7 @@
  '(compilation-window-height 20)
  '(compile-command "ninja -Cout/Debug -l10 -j10")
  '(electric-indent-mode t)
- '(elide-head-headers-to-hide
-   (quote
-    (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.")
-     ("Copyright" . "limitations under the License\\."))))
+ '(elide-head-headers-to-hide (quote (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.") ("Copyright" . "limitations under the License\\."))))
  '(fill-column 80)
  '(global-linum-mode t)
  '(global-whitespace-mode t)
@@ -61,10 +58,7 @@
  '(inhibit-startup-screen t)
  '(kill-whole-line t)
  '(linum-delay t)
- '(package-archives
-   (quote
-    (("melpa" . "http://melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(package-archives (quote (("melpa" . "http://melpa.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(require-final-newline t)
  '(save-place t nil (saveplace))
  '(sentence-end-double-space nil)
@@ -72,6 +66,9 @@
  '(standard-indent 2)
  '(tab-width 2)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(vc-follow-symlinks t)
+ '(vc-handled-backends (quote (Git)))
+ '(vc-initial-comment t)
  '(whitespace-style (quote (trailing space-before-tab empty space-after-tab))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
