@@ -16,6 +16,7 @@
   [IconHidden] {yes}
   [Layer] {2}
   [Position] (WinCenter) {0 0}
+  [Deco] {Tool}
 [end]
 
 [app] (name=crx_knipolnnllmklapflnccelgolnpehhpl)
