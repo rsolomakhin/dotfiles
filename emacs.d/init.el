@@ -12,9 +12,9 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(tool-bar-mode 0)
+(if (functionp 'scroll-bar-mode) (scroll-bar-mode 0))
+(if (functionp 'tool-bar-mode) (tool-bar-mode 0))
 (menu-bar-mode 0)
-(scroll-bar-mode 0)
 
 (add-hook 'find-file-hook 'elide-head)
 (defalias 'yes-or-no-p 'y-or-n-p)

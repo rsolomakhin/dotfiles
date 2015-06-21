@@ -19,10 +19,12 @@ die() {
   exit 1
 }
 
+for file in "common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh env-cros.sh env-gn.sh env-lsan.sh fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu screenrc tmux.conf vimrc zshrc Xresources bashrc bash_profile"; do
+  mkdir -p ~/`dirname $file` || die "Cannot create the dir for $file"
+  ln -s ~/.dotfiles/$file ~/.$file || die "Cannot link $file to home dir"
+done
+
 git config user.email "rouslan.solomakhin@gmail.com" || die "Cannot set git user email for this repository"
-cd || die "Cannot change dir to home"
-rcup -v || die "Cannot install dotfiles"
-cd - || die "Cannot go back to previous directory"
 git config --global --get user.email || git config --global user.email "rouslan.solomakhin@gmail.com" || die "Cannot set global git user email"
 git config --global --replace-all alias.br branch || die "Cannot alias git br"
 git config --global --replace-all alias.brv "branch -vv" || die "Cannot alias git brv"
@@ -39,6 +41,8 @@ git config --global --replace-all http.cookiefile ~/.gitcookies || die "Cannot s
 git config --global --replace-all push.default simple || die "Cannot set git push settings"
 git config --global --replace-all user.name "Rouslan Solomakhin" || die "Cannot set git user name"
 git submodule update --init --recursive || die "Cannot update submodules"
+
 which apt-get > /dev/null && sudo apt-get install build-essential cmake python-dev || die "Cannot install YCM deps"
+
 emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"
 vim -c ":PlugInstall" -c ":qa" || die "Cannot install vim plugins"
