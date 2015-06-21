@@ -44,7 +44,5 @@
 [end]
 
 [app] (Role=browser) {1}
-  [Dimensions] {30% 40%}
-  [Position] {100 100}
   [Workspace] {1}
 [end]
