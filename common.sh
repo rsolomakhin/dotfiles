@@ -31,6 +31,7 @@ export FZF_DEFAULT_OPTS="--color=bw"
 export GOPATH=$HOME/go
 export GYP_DEFINES="component=shared_library"
 export GYP_GENERATORS="ninja"
+export PS1="\u@\h:\w\$ "
 
 if [[ $PATH != *depot_tools* ]]; then
   PATH=$HOME/software/bin:$PATH
