@@ -40,15 +40,9 @@
 [app] (xterm) {1}
   [Position] {0 0}
   [Workspace] {0}
-  [Dimensions] {50% 100%}
-[end]
-
-[app] (Role=browser) {1}
-  [Workspace] {1}
+  [Dimensions] {51% 100%}
 [end]
 
 [app] (empathy-chat)
   [Workspace] {1}
-  [Position] (BottomLeft) {10 10}
-  [Dimensions] [300 300]
 [end]
