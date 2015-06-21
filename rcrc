@@ -15,4 +15,4 @@
 # limitations under the License.
 
 EXCLUDES="README.md LICENSE windows install.sh"
-SYMLINK_DIRS="ftplugin ftdetect third_party"
+
