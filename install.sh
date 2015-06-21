@@ -42,7 +42,10 @@ git config --global --replace-all push.default simple || die "Cannot set git pus
 git config --global --replace-all user.name "Rouslan Solomakhin" || die "Cannot set git user name"
 git submodule update --init --recursive || die "Cannot update submodules"
 
-which apt-get > /dev/null && sudo apt-get install build-essential cmake python-dev || die "Cannot install YCM deps"
+which apt-get > /dev/null
+if [ $? -eq 0 ]; then
+  sudo apt-get install build-essential cmake python-dev || die "Cannot install YCM deps"
+fi
 
 emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"
 vim -c ":PlugInstall" -c ":qa" || die "Cannot install vim plugins"
