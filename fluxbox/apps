@@ -50,4 +50,5 @@
 [app] (empathy-chat)
   [Workspace] {1}
   [Position] (BottomLeft) {10 10}
+  [Dimensions] [300 300]
 [end]
