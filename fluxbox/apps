@@ -12,23 +12,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[app] (name=fbrun)
+[app] (fbrun)
+  [Deco] {Tool}
+  [FocusNewWindow] {yes}
   [IconHidden] {yes}
   [Layer] {2}
   [Position] (WinCenter) {0 0}
-  [Deco] {Tool}
+  [Sticky] {yes}
 [end]
 
-[app] (name=crx_knipolnnllmklapflnccelgolnpehhpl)
+[app] (crx_knipolnnllmklapflnccelgolnpehhpl)
   [Deco] {None}
-  [IconHidden] {yes}
+  [Hidden] {yes}
   [Layer] {6}
   [Sticky] {yes}
 [end]
 
-[app] (name=chrome_app_list)
-  [IconHidden] {yes}
+[app] (chrome_app_list)
+  [Deco] {None}
+  [FocusNewWindow] {yes}
+  [Hidden] {yes}
   [Layer] {2}
   [Position] (TopRight) {0 0}
-  [Deco] {None}
+  [Sticky] {yes}
+[end]
+
+[app] (xterm) {1}
+  [Position] {0 0}
+  [Workspace] {0}
+  [Dimensions] {50% 100%}
+[end]
+
+[app] (Role=browser) {1}
+  [Dimensions] {30% 40%}
+  [Jump] {yes}
+  [Position] {100 100}
+  [Workspace] {1}
 [end]
