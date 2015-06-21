@@ -16,7 +16,7 @@
 
 google-chrome-unstable &
 xrdb ~/.Xresources
-xterm &
+xterm -e "tmux attach" &
 xscreensaver -no-splash &
 setxkbmap -option ctrl:nocaps
 fbautostart
