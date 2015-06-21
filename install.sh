@@ -45,6 +45,11 @@ git submodule update --init --recursive || die "Cannot update submodules"
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
   sudo apt-get install build-essential cmake python-dev || die "Cannot install YCM deps"
+else
+  which brew > /dev/null
+  if [ $? -eq 0 ]; then
+    brew install cmake || die "Cannot install YCM deps"
+  fi
 fi
 
 emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"
