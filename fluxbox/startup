@@ -18,6 +18,7 @@ google-chrome-unstable &
 xrdb ~/.Xresources
 xterm -e "tmux attach" &
 xscreensaver -no-splash &
+empathy --start-hidden &
 setxkbmap -option ctrl:nocaps
 fbautostart
 exec fluxbox

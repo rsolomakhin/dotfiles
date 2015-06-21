@@ -46,3 +46,8 @@
 [app] (Role=browser) {1}
   [Workspace] {1}
 [end]
+
+[app] (empathy-chat)
+  [Workspace] {1}
+  [Position] (BottomLeft) {10 10}
+[end]
