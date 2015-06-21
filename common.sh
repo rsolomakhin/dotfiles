@@ -61,9 +61,6 @@ alias so="source"
 alias v="vim"
 alias vi="vim"
 ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto"
-if [ "$TERM" == "xterm" ]; then
-  alias tmux="tmux -2"
-fi
 
 # Disable flow control (Ctrl-S).
 stty -ixon
