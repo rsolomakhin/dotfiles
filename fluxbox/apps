@@ -45,8 +45,9 @@
 
 [app] (empathy-chat) {1}
   [Workspace] {1}
+  [Minimized] {yes}
 [end]
 
-[app] (Role=browser) {1}
+[app] (Role=browser) (Title=.*Inbox.*|.*Calendar.*)
   [Workspace] {1}
 [end]
