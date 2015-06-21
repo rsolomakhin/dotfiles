@@ -12,39 +12,39 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-xterm*color0: black
-xterm*color1: red4
-xterm*color2: green4
-xterm*color3: yellow4
-xterm*color4: blue4
-xterm*color5: magenta4
-xterm*color6: cyan4
-xterm*color7: gray90
-xterm*color8: gray30
-xterm*color9: red3
-xterm*color10: green3
-xterm*color11: yellowe
-xterm*color12: blue3
-xterm*color13: magenta3
-xterm*color14: cyan3
-xterm*color15: white
+*color0: black
+*color1: red4
+*color2: green4
+*color3: yellow4
+*color4: blue4
+*color5: magenta4
+*color6: cyan4
+*color7: gray90
+*color8: gray30
+*color9: red3
+*color10: green3
+*color11: yellowe
+*color12: blue3
+*color13: magenta3
+*color14: cyan3
+*color15: white
 
-xterm*background: white
-xterm*cursorColor: red3
-redxterm*foreground: black
+*background: white
+*cursorColor: red3
+*foreground: black
 
-xterm*allowBoldFonts: false
-xterm*locale: true
-xterm*metaSendsEscape: true
-xterm*saveLines: 4096
-xterm*termName: xterm-256color
-xterm*utf8: 1
+*allowBoldFonts: false
+*locale: true
+*metaSendsEscape: true
+*saveLines: 4096
+*termName: xterm-256color
+*utf8: 1
 
-xterm*faceName: Ubuntu Mono:style=Regular:antialias=false
-xterm*faceSize: 12
-xterm*faceSize1: 4
-xterm*faceSize2: 6
-xterm*faceSize3: 10
-xterm*faceSize4: 16
-xterm*faceSize5: 24
-xterm*faceSize6: 32
+*faceName: Ubuntu Mono:style=Regular:antialias=false
+*faceSize: 12
+*faceSize1: 4
+*faceSize2: 6
+*faceSize3: 10
+*faceSize4: 16
+*faceSize5: 24
+*faceSize6: 32

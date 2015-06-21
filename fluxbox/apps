@@ -37,10 +37,10 @@
   [Sticky] {yes}
 [end]
 
-[app] (xterm) {1}
+[app] (workspace)
   [Position] {0 0}
   [Workspace] {0}
-  [Dimensions] {51% 100%}
+  [Dimensions] {50% 100%}
 [end]
 
 [app] (empathy-chat)
