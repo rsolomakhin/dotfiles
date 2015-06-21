@@ -16,7 +16,7 @@
 
 google-chrome-unstable &
 xrdb ~/.Xresources
-xterm -name "xterm-workspace" -e "tmux attach" &
+xterm -title "work" -e "tmux attach" &
 xscreensaver -no-splash &
 empathy --start-hidden &
 setxkbmap -option ctrl:nocaps

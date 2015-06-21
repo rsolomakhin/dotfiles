@@ -37,7 +37,7 @@
   [Sticky] {yes}
 [end]
 
-[app] (xterm-workspace) (Class=XTerm) {1}
+[app] (xterm) (Title=work)
   [Position] {0 0}
   [Workspace] {0}
   [Dimensions] {50% 100%}
