@@ -17,7 +17,7 @@
 google-chrome-unstable &
 xrdb ~/.Xresources
 xterm &
-xscreensaver &
+xscreensaver -no-splash &
 setxkbmap -option ctrl:nocaps
 fbautostart
 exec fluxbox
