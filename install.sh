@@ -19,7 +19,7 @@ die() {
   exit 1
 }
 
-for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh env-cros.sh env-gn.sh env-lsan.sh fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu screenrc tmux.conf vimrc zshrc Xresources bashrc bash_profile; do
+for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh env-cros.sh env-gn.sh env-lsan.sh fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu screenrc tmux.conf vimrc vim/autoload/plug.vim zshrc Xresources bashrc bash_profile; do
   mkdir -p ~/`dirname $file` || die "Cannot create the dir for $file"
   ln -sfv ~/.dotfiles/$file ~/.$file || die "Cannot link $file to home dir"
 done
