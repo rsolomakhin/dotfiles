@@ -37,12 +37,16 @@
   [Sticky] {yes}
 [end]
 
-[app] (workspace)
+[app] (xterm-workspace) (Class=XTerm) {1}
   [Position] {0 0}
   [Workspace] {0}
   [Dimensions] {50% 100%}
 [end]
 
-[app] (empathy-chat)
+[app] (empathy-chat) {1}
+  [Workspace] {1}
+[end]
+
+[app] (Role=browser) {1}
   [Workspace] {1}
 [end]
