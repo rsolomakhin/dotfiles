@@ -33,8 +33,13 @@
    (lambda (p)
      (or (package-installed-p p)
          (package-install p)))
-   '(clang-format go-mode google-c-style))
+   '(clang-format company company-go go-mode google-c-style))
   (message "Done."))
+
+(package-initialize)
+(require 'company)
+(require 'company-go)
+(global-company-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -51,20 +56,14 @@
  '(compilation-window-height 20)
  '(compile-command "ninja -Cout/Debug -l10 -j10")
  '(electric-indent-mode t)
- '(elide-head-headers-to-hide
-   (quote
-    (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.")
-     ("Copyright" . "limitations under the License\\."))))
+ '(elide-head-headers-to-hide (quote (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.") ("Copyright" . "limitations under the License\\."))))
  '(fill-column 80)
  '(global-whitespace-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-whole-line t)
  '(linum-delay t)
- '(package-archives
-   (quote
-    (("melpa" . "http://melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(package-archives (quote (("melpa" . "http://melpa.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(require-final-newline t)
  '(save-place t nil (saveplace))
  '(sentence-end-double-space nil)
