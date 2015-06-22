@@ -33,7 +33,7 @@
    (lambda (p)
      (or (package-installed-p p)
          (package-install p)))
-   '(clang-format company company-go go-mode google-c-style))
+   '(clang-format company-go company-ycmd go-mode google-c-style))
   (message "Done."))
 
 (add-hook 'after-init-hook 'global-company-mode)
@@ -43,7 +43,7 @@
                           (company-mode)))
 
 (add-hook 'c++-mode-hook 'company-ycmd-setup)
-(set-variable 'ycmd-server-command '("python"))
+(set-variable 'ycmd-server-command '("python" "-u"))
 (add-to-list 'ycmd-server-command (expand-file-name "~/.ycmd/ycmd") t)
 (set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
 
