@@ -46,10 +46,17 @@ which apt-get > /dev/null
 if [ $? -eq 0 ]; then
   sudo apt-get install build-essential cmake python-dev || die "Cannot install YCM deps"
 else
+  export PATH=$HOME/software/bin:$PATH || die "Cannot add $HOME/software/bin to the path"
   which brew > /dev/null
-  if [ $? -eq 0 ]; then
-    brew install cmake || die "Cannot install YCM deps"
+  if [ $? -ne 0 ]; then
+    pushd $HOME/software || die "Cannot change dir to $HOME/software"
+    curl -L https://github.com/Homebrew/homebrew/tarball/master | tar xz --strip 1 || die "Cannot download homebrew"
+    popd || die "Cannot return to previous dir"
   fi
+  brew install cmake || die "Cannot install YCM deps"
+  brew install bash vim emacs coreutils || die "Cannot install updated tools"
+  brew update || die "Cannot update homebrew formulae"
+  brew upgrade --all || die "Cannot upgrade all homebrew packages"
 fi
 
 emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"
