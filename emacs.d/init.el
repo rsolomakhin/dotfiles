@@ -42,7 +42,7 @@
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
 
-(add-hook 'c++-mode-hook 'ycmd-mode)
+(add-hook 'c++-mode-hook 'company-ycmd-setup)
 (set-variable 'ycmd-server-command '("python"))
 (add-to-list 'ycmd-server-command (expand-file-name "~/.ycmd/ycmd") t)
 (set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")

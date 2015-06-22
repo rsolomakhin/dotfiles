@@ -60,6 +60,8 @@ else
 fi
 
 pushd ~/.ycmd || die "Cannot go into ~/.ycmd dir"
+git pull --rebase || die "Cannot update ycmd"
+git submodule update --init --recursive || die "Cannot update ycmd dependencies"
 ./build.py --clang-completer || die "Cannot build clang completer for ycmd"
 popd || die "Cannot return from ~/.ycmd dir"
 
