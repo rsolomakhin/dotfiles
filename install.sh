@@ -59,11 +59,14 @@ else
   brew upgrade --all || die "Cannot upgrade all homebrew packages"
 fi
 
-pushd ~/.ycmd || die "Cannot go into ~/.ycmd dir"
+pushd ycmd || die "Cannot go into ycmd dir"
+hash=`git log -n 1 --format=%h`
 git pull --rebase || die "Cannot update ycmd"
-git submodule update --init --recursive || die "Cannot update ycmd dependencies"
-./build.py --clang-completer || die "Cannot build clang completer for ycmd"
-popd || die "Cannot return from ~/.ycmd dir"
+if [ "$hash" != "`git log -n 1 --format=%h`" ]; then
+  git submodule update --init --recursive || die "Cannot update ycmd dependencies"
+  ./build.py --clang-completer || die "Cannot build clang completer for ycmd"
+fi
+popd || die "Cannot return from ycmd dir"
 
 emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"
 vim -c ":PlugInstall" -c ":qa" || die "Cannot install vim plugins"
