@@ -64,7 +64,7 @@ hash=`git log -n 1 --format=%h`
 git pull --rebase || die "Cannot update ycmd"
 if [ "$hash" != "`git log -n 1 --format=%h`" ]; then
   git submodule update --init --recursive || die "Cannot update ycmd dependencies"
-  ./build.py --clang-completer || die "Cannot build clang completer for ycmd"
+  ./build.py --clang-completer --system-libclang || die "Cannot build clang completer for ycmd"
 fi
 popd || die "Cannot return from ycmd dir"
 
