@@ -37,9 +37,15 @@
   (message "Done."))
 
 (add-hook 'after-init-hook 'global-company-mode)
+
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
+
+(add-hook 'c++-mode-hook 'ycmd-mode)
+(set-variable 'ycmd-server-command '("python"))
+(add-to-list 'ycmd-server-command (expand-file-name "~/.ycmd/ycmd") t)
+(set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
