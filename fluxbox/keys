@@ -44,6 +44,8 @@ Mod4 Right :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopRight}
 121 :Exec amixer sset Master,0 toggle
 
 Mod1 F2 :Exec fbrun -bg black -fg white
+Mod4 r :Exec fbrun -bg black -fg white
+
 Control Mod1 s :Exec google-chrome-unstable --show-app-list
 Control Mod1 t :Exec xterm
 
