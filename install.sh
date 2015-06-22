@@ -44,7 +44,7 @@ git submodule update --init --recursive || die "Cannot update submodules"
 
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
-  sudo apt-get install build-essential cmake python-dev || die "Cannot install YCM deps"
+  sudo apt-get install build-essential cmake python-dev gocode libclang-3.6 || die "Cannot install YCM deps"
 else
   export PATH=$HOME/software/bin:$PATH || die "Cannot add $HOME/software/bin to the path"
   which brew > /dev/null
@@ -53,7 +53,7 @@ else
     curl -L https://github.com/Homebrew/homebrew/tarball/master | tar xz --strip 1 || die "Cannot download homebrew"
     popd || die "Cannot return to previous dir"
   fi
-  brew install cmake || die "Cannot install YCM deps"
+  brew install cmake libclang gocode || die "Cannot install YCM deps"
   brew install bash vim emacs coreutils clang-format || die "Cannot install updated tools"
   brew update || die "Cannot update homebrew formulae"
   brew upgrade --all || die "Cannot upgrade all homebrew packages"
@@ -64,7 +64,7 @@ hash=`git log -n 1 --format=%h`
 git pull --rebase || die "Cannot update ycmd"
 if [ "$hash" != "`git log -n 1 --format=%h`" ]; then
   git submodule update --init --recursive || die "Cannot update ycmd dependencies"
-  ./build.py --clang-completer --system-libclang || die "Cannot build clang completer for ycmd"
+  ./build.py --clang-completer --system-libclang --gocode-completer || die "Cannot build ycmd"
 fi
 popd || die "Cannot return from ycmd dir"
 
