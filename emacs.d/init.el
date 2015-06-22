@@ -51,17 +51,25 @@
  '(compilation-window-height 20)
  '(compile-command "ninja -Cout/Debug -l10 -j10")
  '(electric-indent-mode t)
- '(elide-head-headers-to-hide (quote (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.") ("Copyright" . "limitations under the License\\."))))
+ '(elide-head-headers-to-hide
+   (quote
+    (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.")
+     ("Copyright" . "limitations under the License\\."))))
  '(fill-column 80)
  '(global-whitespace-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-whole-line t)
  '(linum-delay t)
- '(package-archives (quote (("melpa" . "http://melpa.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(package-archives
+   (quote
+    (("melpa" . "http://melpa.org/packages/")
+     ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(require-final-newline t)
  '(save-place t nil (saveplace))
  '(sentence-end-double-space nil)
+ '(sh-basic-offset 2)
+ '(sh-indentation 2)
  '(show-trailing-whitespace t)
  '(standard-indent 2)
  '(tab-width 2)

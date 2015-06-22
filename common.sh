@@ -40,7 +40,6 @@ if [[ $PATH != *depot_tools* ]]; then
   PATH=$PATH:$HOME/android-sdk-linux/tools
   PATH=$PATH:$HOME/depot_tools
   PATH=$PATH:$HOME/gradle/bin
-  PATH=$PATH:$HOME/.third_party/cask/bin
   export PATH
 fi
 
@@ -60,7 +59,7 @@ alias j="jobs"
 alias so="source"
 alias v="vim"
 alias vi="vim"
-ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto"
+ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto" || alias ls="gls --color=auto"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
