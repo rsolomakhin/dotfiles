@@ -54,7 +54,7 @@ else
     popd || die "Cannot return to previous dir"
   fi
   brew install cmake || die "Cannot install YCM deps"
-  brew install bash vim emacs coreutils || die "Cannot install updated tools"
+  brew install bash vim emacs coreutils clang-format || die "Cannot install updated tools"
   brew update || die "Cannot update homebrew formulae"
   brew upgrade --all || die "Cannot upgrade all homebrew packages"
 fi
