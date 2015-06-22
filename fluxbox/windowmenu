@@ -13,8 +13,5 @@
 # limitations under the License.
 
 [begin]
-  [stick]
-  [maximize]
-  [iconify]
-  [close]
+  [layer]
 [end]
