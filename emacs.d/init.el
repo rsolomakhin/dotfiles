@@ -36,10 +36,10 @@
    '(clang-format company company-go go-mode google-c-style))
   (message "Done."))
 
-(package-initialize)
-(require 'company)
-(require 'company-go)
-(global-company-mode)
+(add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
