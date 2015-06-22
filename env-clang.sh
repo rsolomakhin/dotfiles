@@ -26,4 +26,9 @@ export GYP_DEFINES="component=shared_library clang=1"
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 echo $GYP_DEFINES
 mkdir -p out_clang
-ln -svfT out_clang out
+which gln > /dev/null
+if [ $? -eq 0 ]; then
+  gln -svfT out_clang out
+else
+  ln -svfT out_clang out
+fi
