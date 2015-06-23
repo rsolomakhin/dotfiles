@@ -27,37 +27,55 @@ for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh \
   ln -sfvT ~/.dotfiles/$file ~/.$file || die "Cannot link $file to home dir"
 done
 
-git config user.email "rouslan.solomakhin@gmail.com" || die "Cannot set git user email for this repository"
-git config --global --get user.email || git config --global user.email "rouslan.solomakhin@gmail.com" || die "Cannot set global git user email"
+git config user.email "rouslan.solomakhin@gmail.com" \
+  || die "Cannot set git user email for this repository"
+git config --global --get user.email \
+  || git config --global user.email "rouslan.solomakhin@gmail.com" \
+  || die "Cannot set global git user email"
 git config --global --replace-all alias.br branch || die "Cannot alias git br"
-git config --global --replace-all alias.brv "branch -vv" || die "Cannot alias git brv"
-git config --global --replace-all alias.can "commit -a --amend --no-edit" || die "Cannot alias git can"
+git config --global --replace-all alias.brv "branch -vv" \
+  || die "Cannot alias git brv"
+git config --global --replace-all alias.can "commit -a --amend --no-edit" \
+  || die "Cannot alias git can"
 git config --global --replace-all alias.co checkout || die "Cannot alias git co"
 git config --global --replace-all alias.ls ls-files || die "Cannot alias git ls"
 git config --global --replace-all alias.st status || die "Cannot alias git st"
-git config --global --replace-all alias.sub "submodule update --init --recursive" || die "Cannot alias git sub"
-git config --global --replace-all color.ui auto || die "Cannot enable git colors"
-git config --global --replace-all core.autocrlf false || die "Cannot set git autoclrf"
-git config --global --replace-all core.excludesfile ~/.cvsignore || die "Cannot set git excludes file"
-git config --global --replace-all core.filemode false || die "Cannot disable git filemode"
-git config --global --replace-all http.cookiefile ~/.gitcookies || die "Cannot set git cookie file"
-git config --global --replace-all push.default simple || die "Cannot set git push settings"
-git config --global --replace-all user.name "Rouslan Solomakhin" || die "Cannot set git user name"
+git config --global --replace-all alias.sub \
+  "submodule update --init --recursive" || die "Cannot alias git sub"
+git config --global --replace-all color.ui auto \
+  || die "Cannot enable git colors"
+git config --global --replace-all core.autocrlf false \
+  || die "Cannot set git autoclrf"
+git config --global --replace-all core.excludesfile ~/.cvsignore \
+  || die "Cannot set git excludes file"
+git config --global --replace-all core.filemode false \
+  || die "Cannot disable git filemode"
+git config --global --replace-all http.cookiefile ~/.gitcookies \
+  || die "Cannot set git cookie file"
+git config --global --replace-all push.default simple \
+  || die "Cannot set git push settings"
+git config --global --replace-all user.name "Rouslan Solomakhin" \
+  || die "Cannot set git user name"
 git submodule update --init --recursive || die "Cannot update submodules"
 
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
-  sudo apt-get install build-essential cmake python-dev gocode libclang-3.6 || die "Cannot install YCM deps"
+  sudo apt-get install build-essential cmake python-dev gocode libclang-3.6 \
+    || die "Cannot install YCM deps"
 else
-  export PATH=$HOME/software/bin:$PATH || die "Cannot add $HOME/software/bin to the path"
+  export PATH=$HOME/software/bin:$PATH \
+    || die "Cannot add $HOME/software/bin to the path"
   which brew > /dev/null
   if [ $? -ne 0 ]; then
     pushd $HOME/software || die "Cannot change dir to $HOME/software"
-    curl -L https://github.com/Homebrew/homebrew/tarball/master | tar xz --strip 1 || die "Cannot download homebrew"
+    curl -L https://github.com/Homebrew/homebrew/tarball/master \
+      | tar xz --strip 1 \
+      || die "Cannot download homebrew"
     popd || die "Cannot return to previous dir"
   fi
   brew install cmake libclang gocode || die "Cannot install YCM deps"
-  brew install bash vim emacs coreutils clang-format || die "Cannot install updated tools"
+  brew install bash vim emacs coreutils clang-format \
+    || die "Cannot install updated tools"
   brew update || die "Cannot update homebrew formulae"
   brew upgrade --all || die "Cannot upgrade all homebrew packages"
 fi
@@ -66,8 +84,10 @@ pushd ycmd || die "Cannot go into ycmd dir"
 hash=`git log -n 1 --format=%h`
 git pull --rebase || die "Cannot update ycmd"
 if [ "$hash" != "`git log -n 1 --format=%h`" ]; then
-  git submodule update --init --recursive || die "Cannot update ycmd dependencies"
-  ./build.py --clang-completer --system-libclang --gocode-completer || die "Cannot build ycmd"
+  git submodule update --init --recursive \
+    || die "Cannot update ycmd dependencies"
+  ./build.py --clang-completer --system-libclang --gocode-completer \
+    || die "Cannot build ycmd"
 fi
 popd || die "Cannot return from ycmd dir"
 
