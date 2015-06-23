@@ -36,12 +36,13 @@ export PS1="\u@\h:\w\$ "
 
 if [[ $PATH != *depot_tools* ]]; then
   PATH=$HOME/software/bin:$PATH
+  PATH=$JAVA_HOME/bin:$PATH
   PATH=$PATH:$GOPATH/bin
   PATH=$PATH:$HOME/android-sdk-linux/platform-tools
   PATH=$PATH:$HOME/android-sdk-linux/tools
   PATH=$PATH:$HOME/depot_tools
+  PATH=$PATH:$HOME/google-cloud-sdk/bin
   PATH=$PATH:$HOME/gradle/bin
-  PATH=$PATH:$JAVA_HOME/bin
   export PATH
 fi
 

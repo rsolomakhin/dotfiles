@@ -22,3 +22,7 @@ source ~/.common.sh
 # Remap Ctrl-T to use fzf-tmux directly, which respects FZF_DEFAULT_COMMAND and
 # FZF_DEFAULT_OPTS.
 bind '"\C-t": "$(fzf-tmux)\e\C-e"'
+
+# Bash completion for gcloud.
+[ -f ~/google-cloud-sdk/completion.bash.inc ] \
+  && source ~/google-cloud-sdk/completion.bash.inc
