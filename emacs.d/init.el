@@ -25,7 +25,7 @@
 (savehist-mode)
 (windmove-default-keybindings)
 
-(add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'prog-mode-hook 'global-company-mode)
 (add-hook 'c++-mode-hook 'ycmd-mode)
 (add-hook 'ycmd-mode-hook
           (lambda ()
@@ -69,6 +69,7 @@
  '(compilation-scroll-output (quote first-error))
  '(compilation-window-height 20)
  '(compile-command "ninja -Cout/Debug -l10 -j10")
+ '(custom-enabled-themes (quote (tango-dark)))
  '(electric-indent-mode t)
  '(elide-head-headers-to-hide (quote (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.") ("Copyright" . "limitations under the License\\."))))
  '(fill-column 80)
