@@ -46,6 +46,10 @@
             (ycmd-mode)
             (add-hook 'before-save-hook 'gofmt-before-save)))
 
+(add-hook 'java-mode-hook (lambda ()
+                            (setq c-basic-offset 4)
+                            (setq fill-column 100)))
+
 (defun install-my-packages ()
   (interactive)
   (package-initialize)
