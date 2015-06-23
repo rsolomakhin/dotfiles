@@ -47,7 +47,8 @@ git.exe config --global --replace-all alias.can "commit -a --amend --no-edit"
 git.exe config --global --replace-all alias.co checkout
 git.exe config --global --replace-all alias.ls ls-files
 git.exe config --global --replace-all alias.st status
-git.exe config --global --replace-all alias.sub "submodule update --init --recursive"
+git.exe config --global --replace-all alias.sub ^
+  "submodule update --init --recursive"
 git.exe config --global --replace-all color.ui auto
 git.exe config --global --replace-all core.autocrlf false
 git.exe config --global --replace-all core.excludesfile %USERPROFILE%\.cvsignore
@@ -57,7 +58,8 @@ git.exe config --global --replace-all push.default simple
 git.exe config --global --replace-all user.name "Rouslan Solomakhin"
 git.exe config --global --get user.email > NUL 2>&1
 if errorlevel 1 (
-  git.exe config --global --replace-all user.email "rouslan.solomakhin@gmail.com"
+  git.exe config --global --replace-all user.email ^
+    "rouslan.solomakhin@gmail.com"
 )
 git.exe config --replace-all user.email "rouslan.solomakhin@gmail.com"
 
