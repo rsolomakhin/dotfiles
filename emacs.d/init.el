@@ -89,7 +89,6 @@
  '(save-place t nil (saveplace))
  '(sentence-end-double-space nil)
  '(sh-basic-offset 2)
- '(sh-indentation 2)
  '(show-trailing-whitespace t)
  '(standard-indent 2)
  '(tab-width 2)

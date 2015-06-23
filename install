@@ -86,8 +86,7 @@ git pull --rebase || die "Cannot update ycmd"
 if [ "$hash" != "`git log -n 1 --format=%h`" ]; then
   git submodule update --init --recursive \
     || die "Cannot update ycmd dependencies"
-  ./build.py --clang-completer --system-libclang --gocode-completer \
-    || die "Cannot build ycmd"
+  ./build.py --clang-completer --gocode-completer || die "Cannot build ycmd"
 fi
 popd || die "Cannot return from ycmd dir"
 
