@@ -34,7 +34,8 @@
             (flycheck-ycmd-setup)))
 (set-variable 'ycmd-server-command '("python" "-u"))
 (add-to-list 'ycmd-server-command (expand-file-name "~/.ycmd/ycmd") t)
-(set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
+(set-variable 'ycmd-global-config
+              "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
 (when (not (display-graphic-p))
   (setq flycheck-indication-mode nil))
 
