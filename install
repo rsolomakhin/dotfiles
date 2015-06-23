@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright 2015 Rouslan Solomakhin
 #
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 die() {
-  echo $@
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
   exit 1
 }
 
