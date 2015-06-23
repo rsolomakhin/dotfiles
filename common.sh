@@ -31,6 +31,7 @@ export FZF_DEFAULT_OPTS="--color=bw"
 export GOPATH=$HOME/go
 export GYP_DEFINES="component=shared_library"
 export GYP_GENERATORS="ninja"
+export JAVA_HOME=$HOME/jdk
 export PS1="\u@\h:\w\$ "
 
 if [[ $PATH != *depot_tools* ]]; then
@@ -40,6 +41,7 @@ if [[ $PATH != *depot_tools* ]]; then
   PATH=$PATH:$HOME/android-sdk-linux/tools
   PATH=$PATH:$HOME/depot_tools
   PATH=$PATH:$HOME/gradle/bin
+  PATH=$PATH:$JAVA_HOME/bin
   export PATH
 fi
 
