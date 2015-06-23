@@ -83,6 +83,7 @@ else
 fi
 
 pushd ycmd || die "Cannot go into ycmd dir"
+git checkout master || die "Cannot checkout ycmd master"
 hash=`git log -n 1 --format=%h`
 git pull --rebase || die "Cannot update ycmd"
 if [ "$hash" != "`git log -n 1 --format=%h`" ]; then
