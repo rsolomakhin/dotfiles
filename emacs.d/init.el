@@ -25,7 +25,9 @@
 (savehist-mode)
 (windmove-default-keybindings)
 
-(add-hook 'prog-mode-hook 'global-company-mode)
+(add-hook 'prog-mode-hook (lambda ()
+                            (if (functionp 'global-company-mode)
+                                (global-company-mode))))
 (add-hook 'c++-mode-hook 'ycmd-mode)
 (add-hook 'ycmd-mode-hook
           (lambda ()
