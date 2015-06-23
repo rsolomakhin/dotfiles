@@ -60,7 +60,7 @@ git submodule update --init --recursive || die "Cannot update submodules"
 
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
-  sudo apt-get install build-essential cmake python-dev gocode libclang-3.6 \
+  sudo apt-get install build-essential cmake python-dev gocode \
     || die "Cannot install YCM deps"
 else
   export PATH=$HOME/software/bin:$PATH \
@@ -73,7 +73,7 @@ else
       || die "Cannot download homebrew"
     popd || die "Cannot return to previous dir"
   fi
-  brew install cmake libclang gocode || die "Cannot install YCM deps"
+  brew install cmake gocode || die "Cannot install YCM deps"
   brew install bash vim emacs coreutils clang-format \
     || die "Cannot install updated tools"
   brew update || die "Cannot update homebrew formulae"
