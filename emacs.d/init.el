@@ -90,6 +90,7 @@
  '(vc-follow-symlinks t)
  '(vc-handled-backends (quote (Git)))
  '(vc-initial-comment t)
+ '(whitespace-line-column nil)
  '(whitespace-style (quote (trailing space-before-tab empty space-after-tab face lines))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
