@@ -37,7 +37,6 @@ copy  /Y     cvsignore    %USERPROFILE%\.cvsignore
 copy  /Y     vimrc        %USERPROFILE%\.vimrc
 copy  /Y     zshrc        %USERPROFILE%\.zshrc
 xcopy /Y/S/I emacs.d      %USERPROFILE%\.emacs.d
-xcopy /Y/S/I third_party  %USERPROFILE%\.third_party
 xcopy /Y/S/I vim          %USERPROFILE%\vimfiles
 popd
 
