@@ -85,9 +85,6 @@ silent! if plug#begin()
   Plug 'fatih/vim-go'
   if has("win32")
     Plug 'Blackrush/vim-gocode'
-  else
-    Plug 'nsf/gocode', {'rtp': 'vim',
-          \ 'do': '~/.vim/plugged/gocode/vim/symlink.sh'}
   endif
 
   call plug#end()
