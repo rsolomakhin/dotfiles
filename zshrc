@@ -28,15 +28,6 @@ alias -s js="$EDITOR"
 alias -s proto="$EDITOR"
 alias -s xml="$EDITOR"
 
-# Save and share history.
-export HISTSIZE=1000
-if ((!EUID)); then
-  export HISTFILE=~/.history_root
-else
-  export HISTFILE=~/.history
-fi
-export SAVEHIST=1000
-
 if [[ $EDITOR == v* ]]; then
   # Vi editing mode.
   bindkey -v
@@ -44,18 +35,18 @@ if [[ $EDITOR == v* ]]; then
   bindkey '^G' what-cursor-position
   bindkey '^h' backward-delete-char
   export KEYTIMEOUT=1
-  # Vim text objects.
-  if [ -f ~/.third_party/opp.zsh/opp.zsh ]; then
-    source ~/.third_party/opp.zsh/opp.zsh
-  fi
 else
-  # Emacs editing mode.
-  bindkey -e
+  if [ -z "$INSIDE_EMACS" ]; then
+    # Emacs editing mode.
+    bindkey -e
+  fi
 fi
 
-# Fuzzy file finder and history lookup.
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -z "$INSIDE_EMACS" ]; then
+  # Fuzzy file finder and history lookup.
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Zsh completion for gcloud.
-[ -f ~/google-cloud-sdk/completion.zsh.inc ] \
-  && source ~/google-cloud-sdk/completion.zsh.inc
+  # Zsh completion for gcloud.
+  [ -f ~/google-cloud-sdk/completion.zsh.inc ] \
+    && source ~/google-cloud-sdk/completion.zsh.inc
+fi
