@@ -60,7 +60,8 @@ git submodule update --init --recursive || die "Cannot update submodules"
 
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
-  sudo apt-get install build-essential cmake python-dev gocode \
+  sudo apt-get install golang || die "Cannot install go"
+  sudo apt-get install build-essential cmake python-dev \
     || die "Cannot install YCM deps"
 else
   export PATH=$HOME/software/bin:$PATH \
@@ -74,13 +75,14 @@ else
     popd || die "Cannot return to previous dir"
   fi
   brew install go || die "Cannot install go"
-  go get github.com/nsf/gocode || die "Cannot get gocode package for go"
   brew install cmake || die "Cannot install cmake for YCM"
   brew install bash vim emacs coreutils clang-format \
     || die "Cannot install updated tools"
   brew update || die "Cannot update homebrew formulae"
   brew upgrade --all || die "Cannot upgrade all homebrew packages"
 fi
+
+go get github.com/nsf/gocode || die "Cannot get gocode package for go"
 
 pushd ycmd || die "Cannot go into ycmd dir"
 git checkout master || die "Cannot checkout ycmd master"
