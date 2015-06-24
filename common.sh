@@ -35,9 +35,9 @@ export PS1="\u@\h:\w\$ "
 
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 
-if [[ $PATH != $HOME/software/bin:$JAVA_HOME/bin:* ]]; then
-  PATH=$JAVA_HOME/bin:$PATH
-  PATH=$HOME/software/bin:$PATH
+PREFIX=$HOME/software/bin:$JAVA_HOME/bin
+if [[ $PATH != $PREFIX:* ]]; then
+  PATH=$PREFIX:$PATH
 fi
 
 if [[ $PATH != *depot_tools* ]]; then
