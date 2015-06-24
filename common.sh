@@ -29,14 +29,18 @@ export FZF_DEFAULT_COMMAND="find -L . \( \
         sed 1d | cut -b3- "
 export FZF_DEFAULT_OPTS="--color=bw"
 export GOPATH=$HOME/go
-export GYP_DEFINES="component=shared_library"
 export GYP_GENERATORS="ninja"
 export JAVA_HOME=$HOME/jdk
 export PS1="\u@\h:\w\$ "
 
-if [[ $PATH != *depot_tools* ]]; then
-  PATH=$HOME/software/bin:$PATH
+[ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
+
+if [[ $PATH != $HOME/software/bin:$JAVA_HOME/bin:* ]]; then
   PATH=$JAVA_HOME/bin:$PATH
+  PATH=$HOME/software/bin:$PATH
+fi
+
+if [[ $PATH != *depot_tools* ]]; then
   PATH=$PATH:$GOPATH/bin
   PATH=$PATH:$HOME/android-sdk-linux/platform-tools
   PATH=$PATH:$HOME/android-sdk-linux/tools
@@ -62,7 +66,8 @@ alias j="jobs"
 alias so="source"
 alias v="vim"
 alias vi="vim"
-ls --color=auto > /dev/null 2>&1 && alias ls="ls --color=auto" || alias ls="gls --color=auto"
+ls --version > /dev/null 2>&1 && alias ls="ls --color=auto" || alias ls="gls --color=auto"
+ln --version > /dev/null 2>&1 || alias ln="gln"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
