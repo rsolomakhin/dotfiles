@@ -18,7 +18,6 @@
 
 (add-hook 'find-file-hook 'elide-head)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(electric-pair-mode)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 (global-set-key (kbd "C-x b") 'bs-show)
 (recentf-mode)
@@ -28,6 +27,11 @@
 (add-hook 'prog-mode-hook (lambda ()
                             (if (functionp 'global-company-mode)
                                 (global-company-mode))))
+(setq company-begin-commands '(self-insert-command))
+(setq company-echo-delay 0)
+(setq company-idle-delay .3)
+(setq company-tooltip-limit 20)
+
 (add-hook 'c++-mode-hook 'ycmd-mode)
 (add-hook 'ycmd-mode-hook
           (lambda ()
@@ -79,7 +83,7 @@
  '(electric-indent-mode t)
  '(elide-head-headers-to-hide (quote (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.") ("Copyright" . "limitations under the License\\."))))
  '(fill-column 80)
- '(global-whitespace-mode t)
+ '(global-whitespace-mode nil)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-whole-line t)
@@ -89,7 +93,6 @@
  '(save-place t nil (saveplace))
  '(sentence-end-double-space nil)
  '(sh-basic-offset 2)
- '(show-trailing-whitespace t)
  '(standard-indent 2)
  '(tab-width 2)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
