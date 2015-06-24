@@ -69,7 +69,7 @@ else
   fi
   brew install go || die "Cannot install go"
   brew install cmake || die "Cannot install cmake for YCM"
-  brew install bash vim emacs coreutils clang-format \
+  brew install bash vim emacs coreutils clang-format tmux \
     || die "Cannot install updated tools"
   brew update || die "Cannot update homebrew formulae"
   brew upgrade --all || die "Cannot upgrade all homebrew packages"
