@@ -60,6 +60,7 @@ else
     || die "Cannot add $HOME/software/bin to the path"
   which brew > /dev/null
   if [ $? -ne 0 ]; then
+    mkdir -p $HOME/software || die "Cannot create $HOME/software dir"
     pushd $HOME/software || die "Cannot change dir to $HOME/software"
     curl -L https://github.com/Homebrew/homebrew/tarball/master \
       | tar xz --strip 1 \
