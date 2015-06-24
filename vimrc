@@ -64,7 +64,8 @@ silent! if plug#begin()
   endif
 
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
-    Plug 'Valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
+    Plug 'Valloric/YouCompleteMe',
+          \ {'do': './install.sh --clang-completer --gocode-completer'}
     let g:ycm_global_ycm_extra_conf =
           \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
   endif
