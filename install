@@ -84,16 +84,13 @@ fi
 
 go get github.com/nsf/gocode || die "Cannot get gocode package for go"
 
-pushd ycmd || die "Cannot go into ycmd dir"
-git checkout master || die "Cannot checkout ycmd master"
-hash=`git log -n 1 --format=%h`
-git pull --rebase || die "Cannot update ycmd"
-if [ "$hash" != "`git log -n 1 --format=%h`" ]; then
+if [ ! -e ycmd/ycm_core.so ]; then
+  pushd ycmd || die "Cannot go into ycmd dir"
   git submodule update --init --recursive \
     || die "Cannot update ycmd dependencies"
   ./build.py --clang-completer --gocode-completer || die "Cannot build ycmd"
+  popd || die "Cannot return from ycmd dir"
 fi
-popd || die "Cannot return from ycmd dir"
 
 emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"
 vim -c ":PlugInstall" -c ":qa" || die "Cannot install vim plugins"
