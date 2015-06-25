@@ -11,31 +11,33 @@
 :: WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
-@echo off
 
-copy  /Y drmemory-env.bat %SYSTEMDRIVE%\src\ ^
+if not exist %SYSTEMDRIVE%\src mkdir %SYSTEMDRIVE%\src ^
+  || echo "Cannot create src dir" && exit /b 1
+
+pushd %~dp0 ^
+  || echo "Cannot go into the directory of the install script" && exit /b 1
+
+copy /Y drmemory-env.bat %SYSTEMDRIVE%\src\ ^
   || echo "Cannot copy drmemory-env.bat" && exit /b 1
-copy  /Y env.bat          %SYSTEMDRIVE%\src\ ^
+copy /Y env.bat %SYSTEMDRIVE%\src\ ^
   || echo "Cannot copy env.bat" && exit /b 1
-
-pushd %SYSTEMDRIVE%\src\dotfiles\ ^
-  || echo "Cannot go change to dotfile dir" && exit /b 1
-copy  /Y     bash_profile %USERPROFILE%\.bash_profile ^
+copy /Y ..\bash_profile %USERPROFILE%\.bash_profile ^
   || echo "Cannot copy bash_profile" && exit /b 1
-copy  /Y     bashrc       %USERPROFILE%\.bashrc ^
+copy /Y ..\bashrc %USERPROFILE%\.bashrc ^
   || echo "Cannot copy bashrc" && exit /b 1
-copy  /Y     cvsignore    %USERPROFILE%\.cvsignore ^
+copy /Y ..\cvsignore %USERPROFILE%\.cvsignore ^
   || echo "Cannot copy cvsignore" && exit /b 1
-copy  /Y     vimrc        %USERPROFILE%\.vimrc ^
+copy /Y ..\vimrc %USERPROFILE%\.vimrc ^
   || echo "Cannot copy vimrc" && exit /b 1
-copy  /Y     zshrc        %USERPROFILE%\.zshrc ^
+copy /Y ..\zshrc %USERPROFILE%\.zshrc ^
   || echo "Cannot copy zhsrc" && exit /b 1
-xcopy /Y/S/I emacs.d      %USERPROFILE%\.emacs.d ^
+xcopy /Y/S/I ..\emacs.d %USERPROFILE%\.emacs.d ^
   || echo "Cannot copy emacs.d dir" && exit /b 1
-xcopy /Y/S/I vim          %USERPROFILE%\vimfiles ^
+xcopy /Y/S/I ..\vim %USERPROFILE%\vimfiles ^
   || echo "Cannot copy vimfiles dir" && exit /b 1
 popd ^
-  || echo "Cannot return to the previous dir" && exit /b 1
+  || echo "Cannot return to original directory" && exit /b 1
 
 git.exe config --global --replace-all alias.br branch ^
   || echo "Cannot set git br alias" && exit /b 1
