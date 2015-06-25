@@ -12,6 +12,7 @@
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
 
+@echo off
 set ALTERNATE_EDITOR=emacs.exe
 set EDITOR=emacs.exe
 set GYP_DEFINES=component=shared_library fastbuild=2 disable_nacl=1 disable_pnacl=1

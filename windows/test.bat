@@ -16,4 +16,5 @@ setlocal
 set SYSTEMDRIVE=%CD%\Temp
 set USERPROFILE=%SYSTEMDRIVE%\Users\Example
 mkdir %USERPROFILE%
-install.bat
+call install.bat
+rmdir /s/q Temp

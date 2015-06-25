@@ -12,6 +12,7 @@
 :: See the License for the specific language governing permissions and
 :: limitations under the License.
 
+@echo off
 if not exist %SYSTEMDRIVE%\src mkdir %SYSTEMDRIVE%\src ^
   || echo "Cannot create src dir" && exit /b 1
 
@@ -22,6 +23,7 @@ copy /Y drmemory-env.bat %SYSTEMDRIVE%\src\ ^
   || echo "Cannot copy drmemory-env.bat" && exit /b 1
 copy /Y env.bat %SYSTEMDRIVE%\src\ ^
   || echo "Cannot copy env.bat" && exit /b 1
+
 copy /Y ..\bash_profile %USERPROFILE%\.bash_profile ^
   || echo "Cannot copy bash_profile" && exit /b 1
 copy /Y ..\bashrc %USERPROFILE%\.bashrc ^
@@ -36,6 +38,7 @@ xcopy /Y/S/I ..\emacs.d %USERPROFILE%\.emacs.d ^
   || echo "Cannot copy emacs.d dir" && exit /b 1
 xcopy /Y/S/I ..\vim %USERPROFILE%\vimfiles ^
   || echo "Cannot copy vimfiles dir" && exit /b 1
+
 popd ^
   || echo "Cannot return to original directory" && exit /b 1
 
@@ -58,17 +61,19 @@ git.exe config --global --replace-all color.ui auto ^
   || echo "Cannot set git color preference" && exit /b 1
 git.exe config --global --replace-all core.autocrlf false ^
   || echo "Cannot set git line termination preference" && exit /b 1
-git.exe config --global --replace-all core.excludesfile %USERPROFILE%\.cvsignore ^
+git.exe config --global --replace-all ^
+  core.excludesfile %USERPROFILE%\.cvsignore ^
   || echo "Cannot set git excludes file" && exit /b 1
 git.exe config --global --replace-all core.filemode false ^
   || echo "Cannot set git file mode preference" && exit /b 1
-git.exe config --global --replace-all http.cookiefile %USERPROFILE%\.gitcookies ^
+git.exe config --global --replace-all ^
+  http.cookiefile %USERPROFILE%\.gitcookies ^
   || echo "Cannot set git cookie file location" && exit /b 1
 git.exe config --global --replace-all push.default simple ^
   || echo "Cannot set git push preferences" && exit /b 1
 git.exe config --global --replace-all user.name "Rouslan Solomakhin" ^
   || echo "Cannot set git user name preference" && exit /b 1
-git.exe config --global --get user.email > NUL 2>&1
+git.exe config --global --get user.email
 if errorlevel 1 (
   git.exe config --global --replace-all user.email ^
     "rouslan.solomakhin@gmail.com" ^
