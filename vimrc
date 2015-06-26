@@ -78,6 +78,7 @@ silent! if plug#begin()
   Plug 'jnurmine/Zenburn'
   Plug 'nanotech/jellybeans.vim'
   Plug 'sjl/badwolf'
+  Plug 'w0ng/vim-hybrid'
 
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-dispatch'
@@ -119,7 +120,7 @@ endif
 
 " Colorscheme
 try
-  colorscheme jellybeans
+  colorscheme hybrid
 catch
 endtry
 
