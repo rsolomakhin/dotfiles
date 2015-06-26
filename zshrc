@@ -28,20 +28,6 @@ alias -s js="$EDITOR"
 alias -s proto="$EDITOR"
 alias -s xml="$EDITOR"
 
-if [[ $EDITOR == v* ]]; then
-  # Vi editing mode.
-  bindkey -v
-  bindkey '^?' backward-delete-char
-  bindkey '^G' what-cursor-position
-  bindkey '^h' backward-delete-char
-  export KEYTIMEOUT=1
-else
-  if [ -z "$INSIDE_EMACS" ]; then
-    # Emacs editing mode.
-    bindkey -e
-  fi
-fi
-
 if [ -z "$INSIDE_EMACS" ]; then
   # Fuzzy file finder and history lookup.
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
