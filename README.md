@@ -14,7 +14,7 @@ $ source .bashrc
 
 # Mac
 
-- Install [Xcode](https://developer.apple.com/xcode/)
+- Install [Xcode]
 
 ```sh
 $ git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
@@ -28,25 +28,29 @@ $ source .bashrc
 
 # Windows
 
-- Extract
-  [depot_tools.zip](https://src.chromium.org/svn/trunk/tools/depot_tools.zip) in
-  `c:\src\depot_tools`
+- Extract [depot_tools.zip] in `c:\src\depot_tools`
 
-- Install [GitHub Windows](https://windows.github.com/) and clone this
+- Install [GitHub Windows] and clone this
   repository in `c:\src\dotfiles`
 
-- Extract Vim [runtime files](ftp://ftp.vim.org/pub/vim/pc/vim74rt.zip), [GUI
-  executable](ftp://ftp.vim.org/pub/vim/pc/gvim74.zip), and [Win32 console
-  executable](ftp://ftp.vim.org/pub/vim/pc/vim74w32.zip) in `c:\vim`
+- Extract Vim [runtime files], [GUI executable], and [Win32 console executable]
+  in `c:\vim`
 
-- Extract
-  [Emacs](https://ftp.gnu.org/gnu/emacs/windows/emacs-24.4-bin-i686-pc-mingw32.zip)
-  in `c:\emacs`
+- Extract [Emacs] in `c:\emacs`
 
-- Install [Visual Studio Community](https://www.visualstudio.com/)
+- Install [Visual Studio Community]
 
 ```sh
 c:\src\depot_tools> gclient.bat
 c:\src\dotfiles\windows> install.bat
 c:\src> env.bat
 ```
+
+[Xcode]: https://developer.apple.com/xcode/
+[depot_tools.zip]: https://src.chromium.org/svn/trunk/tools/depot_tools.zip
+[GitHub Windows]: https://windows.github.com/
+[runtime files]: ftp://ftp.vim.org/pub/vim/pc/vim74rt.zip
+[GUI executable]: ftp://ftp.vim.org/pub/vim/pc/gvim74.zip
+[Win32 console executable]: ftp://ftp.vim.org/pub/vim/pc/vim74w32.zip
+[Emacs]: https://ftp.gnu.org/gnu/emacs/windows/emacs-24.4-bin-i686-pc-mingw32.zip
+[Visual Studio Community]: https://www.visualstudio.com/
