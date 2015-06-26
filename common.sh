@@ -28,7 +28,6 @@ export FZF_CTRL_T_COMMAND="find -L . \( \
     -type l -print 2> /dev/null | \
         sed 1d | cut -b3- "
 export FZF_DEFAULT_COMMAND="$FZF_CTRL_T_COMMAND"
-export FZF_DEFAULT_OPTS="--color=bw"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export JAVA_HOME=$HOME/jdk
