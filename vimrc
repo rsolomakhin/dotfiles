@@ -12,7 +12,7 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-let &colorcolumn='+' . join(range(1, 300), ',+')
+let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
 set backspace=indent,eol,start
 set completeopt=
@@ -72,16 +72,16 @@ silent! if plug#begin()
 
   Plug 'google/vim-maktaba' | Plug 'google/vim-glaive' |
         \ Plug 'google/vim-codefmt'
+
+  " Colorschemes
   Plug 'altercation/vim-colors-solarized'
   Plug 'jnurmine/Zenburn'
+  Plug 'nanotech/jellybeans.vim'
   Plug 'sjl/badwolf'
+
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
-
-  Plug 'vim-scripts/diffchar.vim'
-  let g:DiffUnit = 'Word1'
-  let g:DiffUpdate = 1
 
   Plug 'fatih/vim-go'
   if has("win32")
@@ -117,9 +117,9 @@ else
   nnoremap <Leader>t :CtrlP<CR>
 endif
 
-" Colorscheme.
+" Colorscheme
 try
-  colorscheme badwolf
+  colorscheme jellybeans
 catch
 endtry
 
@@ -170,8 +170,3 @@ augroup custom
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
-
-hi DiffAdd     ctermbg=22 ctermfg=white
-hi DiffChange  ctermbg=58 ctermfg=white
-hi DiffDelete  ctermbg=52 ctermfg=white
-hi DiffText    ctermbg=100 ctermfg=white
