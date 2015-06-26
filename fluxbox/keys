@@ -35,6 +35,8 @@ Mod4 Up :Maximize
 Mod4 Left :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopLeft}
 Mod4 Right :MacroCmd {ResizeTo 50% 100%} {MoveTo 0 0 TopRight}
 Mod4 Down :MacroCmd {ResizeTo 50% 50%} {MoveTo 0 0 Center}
+OnWindow Mod1 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 OnWindow Mod4 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
 OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 

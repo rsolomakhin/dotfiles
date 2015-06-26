@@ -19,6 +19,6 @@ xrdb ~/.Xresources
 xterm -title "work" -e "tmux attach" &
 xscreensaver -no-splash &
 empathy --start-hidden &
-setxkbmap -option ctrl:nocaps
+setxkbmap -option caps:escape
 fbautostart
 exec fluxbox
