@@ -16,13 +16,9 @@
 
 source ~/.common.sh
 
-if [ -z "$INSIDE_EMACS" ]; then
+if [ "$TERM" != "dumb" ]; then
   # Fuzzy file finder and history lookup.
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-  # Remap Ctrl-T to use fzf-tmux directly, which respects FZF_DEFAULT_COMMAND and
-  # FZF_DEFAULT_OPTS.
-  bind '"\C-t": "$(fzf-tmux)\e\C-e"'
 
   # Bash completion for gcloud.
   [ -f ~/google-cloud-sdk/completion.bash.inc ] \

@@ -28,8 +28,8 @@ set mouse=
 set nocompatible
 set nocursorline
 set nojoinspaces
+set nonumber
 set nospell
-set number
 set ruler
 set shiftwidth=2
 set showcmd
@@ -74,6 +74,7 @@ silent! if plug#begin()
         \ Plug 'google/vim-codefmt'
   Plug 'altercation/vim-colors-solarized'
   Plug 'jnurmine/Zenburn'
+  Plug 'sjl/badwolf'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
@@ -116,9 +117,9 @@ else
   nnoremap <Leader>t :CtrlP<CR>
 endif
 
-" Zenburn
+" Colorscheme.
 try
-  colorscheme zenburn
+  colorscheme badwolf
 catch
 endtry
 

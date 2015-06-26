@@ -28,7 +28,7 @@ alias -s js="$EDITOR"
 alias -s proto="$EDITOR"
 alias -s xml="$EDITOR"
 
-if [ -z "$INSIDE_EMACS" ]; then
+if [ "$TERM" != "dumb" ]; then
   # Fuzzy file finder and history lookup.
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
