@@ -24,20 +24,14 @@ copy /Y drmemory-env.bat %SYSTEMDRIVE%\src\ ^
 copy /Y env.bat %SYSTEMDRIVE%\src\ ^
   || echo "Cannot copy env.bat" && exit /b 1
 
-copy /Y ..\bash_profile %USERPROFILE%\.bash_profile ^
-  || echo "Cannot copy bash_profile" && exit /b 1
-copy /Y ..\bashrc %USERPROFILE%\.bashrc ^
-  || echo "Cannot copy bashrc" && exit /b 1
 copy /Y ..\cvsignore %USERPROFILE%\.cvsignore ^
   || echo "Cannot copy cvsignore" && exit /b 1
 copy /Y ..\vimrc %USERPROFILE%\.vimrc ^
   || echo "Cannot copy vimrc" && exit /b 1
-copy /Y ..\zshrc %USERPROFILE%\.zshrc ^
-  || echo "Cannot copy zhsrc" && exit /b 1
-xcopy /Y/S/I ..\emacs.d %USERPROFILE%\.emacs.d ^
-  || echo "Cannot copy emacs.d dir" && exit /b 1
 xcopy /Y/S/I ..\vim %USERPROFILE%\vimfiles ^
   || echo "Cannot copy vimfiles dir" && exit /b 1
+xcopy /Y/S/I ..\emacs.d %USERPROFILE%\.emacs.d ^
+  || echo "Cannot copy emacs.d dir" && exit /b 1
 
 popd ^
   || echo "Cannot return to original directory" && exit /b 1
