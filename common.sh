@@ -34,6 +34,7 @@ export JAVA_HOME=$HOME/jdk
 export PS1="\u@\h:\w\$ "
 
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
+[ "$TERM" == "dumb" ] && export PAGER=cat
 
 PREFIX=$HOME/software/bin:$JAVA_HOME/bin
 if [[ $PATH != $PREFIX:* ]]; then
@@ -61,6 +62,8 @@ if ! ssh-add -l > /dev/null 2>&1; then
   done
 fi
 
+alias e="$EDITOR"
+alias em="emacsclient -t"
 alias grep="grep --color=auto"
 alias j="jobs"
 alias so="source"
@@ -71,15 +74,3 @@ ln --version > /dev/null 2>&1 || alias ln="gln"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
-
-if [[ $EDITOR == v* ]]; then
-  alias e="emacs -nw"
-  alias em="emacs -nw"
-else
-  alias e="$EDITOR"
-  alias em="$EDITOR"
-fi
-
-if [ -n "$INSIDE_EMACS" ]; then
-  export PAGER=cat
-fi
