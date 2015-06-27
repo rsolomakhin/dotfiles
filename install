@@ -58,10 +58,7 @@ if [ $? -eq 0 ]; then
   sudo apt-get install build-essential cmake python-dev \
     || die "Cannot install YCM deps"
 else
-  export PATH=$HOME/software/bin:$PATH \
-    || die "Cannot add $HOME/software/bin to the path"
-  which brew > /dev/null
-  if [ $? -ne 0 ]; then
+  if [ ! -e $HOME/software/bin/brew ]; then
     mkdir -p $HOME/software || die "Cannot create $HOME/software dir"
     pushd $HOME/software || die "Cannot change dir to $HOME/software"
     curl -L https://github.com/Homebrew/homebrew/tarball/master \
@@ -69,6 +66,8 @@ else
       || die "Cannot download homebrew"
     popd || die "Cannot return to previous dir"
   fi
+  export PATH=$HOME/software/bin:$PATH \
+    || die "Cannot add $HOME/software/bin to the path"
   brew install go || die "Cannot install go"
   brew install cmake || die "Cannot install cmake for YCM"
   brew install bash vim emacs coreutils clang-format tmux \
