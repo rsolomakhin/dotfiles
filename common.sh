@@ -52,11 +52,11 @@ if [[ $PATH != *depot_tools* ]]; then
 fi
 
 # Resume SSH agent.
-[ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh > /dev/null 2>&1
-if ! ssh-add -l > /dev/null 2>&1; then
-  killall -9 ssh-agent > /dev/null 2>&1
+[ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh >& /dev/null
+if ! ssh-add -l >& /dev/null; then
+  killall -9 ssh-agent >& /dev/null
   ssh-agent -s > ~/.ssh_agent.sh
-  source ~/.ssh_agent.sh > /dev/null 2>&1
+  source ~/.ssh_agent.sh >& /dev/null
   for file in ~/.ssh/*.pub; do
     ssh-add ${file/.pub}
   done
@@ -69,8 +69,8 @@ alias j="jobs"
 alias so="source"
 alias v="vim"
 alias vi="vim"
-ls --version > /dev/null 2>&1 && alias ls="ls --color=auto" || alias ls="gls --color=auto"
-ln --version > /dev/null 2>&1 || alias ln="gln"
+ls --version >& /dev/null && alias ls="ls --color=auto" || alias ls="gls --color=auto"
+ln --version >& /dev/null || alias ln="gln"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
