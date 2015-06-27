@@ -15,16 +15,7 @@ $ source .bashrc
 # Mac
 
 - Install [Xcode]
-
-```sh
-$ git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/github -C "rouslan@example.com"
-$ eval "$(ssh-agent -s)"
-$ ssh-add ~/.ssh/github
-$ git clone git@github.com:rsolomakhin/dotfiles.git .dotfiles
-$ .dotfiles/install
-$ source .bashrc
-```
+- Same steps as Linux
 
 # Windows
 
