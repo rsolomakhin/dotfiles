@@ -53,6 +53,8 @@ git config --global --replace-all user.name "Rouslan Solomakhin" \
   || die "Cannot set git user name"
 git submodule update --init --recursive || die "Cannot update submodules"
 
+mkdir -p ~/software/bin || die "Cannot create software/bin dir."
+
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
   sudo apt-get install golang || die "Cannot install go"
@@ -100,6 +102,7 @@ for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh \
   mkdir -pv ~/.`dirname $file` || die "Cannot create the dir for $file"
   $LINKER -sfvT $PWD/$file ~/.$file || die "Cannot link $file to home dir"
 done
+$LINKER -sfvT $PWD/p ~/software/bin/p || die "Cannot link p to software/bin dir"
 
 emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"
 vim -c ":PlugInstall" -c ":qa" || die "Cannot install vim plugins"
