@@ -26,8 +26,6 @@ copy /Y env.bat %SYSTEMDRIVE%\src\ ^
 
 copy /Y ..\cvsignore %USERPROFILE%\.cvsignore ^
   || echo "Cannot copy cvsignore" && exit /b 1
-copy /Y ..\vimrc %USERPROFILE%\.vimrc ^
-  || echo "Cannot copy vimrc" && exit /b 1
 xcopy /Y/S/I ..\vim %USERPROFILE%\vimfiles ^
   || echo "Cannot copy vimfiles dir" && exit /b 1
 xcopy /Y/S/I ..\emacs.d %USERPROFILE%\.emacs.d ^
