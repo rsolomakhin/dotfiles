@@ -119,8 +119,11 @@ else
 endif
 
 " vim-codefmt
-call glaive#Install()
-Glaive codefmt plugin[mappings]
+try
+  call glaive#Install()
+  Glaive codefmt plugin[mappings]
+catch
+endtry
 
 " Colorscheme
 try
