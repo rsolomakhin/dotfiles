@@ -128,15 +128,11 @@ endtry
 highlight ExtraWhitespace ctermbg=red
 
 " vim-codefmt
-if exists("*glaive#Install")
-  call glaive#Install()
-  Glaive codefmt plugin[mappings]
-endif
+call glaive#Install()
+Glaive codefmt plugin[mappings]
 
 " vim-fugitive
-if exists("*fugitive#statusline")
-  set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-endif
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 command! ChromiumSource :exec '!google-chrome-unstable
       \ https://code.google.com/p/chromium/codesearch\#chromium/src/%'
