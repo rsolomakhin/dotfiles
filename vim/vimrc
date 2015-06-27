@@ -118,6 +118,10 @@ else
   nnoremap <Leader>t :CtrlP<CR>
 endif
 
+" vim-codefmt
+call glaive#Install()
+Glaive codefmt plugin[mappings]
+
 " Colorscheme
 try
   colorscheme hybrid
@@ -126,10 +130,6 @@ endtry
 
 " vim-better-whitespace
 highlight ExtraWhitespace ctermbg=red
-
-" vim-codefmt
-call glaive#Install()
-Glaive codefmt plugin[mappings]
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
