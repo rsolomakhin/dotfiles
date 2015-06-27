@@ -74,10 +74,10 @@ silent! if plug#begin()
         \ Plug 'google/vim-codefmt'
 
   " Colorschemes
-  Plug 'altercation/vim-colors-solarized'
-  Plug 'jnurmine/Zenburn'
-  Plug 'nanotech/jellybeans.vim'
-  Plug 'sjl/badwolf'
+  " Plug 'altercation/vim-colors-solarized'
+  " Plug 'jnurmine/Zenburn'
+  " Plug 'nanotech/jellybeans.vim'
+  " Plug 'sjl/badwolf'
   Plug 'w0ng/vim-hybrid'
 
   Plug 'ntpeters/vim-better-whitespace'
