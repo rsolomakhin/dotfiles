@@ -81,24 +81,17 @@ GOPATH=$HOME/go
 PATH=$GOPATH/bin:$PATH
 go get github.com/nsf/gocode || die "Cannot get gocode package for go"
 
-if [ ! -e ycmd/ycm_core.so ]; then
-  pushd ycmd || die "Cannot go into ycmd dir"
-  git submodule update --init --recursive \
-    || die "Cannot update ycmd dependencies"
-  ./build.py --clang-completer --gocode-completer || die "Cannot build ycmd"
-  popd || die "Cannot return from ycmd dir"
-fi
-
 LINKER=ln
 $LINKER --version >& /dev/null || LINKER=gln
-
 for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh \
   env-cros.sh env-gn.sh env-lsan.sh fluxbox/apps fluxbox/menu fluxbox/startup \
   fluxbox/init fluxbox/keys fluxbox/windowmenu screenrc tmux.conf vim/vimrc \
-  vim/autoload/plug.vim zshrc Xresources bashrc bash_profile ycmd; do
+  vim/autoload/plug.vim zshrc Xresources bashrc bash_profile; do
   mkdir -pv ~/.`dirname $file` || die "Cannot create the dir for $file"
   $LINKER -sfvT $PWD/$file ~/.$file || die "Cannot link $file to home dir"
 done
 
-emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"
 vim -c ":PlugInstall" -c ":qa" || die "Cannot install vim plugins"
+$LINKER -sfvT ~/.vim/plugged/YouCompleteMe/third_party/ycmd ~/.ycmd \
+  || die "Cannot link vim's ycmd to home dir"
+emacs -nw -f install-my-packages --kill || die "Cannot install emacs packages"

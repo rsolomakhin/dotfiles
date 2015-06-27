@@ -14,6 +14,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[submodule "ycmd"]
-	path = ycmd
-	url = https://github.com/Valloric/ycmd.git
