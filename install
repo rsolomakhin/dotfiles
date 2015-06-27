@@ -78,9 +78,8 @@ else
   brew upgrade --all || die "Cannot upgrade all homebrew packages"
 fi
 
-# Setup path and aliases for running 'go' and 'ln' on mac.
-source common.sh
-
+GOPATH=$HOME/go
+PATH=$GOPATH/bin:$PATH
 go get github.com/nsf/gocode || die "Cannot get gocode package for go"
 
 if [ ! -e ycmd/ycm_core.so ]; then

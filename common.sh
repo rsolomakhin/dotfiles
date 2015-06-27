@@ -66,11 +66,13 @@ alias e="$EDITOR"
 alias em="emacsclient -t"
 alias grep="grep --color=auto"
 alias j="jobs"
+alias p="pushd"
 alias so="source"
-alias v="vim"
 alias vi="vim"
-ls --version >& /dev/null && alias ls="ls --color=auto" || alias ls="gls --color=auto"
-ln --version >& /dev/null || alias ln="gln"
+alias v="vim"
+ls --version >& /dev/null \
+  && alias ls="ls --color=auto" \
+  || alias ls="gls --color=auto"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
