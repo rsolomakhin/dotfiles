@@ -31,7 +31,12 @@ export FZF_DEFAULT_COMMAND="$FZF_CTRL_T_COMMAND"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export JAVA_HOME=$HOME/jdk
-export PS1="\u@\h:\w\$ "
+
+if type __git_ps1 >& /dev/null; then
+  export PS1="[\u@\h \w$(__git_ps1 " (%s)")]\$ "
+else
+  export PS1="[\u@\h \w]\$ "
+fi
 
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 [ "$TERM" == "dumb" ] && export PAGER=cat
