@@ -32,10 +32,11 @@ export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export JAVA_HOME=$HOME/jdk
 
+[ -e /usr/lib/git-core/git-sh-prompt ] && source /usr/lib/git-core/git-sh-prompt
 if type __git_ps1 >& /dev/null; then
-  export PS1="[\u@\h \w$(__git_ps1 " (%s)")]\$ "
+  export PS1='[\u@\h \w$(__git_ps1 " (%s)")]\$ '
 else
-  export PS1="[\u@\h \w]\$ "
+  export PS1='[\u@\h \w]\$ '
 fi
 
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
