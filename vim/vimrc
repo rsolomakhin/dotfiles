@@ -137,7 +137,7 @@ highlight ExtraWhitespace ctermbg=red
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-command! ChromiumSource :exec '!google-chrome-unstable
+command! ChromiumSource :exec '!x-www-browser
       \ https://code.google.com/p/chromium/codesearch\#chromium/src/%'
 
 augroup custom
