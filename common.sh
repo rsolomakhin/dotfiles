@@ -81,7 +81,7 @@ alias so="source"
 alias vi="vim"
 alias v="vim"
 
-unalias ls
+unalias ls >& /dev/null
 ls --version >& /dev/null \
   && alias ls="ls --color=auto" \
   || alias ls="gls --color=auto"
