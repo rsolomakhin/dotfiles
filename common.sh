@@ -80,6 +80,8 @@ alias j="jobs"
 alias so="source"
 alias vi="vim"
 alias v="vim"
+
+unalias ls
 ls --version >& /dev/null \
   && alias ls="ls --color=auto" \
   || alias ls="gls --color=auto"
