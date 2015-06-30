@@ -32,7 +32,12 @@ export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export JAVA_HOME=$HOME/jdk
 
-[ -e /usr/lib/git-core/git-sh-prompt ] && source /usr/lib/git-core/git-sh-prompt
+if [ -e /usr/lib/git-core/git-sh-prompt ]; then
+  source /usr/lib/git-core/git-sh-prompt
+elif [ -e /usr/local/git/current/share/git-core/git-prompt.sh ]; then
+  source /usr/local/git/current/share/git-core/git-prompt.sh
+fi
+
 if type __git_ps1 >& /dev/null; then
   export PS1='[\u@\h \w$(__git_ps1 " (%s)")]\$ '
 else
