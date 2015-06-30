@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-google-chrome-unstable &
+google-chrome-beta &
 xrdb ~/.Xresources
 xterm -title "work" -e "tmux attach" &
 xscreensaver -no-splash &
