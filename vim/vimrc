@@ -81,7 +81,6 @@ silent! if plug#begin()
   " Plug 'sjl/badwolf'
   Plug 'w0ng/vim-hybrid'
 
-  Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
   Plug 'Valloric/ListToggle'
@@ -132,9 +131,6 @@ try
   colorscheme hybrid
 catch
 endtry
-
-" vim-better-whitespace
-highlight ExtraWhitespace ctermbg=red
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
