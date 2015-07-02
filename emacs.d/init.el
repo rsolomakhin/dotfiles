@@ -26,10 +26,6 @@
 (add-hook 'prog-mode-hook (lambda ()
                             (if (functionp 'global-company-mode)
                                 (global-company-mode))))
-(setq company-begin-commands '(self-insert-command))
-(setq company-echo-delay 0)
-(setq company-idle-delay .3)
-(setq company-tooltip-limit 20)
 
 (add-hook 'c++-mode-hook 'ycmd-mode)
 (add-hook 'ycmd-mode-hook
