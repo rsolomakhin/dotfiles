@@ -84,6 +84,7 @@ silent! if plug#begin()
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
+  Plug 'Valloric/ListToggle'
 
   Plug 'fatih/vim-go'
   if has("win32")
