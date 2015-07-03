@@ -64,7 +64,7 @@ fi
 
 # Resume SSH agent.
 [ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh >& /dev/null
-if ! ssh-add -l >& /dev/null; then
+if ! ssh-add -l | grep /.ssh/ >& /dev/null; then
   killall -9 ssh-agent >& /dev/null
   ssh-agent -s > ~/.ssh_agent.sh
   source ~/.ssh_agent.sh >& /dev/null
