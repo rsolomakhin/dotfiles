@@ -25,6 +25,5 @@ fi
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 
 mkdir -pv out_gn/Default
-mkdir -p out_gn
 ln -svfT out_gn out
 gn gen out_gn/Default
