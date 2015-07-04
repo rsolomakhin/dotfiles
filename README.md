@@ -39,24 +39,27 @@ c:\src> env.bat
 
 # Vim and Emacs
 
-| Vim                        | Emacs                                        |
-|----------------------------|----------------------------------------------|
-| ``ESC j``                  | ``C-n``                                      |
-| ``ESC k``                  | ``C-p``                                      |
-| ``ESC h``                  | ``C-b``                                      |
-| ``ESC l``                  | ``C-f``                                      |
-| ``ESC w``                  | ``M-f``                                      |
-| ``ESC b``                  | ``M-b``                                      |
-| ``ESC 0``                  | ``C-a``                                      |
-| ``ESC $``                  | ``C-e``                                      |
-| ``ESC dw``                 | ``M-del``                                    |
-| ``ESC db``                 | ``M-backspace``                              |
-| ``ESC W``                  |                                              |
-| ``ESC B``                  |                                              |
-| ``ESC ciw``                |                                              |
-| ``ESC ca"``                |                                              |
-| ``fzf``                    | ``M-x ido-mode``, ``M-x recentf-open-files`` |
-| ``vim-plug``               | ``M-x list-packges``                         |
+| Vim                              | Emacs                                        |
+|----------------------------------|----------------------------------------------|
+| ``ESC j``                        | ``C-n``                                      |
+| ``ESC k``                        | ``C-p``                                      |
+| ``ESC h``                        | ``C-b``                                      |
+| ``ESC l``                        | ``C-f``                                      |
+| ``ESC w``                        | ``M-f``                                      |
+| ``ESC b``                        | ``M-b``                                      |
+| ``ESC 0``, ``imap <C-A> <ESC>I`` | ``C-a``                                      |
+| ``ESC $``, ``imap <C-E> <ESC>A`` | ``C-e``                                      |
+| ``ESC dw``                       | ``M-del``                                    |
+| ``ESC db``,``C-w``               | ``M-backspace``                              |
+| ``V >>``, ``C-t``                |                                              |
+| ``V <<``, ``C-d``                |                                              |
+| ``ESC W``                        |                                              |
+| ``ESC B``                        |                                              |
+| ``ESC ciw``                      |                                              |
+| ``ESC ca"``                      |                                              |
+| ``ESC "1p...``                   | ``C-y M-y M-y M-y``                          |
+| ``fzf``                          | ``M-x ido-mode``, ``M-x recentf-open-files`` |
+| ``vim-plug``                     | ``M-x list-packges``                         |
 
 [Xcode]: https://developer.apple.com/xcode/
 [depot_tools.zip]: https://src.chromium.org/svn/trunk/tools/depot_tools.zip
