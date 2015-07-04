@@ -55,7 +55,7 @@ c:\src> env.bat
 | ``ESC B``                  |                                              |
 | ``ESC ciw``                |                                              |
 | ``ESC ca"``                |                                              |
-| ``fzf``                    | ``M-X ido-mode``, ``M-x recentf-open-files`` |
+| ``fzf``                    | ``M-x ido-mode``, ``M-x recentf-open-files`` |
 | ``vim-plug``               | ``M-x list-packges``                         |
 
 [Xcode]: https://developer.apple.com/xcode/
