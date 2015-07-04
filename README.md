@@ -37,6 +37,27 @@ c:\src\dotfiles\windows> install.bat
 c:\src> env.bat
 ```
 
+# Vim and Emacs
+
+| Vim                        | Emacs                                        |
+|----------------------------|----------------------------------------------|
+| ``ESC j``                  | ``C-n``                                      |
+| ``ESC k``                  | ``C-p``                                      |
+| ``ESC h``                  | ``C-b``                                      |
+| ``ESC l``                  | ``C-f``                                      |
+| ``ESC w``                  | ``M-f``                                      |
+| ``ESC b``                  | ``M-b``                                      |
+| ``ESC 0``                  | ``C-a``                                      |
+| ``ESC $``                  | ``C-e``                                      |
+| ``ESC dw``                 | ``M-del``                                    |
+| ``ESC db``                 | ``M-backspace``                              |
+| ``ESC W``                  |                                              |
+| ``ESC B``                  |                                              |
+| ``ESC ciw``                |                                              |
+| ``ESC ca"``                |                                              |
+| ``fzf``                    | ``M-X ido-mode``, ``M-x recentf-open-files`` |
+| ``vim-plug``               | ``M-x list-packges``                         |
+
 [Xcode]: https://developer.apple.com/xcode/
 [depot_tools.zip]: https://src.chromium.org/svn/trunk/tools/depot_tools.zip
 [GitHub Windows]: https://windows.github.com/
@@ -45,9 +66,3 @@ c:\src> env.bat
 [Win32 console executable]: ftp://ftp.vim.org/pub/vim/pc/vim74w32.zip
 [Emacs]: https://ftp.gnu.org/gnu/emacs/windows/emacs-24.4-bin-i686-pc-mingw32.zip
 [Visual Studio Community]: https://www.visualstudio.com/
-
-# Vim and Emacs
-
-| Vim                                  | Emacs                                |
-|--------------------------------------|--------------------------------------|
-| Plugins are plentiful and work well. | No modes and intuitive key bindings. |
