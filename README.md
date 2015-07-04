@@ -6,7 +6,7 @@ Quick start steps to setup my Chromium development environment.
 - Install [Eclipse]
 - Install [Eclim]
 
-# Linux
+# UNIX flavors
 
 ```sh
 $ git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
@@ -18,10 +18,9 @@ $ .dotfiles/install
 $ source .bashrc
 ```
 
-# Mac
+# Mac specific
 
 - Install [Xcode]
-- Same steps as Linux
 
 # Windows
 
