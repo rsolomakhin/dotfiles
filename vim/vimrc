@@ -128,6 +128,9 @@ endtry
 
 " Colorscheme
 try
+  if !empty($XTERM_VERSION)
+    let g:hybrid_use_Xresources = 1
+  endif
   colorscheme hybrid
 catch
 endtry
