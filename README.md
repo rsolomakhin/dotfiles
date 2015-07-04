@@ -2,9 +2,9 @@ Quick start steps to setup my Chromium development environment.
 
 # Cross platform
 
-- Install [JDK]
-- Install [Eclipse]
-- Install [Eclim]
+- Install [JDK] in `~/jdk`
+- Install [Eclipse] in `~/eclipse`
+- Install [Eclim] only for Java development
 
 # UNIX flavors
 
