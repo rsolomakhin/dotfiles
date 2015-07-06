@@ -55,6 +55,7 @@ git submodule update --init --recursive || die "Cannot update submodules"
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
   sudo apt-get install golang || die "Cannot install go"
+  sudo apt-get install npm || die "Cannot install node package manager"
   sudo apt-get install build-essential cmake python-dev \
     || die "Cannot install YCM deps"
 else
@@ -69,6 +70,7 @@ else
   export PATH=$HOME/software/bin:$PATH \
     || die "Cannot add $HOME/software/bin to the path"
   brew install go || die "Cannot install go"
+  brew install npm || die "Cannot install node package manager"
   brew install cmake || die "Cannot install cmake for YCM"
   brew install bash vim emacs coreutils clang-format tmux \
     || die "Cannot install updated tools"
