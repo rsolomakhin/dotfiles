@@ -18,6 +18,7 @@
 .emacs.desktop
 .emacs.desktop.lock
 .tags
+.tern-project
+workbench.xmi
 .ycm_extra_conf.py
 .ycm_extra_conf.pyc
-workbench.xmi
