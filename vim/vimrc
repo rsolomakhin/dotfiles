@@ -93,6 +93,8 @@ silent! if plug#begin()
     Plug 'Blackrush/vim-gocode'
   endif
 
+  Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
+
   call plug#end()
 endif
 
