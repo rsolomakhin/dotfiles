@@ -49,6 +49,9 @@
                             (setq c-basic-offset 4)
                             (setq fill-column 100)))
 
+(add-hook 'after-init-hook (lambda ()
+			     (load-theme 'sanityinc-tomorrow-night)))
+
 (defun install-my-packages ()
   (interactive)
   (package-initialize)
