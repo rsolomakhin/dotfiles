@@ -18,7 +18,9 @@
 
 (add-hook 'find-file-hook 'elide-head)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "M-t") 'helm-cmd-t)
 (recentf-mode)
 (savehist-mode)
 (windmove-default-keybindings)
@@ -60,7 +62,7 @@
    (lambda (p)
      (or (package-installed-p p)
          (package-install p)))
-   '(clang-format color-theme-sanityinc-tomorrow company-ycmd flycheck-ycmd go-mode google-c-style markdown-mode))
+   '(clang-format color-theme-sanityinc-tomorrow company-ycmd flycheck-ycmd go-mode google-c-style helm helm-cmd-t markdown-mode))
   (message "Done."))
 
 (custom-set-variables
