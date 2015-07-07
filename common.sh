@@ -16,7 +16,7 @@ export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/android-sdk-linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
-export EDITOR="vim"
+export EDITOR="emacsclient -t"
 export FZF_CTRL_T_COMMAND="find -L . \( \
       -path '*/\.*' -o \
       -path '\./out*' -o \
