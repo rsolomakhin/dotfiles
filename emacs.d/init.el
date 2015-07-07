@@ -90,6 +90,7 @@
  '(kill-whole-line t)
  '(linum-delay t)
  '(package-archives (quote (("melpa" . "http://melpa.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(python-indent-offset 2)
  '(require-final-newline t)
  '(save-place t nil (saveplace))
  '(sentence-end-double-space nil)
