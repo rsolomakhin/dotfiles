@@ -18,8 +18,7 @@
 
 (add-hook 'find-file-hook 'elide-head)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "C-x C-r") 'helm-recentf)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x b") 'helm-for-files)
 (global-set-key (kbd "M-t") 'helm-cmd-t)
 (recentf-mode)
 (savehist-mode)
@@ -85,6 +84,7 @@
  '(elide-head-headers-to-hide (quote (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.") ("Copyright" . "limitations under the License\\."))))
  '(fill-column 80)
  '(global-whitespace-mode nil)
+ '(helm-for-files-preferred-list (quote (helm-source-buffers-list helm-source-recentf helm-source-files-in-current-dir)))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-whole-line t)
