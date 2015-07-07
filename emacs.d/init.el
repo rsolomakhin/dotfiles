@@ -24,6 +24,10 @@
 (savehist-mode)
 (windmove-default-keybindings)
 
+(add-to-list 'auto-mode-alist '("\\.gn" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.gyp" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.gypi" . python-mode))
+
 (add-hook 'prog-mode-hook (lambda ()
                             (if (functionp 'global-company-mode)
                                 (global-company-mode))))
