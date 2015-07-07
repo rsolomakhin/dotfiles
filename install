@@ -52,17 +52,17 @@ git config --global --replace-all user.name "Rouslan Solomakhin" \
   || die "Cannot set git user name"
 git submodule update --init --recursive || die "Cannot update submodules"
 
+mkdir -pv $HOME/software/bin || die "Cannot create $HOME/software/bin dir"
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
   sudo apt-get install golang || die "Cannot install go"
   sudo apt-get install npm || die "Cannot install node package manager"
   sudo apt-get install build-essential cmake python-dev \
     || die "Cannot install YCM deps"
-  ln -svfT /usr/bin/nodejs ~/software/bin/node \
+  ln -svfT /usr/bin/nodejs $HOME/software/bin/node \
     || die "Cannot link node to nodejs"
 else
   if [ ! -e $HOME/software/bin/brew ]; then
-    mkdir -p $HOME/software || die "Cannot create $HOME/software dir"
     pushd $HOME/software || die "Cannot change dir to $HOME/software"
     curl -L https://github.com/Homebrew/homebrew/tarball/master \
       | tar xz --strip 1 \
