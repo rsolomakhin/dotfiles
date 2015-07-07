@@ -56,6 +56,9 @@ c:\src> env.bat
 | ``ESC $``, ``imap <C-E> <ESC>A`` | ``C-e``                                   |
 | ``ESC dw``                       | ``M-del``                                 |
 | ``ESC db``,``C-w``               | ``M-backspace``                           |
+| ``ESC C-r``-``x``                | ``C-space``-``C-x r k``                   |
+| ``ESC C-r``-``y``                | ``C-space``-``C-x r M-w``                 |
+| ``ESC C-r``-``c string ESC``     | ``C-space``-``C-x r t string RET``        |
 | ``V >>``, ``C-t``                |                                           |
 | ``V <<``, ``C-d``                |                                           |
 | ``ESC W``                        |                                           |

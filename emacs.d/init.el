@@ -57,7 +57,7 @@
    (lambda (p)
      (or (package-installed-p p)
          (package-install p)))
-   '(clang-format company-ycmd flycheck-ycmd go-mode google-c-style))
+   '(clang-format company-ycmd flycheck-ycmd go-mode google-c-style markdown-mode))
   (message "Done."))
 
 (custom-set-variables
