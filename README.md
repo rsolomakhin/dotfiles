@@ -44,7 +44,7 @@ c:\src> env.bat
 
 # Vim and Emacs
 
-| (Vim)[1]                         | (Emacs)[2]                                |
+| [Vim][1]                         | [Emacs][2]                                |
 |----------------------------------|-------------------------------------------|
 | ``ESC j``                        | ``C-n``                                   |
 | ``ESC k``                        | ``C-p``                                   |
@@ -85,5 +85,5 @@ c:\src> env.bat
 [Win32 console executable]: ftp://ftp.vim.org/pub/vim/pc/vim74w32.zip
 [Emacs]: https://ftp.gnu.org/gnu/emacs/windows/emacs-24.4-bin-i686-pc-mingw32.zip
 [Visual Studio Community]: https://www.visualstudio.com/
-[1] http://vim-adventures.com/
-[2] http://www.gnu.org/software/emacs/tour/
+[1]: http://vim-adventures.com/
+[2]: http://www.gnu.org/software/emacs/tour/
