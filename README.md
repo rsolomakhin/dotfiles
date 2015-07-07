@@ -52,15 +52,17 @@ c:\src> env.bat
 | ``ESC l``                        | ``C-f``                                   |
 | ``ESC w``                        | ``M-f``                                   |
 | ``ESC b``                        | ``M-b``                                   |
+| ``ESC ^``                        | ``M-m``                                   |
 | ``ESC 0``, ``imap <C-A> <ESC>I`` | ``C-a``                                   |
 | ``ESC $``, ``imap <C-E> <ESC>A`` | ``C-e``                                   |
+| ``ESC J``                        | ``M-^``                                   |
 | ``ESC dw``                       | ``M-del``                                 |
 | ``ESC db``,``C-w``               | ``M-backspace``                           |
 | ``ESC C-r``-``x``                | ``C-space``-``C-x r k``                   |
 | ``ESC C-r``-``y``                | ``C-space``-``C-x r M-w``                 |
 | ``ESC C-r``-``c string ESC``     | ``C-space``-``C-x r t string RET``        |
-| ``V >>``, ``C-t``                |                                           |
-| ``V <<``, ``C-d``                |                                           |
+| ``V >>``, ``C-t``                | ``M-i``, ``C-x TAB S-RIGHT``              |
+| ``V <<``, ``C-d``                | ``C-x TAB S-LEFT``                        |
 | ``ESC W``                        |                                           |
 | ``ESC B``                        |                                           |
 | ``ESC ciw``                      |                                           |
