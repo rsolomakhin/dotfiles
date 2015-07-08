@@ -58,7 +58,8 @@
 
 (add-hook 'after-init-hook
           (lambda ()
-            (if (package-installed-p 'color-theme-sanityinc-tomorrow)
+            (if (and (functionp 'package-installed-p)
+                     (package-installed-p 'color-theme-sanityinc-tomorrow))
                 (load-theme 'sanityinc-tomorrow-night))))
 
 (defun install-my-packages ()
