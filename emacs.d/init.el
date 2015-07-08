@@ -66,6 +66,7 @@
   (interactive)
   (package-initialize)
   (package-refresh-contents)
+  (setq compilation-auto-jump-to-first-error nil)
   (mapc
    (lambda (p)
      (or (package-installed-p p)
