@@ -28,9 +28,10 @@
 (add-to-list 'auto-mode-alist '("\\.gyp" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gypi" . python-mode))
 
-(add-hook 'prog-mode-hook (lambda ()
-                            (if (functionp 'global-company-mode)
-                                (global-company-mode))))
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (if (functionp 'global-company-mode)
+                (global-company-mode))))
 
 (add-hook 'c++-mode-hook 'ycmd-mode)
 (add-hook 'ycmd-mode-hook
@@ -50,12 +51,15 @@
             (ycmd-mode)
             (add-hook 'before-save-hook 'gofmt-before-save)))
 
-(add-hook 'java-mode-hook (lambda ()
-                            (setq c-basic-offset 4)
-                            (setq fill-column 100)))
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq c-basic-offset 4)
+            (setq fill-column 100)))
 
-(add-hook 'after-init-hook (lambda ()
-			     (load-theme 'sanityinc-tomorrow-night)))
+(add-hook 'after-init-hook
+          (lambda ()
+            (if (package-installed-p 'color-theme-sanityinc-tomorrow)
+                (load-theme 'sanityinc-tomorrow-night))))
 
 (defun install-my-packages ()
   (interactive)
