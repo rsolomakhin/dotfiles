@@ -25,6 +25,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (savehist-mode t)
 
+(add-to-list 'auto-mode-alist '("DEPS" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gn" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gyp" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gypi" . python-mode))
