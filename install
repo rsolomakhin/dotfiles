@@ -99,3 +99,7 @@ done
 vim -c ":PlugUpgrade" -c ":PlugInstall" -c ":PlugUpdate" -c ":qa" \
   || die "Cannot install vim plugins"
 
+emacs -batch -f batch-byte-compile $HOME/.emacs.d/*.el \
+  || die "Cannot compile emacs init file"
+emacs -batch -f batch-byte-compile $HOME/.emacs.d/lisp/clang-format/*.el \
+  || die "Cannot compile clang-format emacs library"
