@@ -17,14 +17,14 @@
 (menu-bar-mode 0)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "C-x b") 'helm-for-files)
-(global-set-key (kbd "M-t") 'helm-cmd-t)
 (savehist-mode)
 (windmove-default-keybindings)
 
 (add-to-list 'auto-mode-alist '("\\.gn" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gyp" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gypi" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
 
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -61,7 +61,7 @@
    (lambda (p)
      (or (package-installed-p p)
          (package-install p)))
-   '(clang-format company-ycmd flycheck-ycmd go-mode google-c-style helm helm-cmd-t markdown-mode))
+   '(clang-format company-ycmd flycheck-ycmd go-mode google-c-style markdown-mode))
   (message "Done."))
 
 (custom-set-variables
@@ -76,10 +76,8 @@
  '(compilation-auto-jump-to-first-error t)
  '(compilation-window-height 20)
  '(compile-command "ninja -Cout/Debug -l10 -j10")
- '(elide-head-headers-to-hide (quote (("Copyright .... The Chromium Authors" . "found in the LICENSE file\\.") ("Copyright" . "limitations under the License\\."))))
  '(fill-column 80)
- '(find-file-hook (quote (elide-head global-font-lock-mode-check-buffers save-place-find-file-hook)))
- '(helm-for-files-preferred-list (quote (helm-source-buffers-list helm-source-files-in-current-dir)))
+ '(find-file-hook (quote (global-font-lock-mode-check-buffers save-place-find-file-hook)))
  '(indent-tabs-mode nil)
  '(linum-delay t)
  '(package-archives (quote (("melpa" . "http://melpa.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
@@ -91,12 +89,7 @@
  '(sh-basic-offset 2)
  '(standard-indent 2)
  '(tab-width 2)
- '(uniquify-buffer-name-style (quote forward) nil (uniquify))
- '(vc-follow-symlinks t)
- '(vc-handled-backends (quote (Git)))
- '(vc-initial-comment t)
- '(whitespace-line-column nil)
- '(whitespace-style (quote (trailing space-before-tab empty space-after-tab face lines))))
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
