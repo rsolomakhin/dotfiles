@@ -12,30 +12,13 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(menu-bar-mode 0)
-
 (defalias 'yes-or-no-p 'y-or-n-p)
-(savehist-mode)
-(windmove-default-keybindings)
 
 (add-to-list 'auto-mode-alist '("\\.gn" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gyp" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gypi" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
-
-(set-variable 'ycmd-server-command '("python" "-u"))
-(add-to-list 'ycmd-server-command (expand-file-name "~/.ycmd/ycmd") t)
-(set-variable 'ycmd-global-config
-              "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
-
-(add-hook 'go-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook 'gofmt-before-save)))
-
-(add-hook 'java-mode-hook
-          (lambda ()
-            (setq fill-column 100)))
 
 (add-hook 'after-save-hook
           (lambda ()
@@ -47,7 +30,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(c-mode-common-hook (quote (google-set-c-style)))
  '(column-number-mode t)
  '(compilation-always-kill t)
  '(compilation-ask-about-save nil)
@@ -59,11 +41,12 @@
  '(indent-tabs-mode nil)
  '(linum-delay t)
  '(make-backup-files nil)
- '(package-archives (quote (("melpa" . "http://melpa.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(menu-bar-mode nil)
  '(python-indent-guess-indent-offset nil)
  '(python-indent-offset 2)
  '(require-final-newline t)
  '(save-place t nil (saveplace))
+ '(savehist-mode t)
  '(sentence-end-double-space nil)
  '(sh-basic-offset 2)
  '(standard-indent 2)
