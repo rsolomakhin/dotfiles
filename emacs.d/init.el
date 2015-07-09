@@ -80,6 +80,7 @@
  '(find-file-hook (quote (global-font-lock-mode-check-buffers save-place-find-file-hook)))
  '(indent-tabs-mode nil)
  '(linum-delay t)
+ '(make-backup-files nil)
  '(package-archives (quote (("melpa" . "http://melpa.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(python-indent-guess-indent-offset nil)
  '(python-indent-offset 2)
