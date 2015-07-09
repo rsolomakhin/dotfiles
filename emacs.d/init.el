@@ -13,6 +13,7 @@
 ;; limitations under the License.
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+(savehist-mode t)
 
 (add-to-list 'auto-mode-alist '("\\.gn" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.gyp" . python-mode))
@@ -46,7 +47,6 @@
  '(python-indent-offset 2)
  '(require-final-newline t)
  '(save-place t nil (saveplace))
- '(savehist-mode t)
  '(sentence-end-double-space nil)
  '(sh-basic-offset 2)
  '(standard-indent 2)
