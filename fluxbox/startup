@@ -16,7 +16,7 @@
 
 google-chrome-beta &
 xrdb ~/.Xresources
-xterm -e "tmux attach | tmux" &
+xterm -e "tmux attach || tmux" &
 xscreensaver -no-splash &
 empathy --start-hidden &
 
