@@ -12,8 +12,6 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(if (functionp 'scroll-bar-mode) (scroll-bar-mode 0))
-(if (functionp 'tool-bar-mode) (tool-bar-mode 0))
 (menu-bar-mode 0)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -26,17 +24,6 @@
 (add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
 
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (if (functionp 'global-company-mode)
-                (global-company-mode))))
-
-(add-hook 'c++-mode-hook 'ycmd-mode)
-(add-hook 'ycmd-mode-hook
-          (lambda ()
-            (company-ycmd-setup)
-            (flycheck-mode)
-            (flycheck-ycmd-setup)))
 (set-variable 'ycmd-server-command '("python" "-u"))
 (add-to-list 'ycmd-server-command (expand-file-name "~/.ycmd/ycmd") t)
 (set-variable 'ycmd-global-config
@@ -44,25 +31,16 @@
 
 (add-hook 'go-mode-hook
           (lambda ()
-            (ycmd-mode)
             (add-hook 'before-save-hook 'gofmt-before-save)))
 
 (add-hook 'java-mode-hook
           (lambda ()
-            (setq c-basic-offset 4)
             (setq fill-column 100)))
 
-(defun install-my-packages ()
-  (interactive)
-  (package-initialize)
-  (package-refresh-contents)
-  (setq compilation-auto-jump-to-first-error nil)
-  (mapc
-   (lambda (p)
-     (or (package-installed-p p)
-         (package-install p)))
-   '(clang-format company-ycmd flycheck-ycmd go-mode google-c-style markdown-mode))
-  (message "Done."))
+(add-hook 'after-save-hook
+          (lambda ()
+            (if (string= (buffer-name) "init.el")
+                (byte-compile-file "~/.emacs.d/init.el"))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
