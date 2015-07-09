@@ -88,11 +88,6 @@ silent! if plug#begin()
   Plug 'tpope/vim-fugitive'
   Plug 'Valloric/ListToggle'
 
-  Plug 'fatih/vim-go'
-  if has("win32")
-    Plug 'Blackrush/vim-gocode'
-  endif
-
   Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 
   call plug#end()
