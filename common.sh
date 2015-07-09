@@ -16,7 +16,9 @@ export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/android-sdk-linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
-export EDITOR="emacs --no-site-file"
+export EMACS="emacs --no-site-file"
+export VIM="vim"
+export EDITOR="$EMACS"
 export FZF_CTRL_T_COMMAND="find -L . \( \
       -path '*/\.*' -o \
       -path '\./out*' -o \
@@ -74,12 +76,15 @@ if ! ssh-add -l | grep /.ssh/ >& /dev/null; then
 fi
 
 alias e="$EDITOR"
-alias em="emacs --no-site-file"
+alias em="$EMACS"
+alias ema="$EMACS"
+alias emac="$EMACS"
+alias emacs="$EMACS"
 alias grep="grep --color=auto"
 alias j="jobs"
 alias so="source"
-alias vi="vim"
-alias v="vim"
+alias v="$VIM"
+alias vi="$VIM"
 
 unalias ls >& /dev/null
 ls --version >& /dev/null \
