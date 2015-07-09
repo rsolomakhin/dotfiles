@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[app] (Urgent=yes)
-  [Jump] {yes}
-[end]
-
 [app] (fbrun)
   [Deco] {Tool}
   [FocusNewWindow] {yes}
@@ -41,17 +37,6 @@
   [Sticky] {yes}
 [end]
 
-[app] (xterm) (Title=work)
-  [Position] {0 0}
-  [Workspace] {0}
-  [Dimensions] {50% 100%}
-[end]
-
 [app] (empathy-chat) {1}
-  [Workspace] {1}
   [Minimized] {yes}
-[end]
-
-[app] (Role=browser) (Title=.*Inbox.*|.*Calendar.*)
-  [Workspace] {1}
 [end]

@@ -16,9 +16,13 @@
 
 google-chrome-beta &
 xrdb ~/.Xresources
-xterm -title "work" -e "tmux attach" &
+xterm -e "tmux attach | tmux" &
 xscreensaver -no-splash &
 empathy --start-hidden &
-setxkbmap -option caps:escape
+
+# man xkeyboard-config
+setxkbmap -option ctrl:nocaps  # Caps Lock as Ctrl
+# setxkbmap -option caps:escape  # Make Caps Lock and additional ESC
+
 fbautostart
 exec fluxbox
