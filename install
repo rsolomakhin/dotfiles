@@ -96,11 +96,8 @@ for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh \
   mkdir -pv ~/.`dirname $file` || die "Cannot create the dir for $file"
   $LINKER -sfvT $PWD/$file ~/.$file || die "Cannot link $file to home dir"
   if [[ $file == *.el ]]; then
-    emacs -batch -f batch-byte-compile ~/.$file \
+    emacs --batch -f batch-byte-compile ~/.$file \
       || die "Cannot compile lisp file $file"
-  elif ls ~/.$file/*.el &> /dev/null; then
-    emacs -batch -f batch-byte-compile ~/.$file/*.el \
-      || die "Cannot compile lisp files in $file dir"
   fi
 done
 
