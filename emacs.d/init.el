@@ -18,6 +18,10 @@
   "Format code"
   t)
 
+(autoload
+  'google-set-c-style
+  "~/.emacs.d/lisp/styleguide/google-c-style")
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (savehist-mode t)
 
@@ -26,6 +30,8 @@
 (add-to-list 'auto-mode-alist '("\\.gypi" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
+
+(add-hook 'c-mode-common-hook 'google-set-c-style)
 
 (add-hook 'after-save-hook
           (lambda ()
