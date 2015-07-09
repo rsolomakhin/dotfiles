@@ -74,7 +74,5 @@ if errorlevel 1 (
 git.exe config --replace-all user.email "rouslan.solomakhin@gmail.com" ^
   || echo "Cannot set this repository's git email address" && exit /b 1
 
-emacs.exe -nw -f install-my-packages --kill ^
-  || echo "Cannot install emacs packages" && exit /b 1
 vim.exe -c ":PlugInstall" -c ":qa" ^
   || echo "Cannot install vim plugins" && exit /b 1
