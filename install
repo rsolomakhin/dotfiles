@@ -91,7 +91,8 @@ for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh \
   env-cros.sh env-gn.sh env-lsan.sh fluxbox/apps fluxbox/menu fluxbox/startup \
   fluxbox/init fluxbox/keys fluxbox/windowmenu screenrc tmux.conf vim/vimrc \
   vim/autoload/plug.vim zshrc Xresources bashrc bash_profile \
-  emacs.d/lisp/clang-format/clang-format.el; do
+  emacs.d/lisp/clang-format/clang-format.el \
+  emacs.d/lisp/styleguide/google-c-style.el; do
   mkdir -pv ~/.`dirname $file` || die "Cannot create the dir for $file"
   $LINKER -sfvT $PWD/$file ~/.$file || die "Cannot link $file to home dir"
 done
@@ -103,3 +104,5 @@ emacs -batch -f batch-byte-compile $HOME/.emacs.d/*.el \
   || die "Cannot compile emacs init file"
 emacs -batch -f batch-byte-compile $HOME/.emacs.d/lisp/clang-format/*.el \
   || die "Cannot compile clang-format emacs library"
+emacs -batch -f batch-byte-compile $HOME/.emacs.d/lisp/styleguide/*.el \
+  || die "Cannot compile styleguide emacs library"
