@@ -12,6 +12,8 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
+(add-to-list 'load-path "~/.emacs.d/lisp/company-mode")
+
 (autoload
   'clang-format
   "~/.emacs.d/lisp/clang-format/clang-format"
@@ -21,6 +23,10 @@
 (autoload
   'google-set-c-style
   "~/.emacs.d/lisp/styleguide/google-c-style")
+
+(autoload
+  'company-mode
+  "~/.emacs.d/lisp/company-mode/company")
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (savehist-mode t)
@@ -32,8 +38,8 @@
 (add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
 
+(add-hook 'prog-mode-hook 'company-mode)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
-
 (add-hook 'after-save-hook
           (lambda ()
             (if (string= (buffer-name) "init.el")
