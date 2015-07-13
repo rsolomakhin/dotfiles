@@ -44,6 +44,7 @@
                 (byte-compile-file "~/.emacs.d/init.el"))))
 (add-hook 'java-mode-hook
           (lambda ()
+            (defvar c-basic-offset)
             (setq c-basic-offset 4)
             (setq fill-column 100)))
 
@@ -53,6 +54,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(company-backends (quote (company-elisp company-css company-capf (company-dabbrev-code company-keywords) company-files)))
  '(compilation-always-kill t)
  '(compilation-ask-about-save nil)
  '(compilation-window-height 20)
