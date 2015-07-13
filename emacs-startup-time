@@ -17,6 +17,7 @@
 FORMAT="\"%C\": %E"
 COMMAND="$EMACS"
 if [ -z "$COMMAND" ]; then
+  echo "No \$EMACS var. Using default."
   COMMAND="emacs --no-site-file"
 fi
 
