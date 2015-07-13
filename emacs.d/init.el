@@ -12,6 +12,8 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
+(add-to-list 'load-path "~/.emacs.d/lisp/company-mode")
+
 (autoload
   'clang-format
   "~/.emacs.d/lisp/clang-format/clang-format"
