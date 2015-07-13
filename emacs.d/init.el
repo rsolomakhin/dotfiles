@@ -12,8 +12,6 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(add-to-list 'load-path "~/.emacs.d/lisp/company-mode")
-
 (autoload
   'clang-format
   "~/.emacs.d/lisp/clang-format/clang-format"
@@ -44,6 +42,10 @@
           (lambda ()
             (if (string= (buffer-name) "init.el")
                 (byte-compile-file "~/.emacs.d/init.el"))))
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq c-basic-offset 4)
+            (setq fill-column 100)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -53,7 +55,6 @@
  '(column-number-mode t)
  '(compilation-always-kill t)
  '(compilation-ask-about-save nil)
- '(compilation-auto-jump-to-first-error t)
  '(compilation-window-height 20)
  '(compile-command "ninja -Cout/Debug -l10 -j10")
  '(fill-column 80)
