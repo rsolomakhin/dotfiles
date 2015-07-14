@@ -59,7 +59,6 @@
  '(compile-command "ninja -Cout/Debug -l10 -j10")
  '(fill-column 80)
  '(find-file-hook (quote (global-font-lock-mode-check-buffers save-place-find-file-hook)))
- '(grep-command "git --no-pager grep --no-color --line-number ")
  '(indent-tabs-mode nil)
  '(linum-delay t)
  '(make-backup-files nil)
