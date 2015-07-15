@@ -19,17 +19,6 @@ export CHROMIUM=$HOME/chrome/src
 export EMACS="emacs --no-site-file"
 export VIM="vim"
 export EDITOR="$EMACS"
-export FZF_CTRL_T_COMMAND="find -L . \( \
-      -path '*/\.*' -o \
-      -path '\./out*' -o \
-      -fstype 'dev' -o \
-      -fstype 'proc' \
-    \) -prune -o \
-    -type f -print -o \
-    -type d -print -o \
-    -type l -print 2> /dev/null | \
-        sed 1d | cut -b3- "
-export FZF_DEFAULT_COMMAND="$FZF_CTRL_T_COMMAND"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export JAVA_HOME=$HOME/jdk

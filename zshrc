@@ -29,9 +29,6 @@ alias -s proto="$EDITOR"
 alias -s xml="$EDITOR"
 
 if [ "$TERM" != "dumb" ]; then
-  # Fuzzy file finder and history lookup.
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
   # Zsh completion for gcloud.
   [ -f ~/google-cloud-sdk/completion.zsh.inc ] \
     && source ~/google-cloud-sdk/completion.zsh.inc

@@ -17,9 +17,6 @@
 source ~/.common.sh
 
 if [ "$TERM" != "dumb" ]; then
-  # Fuzzy file finder and history lookup.
-  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
   # Bash completion for gcloud.
   [ -f ~/google-cloud-sdk/completion.bash.inc ] \
     && source ~/google-cloud-sdk/completion.bash.inc

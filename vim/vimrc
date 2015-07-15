@@ -60,12 +60,6 @@ else
 endif
 
 silent! if plug#begin()
-  if !has("win32")
-    Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
-  else
-    Plug 'kien/ctrlp.vim', {'on': ['CtrlPBuffer', 'CtrlPMRU', 'CtrlP']}
-  endif
-
   if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
     Plug 'Valloric/YouCompleteMe',
           \ {'do': './install.sh --clang-completer --gocode-completer'}
@@ -91,32 +85,6 @@ silent! if plug#begin()
   Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
 
   call plug#end()
-endif
-
-" FZF/ctrlp.vim
-if !has("win32")
-  function! s:buflist()
-    redir => ls
-    silent ls
-    redir END
-    return split(ls, '\n')
-  endfunction
-  function! s:bufopen(e)
-    execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-  endfunction
-  nnoremap <silent> <Leader>b :call fzf#run({
-        \ 'source': reverse(<sid>buflist()),
-        \ 'down': '20%',
-        \ 'sink': function('<sid>bufopen')})<CR>
-  nnoremap <silent> <Leader>r :call fzf#run({
-        \ 'source': v:oldfiles,
-        \ 'down': '20%',
-        \ 'sink': 'e '})<CR>
-  nnoremap <silent> <Leader>t :FZF<CR>
-else
-  nnoremap <Leader>b :CtrlPBuffer<CR>
-  nnoremap <Leader>r :CtrlPMRU<CR>
-  nnoremap <Leader>t :CtrlP<CR>
 endif
 
 " vim-codefmt

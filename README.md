@@ -71,7 +71,6 @@ c:\src> env.bat
 | ``ESC ciw``                      |                                           |
 | ``ESC ca"``                      |                                           |
 | ``ESC "1p...``                   | ``C-y M-y M-y M-y``                       |
-| ``fzf``                          | ``helm-for-files``, ``helm-cmd-t``        |
 | ``vim-plug``                     | ``M-x list-packges``                      |
 
 [JDK]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
