@@ -39,10 +39,9 @@
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
 
 (add-hook 'prog-mode-hook 'company-mode)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'cpp-mode-hook 'google-set-c-style)
 (add-hook 'java-mode-hook
           (lambda ()
-            (defvar c-basic-offset)
             (setq c-basic-offset 4)
             (setq fill-column 100)))
 
@@ -51,6 +50,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(c-offsets-alist (quote ((arglist-intro . ++))))
  '(column-number-mode t)
  '(company-backends (quote (company-elisp company-css company-capf (company-dabbrev-code company-keywords) company-files)))
  '(compilation-always-kill t)
