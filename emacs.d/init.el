@@ -12,21 +12,11 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
-(add-to-list 'load-path "~/.emacs.d/lisp/company-mode")
-
 (autoload
   'clang-format
   "~/.emacs.d/lisp/clang-format/clang-format"
   "Format code"
   t)
-
-(autoload
-  'google-set-c-style
-  "~/.emacs.d/lisp/styleguide/google-c-style")
-
-(autoload
-  'company-mode
-  "~/.emacs.d/lisp/company-mode/company")
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (savehist-mode t)
@@ -39,7 +29,6 @@
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
 
 (add-hook 'prog-mode-hook 'company-mode)
-(add-hook 'cpp-mode-hook 'google-set-c-style)
 (add-hook 'java-mode-hook
           (lambda ()
             (setq c-basic-offset 4)
@@ -52,15 +41,12 @@
  ;; If there is more than one, they won't work right.
  '(c-offsets-alist (quote ((arglist-intro . ++))))
  '(column-number-mode t)
- '(company-backends (quote (company-elisp company-css company-capf (company-dabbrev-code company-keywords) company-files)))
  '(compilation-always-kill t)
  '(compilation-ask-about-save nil)
  '(compilation-window-height 20)
- '(compile-command "ninja -Cout/Debug -l10 -j10")
  '(fill-column 80)
  '(find-file-hook (quote (global-font-lock-mode-check-buffers save-place-find-file-hook)))
  '(indent-tabs-mode nil)
- '(linum-delay t)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(python-indent-guess-indent-offset nil)
