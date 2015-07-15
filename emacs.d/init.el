@@ -28,7 +28,6 @@
 (add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
 
-(add-hook 'prog-mode-hook 'company-mode)
 (add-hook 'java-mode-hook
           (lambda ()
             (setq c-basic-offset 4)
