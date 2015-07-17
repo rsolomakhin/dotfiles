@@ -25,9 +25,9 @@ session.screen0.toolbar.tools: iconbar, systemtray, clock
 session.screen0.toolbar.onhead: 1
 session.screen0.toolbar.height: 0
 session.screen0.toolbar.widthPercent: 100
-session.screen0.toolbar.maxOver: false
+session.screen0.toolbar.maxOver: true
 session.screen0.toolbar.alpha: 255
-session.screen0.toolbar.layer: Dock
+session.screen0.toolbar.layer: Normal
 session.screen0.toolbar.autoHide: false
 session.screen0.toolbar.placement: TopCenter
 session.screen0.iconbar.mode: {static groups} (workspace)
@@ -49,7 +49,7 @@ session.screen0.noFocusWhileTypingDelay: 0
 session.screen0.defaultDeco: NORMAL
 session.screen0.fullMaximization: false
 session.screen0.workspacewarping: false
-session.screen0.focusSameHead:  false
+session.screen0.focusSameHead: false
 session.screen0.menuDelay: 200
 session.screen0.rowPlacementDirection: LeftToRight
 session.screen0.maxIgnoreIncrement: true
