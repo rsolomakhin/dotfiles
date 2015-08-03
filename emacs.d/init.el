@@ -19,12 +19,6 @@
   t)
 
 (autoload
-  'clang-format-region
-  "~/.emacs.d/lisp/clang-format/clang-format"
-  "Format statement under cursor or selected region"
-  t)
-
-(autoload
   'clang-format-buffer
   "~/.emacs.d/lisp/clang-format/clang-format"
   "Format entire buffer"
@@ -32,7 +26,13 @@
 
 (autoload
   'google-set-c-style
-  "~/.emacs.d/lisp/styleguide/google-c-style")
+  "~/.emacs.d/lisp/styleguide/google-c-style"
+  "Set Google style for C like languages")
+
+(autoload
+  'google-make-newline-indent
+  "~/.emacs.d/lisp/styleguide/google-c-style"
+  "Indent the newline in C like languages when using Google style")
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (savehist-mode t)
