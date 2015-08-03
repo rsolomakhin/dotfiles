@@ -15,7 +15,19 @@
 (autoload
   'clang-format
   "~/.emacs.d/lisp/clang-format/clang-format"
-  "Format code"
+  "Format statement under cursor or selected region"
+  t)
+
+(autoload
+  'clang-format-region
+  "~/.emacs.d/lisp/clang-format/clang-format"
+  "Format statement under cursor or selected region"
+  t)
+
+(autoload
+  'clang-format-buffer
+  "~/.emacs.d/lisp/clang-format/clang-format"
+  "Format entire buffer"
   t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -38,7 +50,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(c-offsets-alist (quote ((inher-intro . ++) (arglist-intro . ++))))
  '(column-number-mode t)
  '(compilation-always-kill t)
  '(compilation-ask-about-save nil)
@@ -48,6 +59,8 @@
  '(indent-tabs-mode nil)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
+ '(nxml-attribute-indent 8)
+ '(nxml-child-indent 4)
  '(python-indent-guess-indent-offset nil)
  '(python-indent-offset 2)
  '(require-final-newline t)
