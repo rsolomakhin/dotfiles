@@ -35,7 +35,9 @@
   "Indent the newline in C like languages when using Google style")
 
 (if (file-exists-p "/usr/share/emacs/site-lisp/magit/magit.el")
-    (load-file "/usr/share/emacs/site-lisp/magit/magit.el"))
+    (progn
+      (load-file "/usr/share/emacs/site-lisp/magit/magit.el")
+      (require 'magit)))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (savehist-mode t)
