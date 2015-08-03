@@ -34,6 +34,9 @@
   "~/.emacs.d/lisp/styleguide/google-c-style"
   "Indent the newline in C like languages when using Google style")
 
+(if (file-exists-p "/usr/share/emacs/site-lisp/magit/magit.el")
+    (load-file "/usr/share/emacs/site-lisp/magit/magit.el"))
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (savehist-mode t)
 
@@ -62,7 +65,6 @@
  '(compilation-window-height 20)
  '(compile-command "ninja -Cout/Debug -l10 -j10")
  '(fill-column 80)
- '(find-file-hook (quote (global-font-lock-mode-check-buffers save-place-find-file-hook)))
  '(indent-tabs-mode nil)
  '(linum-delay t)
  '(make-backup-files nil)
