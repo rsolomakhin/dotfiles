@@ -30,6 +30,10 @@
   "Format entire buffer"
   t)
 
+(autoload
+  'google-set-c-style
+  "~/.emacs.d/lisp/styleguide/google-c-style")
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (savehist-mode t)
 
@@ -40,6 +44,7 @@
 (add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
 
+(add-hook 'cpp-mode-hook 'google-set-c-style)
 (add-hook 'java-mode-hook
           (lambda ()
             (setq c-basic-offset 4)
@@ -54,9 +59,11 @@
  '(compilation-always-kill t)
  '(compilation-ask-about-save nil)
  '(compilation-window-height 20)
+ '(compile-command "ninja -Cout/Debug -l10 -j10")
  '(fill-column 80)
  '(find-file-hook (quote (global-font-lock-mode-check-buffers save-place-find-file-hook)))
  '(indent-tabs-mode nil)
+ '(linum-delay t)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(nxml-attribute-indent 8)
