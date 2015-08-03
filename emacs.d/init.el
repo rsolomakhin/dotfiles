@@ -44,8 +44,8 @@
 (add-to-list 'auto-mode-alist '("\\.h" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.mm" . objc-mode))
 
-(add-hook 'cpp-mode-hook 'google-set-c-style)
-(add-hook 'cpp-mode-hook 'google-make-newline-indent)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 (add-hook 'java-mode-hook
           (lambda ()
             (setq c-basic-offset 4)
