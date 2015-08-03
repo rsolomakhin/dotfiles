@@ -36,7 +36,7 @@
 
 (if (file-exists-p "/usr/share/emacs/site-lisp/magit/magit.el")
     (progn
-      (load-file "/usr/share/emacs/site-lisp/magit/magit.el")
+      (add-to-list 'load-path "/usr/share/emacs/site-lisp/magit")
       (require 'magit)))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
