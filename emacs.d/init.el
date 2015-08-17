@@ -66,7 +66,7 @@
  '(linum-delay t)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
- '(nxml-attribute-indent 8)
+ '(nxml-attribute-indent 4)
  '(nxml-child-indent 4)
  '(python-indent-guess-indent-offset nil)
  '(python-indent-offset 2)
