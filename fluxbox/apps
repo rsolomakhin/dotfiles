@@ -21,11 +21,6 @@
   [Sticky] {yes}
 [end]
 
-[app] (crx_knipolnnllmklapflnccelgolnpehhpl)
-  [Deco] {None}
-  [Sticky] {yes}
-[end]
-
 [app] (chrome_app_list)
   [Deco] {None}
   [FocusNewWindow] {yes}
