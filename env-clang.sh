@@ -25,10 +25,11 @@ fi
 export GYP_DEFINES="component=shared_library clang=1"
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 echo $GYP_DEFINES
-mkdir -p out_clang
+export CHROMIUM_OUT_DIR=out_clang
+mkdir -p $CHROMIUM_OUT_DIR
 which gln > /dev/null
 if [ $? -eq 0 ]; then
-  gln -svfT out_clang out
+  gln -svfT $CHROMIUM_OUT_DIR out
 else
-  ln -svfT out_clang out
+  ln -svfT $CHROMIUM_OUT_DIR out
 fi

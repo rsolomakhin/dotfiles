@@ -52,9 +52,11 @@ if $TERM == "xterm"
 endif
 
 if has("win32")
+  set spellfile=~/vimfiles/spell/en.utf-8.add
   set directory=~/vimfiles/swap,.
   set guifont=Consolas:h11:cANSI
 else
+  set spellfile=~/.vim/spell/en.utf-8.add
   set directory=~/.vim/swap,.
   set guifont=Ubuntu\ Mono\ 12
 endif

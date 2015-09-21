@@ -24,6 +24,7 @@ fi
 
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 
-mkdir -pv out_gn/Default
-ln -svfT out_gn out
-gn gen out_gn/Default
+export CHROMIUM_OUT_DIR=out_gn
+mkdir -p $CHROMIUM_OUT_DIR/Default
+ln -svfT $CHROMIUM_OUT_DIR out
+gn gen out/Default

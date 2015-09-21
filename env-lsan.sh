@@ -27,5 +27,6 @@ export ASAN_OPTIONS="detect_leaks=1 symbolize=1 external_symbolizer_path=$PWD/th
 export GYP_DEFINES="component=shared_library clang=1 asan=1 lsan=1"
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
 echo $GYP_DEFINES
-mkdir -p out_lsan
-ln -svfT out_lsan out
+export CHROMIUM_OUT_DIR=out_lsan
+mkdir -p $CHROMIUM_OUT_DIR
+ln -svfT $CHROMIUM_OUT_DIR out
