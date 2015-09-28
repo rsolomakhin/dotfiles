@@ -55,7 +55,9 @@ if [[ $PATH != *depot_tools* ]]; then
 fi
 
 # Resume SSH agent.
-[ -e ~/.ssh_agent.sh ] && source ~/.ssh_agent.sh >& /dev/null
+if [ -z "$SSH_AUTH_SOCK" -a -e ~/.ssh_agent.sh ]; then
+  source ~/.ssh_agent.sh >& /dev/null
+fi
 if ! ssh-add -l | grep /.ssh/ >& /dev/null; then
   killall -9 ssh-agent >& /dev/null
   ssh-agent -s > ~/.ssh_agent.sh
