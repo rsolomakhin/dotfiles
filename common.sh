@@ -22,11 +22,10 @@ export VIMRUNTIME="/usr/share/vim/vim74"
 export EDITOR="$VIM"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
-export JAVA_HOME=$HOME/jdk
 
-if [ -e /usr/lib/git-core/git-sh-prompt ]; then
+if [ -f /usr/lib/git-core/git-sh-prompt ]; then
   source /usr/lib/git-core/git-sh-prompt
-elif [ -e /usr/local/git/current/share/git-core/git-prompt.sh ]; then
+elif [ -f /usr/local/git/current/share/git-core/git-prompt.sh ]; then
   source /usr/local/git/current/share/git-core/git-prompt.sh
 fi
 
@@ -39,7 +38,7 @@ fi
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 [ "$TERM" == "dumb" ] && export PAGER=cat
 
-PREFIX=$HOME/software/bin:$JAVA_HOME/bin
+PREFIX=$HOME/software/bin
 if [[ $PATH != $PREFIX:* ]]; then
   PATH=$PREFIX:$PATH
 fi
@@ -55,13 +54,22 @@ if [[ $PATH != *depot_tools* ]]; then
 fi
 
 # Resume SSH agent.
-if [ -z "$SSH_AUTH_SOCK" -a -e ~/.ssh_agent.sh ]; then
+restart_ssh_agent() {
+  killall -9 ssh-agent >& /dev/null
+  ssh-agent -s > ~/.ssh_agent.sh >& /dev/null
   source ~/.ssh_agent.sh >& /dev/null
+}
+if ! ssh-add -l >& /dev/null; then
+  if [ -f ~/.ssh_agent.sh ]; then
+    source ~/.ssh_agent.sh >& /dev/null
+    if ! ssh-add -l >& /dev/null; then
+      restart_ssh_agent
+    fi
+  else
+    restart_ssh_agent
+  fi
 fi
 if ! ssh-add -l | grep /.ssh/ >& /dev/null; then
-  killall -9 ssh-agent >& /dev/null
-  ssh-agent -s > ~/.ssh_agent.sh
-  source ~/.ssh_agent.sh >& /dev/null
   for file in ~/.ssh/*.pub; do
     ssh-add ${file/.pub}
   done
