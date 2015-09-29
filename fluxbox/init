@@ -53,7 +53,7 @@ session.screen0.focusSameHead: false
 session.screen0.menuDelay: 200
 session.screen0.rowPlacementDirection: LeftToRight
 session.screen0.maxIgnoreIncrement: true
-session.screen0.workspaces: 1
+session.screen0.workspaces: 2
 session.screen0.showwindowposition: false
 session.screen0.focusModel: ClickFocus
 session.screen0.strftimeFormat: %a, %d %b %Y, %l:%M %P
