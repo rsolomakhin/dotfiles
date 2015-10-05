@@ -20,7 +20,6 @@ set encoding=utf-8
 set expandtab
 set guioptions=
 set hidden
-set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
@@ -112,6 +111,10 @@ let g:EclimCompletionMethod = 'omnifunc'
 
 command! ChromiumSource :Start x-www-browser
       \ https://code.google.com/p/chromium/codesearch\#chromium/src/%
+
+if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
+  source ~/chrome/src/tools/vim/ninja-build.vim
+endif
 
 augroup custom
   autocmd!
