@@ -102,8 +102,8 @@ endtry
 
 " Colorscheme
 try
-  if !empty($XTERM_VERSION) or !empty($ITERM_PROFILE)
-    let g:hybrid_use_Xresources = 1
+  if !empty($XTERM_VERSION) || !empty($ITERM_PROFILE)
+    let g:hybrid_use_Xresources=1
     set background=dark
   endif
   colorscheme hybrid
