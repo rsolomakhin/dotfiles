@@ -81,9 +81,14 @@ silent! if plug#begin()
 
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
-  Plug 'Valloric/ListToggle'
 
-  Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
+  " ]q - next quickfix.
+  " [q - previous quickfix.
+  Plug 'tpope/vim-unimpaired'
+
+  " <leader>q - show/hide quickfix list.
+  " <leader>l - show/hide location list.
+  Plug 'Valloric/ListToggle'
 
   call plug#end()
 endif
