@@ -33,3 +33,5 @@ if [ "$TERM" != "dumb" ]; then
   [ -f ~/google-cloud-sdk/completion.zsh.inc ] \
     && source ~/google-cloud-sdk/completion.zsh.inc
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -69,6 +69,13 @@ silent! if plug#begin()
     let g:ycm_always_populate_location_list = 1
   endif
 
+  if !has("win32")
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+    nnoremap <buffer><silent> <leader>t :FZF<CR>
+  endif
+
+  " <leader>= - format selected lines or current line.
+  " <leader>b - format buffer.
   Plug 'google/vim-maktaba' | Plug 'google/vim-glaive' |
         \ Plug 'google/vim-codefmt'
 
@@ -131,10 +138,6 @@ augroup custom
 
   autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go
         \ setlocal textwidth=80
-  autocmd FileType cpp,c,html,javascript,java,python
-        \ if exists(":CrBuild") != 2 && isdirectory(expand('~/chrome/src'))
-        \ | source ~/chrome/src/tools/vim/ninja-build.vim
-        \ | endif
   autocmd FileType cpp nnoremap <buffer><silent> <C-]> :YcmCompleter GoTo<CR>
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
   autocmd FileType gitcommit setlocal spell

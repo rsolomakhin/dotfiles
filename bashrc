@@ -21,3 +21,5 @@ if [ "$TERM" != "dumb" ]; then
   [ -f ~/google-cloud-sdk/completion.bash.inc ] \
     && source ~/google-cloud-sdk/completion.bash.inc
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
