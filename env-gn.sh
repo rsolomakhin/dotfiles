@@ -22,9 +22,10 @@ if [ ! -e ../.gclient ]; then
   return
 fi
 
+unset GYP_DEFINES
 [ -e ~/.env-local.sh ] && source ~/.env-local.sh
-
 export CHROMIUM_OUT_DIR=out_gn
 mkdir -p $CHROMIUM_OUT_DIR/Default
 ln -svfT $CHROMIUM_OUT_DIR out
 gn gen out/Default
+gn args out/Default
