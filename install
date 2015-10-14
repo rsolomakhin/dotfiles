@@ -97,5 +97,4 @@ for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh \
   $LINKER -sfvT $PWD/$file ~/.$file || die "Cannot link $file to home dir"
 done
 
-vim -c ":PlugUpgrade" -c ":PlugInstall" -c ":PlugUpdate" -c ":qa" \
-  || die "Cannot install vim plugins"
+vim -c ":PlugInstall" -c ":qa" || die "Cannot install vim plugins"
