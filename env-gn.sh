@@ -22,10 +22,20 @@ if [ ! -e ../.gclient ]; then
   return
 fi
 
-unset GYP_DEFINES
-[ -e ~/.env-local.sh ] && source ~/.env-local.sh
 export CHROMIUM_OUT_DIR=out_gn
 mkdir -p $CHROMIUM_OUT_DIR/Default
 ln -svfT $CHROMIUM_OUT_DIR out
+if [ ! -e $CHROMIUM_OUT_DIR/Default/args.gn ]; then
+  cat > $CHROMIUM_OUT_DIR/Default/args.gn <<EOF
+disable_incremental_isolated_processes = true
+enable_incremental_javac = true
+is_clang = true
+is_component_build = true
+is_debug = false
+target_os = "android"
+EOF
+fi
+unset GYP_DEFINES
+[ -e ~/.env-local.sh ] && source ~/.env-local.sh
+cat $CHROMIUM_OUT_DIR/Default/args.gn
 gn gen out/Default
-gn args out/Default
