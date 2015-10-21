@@ -56,6 +56,7 @@ fi
 
 # Resume SSH agent.
 restart_ssh_agent() {
+  rm -f ~/.ssh_agent.sh
   killall -9 ssh-agent
   ssh-agent -s > ~/.ssh_agent.sh
   source ~/.ssh_agent.sh
