@@ -22,6 +22,7 @@ export VIMRUNTIME="/usr/share/vim/vim74"
 export EDITOR="$VIM"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
+export HISTCONTROL="ignoredups:erasedups"
 
 if [ -f /usr/lib/git-core/git-sh-prompt ]; then
   source /usr/lib/git-core/git-sh-prompt
@@ -55,14 +56,14 @@ fi
 
 # Resume SSH agent.
 restart_ssh_agent() {
-  killall -9 ssh-agent >& /dev/null
-  ssh-agent -s > ~/.ssh_agent.sh >& /dev/null
-  source ~/.ssh_agent.sh >& /dev/null
+  killall -9 ssh-agent
+  ssh-agent -s > ~/.ssh_agent.sh
+  source ~/.ssh_agent.sh
 }
 if ! ssh-add -l >& /dev/null; then
   if [ -f ~/.ssh_agent.sh ]; then
-    source ~/.ssh_agent.sh >& /dev/null
-    if ! ssh-add -l >& /dev/null; then
+    source ~/.ssh_agent.sh
+    if ! ssh-add -l; then
       restart_ssh_agent
     fi
   else
