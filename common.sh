@@ -18,11 +18,16 @@ export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export CHROMIUM=$HOME/chrome/src
 export EMACS="emacsclient -t"
 export VIM="vim"
-export VIMRUNTIME="/usr/share/vim/vim74"
 export EDITOR="$VIM"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
+
+if [ -d ~/software/share/vim/vim74 ]; then
+  export VIMRUNTIME=$HOME/software/share/vim/vim74
+elif [ -d /usr/share/vim/vim74 ]; then
+  export VIMRUNTIME=/usr/share/vim/vim74
+fi
 
 if [ -f /usr/lib/git-core/git-sh-prompt ]; then
   source /usr/lib/git-core/git-sh-prompt
