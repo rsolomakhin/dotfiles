@@ -22,6 +22,7 @@ export EDITOR="$VIM"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
+export FZF_DEFAULT_COMMAND="git ls || find"
 
 if [ -d ~/software/share/vim/vim74 ]; then
   export VIMRUNTIME=$HOME/software/share/vim/vim74
