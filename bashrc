@@ -20,6 +20,10 @@ if [ "$TERM" != "dumb" ]; then
   # Bash completion for gcloud.
   [ -f ~/google-cloud-sdk/completion.bash.inc ] \
     && source ~/google-cloud-sdk/completion.bash.inc
+
+  # Bash completion for git commands, branch names, and options.
+  [ -f /etc/bash_completion.d/git-prompt ] \
+    && source /etc/bash_completion.d/git-prompt
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
