@@ -24,7 +24,12 @@ fi
 
 export CHROMIUM_OUT_DIR=out_gn
 mkdir -p $CHROMIUM_OUT_DIR/Default
-ln -svfT $CHROMIUM_OUT_DIR out
+which gln > /dev/null
+if [ $? -eq 0 ]; then
+  gln -svfT $CHROMIUM_OUT_DIR out
+else
+  ln -svfT $CHROMIUM_OUT_DIR out
+fi
 if [ ! -e $CHROMIUM_OUT_DIR/Default/args.gn ]; then
   cat > $CHROMIUM_OUT_DIR/Default/args.gn <<EOF
 disable_incremental_isolated_processes = true
