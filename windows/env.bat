@@ -14,15 +14,14 @@
 
 @echo off
 set ALTERNATE_EDITOR=emacs.exe
-set EDITOR=gvim.exe
+set EDITOR=c:\vim\gvim.exe
 set GYP_DEFINES=component=shared_library fastbuild=2 disable_nacl=1 disable_pnacl=1
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
 set GOPATH=%SYSTEMDRIVE%\src\go
 
-doskey e=start /b emacs.exe $*
-doskey v=start /b gvim.exe $*
+doskey e=start /b %EDITOR% $*
 
 if not "%PATH%" == "%PATH:depot_tools=%" (
   goto skip_path
