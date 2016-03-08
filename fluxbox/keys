@@ -55,6 +55,8 @@ Control Mod1 Right :NextWorkspace
 Shift Control Mod1 Left :TakeToPrevWorkspace
 Shift Control Mod1 Right :TakeToNextWorkspace
 
+Print :Exec gnome-screenshot --window --delay=10
+
 Control Mod1 l :Exec xscreensaver-command --lock
 Mod4 l :Exec xscreensaver-command --lock
 Shift Control l :Exec xscreensaver-command --lock

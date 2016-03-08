@@ -129,9 +129,13 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 
+if filereadable(glob("~/chrome/src/tools/vim/mojom/syntax/mojom.vim"))
+  set runtimepath^=/path/to/src/tools/vim/mojom
+endif
+
 augroup custom
   autocmd!
-  autocmd BufRead,BufNewFile *.DEPS set filetype=python
+  autocmd BufRead,BufNewFile DEPS set filetype=python
   autocmd BufRead,BufNewFile *.gypi set filetype=python
   autocmd BufRead,BufNewFile *.gyp  set filetype=python
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
