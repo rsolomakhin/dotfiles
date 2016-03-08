@@ -130,7 +130,7 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
 endif
 
 if filereadable(glob("~/chrome/src/tools/vim/mojom/syntax/mojom.vim"))
-  set runtimepath^=/path/to/src/tools/vim/mojom
+  set runtimepath^=~/chrome/src/tools/vim/mojom
 endif
 
 augroup custom
