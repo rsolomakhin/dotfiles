@@ -129,10 +129,6 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 
-if filereadable(glob("~/chrome/src/tools/vim/mojom/syntax/mojom.vim"))
-  set runtimepath^=~/chrome/src/tools/vim/mojom
-endif
-
 augroup custom
   autocmd!
   autocmd BufRead,BufNewFile DEPS set filetype=python
@@ -159,3 +155,8 @@ augroup custom
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
+
+" Must be after augroup, because has its own autocmds.
+if filereadable(glob("~/chrome/src/tools/vim/mojom/syntax/mojom.vim"))
+  set runtimepath^=~/chrome/src/tools/vim/mojom
+endif
