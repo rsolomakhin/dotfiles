@@ -155,8 +155,3 @@ augroup custom
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
-
-" Must be after augroup, because has its own autocmds.
-if filereadable(glob("~/chrome/src/tools/vim/mojom/syntax/mojom.vim"))
-  set runtimepath^=~/chrome/src/tools/vim/mojom
-endif
