@@ -70,7 +70,7 @@ silent! if plug#begin()
   endif
 
   if !has("win32")
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     nnoremap <buffer><silent> <leader>t :FZF<CR>
   endif
 
