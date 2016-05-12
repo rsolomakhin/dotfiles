@@ -58,6 +58,7 @@ if [[ $PATH != *depot_tools* ]]; then
   PATH=$PATH:$HOME/depot_tools
   PATH=$PATH:$HOME/google-cloud-sdk/bin
   PATH=$PATH:$HOME/gradle/bin
+  PATH=$PATH:$HOME/node/bin
   export PATH
 fi
 
