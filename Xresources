@@ -18,11 +18,19 @@ xterm*saveLines: 4096
 xterm*utf8: 1
 xterm*termName: xterm-256color
 
-xterm*faceName: Ubuntu Mono:style=Regular:antialias=false
-xterm*faceSize: 12
+!xterm*faceName: Ubuntu Mono:style=Regular:antialias=false
+!xterm*faceSize: 12
+!xterm*faceSize1: 4
+!xterm*faceSize2: 6
+!xterm*faceSize3: 10
+!xterm*faceSize4: 16
+!xterm*faceSize5: 24
+!xterm*faceSize6: 32
+xterm*faceName: Source Code Pro,Source Code Pro Medium:style=Medium,Regular
+xterm*faceSize: 11
 xterm*faceSize1: 4
 xterm*faceSize2: 6
-xterm*faceSize3: 10
+xterm*faceSize3: 8
 xterm*faceSize4: 16
 xterm*faceSize5: 24
 xterm*faceSize6: 32
