@@ -104,3 +104,7 @@ ls --version >& /dev/null \
 
 # Disable flow control (Ctrl-S).
 stty -ixon
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL

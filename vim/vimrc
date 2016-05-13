@@ -84,7 +84,8 @@ silent! if plug#begin()
   " Plug 'jnurmine/Zenburn'
   " Plug 'nanotech/jellybeans.vim'
   " Plug 'sjl/badwolf'
-  Plug 'w0ng/vim-hybrid'
+  " Plug 'w0ng/vim-hybrid'
+  Plug 'chriskempson/base16-vim'
 
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
@@ -109,11 +110,17 @@ endtry
 
 " Colorscheme
 try
-  if !empty($XTERM_VERSION) || !empty($ITERM_PROFILE)
-    let g:hybrid_use_Xresources=1
-    set background=dark
-  endif
-  colorscheme hybrid
+  " Hybrid
+  " if !empty($XTERM_VERSION) || !empty($ITERM_PROFILE)
+  "   let g:hybrid_use_Xresources=1
+  "   set background=dark
+  " endif
+  " colorscheme hybrid
+
+  " Base16
+  let base16colorspace=256
+  set background=dark
+  colorscheme base16-default
 catch
 endtry
 
