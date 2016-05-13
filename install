@@ -93,6 +93,12 @@ GOPATH=$HOME/go
 PATH=$GOPATH/bin:$PATH
 go get github.com/nsf/gocode || die "Cannot get gocode package for go"
 
+if [ ! -d ~/.config/base16-shell ]; then
+  mkdir -p ~/.config || die "Cannot create .config dir"
+  git clone https://github.com/chriskempson/base16-shell.git \
+    ~/.config/base16-shell || die "Cannot git clone base16-shell"
+fi
+
 LINKER=ln
 $LINKER --version >& /dev/null || LINKER=gln
 for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh \
