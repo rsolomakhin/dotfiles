@@ -57,7 +57,7 @@ if has("win32")
 else
   set spellfile=~/.vim/spell/en.utf-8.add
   set directory=~/.vim/swap,.
-  set guifont=Ubuntu\ Mono\ 12
+  set guifont=Source\ Code\ Pro\ Medium\ 11
 endif
 
 silent! if plug#begin()
@@ -120,13 +120,19 @@ try
   " Base16
   let base16colorspace=256
   set background=dark
-  colorscheme base16-default
+  colorscheme base16-monokai
 catch
 endtry
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
+" Eclim
+" :JavaSearchContext - go to definition.
+" :JavaFormat - format code.
+" :Checkstyle - check the source code style.
+" :JavaImport - import the class under cursor.
+" :JavaImportOrganize - organize imports.
 let g:EclimCompletionMethod = 'omnifunc'
 
 command! ChromiumSource :Start x-www-browser
@@ -149,7 +155,7 @@ augroup custom
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit setlocal textwidth=72
-  autocmd FileType java let b:codefmt_formatter = 'clang-format'
+  autocmd FileType java nnoremap <buffer><silent> <C-]> :JavaSearchContext<CR>
   autocmd FileType java setlocal shiftwidth=4
   autocmd FileType java setlocal softtabstop=4
   autocmd FileType java setlocal tabstop=4
