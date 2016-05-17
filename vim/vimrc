@@ -137,6 +137,16 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " :JavaImportOrganize - organize imports.
 let g:EclimCompletionMethod = 'omnifunc'
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
 command! ChromiumSource :Start x-www-browser
       \ https://code.google.com/p/chromium/codesearch\#chromium/src/%
 
