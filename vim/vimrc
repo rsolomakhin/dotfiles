@@ -69,6 +69,8 @@ silent! if plug#begin()
     let g:ycm_always_populate_location_list = 1
   endif
 
+  Plug 'scrooloose/syntastic'
+
   if !has("win32")
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     nnoremap <buffer><silent> <leader>t :FZF<CR>
