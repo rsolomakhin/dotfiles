@@ -72,6 +72,9 @@ else
       | tar xz --strip 1 \
       || die "Cannot download homebrew"
     popd || die "Cannot return to previous dir"
+  else
+    brew update || die "Cannot update homebrew formulae"
+    brew upgrade --all || die "Cannot upgrade all homebrew packages"
   fi
   export PATH=$HOME/software/bin:$PATH \
     || die "Cannot add $HOME/software/bin to the path"
@@ -80,8 +83,6 @@ else
   brew install cmake || die "Cannot install cmake for YCM"
   brew install bash vim emacs coreutils clang-format tmux \
     || die "Cannot install updated tools"
-  brew update || die "Cannot update homebrew formulae"
-  brew upgrade --all || die "Cannot upgrade all homebrew packages"
 fi
 
 GOPATH=$HOME/go
