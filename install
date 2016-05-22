@@ -46,8 +46,6 @@ git config --global --replace-all core.filemode false \
   || die "Cannot disable git filemode"
 git config --global --replace-all http.cookiefile ~/.gitcookies \
   || die "Cannot set git cookie file"
-git config --global --replace-all push.default simple \
-  || die "Cannot set git push settings"
 git config --global --replace-all user.name "Rouslan Solomakhin" \
   || die "Cannot set git user name"
 git submodule update --init --recursive || die "Cannot update submodules"
