@@ -53,9 +53,6 @@ git submodule update --init --recursive || die "Cannot update submodules"
 mkdir -pv $HOME/software/bin || die "Cannot create $HOME/software/bin dir"
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
-  if [ ! `which emacs` ]; then
-    sudo apt-get install emacs24-nox || die "Canot install emacs"
-  fi
   if [ ! `which go` ]; then
     sudo apt-get install golang || die "Cannot install go"
   fi
