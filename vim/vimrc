@@ -15,15 +15,12 @@
 let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
 set backspace=indent,eol,start
-set completeopt=
 set encoding=utf-8
 set expandtab
-set guioptions=
 set hidden
 set ignorecase
 set incsearch
 set laststatus=2
-set mouse=
 set nocompatible
 set nocursorline
 set nojoinspaces
@@ -43,21 +40,12 @@ set ttimeoutlen=0
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
 
-imap <C-A> <Esc>I
-imap <C-E> <Esc>A
-
-if $TERM == "xterm"
-  set t_Co=256
-endif
-
 if has("win32")
   set spellfile=~/vimfiles/spell/en.utf-8.add
   set directory=~/vimfiles/swap,.
-  set guifont=Consolas:h11:cANSI
 else
   set spellfile=~/.vim/spell/en.utf-8.add
   set directory=~/.vim/swap,.
-  set guifont=Source\ Code\ Pro\ Medium\ 11
 endif
 
 silent! if plug#begin()
@@ -73,10 +61,9 @@ silent! if plug#begin()
 
   if !has("win32")
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    nnoremap <buffer><silent> <leader>t :FZF<CR>
   endif
 
-  " <leader>= - format selected lines or current line.
+  " <leader>== - format selected lines or current line.
   " <leader>b - format buffer.
   Plug 'google/vim-maktaba' | Plug 'google/vim-glaive' |
         \ Plug 'google/vim-codefmt'
@@ -131,21 +118,27 @@ nnoremap ]l :lnext<CR>
 nnoremap [l :lprevious<CR>
 nnoremap <leader>q :cwindow<CR>
 nnoremap <leader>l :lwindow<CR>
+nnoremap <leader>t :FZF<CR>
 
 augroup custom
   autocmd!
-  autocmd BufRead,BufNewFile DEPS set filetype=python
-  autocmd BufRead,BufNewFile *.gypi set filetype=python
-  autocmd BufRead,BufNewFile *.gyp  set filetype=python
+  autocmd BufRead,BufNewFile DEPS      set filetype=python
+  autocmd BufRead,BufNewFile *.gypi    set filetype=python
+  autocmd BufRead,BufNewFile *.gyp     set filetype=python
+  autocmd BufRead,BufNewFile BUILD.gn  set filetype=python
+
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
   autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go
         \ setlocal textwidth=80
-  autocmd FileType cpp nnoremap <buffer><silent> <C-]> :YcmCompleter GoTo<CR>
+
+  autocmd FileType cpp nnoremap <C-]> :YcmCompleter GoTo<CR>
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
+
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit setlocal textwidth=72
-  autocmd FileType java nnoremap <buffer><silent> <C-]> :JavaSearchContext<CR>
+
+  autocmd FileType java nnoremap <C-]> :JavaSearchContext<CR>
   autocmd FileType java setlocal shiftwidth=4
   autocmd FileType java setlocal softtabstop=4
   autocmd FileType java setlocal tabstop=4
