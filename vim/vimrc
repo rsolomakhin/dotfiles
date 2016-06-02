@@ -82,8 +82,7 @@ catch
 endtry
 
 " Colors
-set background=dark
-hi ColorColumn ctermbg=242
+hi ColorColumn ctermbg=7
 hi Visual ctermbg=yellow ctermfg=black
 
 " vim-fugitive
@@ -151,3 +150,5 @@ augroup custom
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
+
+syntax off

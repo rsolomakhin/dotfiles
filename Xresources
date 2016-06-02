@@ -18,72 +18,11 @@ xterm*saveLines: 4096
 xterm*utf8: 1
 xterm*termName: xterm-256color
 
-!xterm*faceName: Ubuntu Mono:style=Regular:antialias=false
-!xterm*faceSize: 12
-!xterm*faceSize1: 4
-!xterm*faceSize2: 6
-!xterm*faceSize3: 10
-!xterm*faceSize4: 16
-!xterm*faceSize5: 24
-!xterm*faceSize6: 32
-xterm*faceName: Source Code Pro,Source Code Pro Medium:style=Medium,Regular
-!xterm*faceName: Source Code Pro,Source Code Pro Light:style=Light,Regular:antialias=false
-xterm*faceSize: 10
-xterm*faceSize1: 7
-xterm*faceSize2: 8
-xterm*faceSize3: 9
-xterm*faceSize4: 11
-xterm*faceSize5: 12
-xterm*faceSize6: 13
-
-! https://github.com/chriskempson/base16-xresources/blob/master/base16-monokai.dark.256.xresources
-! Base16 Monokai
-! Scheme: Wimer Hazenberg (http://www.monokai.nl)
-
-#define base00 #272822
-#define base01 #383830
-#define base02 #49483e
-#define base03 #75715e
-#define base04 #a59f85
-#define base05 #f8f8f2
-#define base06 #f5f4f1
-#define base07 #f9f8f5
-#define base08 #f92672
-#define base09 #fd971f
-#define base0A #f4bf75
-#define base0B #a6e22e
-#define base0C #a1efe4
-#define base0D #66d9ef
-#define base0E #ae81ff
-#define base0F #cc6633
-
-xterm*foreground:   base05
-xterm*background:   base00
-xterm*cursorColor:  base05
-
-xterm*color0:       base00
-xterm*color1:       base08
-xterm*color2:       base0B
-xterm*color3:       base0A
-xterm*color4:       base0D
-xterm*color5:       base0E
-xterm*color6:       base0C
-xterm*color7:       base05
-
-xterm*color8:       base03
-xterm*color9:       base08
-xterm*color10:      base0B
-xterm*color11:      base0A
-xterm*color12:      base0D
-xterm*color13:      base0E
-xterm*color14:      base0C
-xterm*color15:      base07
-
-! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
-! use 'shell' template to set these if necessary
-xterm*color16:      base09
-xterm*color17:      base0F
-xterm*color18:      base01
-xterm*color19:      base02
-xterm*color20:      base04
-xterm*color21:      base06
+xterm*faceName: Ubuntu Mono:style=Regular:antialias=false
+xterm*faceSize: 12
+xterm*faceSize1: 4
+xterm*faceSize2: 6
+xterm*faceSize3: 10
+xterm*faceSize4: 16
+xterm*faceSize5: 24
+xterm*faceSize6: 32
