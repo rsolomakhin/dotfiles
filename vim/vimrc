@@ -58,6 +58,8 @@ silent! if plug#begin()
   endif
 
   Plug 'scrooloose/syntastic'
+  Plug 'aldafu/vim-widl'
+  Plug 'w0ng/vim-hybrid'
 
   if !has("win32")
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -82,8 +84,11 @@ catch
 endtry
 
 " Colors
-hi ColorColumn ctermbg=7
-hi Visual ctermbg=yellow ctermfg=black
+try
+  colorscheme hybrid
+  set background=dark
+catch
+endtry
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -121,10 +126,12 @@ nnoremap <leader>t :FZF<CR>
 
 augroup custom
   autocmd!
-  autocmd BufRead,BufNewFile DEPS      set filetype=python
-  autocmd BufRead,BufNewFile *.gypi    set filetype=python
-  autocmd BufRead,BufNewFile *.gyp     set filetype=python
-  autocmd BufRead,BufNewFile BUILD.gn  set filetype=python
+  autocmd BufRead,BufNewFile DEPS   set filetype=python
+  autocmd BufRead,BufNewFile *.gypi set filetype=python
+  autocmd BufRead,BufNewFile *.gyp  set filetype=python
+  autocmd BufRead,BufNewFile *.gn   set filetype=python
+
+  autocmd BufRead,BufNewFile *.idl set filetype=widl
 
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
@@ -150,5 +157,3 @@ augroup custom
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
-
-syntax off
