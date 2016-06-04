@@ -1,2 +1,3 @@
-install: ./install
+language: python
+script: ./install
 sudo: required
