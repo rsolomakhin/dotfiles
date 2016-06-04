@@ -48,16 +48,24 @@ git config --global --replace-all http.cookiefile ~/.gitcookies \
   || die "Cannot set git cookie file"
 git config --global --replace-all user.name "Rouslan Solomakhin" \
   || die "Cannot set git user name"
+
 git submodule update --init --recursive || die "Cannot update submodules"
+
+CONFIGS="common.sh cvsignore tmux.conf vim/vimrc vim/autoload/plug.vim zshrc bashrc bash_profile"
 
 mkdir -pv $HOME/software/bin || die "Cannot create $HOME/software/bin dir"
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
+  CONFIGS="$CONFIGS fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu Xresources"
+
   if [ ! `which go` ]; then
     sudo apt-get install golang || die "Cannot install go"
   fi
   if [ ! `which npm` ]; then
     sudo apt-get install npm || die "Cannot install node package manager"
+  fi
+  if [ ! `which fluxbox` ]; then
+    sudo apt-get install fluxbox || die "Cannot install fluxbox window manager"
   fi
   if [ ! `which cmake` -o ! `which python-config` ]; then
     sudo apt-get install cmake python-dev \
@@ -89,20 +97,9 @@ export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 go get github.com/nsf/gocode || die "Cannot get gocode package for go"
 
-if [ ! -d ~/.config/base16-shell ]; then
-  mkdir -p ~/.config || die "Cannot create .config dir"
-  git clone https://github.com/chriskempson/base16-shell.git \
-    ~/.config/base16-shell || die "Cannot git clone base16-shell"
-fi
-
 LINKER=ln
 $LINKER --version >& /dev/null || LINKER=gln
-for file in common.sh cvsignore emacs.d/init.el env-android.sh env-clang.sh \
-  env-cros.sh env-gn.sh env-lsan.sh fluxbox/apps fluxbox/menu fluxbox/startup \
-  fluxbox/init fluxbox/keys fluxbox/windowmenu screenrc tmux.conf vim/vimrc \
-  vim/autoload/plug.vim zshrc Xresources bashrc bash_profile \
-  emacs.d/lisp/clang-format/clang-format.el \
-  emacs.d/lisp/styleguide/google-c-style.el; do
+for file in $CONFIGS; do
   mkdir -pv ~/.`dirname $file` || die "Cannot create the dir for $file"
   $LINKER -sfvT $PWD/$file ~/.$file || die "Cannot link $file to home dir"
 done
