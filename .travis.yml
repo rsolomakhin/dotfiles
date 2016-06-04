@@ -1,4 +1,4 @@
-language: python
+language: c
 script: ./install
 sudo: required
 os:
