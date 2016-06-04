@@ -61,7 +61,7 @@ export PATH=$HOME/software/bin:$PATH \
   || die "Cannot add $HOME/software/bin to the path"
 
 CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile"
-PROGS="npm cmake curl"
+PROGS="cmake curl"
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
   CONFIGS="$CONFIGS fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu Xresources"
@@ -80,7 +80,7 @@ else
     brew update || die "Cannot update homebrew formulae"
     brew upgrade --all || die "Cannot upgrade all homebrew packages"
   fi
-  PROGS="$PROGS go bash vim coreutils clang-format tmux"
+  PROGS="$PROGS npm go bash vim coreutils clang-format tmux"
   brew install $PROGS || die "Cannot install programs"
 fi
 
