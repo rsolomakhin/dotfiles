@@ -64,7 +64,7 @@ Glaive codefmt plugin[mappings]
 " Colors
 set background=dark
 let g:hybrid_custom_term_colors = 1
-" colorscheme hybrid
+colorscheme hybrid
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
