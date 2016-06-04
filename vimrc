@@ -12,6 +12,10 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
 let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
 set backspace=indent,eol,start
@@ -48,48 +52,19 @@ else
   set directory=~/.vim/swap,.
 endif
 
-silent! if plug#begin()
-  if !has("win32") && !has("win32unix") && v:version >=703 && has("patch584")
-    Plug 'Valloric/YouCompleteMe',
-          \ {'do': './install.py --clang-completer --gocode-completer'}
-    let g:ycm_global_ycm_extra_conf =
-          \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-    let g:ycm_always_populate_location_list = 1
-  endif
-
-  Plug 'scrooloose/syntastic'
-  Plug 'aldafu/vim-widl'
-  Plug 'w0ng/vim-hybrid'
-
-  if !has("win32")
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  endif
-
-  " <leader>== - format selected lines or current line.
-  " <leader>b - format buffer.
-  Plug 'google/vim-maktaba' | Plug 'google/vim-glaive' |
-        \ Plug 'google/vim-codefmt'
-
-  Plug 'tpope/vim-dispatch'
-  Plug 'tpope/vim-fugitive'
-
-  call plug#end()
-endif
+" YCM
+let g:ycm_global_ycm_extra_conf =
+      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
+let g:ycm_always_populate_location_list = 1
 
 " vim-codefmt
-try
-  call glaive#Install()
-  Glaive codefmt plugin[mappings]
-catch
-endtry
+call glaive#Install()
+Glaive codefmt plugin[mappings]
 
 " Colors
-try
-  set background=dark
-  let g:hybrid_custom_term_colors = 1
-  colorscheme hybrid
-catch
-endtry
+set background=dark
+let g:hybrid_custom_term_colors = 1
+" colorscheme hybrid
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -100,7 +75,10 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " :Checkstyle - check the source code style.
 " :JavaImport - import the class under cursor.
 " :JavaImportOrganize - organize imports.
-let g:EclimCompletionMethod = 'omnifunc'
+"let g:EclimCompletionMethod = 'omnifunc'
+"augroup eclim
+"  autocmd FileType java nnoremap <C-]> :JavaSearchContext<CR>
+"augroup end
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -124,10 +102,6 @@ nnoremap [l :lprevious<CR>
 nnoremap <leader>q :cwindow<CR>
 nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>t :FZF<CR>
-
-"augroup eclim
-"  autocmd FileType java nnoremap <C-]> :JavaSearchContext<CR>
-"augroup end
 
 augroup custom
   autocmd!

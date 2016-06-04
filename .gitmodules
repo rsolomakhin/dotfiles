@@ -1,0 +1,30 @@
+[submodule "vim/bundle/YouCompleteMe"]
+	path = vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim/bundle/vim-widl"]
+	path = vim/bundle/vim-widl
+	url = https://github.com/aldafu/vim-widl.git
+[submodule "vim/bundle/vim-hybrid"]
+	path = vim/bundle/vim-hybrid
+	url = https://github.com/w0ng/vim-hybrid.git
+[submodule "vim/bundle/fzf"]
+	path = vim/bundle/fzf
+	url = https://github.com/junegunn/fzf.git
+[submodule "vim/bundle/vim-maktaba"]
+	path = vim/bundle/vim-maktaba
+	url = https://github.com/google/vim-maktaba.git
+[submodule "vim/bundle/vim-glaive"]
+	path = vim/bundle/vim-glaive
+	url = https://github.com/google/vim-glaive.git
+[submodule "vim/bundle/vim-codefmt"]
+	path = vim/bundle/vim-codefmt
+	url = https://github.com/google/vim-codefmt.git
+[submodule "vim/bundle/vim-dispatch"]
+	path = vim/bundle/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git

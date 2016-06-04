@@ -51,7 +51,7 @@ git config --global --replace-all user.name "Rouslan Solomakhin" \
 
 git submodule update --init --recursive || die "Cannot update submodules"
 
-CONFIGS="cvsignore tmux.conf vim/vimrc vim/autoload/plug.vim zshrc bashrc bash_profile"
+CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile"
 
 mkdir -pv $HOME/software/bin || die "Cannot create $HOME/software/bin dir"
 which apt-get > /dev/null
@@ -66,6 +66,9 @@ if [ $? -eq 0 ]; then
   fi
   if [ ! `which fluxbox` ]; then
     sudo apt-get install fluxbox || die "Cannot install fluxbox window manager"
+  fi
+  if [ ! `which curl` ]; then
+    sudo apt-get install curl || die "Cannot install curl downloader"
   fi
   if [ ! `which cmake` -o ! `which python-config` ]; then
     sudo apt-get install cmake python-dev \
@@ -89,6 +92,7 @@ else
   brew install go || die "Cannot install go"
   brew install npm || die "Cannot install node package manager"
   brew install cmake || die "Cannot install cmake for YCM"
+  brew install curl || die "Cannot install curl downloader"
   brew install bash vim emacs coreutils clang-format tmux \
     || die "Cannot install updated tools"
 fi
@@ -101,6 +105,7 @@ npm install -g eslint || die "Cannot install eslint"
 npm install -g eslint-config-google \
   || die "Cannot install Google config for eslint"
 npm install -g csslint || die "Cannot install csslint"
+npm install -g tern || die "Cannot install tern"
 
 LINKER=ln
 $LINKER --version >& /dev/null || LINKER=gln
@@ -109,4 +114,17 @@ for file in $CONFIGS; do
   $LINKER -sfvT $PWD/$file ~/.$file || die "Cannot link $file to home dir"
 done
 
-vim -c ":PlugInstall" -c ":qa" || die "Cannot install vim plugins"
+mkdir -p ~/.vim/swap || die "Cannot create the vim swap dir"
+mkdir -p ~/.vim/autoload || die "Cannot create autoload dir"
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim \
+  die "Cannot download vim-pathogen"
+
+pushd vim/bundle/YouCompleteMe || die "Cannot change dir"
+./install.py --clang-completer --gocode-completer --tern-completer \
+  || die "Cannot install YCM"
+popd || die "Cannot go back"
+
+$LINKER -sfvT ~/.dotfiles/vim/bundle/fzf ~/.fzf
+pushd ~/.fzf || die "Cannot go to fzf dir"
+./install --all || die "Cannot install fzf"
+popd || die "Cannot go back"
