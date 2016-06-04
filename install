@@ -97,6 +97,11 @@ export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 go get github.com/nsf/gocode || die "Cannot get gocode package for go"
 
+npm install -g eslint || die "Cannot install eslint"
+npm install -g eslint-config-google \
+  || die "Cannot install Google config for eslint"
+npm install -g csslint || die "Cannot install csslint"
+
 LINKER=ln
 $LINKER --version >& /dev/null || LINKER=gln
 for file in $CONFIGS; do
