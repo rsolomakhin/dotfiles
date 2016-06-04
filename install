@@ -51,7 +51,7 @@ git config --global --replace-all user.name "Rouslan Solomakhin" \
 
 git submodule update --init --recursive || die "Cannot update submodules"
 
-CONFIGS="common.sh cvsignore tmux.conf vim/vimrc vim/autoload/plug.vim zshrc bashrc bash_profile"
+CONFIGS="cvsignore tmux.conf vim/vimrc vim/autoload/plug.vim zshrc bashrc bash_profile"
 
 mkdir -pv $HOME/software/bin || die "Cannot create $HOME/software/bin dir"
 which apt-get > /dev/null
