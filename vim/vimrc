@@ -125,6 +125,10 @@ nnoremap <leader>q :cwindow<CR>
 nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>t :FZF<CR>
 
+"augroup eclim
+"  autocmd FileType java nnoremap <C-]> :JavaSearchContext<CR>
+"augroup end
+
 augroup custom
   autocmd!
   autocmd BufRead,BufNewFile DEPS   set filetype=python
@@ -145,7 +149,6 @@ augroup custom
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit setlocal textwidth=72
 
-  autocmd FileType java nnoremap <C-]> :JavaSearchContext<CR>
   autocmd FileType java setlocal shiftwidth=4
   autocmd FileType java setlocal softtabstop=4
   autocmd FileType java setlocal tabstop=4
