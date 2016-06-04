@@ -76,7 +76,11 @@ if [ $? -eq 0 ]; then
   fi
   ln -svfT /usr/bin/nodejs $HOME/software/bin/node \
     || die "Cannot link node to nodejs"
-  PATH=$HOME/software/bin:$PATH
+  sudo npm install -g eslint || die "Cannot install eslint"
+  sudo npm install -g eslint-config-google \
+    || die "Cannot install Google config for eslint"
+  sudo npm install -g csslint || die "Cannot install csslint"
+  sudo npm install -g tern || die "Cannot install tern"
 else
   if [ ! -e $HOME/software/bin/brew ]; then
     pushd $HOME/software || die "Cannot change dir to $HOME/software"
@@ -96,17 +100,16 @@ else
   brew install curl || die "Cannot install curl downloader"
   brew install bash vim emacs coreutils clang-format tmux \
     || die "Cannot install updated tools"
+  npm install -g eslint || die "Cannot install eslint"
+  npm install -g eslint-config-google \
+    || die "Cannot install Google config for eslint"
+  npm install -g csslint || die "Cannot install csslint"
+  npm install -g tern || die "Cannot install tern"
 fi
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 go get github.com/nsf/gocode || die "Cannot get gocode package for go"
-
-npm install -g eslint || die "Cannot install eslint"
-npm install -g eslint-config-google \
-  || die "Cannot install Google config for eslint"
-npm install -g csslint || die "Cannot install csslint"
-npm install -g tern || die "Cannot install tern"
 
 LINKER=ln
 $LINKER --version >& /dev/null || LINKER=gln
