@@ -65,7 +65,7 @@ PROGS="npm cmake curl"
 which apt-get > /dev/null
 if [ $? -eq 0 ]; then
   CONFIGS="$CONFIGS fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu Xresources"
-  PROGS="$PROGS golang fluxbox python-dev"
+  PROGS="$PROGS nodejs golang fluxbox python-dev"
   sudo apt-get install $PROGS || die "Cannot install programs"
   ln -svfT /usr/bin/nodejs $HOME/software/bin/node \
     || die "Cannot link node to nodejs"
