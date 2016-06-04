@@ -76,6 +76,7 @@ if [ $? -eq 0 ]; then
   fi
   ln -svfT /usr/bin/nodejs $HOME/software/bin/node \
     || die "Cannot link node to nodejs"
+  PATH=$HOME/software/bin:$PATH
 else
   if [ ! -e $HOME/software/bin/brew ]; then
     pushd $HOME/software || die "Cannot change dir to $HOME/software"
