@@ -14,6 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+FORCE=0
+if [ "$@" == "--force" ]; then
+  FORCE=1
+fi
+
 die() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
   exit 1
@@ -102,10 +107,13 @@ if [ ! -e ~/.vim/autoload/pathogen.vim ]; then
     || die "Cannot download vim-pathogen"
 fi
 
-pushd vim/bundle/YouCompleteMe || die "Cannot change dir"
-./install.py --clang-completer --gocode-completer --tern-completer \
-  || die "Cannot install YCM"
-popd || die "Cannot go back"
+YCM_OUTPUT=vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so
+if [ ! -e $YCM_OUTPUT -a ! $FORCE ]; then
+  pushd vim/bundle/YouCompleteMe || die "Cannot change dir"
+  ./install.py --clang-completer --gocode-completer --tern-completer \
+    || die "Cannot install YCM"
+  popd || die "Cannot go back"
+fi
 
 $LINKER -sfvT `pwd`/vim/bundle/fzf ~/.fzf
 pushd ~/.fzf || die "Cannot go to fzf dir"
