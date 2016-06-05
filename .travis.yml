@@ -8,3 +8,5 @@ os:
 matrix:
   allow_failures:
     - os: osx
+git:
+  submodules: false
