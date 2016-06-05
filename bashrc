@@ -31,8 +31,8 @@ HELPERS="/usr/lib/git-core/git-sh-prompt
 /usr/local/git/current/share/git-core/git-prompt.sh
 /usr/local/git/current/share/git-core/git-completion.bash
 /etc/bash_completion.d/git-prompt
-~/google-cloud-sdk/completion.bash.inc
-~/.fzf.bash"
+$HOME/google-cloud-sdk/completion.bash.inc
+$HOME/.fzf.bash"
 for helper in $HELPERS; do [ -f $helper ] && source $helper; done
 
 if type __git_ps1 >& /dev/null; then
