@@ -1,5 +1,5 @@
 language: generic
-script: ./install
+script: travis_wait 60 ./install
 sudo: required
 dist: trusty
 os:
