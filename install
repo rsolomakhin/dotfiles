@@ -119,10 +119,6 @@ for file in $CONFIGS; do
     || die "Cannot link $file to home dir"
 done
 
-if [ ! -e ~/go/bin/gocode -o $FORCE -eq 1 ]; then
-  go get github.com/nsf/gocode || die "Cannot get gocode package for go"
-fi
-
 NODE_MODULES="eslint eslint-config-google csslint typescript tern"
 for mod in $NODE_MODULES; do
   if [ ! -e ~/node/lib/node_modules/$mod -o $FORCE -eq 1 ]; then

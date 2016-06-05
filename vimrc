@@ -111,7 +111,7 @@ endif
 augroup custom
   autocmd!
   autocmd BufRead,BufNewFile *.idl set filetype=widl
-
+  autocmd BufRead,BufNewFile .tern-project set filetype=json
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
   autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go

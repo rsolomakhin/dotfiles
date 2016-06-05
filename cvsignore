@@ -19,7 +19,6 @@
 .emacs.desktop
 .emacs.desktop.lock
 .tags
-.tern-project
 .ycm_extra_conf.py
 .ycm_extra_conf.pyc
 TAGS
