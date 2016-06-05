@@ -114,7 +114,7 @@ augroup custom
   autocmd BufRead,BufNewFile .tern-project set filetype=json
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
-  autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go
+  autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch
         \ setlocal textwidth=80
 
   autocmd FileType cpp nnoremap <C-]> :YcmCompleter GoTo<CR>
