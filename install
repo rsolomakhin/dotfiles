@@ -71,7 +71,7 @@ export GOPATH=$HOME/go || die "Cannot set the go path"
 export PATH=$GOPATH/bin:$PATH || die "Cannot add ~/go/bin to the path"
 export PATH=$HOME/node/bin:$PATH || die "Cannot add ~/node/bin to the path"
 
-CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile"
+CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc"
 PROGS="cmake npm"
 
 which apt-get >& /dev/null
