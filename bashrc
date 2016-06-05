@@ -27,8 +27,8 @@ export HISTCONTROL="ignoredups:erasedups"
 export FZF_DEFAULT_COMMAND="git ls"
 export FZF_CTRL_T_COMMAND="git ls || find"
 
-if [ -d ~/software/share/vim/vim74 ]; then
-  export VIMRUNTIME=$HOME/software/share/vim/vim74
+if [ -d ~/homebrew/share/vim/vim74 ]; then
+  export VIMRUNTIME=$HOME/homebrew/share/vim/vim74
 elif [ -d /usr/share/vim/vim74 ]; then
   export VIMRUNTIME=/usr/share/vim/vim74
 fi
@@ -48,7 +48,7 @@ fi
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 [ "$TERM" == "dumb" ] && export PAGER=cat
 
-PREFIX=$HOME/software/bin
+PREFIX=$HOME/software/bin:$HOME/homebrew/bin
 if [[ $PATH != $PREFIX:* ]]; then
   PATH=$PREFIX:$PATH
 fi
@@ -100,9 +100,7 @@ alias v="$VIM"
 alias vi="$VIM"
 
 unalias ls >& /dev/null
-ls --version >& /dev/null \
-  && alias ls="ls --color=auto" \
-  || alias ls="gls --color=auto"
+ls --version >& /dev/null && alias ls="ls --color=auto" || alias ls="ls -G"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
