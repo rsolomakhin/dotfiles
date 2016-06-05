@@ -62,14 +62,14 @@ git config --global --replace-all user.name "Rouslan Solomakhin" \
 
 git submodule update --init --recursive || die "Cannot update submodules"
 
-mkdir -pv ~/software/bin || die "Cannot create $HOME/software/bin dir"
+mkdir -pv ~/node/bin || die "Cannot create ~/node/bin dir"
 mkdir -pv ~/.vim/swap || die "Cannot create the vim swap dir"
+mkdir -pv ~/.vim/spell || die "Cannot create the vim spell dir"
 mkdir -pv ~/.vim/autoload || die "Cannot create vim autoload dir"
 
 export GOPATH=$HOME/go || die "Cannot set the go path"
-export PATH=$GOPATH/bin:$PATH || die "Cannot add $GOPATH/bin to the path"
-export PATH=$HOME/software/bin:$PATH \
-  || die "Cannot add $HOME/software/bin to the path"
+export PATH=$GOPATH/bin:$PATH || die "Cannot add ~/go/bin to the path"
+export PATH=$HOME/node/bin:$PATH || die "Cannot add ~/node/bin to the path"
 
 CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile"
 PROGS="cmake npm"
@@ -84,7 +84,7 @@ if [ $? -eq 0 ]; then
       sudo apt-get install $PROGS || die "Cannot install $prog"
     fi
   done
-  ln -svf /usr/bin/nodejs ~/software/bin/node \
+  ln -svf /usr/bin/nodejs ~/node/bin/node \
     || die "Cannot link node to nodejs"
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
     curl -LSso ~/.Xresources-hybrid \
@@ -125,8 +125,8 @@ fi
 
 NODE_MODULES="eslint eslint-config-google csslint typescript tern"
 for mod in $NODE_MODULES; do
-  if [ ! -e ~/software/lib/node_modules/$mod -o $FORCE -eq 1 ]; then
-    npm install --global --prefix=$HOME/software $mod \
+  if [ ! -e ~/node/lib/node_modules/$mod -o $FORCE -eq 1 ]; then
+    npm install --global --prefix=$HOME/node $mod \
       || die "Cannot install $mod"
   fi
 done
@@ -149,6 +149,6 @@ fi
   || die "Cannot link $HOME/.fzf"
 if [ ! -e ~/.fzf/bin/fzf -o $FORCE -eq 1 ]; then
   pushd ~/.fzf || die "Cannot go to fzf dir"
-  ./install --all || die "Cannot install fzf"
+  ./install --all --no-update-rc || die "Cannot install fzf"
   popd || die "Cannot go back"
 fi

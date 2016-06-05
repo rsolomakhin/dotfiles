@@ -17,7 +17,6 @@
 export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/android-sdk-linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
-export CHROMIUM=$HOME/chrome/src
 export EMACS="emacsclient -t"
 export VIM="vim"
 export EDITOR="$VIM"
@@ -26,18 +25,15 @@ export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
 export FZF_DEFAULT_COMMAND="git ls"
 export FZF_CTRL_T_COMMAND="git ls || find"
+[ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 
-if [ -d ~/homebrew/share/vim/vim74 ]; then
-  export VIMRUNTIME=$HOME/homebrew/share/vim/vim74
-elif [ -d /usr/share/vim/vim74 ]; then
-  export VIMRUNTIME=/usr/share/vim/vim74
-fi
-
-if [ -f /usr/lib/git-core/git-sh-prompt ]; then
-  source /usr/lib/git-core/git-sh-prompt
-elif [ -f /usr/local/git/current/share/git-core/git-prompt.sh ]; then
-  source /usr/local/git/current/share/git-core/git-prompt.sh
-fi
+HELPERS="/usr/lib/git-core/git-sh-prompt
+/usr/local/git/current/share/git-core/git-prompt.sh
+/usr/local/git/current/share/git-core/git-completion.bash
+/etc/bash_completion.d/git-prompt
+~/google-cloud-sdk/completion.bash.inc
+~/.fzf.bash"
+for helper in $HELPERS; do [ -f $helper ] && source $helper; done
 
 if type __git_ps1 >& /dev/null; then
   export PS1='[\u@\h \w$(__git_ps1 " (%s)")]\$ '
@@ -45,12 +41,18 @@ else
   export PS1='[\u@\h \w]\$ '
 fi
 
-[ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
-[ "$TERM" == "dumb" ] && export PAGER=cat
+if [ -d /usr/share/vim/vim74 ]; then
+  export VIMRUNTIME=/usr/share/vim/vim74
+fi
 
-PREFIX=$HOME/software/bin:$HOME/homebrew/bin
-if [[ $PATH != $PREFIX:* ]]; then
-  PATH=$PREFIX:$PATH
+if [ -d ~/homebrew/bin ]; then
+  PREFIX=$HOME/homebrew/bin
+  if [[ $PATH != $PREFIX:* ]]; then
+    PATH=$PREFIX:$PATH
+  fi
+  if [ -d ~/homebrew/share/vim/vim74 ]; then
+    export VIMRUNTIME=$HOME/homebrew/share/vim/vim74
+  fi
 fi
 
 if [[ $PATH != *depot_tools* ]]; then
@@ -63,6 +65,24 @@ if [[ $PATH != *depot_tools* ]]; then
   PATH=$PATH:$HOME/node/bin
   export PATH
 fi
+
+alias e="$EDITOR"
+alias em="$EMACS"
+alias ema="$EMACS"
+alias emac="$EMACS"
+alias emacs="$EMACS"
+alias grep="grep --color=auto"
+alias ggrep="git grep"
+alias j="jobs"
+alias so="source"
+alias v="$VIM"
+alias vi="$VIM"
+
+unalias ls >& /dev/null
+ls --version >& /dev/null && alias ls="ls --color=auto" || alias ls="ls -G"
+
+# Disable flow control (Ctrl-S).
+stty -ixon
 
 # Resume SSH agent.
 restart_ssh_agent() {
@@ -86,33 +106,3 @@ if ! ssh-add -l | grep /.ssh/ >& /dev/null; then
     ssh-add ${file/.pub}
   done
 fi
-
-alias e="$EDITOR"
-alias em="$EMACS"
-alias ema="$EMACS"
-alias emac="$EMACS"
-alias emacs="$EMACS"
-alias grep="grep --color=auto"
-alias ggrep="git grep"
-alias j="jobs"
-alias so="source"
-alias v="$VIM"
-alias vi="$VIM"
-
-unalias ls >& /dev/null
-ls --version >& /dev/null && alias ls="ls --color=auto" || alias ls="ls -G"
-
-# Disable flow control (Ctrl-S).
-stty -ixon
-
-if [ "$TERM" != "dumb" ]; then
-  # Bash completion for gcloud.
-  [ -f ~/google-cloud-sdk/completion.bash.inc ] \
-    && source ~/google-cloud-sdk/completion.bash.inc
-
-  # Bash completion for git commands, branch names, and options.
-  [ -f /etc/bash_completion.d/git-prompt ] \
-    && source /etc/bash_completion.d/git-prompt
-fi
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
