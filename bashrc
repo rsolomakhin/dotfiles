@@ -61,7 +61,8 @@ $HOME/android-sdk-linux/tools
 $HOME/depot_tools
 $HOME/google-cloud-sdk/bin
 $HOME/gradle/bin
-$HOME/node/bin"
+$HOME/node/bin
+$HOME/software/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$PATH:$tool
 done
