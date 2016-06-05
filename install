@@ -145,6 +145,22 @@ if [ ! -e $YCM_OUTPUT -o $FORCE -eq 1 ]; then
   popd || die "Cannot go back"
 fi
 
+if [ ! -e vim/bundle/mojom -o $FORCE -eq 1 ]; then
+  rm -rfv vim/bundle/mojom || die "Cannot clear the old mojom directory"
+  if [ -e ~/chrome/src/tools/vim/mojom ]; then
+    cp -av ~/chrome/src/tools/vim/mojom vim/bundle/mojom || \
+      die "Cannot copy over the mojom vim syntax config"
+  fi
+fi
+
+if [ ! -e vim/bundle/gn -o $FORCE -eq 1 ]; then
+  rm -rfv vim/bundle/gn || die "Cannot clear the old gn directory"
+  if [ -e ~/chrome/src/tools/gn/misc/vim ]; then
+    cp -av ~/chrome/src/tools/gn/misc/vim  vim/bundle/gn || \
+      die "Cannot copy over the gn vim syntax config"
+  fi
+fi
+
 [ -e ~/.fzf ] || ln -sfv $PWD/vim/bundle/fzf ~/.fzf \
   || die "Cannot link $HOME/.fzf"
 if [ ! -e ~/.fzf/bin/fzf -o $FORCE -eq 1 ]; then

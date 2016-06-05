@@ -88,12 +88,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_java_checkers = []
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_args = '-c google --env browser'
-
-if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
-  source ~/chrome/src/tools/vim/ninja-build.vim
-endif
 
 nnoremap ]q :cnext<CR>
 nnoremap [q :cprevious<CR>
@@ -103,13 +100,16 @@ nnoremap <leader>q :cwindow<CR>
 nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>t :FZF<CR>
 
+if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
+  source ~/chrome/src/tools/vim/ninja-build.vim
+endif
+
+if filereadable(glob("~/chrome/src/tools/vim/filetypes.vim"))
+  source ~/chrome/src/tools/vim/filetypes.vim
+endif
+
 augroup custom
   autocmd!
-  autocmd BufRead,BufNewFile DEPS   set filetype=python
-  autocmd BufRead,BufNewFile *.gypi set filetype=python
-  autocmd BufRead,BufNewFile *.gyp  set filetype=python
-  autocmd BufRead,BufNewFile *.gn   set filetype=python
-
   autocmd BufRead,BufNewFile *.idl set filetype=widl
 
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
