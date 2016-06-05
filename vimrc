@@ -19,6 +19,7 @@ filetype plugin indent on
 let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
 set backspace=indent,eol,start
+set completeopt= " Turn off YCM's previews on top
 set encoding=utf-8
 set expandtab
 set hidden
@@ -55,7 +56,6 @@ endif
 " YCM
 let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-let g:ycm_always_populate_location_list = 1
 
 " vim-codefmt
 call glaive#Install()
