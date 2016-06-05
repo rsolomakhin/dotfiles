@@ -16,7 +16,7 @@
 
 eval `dbus-launch --sh-syntax --exit-with-session`
 google-chrome-beta &
-xrdb ~/.Xresources
+xrdb -I$HOME ~/.Xresources
 xterm -e tmux attach-session &
 xscreensaver -no-splash &
 empathy --start-hidden &

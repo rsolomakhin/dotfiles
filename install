@@ -86,6 +86,10 @@ if [ $? -eq 0 ]; then
   done
   ln -svf /usr/bin/nodejs ~/software/bin/node \
     || die "Cannot link node to nodejs"
+  if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
+    curl -LSso ~/.Xresources-hybrid \
+      https://gist.githubusercontent.com/w0ng/3278077/raw/4c9e1510a7ade25b787efed0ad435234c0af1ba5/.Xresources-hybrid
+  fi
 else
   export PATH=$HOME/homebrew/bin:$PATH \
     || die "Cannot add $HOME/homebrew/bin to the path"
