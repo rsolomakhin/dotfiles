@@ -74,11 +74,13 @@ export PATH=$HOME/software/bin:$PATH \
 CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile"
 PROGS="cmake npm"
 
-if [ `which apt-get` ]; then
+which apt-get >& /dev/null
+if [ $? -ne 0 ]; then
   CONFIGS="$CONFIGS fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu Xresources"
   PROGS="$PROGS curl golang fluxbox python-dev"
   for prog in $PROGS; do
-    if [ ! `which $prog` -o $FORCE -eq 1 ]; then
+    which $prog >& /dev/null
+    if [ $? -ne 0 -o $FORCE -eq 1 ]; then
       sudo apt-get install $PROGS || die "Cannot install $prog"
     fi
   done
