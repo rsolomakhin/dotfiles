@@ -107,7 +107,7 @@ pushd vim/bundle/YouCompleteMe || die "Cannot change dir"
   || die "Cannot install YCM"
 popd || die "Cannot go back"
 
-$LINKER -sfvT vim/bundle/fzf ~/.fzf
+$LINKER -sfvT `pwd`/vim/bundle/fzf ~/.fzf
 pushd ~/.fzf || die "Cannot go to fzf dir"
 ./install --all || die "Cannot install fzf"
 popd || die "Cannot go back"

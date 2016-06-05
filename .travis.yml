@@ -2,3 +2,9 @@ language: generic
 script: ./install
 sudo: required
 dist: trusty
+os:
+  - linux
+  - osx
+matrix:
+  allow_failures:
+    - os: osx
