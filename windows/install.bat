@@ -25,7 +25,7 @@ if not exist %USERPROFILE%\vimfiles\swap mkdir %USERPROFILE%\vimfiles\swap ^
 if not exist %USERPROFILE%\vimfiles\autoload mkdir %USERPROFILE%\vimfiles\autoload ^
   || echo "Cannot create vim autoload dir" && exit /b 1
 
-bitsadmin.exe /transfer "DownloadVimPathogen" https://tpo.pe/pathongen.vim ^
+bitsadmin.exe /transfer "DownloadVimPathogen" https://tpo.pe/pathogen.vim ^
   %USERPROFILE%\vimfiles\autoload\pathogen.vim ^
   || echo "Cannot download vim pathogen" && exit /b 1
 
