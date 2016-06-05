@@ -48,23 +48,24 @@ fi
 if [ -d ~/homebrew/bin ]; then
   PREFIX=$HOME/homebrew/bin
   if [[ $PATH != $PREFIX:* ]]; then
-    PATH=$PREFIX:$PATH
+    PATH=$PREFIX:${PATH/:$PREFIX}
   fi
   if [ -d ~/homebrew/share/vim/vim74 ]; then
     export VIMRUNTIME=$HOME/homebrew/share/vim/vim74
   fi
 fi
 
-if [[ $PATH != *depot_tools* ]]; then
-  PATH=$PATH:$GOPATH/bin
-  PATH=$PATH:$HOME/android-sdk-linux/platform-tools
-  PATH=$PATH:$HOME/android-sdk-linux/tools
-  PATH=$PATH:$HOME/depot_tools
-  PATH=$PATH:$HOME/google-cloud-sdk/bin
-  PATH=$PATH:$HOME/gradle/bin
-  PATH=$PATH:$HOME/node/bin
-  export PATH
-fi
+TOOLS="$GOPATH/bin
+$HOME/android-sdk-linux/platform-tools
+$HOME/android-sdk-linux/tools
+$HOME/depot_tools
+$HOME/google-cloud-sdk/bin
+$HOME/gradle/bin
+$HOME/node/bin"
+for tool in $TOOLS; do
+  [[ -d $tool && $PATH != *$tool* ]] && PATH=$PATH:$tool
+done
+export PATH
 
 alias e="$EDITOR"
 alias em="$EMACS"
