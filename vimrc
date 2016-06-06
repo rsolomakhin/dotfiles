@@ -92,6 +92,13 @@ let g:syntastic_java_checkers = []
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_args = '-c google --env browser'
 
+" FZF
+command! FZFMru call fzf#run({
+      \  'source':  v:oldfiles,
+      \  'sink':    'e',
+      \  'options': '-m -x +s',
+      \  'down':    '40%'})
+
 nnoremap ]q :cnext<CR>
 nnoremap [q :cprevious<CR>
 nnoremap ]l :lnext<CR>
@@ -99,6 +106,7 @@ nnoremap [l :lprevious<CR>
 nnoremap <leader>q :cwindow<CR>
 nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>t :FZF<CR>
+nnoremap <leader>r :FZFMru<CR>
 
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
