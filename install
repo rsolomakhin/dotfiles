@@ -119,7 +119,7 @@ for file in $CONFIGS; do
     || die "Cannot link $file to home dir"
 done
 
-NODE_MODULES="eslint eslint-config-google csslint typescript tern gulp"
+NODE_MODULES="eslint eslint-config-google csslint typescript tern gulp bower"
 for mod in $NODE_MODULES; do
   if [ ! -e ~/node/lib/node_modules/$mod -o $FORCE -eq 1 ]; then
     npm install --global --prefix=$HOME/node $mod \
