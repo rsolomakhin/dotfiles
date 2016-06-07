@@ -90,15 +90,22 @@ if [ $? -eq 0 ]; then
     || die "Cannot link node to nodejs"
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
     curl -LSso ~/.Xresources-hybrid \
-      https://gist.githubusercontent.com/w0ng/3278077/raw/4c9e1510a7ade25b787efed0ad435234c0af1ba5/.Xresources-hybrid
+      https://gist.githubusercontent.com/w0ng/3278077/raw/4c9e1510a7ade25b787efed0ad435234c0af1ba5/.Xresources-hybrid \
+      || die "Cannot download hybrid them for xterm"
+  fi
+  if [ ! -e ~/dynamorio/bin64 -o $FORCE -eq 1 ]; then
+    mkdir -pv ~/dynamorio || die "Cannot create ~/dynamorio dir"
+    curl -L https://github.com/DynamoRIO/dynamorio/releases/download/release_6_1_1/DynamoRIO-Linux-6.1.1-3.tar.gz \
+      | tar xz --strip 1 -C ~/dynamorio \
+      || die "Cannot download dynamorio"
   fi
 else
   export PATH=$HOME/homebrew/bin:$PATH \
-    || die "Cannot add $HOME/homebrew/bin to the path"
+    || die "Cannot add ~/homebrew/bin to the path"
   which brew >& /dev/null
   if [ $? -ne 0 -o $FORCE -eq 1 ]; then
     echo "Installing homebrew"
-    mkdir -pv ~/homebrew || die "Cannot create $HOME/homebrew dir"
+    mkdir -pv ~/homebrew || die "Cannot create ~/homebrew dir"
     curl -L https://github.com/Homebrew/brew/tarball/master \
       | tar xz --strip 1 -C ~/homebrew \
       || die "Cannot download homebrew"

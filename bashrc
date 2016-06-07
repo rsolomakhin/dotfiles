@@ -60,6 +60,10 @@ TOOLS="$GOPATH/bin
 $HOME/android-sdk-linux/platform-tools
 $HOME/android-sdk-linux/tools
 $HOME/depot_tools
+$HOME/dynamorio/bin64
+$HOME/dynamorio/drmemory/bin64
+$HOME/dynamorio/dynamorio/bin64
+$HOME/dynamorio/tools/bin64
 $HOME/google-cloud-sdk/bin
 $HOME/gradle/bin
 $HOME/node/bin
