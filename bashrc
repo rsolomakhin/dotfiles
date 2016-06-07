@@ -17,14 +17,15 @@
 export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/android-sdk-linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
-export EMACS="emacsclient -t"
-export VIM="vim"
 export EDITOR="$VIM"
+export EMACS="emacsclient -t"
+export FZF_CTRL_T_COMMAND="git ls || find"
+export FZF_DEFAULT_COMMAND="git ls"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
-export FZF_DEFAULT_COMMAND="git ls"
-export FZF_CTRL_T_COMMAND="git ls || find"
+export PYTHONPATH=$HOME/python:$PYTHONPATH
+export VIM="vim"
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 
 HELPERS="/usr/lib/git-core/git-sh-prompt
@@ -62,6 +63,7 @@ $HOME/depot_tools
 $HOME/google-cloud-sdk/bin
 $HOME/gradle/bin
 $HOME/node/bin
+$HOME/python/bin
 $HOME/software/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$PATH:$tool
