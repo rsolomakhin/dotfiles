@@ -126,7 +126,7 @@ nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>t :FZF<CR>
 nnoremap <leader>s :FZFLines<CR>
 nnoremap <leader>r :FZFMru<CR>
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeFind<CR>
 
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
