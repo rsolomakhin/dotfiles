@@ -86,7 +86,7 @@ if [ $? -eq 0 ]; then
       sudo apt-get install $PROGS || die "Cannot install $prog"
     fi
   done
-  which inotify-wait >& /dev/null
+  which inotifywait >& /dev/null
   if [ $? -ne 0 -o $FORCE -eq 1 ]; then
     sudo apt-get install inotify-tools || die "Cannot install inotify-tools"
   fi
