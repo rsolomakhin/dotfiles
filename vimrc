@@ -63,7 +63,7 @@ Glaive codefmt plugin[mappings]
 
 " Colors
 set background=dark
-let g:hybrid_custom_term_colors = 1
+" let g:hybrid_custom_term_colors = 1
 colorscheme hybrid
 
 " vim-fugitive
@@ -142,7 +142,7 @@ augroup custom
   autocmd BufRead,BufNewFile .tern-project set filetype=json
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
-  autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch
+  autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto
         \ setlocal textwidth=80
 
   autocmd FileType cpp nnoremap <C-]> :YcmCompleter GoTo<CR>

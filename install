@@ -86,18 +86,16 @@ if [ $? -eq 0 ]; then
       sudo apt-get install $PROGS || die "Cannot install $prog"
     fi
   done
+  which inotify-wait >& /dev/null
+  if [ $? -ne 0 -o $FORCE -eq 1 ]; then
+    sudo apt-get install inotify-tools || die "Cannot install inotify-tools"
+  fi
   ln -svf /usr/bin/nodejs ~/node/bin/node \
     || die "Cannot link node to nodejs"
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
     curl -LSso ~/.Xresources-hybrid \
       https://gist.githubusercontent.com/w0ng/3278077/raw/4c9e1510a7ade25b787efed0ad435234c0af1ba5/.Xresources-hybrid \
       || die "Cannot download hybrid them for xterm"
-  fi
-  if [ ! -e ~/dynamorio/bin64 -o $FORCE -eq 1 ]; then
-    mkdir -pv ~/dynamorio || die "Cannot create ~/dynamorio dir"
-    curl -L https://github.com/DynamoRIO/dynamorio/releases/download/release_6_1_1/DynamoRIO-Linux-6.1.1-3.tar.gz \
-      | tar xz --strip 1 -C ~/dynamorio \
-      || die "Cannot download dynamorio"
   fi
 else
   export PATH=$HOME/homebrew/bin:$PATH \
