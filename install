@@ -72,6 +72,8 @@ export GOPATH=$HOME/go || die "Cannot set the go path"
 export PATH=$GOPATH/bin:$PATH || die "Cannot add ~/go/bin to the path"
 export PATH=$HOME/node/bin:$PATH || die "Cannot add ~/node/bin to the path"
 export PATH=$HOME/python/bin:$PATH || die "Cannot add ~/python/bin to the path"
+export PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH \
+  || die "Cannot add ~/.gem/ruby/2.0/bin to the path"
 
 CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc tern-config"
 PROGS="cmake npm"
@@ -89,6 +91,14 @@ if [ $? -eq 0 ]; then
   which inotifywait >& /dev/null
   if [ $? -ne 0 -o $FORCE -eq 1 ]; then
     sudo apt-get install inotify-tools || die "Cannot install inotify-tools"
+  fi
+  which gem2.0 >& /dev/null
+  if [ $? -ne 0 -o $FORCE -eq 1 ]; then
+    sudo apt-get install ruby2.0 || die "Cannot install ruby 2.0"
+  fi
+  which bundler >& /dev/null
+  if [ $? -ne 0 -o $FORCE -eq 1 ]; then
+    gem2.0 install --user-install bundler || die "Cannot install bundler gem"
   fi
   ln -svf /usr/bin/nodejs ~/node/bin/node \
     || die "Cannot link node to nodejs"
