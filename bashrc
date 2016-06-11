@@ -63,6 +63,7 @@ TOOLS="$GOPATH/bin
 $HOME/android-sdk-linux/platform-tools
 $HOME/android-sdk-linux/tools
 $HOME/depot_tools
+$HOME/.fzf/bin
 $HOME/google-cloud-sdk/bin
 $HOME/node/bin
 $HOME/python/bin
