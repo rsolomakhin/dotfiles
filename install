@@ -95,13 +95,6 @@ if [ $? -eq 0 ]; then
     sudo apt-get install ruby2.0-dev \
       || die "Cannot install ruby 2.0 with development headers"
   fi
-  which bundler >& /dev/null
-  if [ $? -ne 0 -o $FORCE -eq 1 ]; then
-    sudo gem2.0 install bundler || die "Cannot install bundler gem"
-  fi
-  sudo ln -svf /usr/bin/gem2.0 /usr/bin/gem || die "Cannot link gem to gem2.0"
-  sudo chmod a+rx -R /var/lib/gems/2.0.0/specifications \
-    || die "Cannot make gem specifications world-readable"
   ln -svf /usr/bin/nodejs ~/node/bin/node \
     || die "Cannot link node to nodejs"
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
