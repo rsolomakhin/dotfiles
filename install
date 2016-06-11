@@ -72,8 +72,6 @@ export GOPATH=$HOME/go || die "Cannot set the go path"
 export PATH=$GOPATH/bin:$PATH || die "Cannot add ~/go/bin to the path"
 export PATH=$HOME/node/bin:$PATH || die "Cannot add ~/node/bin to the path"
 export PATH=$HOME/python/bin:$PATH || die "Cannot add ~/python/bin to the path"
-export PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH \
-  || die "Cannot add ~/.gem/ruby/2.0/bin to the path"
 
 CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc tern-config"
 PROGS="cmake npm"
@@ -94,12 +92,16 @@ if [ $? -eq 0 ]; then
   fi
   which gem2.0 >& /dev/null
   if [ $? -ne 0 -o $FORCE -eq 1 ]; then
-    sudo apt-get install ruby2.0 || die "Cannot install ruby 2.0"
+    sudo apt-get install ruby2.0-dev \
+      || die "Cannot install ruby 2.0 with development headers"
   fi
   which bundler >& /dev/null
   if [ $? -ne 0 -o $FORCE -eq 1 ]; then
-    gem2.0 install --user-install bundler || die "Cannot install bundler gem"
+    sudo gem2.0 install bundler || die "Cannot install bundler gem"
   fi
+  sudo ln -svf /usr/bin/gem2.0 /usr/bin/gem || die "Cannot link gem to gem2.0"
+  sudo chmod a+rx -R /var/lib/gems/2.0.0/specifications \
+    || die "Cannot make gem specifications world-readable"
   ln -svf /usr/bin/nodejs ~/node/bin/node \
     || die "Cannot link node to nodejs"
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then

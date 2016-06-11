@@ -60,7 +60,6 @@ TOOLS="$GOPATH/bin
 $HOME/android-sdk-linux/platform-tools
 $HOME/android-sdk-linux/tools
 $HOME/depot_tools
-$HOME/.gem/ruby/2.0.0/bin
 $HOME/google-cloud-sdk/bin
 $HOME/gradle/bin
 $HOME/node/bin
