@@ -30,7 +30,7 @@ die() {
   exit 1
 }
 
-pushd $(dirname ${BASH_SOURCE[0]})
+pushd $(dirname ${BASH_SOURCE[0]}) || die "Cannot go into ${BASH_SOURCE[0]} dir"
 
 git config user.email "rouslan.solomakhin@gmail.com" \
   || die "Cannot set git user email for this repository"

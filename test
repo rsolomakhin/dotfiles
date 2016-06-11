@@ -15,10 +15,17 @@
 # limitations under the License.
 
 die() {
-  echo $@ >&2
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
   exit 1
 }
+
+export HOME=/tmp/rsolomakhin-dotfiles-test-home
+rm -rf $HOME || die "Cannot remove the $HOME dir"
+mkdir -pv $HOME || die "Cannot create $HOME dir"
+
+pushd $(dirname ${BASH_SOURCE[0]}) || die "Cannot go into ${BASH_SOURCE[0]} dir"
 
 ./install || die "Unable to perform a clean install"
 ./install || die "Unable to perform a quick install check"
 ./install --force || die "Unable to force re-install"
+echo ALL TESTS PASS
