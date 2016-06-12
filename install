@@ -188,3 +188,7 @@ if [ ! -e ~/.fzf/bin/fzf -o $FORCE -eq 1 ]; then
   ./install --all --no-update-rc || die "Cannot install fzf"
   popd || die "Cannot go back"
 fi
+
+for dir in vim/bundle/*/doc; do
+  vim -u NONE -c "helptags $dir" -c q || die "Cannot install vim docs from $dir"
+done
