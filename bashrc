@@ -67,7 +67,8 @@ $HOME/.fzf/bin
 $HOME/google-cloud-sdk/bin
 $HOME/node/bin
 $HOME/python/bin
-$HOME/software/bin"
+$HOME/software/bin
+/opt/android-studio-stable/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$PATH:$tool
 done
