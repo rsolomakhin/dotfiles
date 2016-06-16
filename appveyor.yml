@@ -15,3 +15,6 @@
 version: '{build}'
 install:
 - cmd: windows\install.bat
+build: off
+test: off
+deploy: off
