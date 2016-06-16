@@ -13,7 +13,7 @@
 # limitations under the License.
 
 language: generic
-script: travis_wait 60 ./test
+script: travis_wait 60 ./install
 sudo: required
 dist: trusty
 os:
