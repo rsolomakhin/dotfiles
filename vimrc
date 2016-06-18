@@ -63,22 +63,10 @@ Glaive codefmt plugin[mappings]
 
 " Colors
 set background=dark
-" let g:hybrid_custom_term_colors = 1
 colorscheme hybrid
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-
-" Eclim
-" :JavaSearchContext - go to definition.
-" :JavaFormat - format code.
-" :Checkstyle - check the source code style.
-" :JavaImport - import the class under cursor.
-" :JavaImportOrganize - organize imports.
-"let g:EclimCompletionMethod = 'omnifunc'
-"augroup eclim
-"  autocmd FileType java nnoremap <C-]> :JavaSearchContext<CR>
-"augroup end
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -86,7 +74,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_java_checkers = []
 let g:syntastic_javascript_checkers = ['eslint']
@@ -106,11 +94,6 @@ function! s:buffer_lines()
   endfor
   return res
 endfunction
-command! FZFLines call fzf#run({
-      \  'source':  <sid>buffer_lines(),
-      \  'sink':    function('<sid>line_handler'),
-      \  'options': '--extended --nth=3..',
-      \  'down':    '60%'})
 command! FZFMru call fzf#run({
       \  'source':  v:oldfiles,
       \  'sink':    'e',
@@ -124,9 +107,8 @@ nnoremap [l :lprevious<CR>
 nnoremap <leader>q :cwindow<CR>
 nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>t :FZF<CR>
-nnoremap <leader>s :FZFLines<CR>
 nnoremap <leader>r :FZFMru<CR>
-nnoremap <C-n> :NERDTreeFind<CR>
+nnoremap <leader>s :SyntasticCheck<CR>
 
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
