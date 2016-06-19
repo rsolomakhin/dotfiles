@@ -90,6 +90,18 @@ let g:syntastic_mode_map = {
       \  'mode': 'passive',
       \  'active_filetypes': [],
       \  'passive_filetypes': []}
+let s:syntastic_mode='passive'
+function! ToggleSyntastic()
+  if (s:syntastic_mode == 'passive')
+    echom 'syntastic on'
+    let s:syntastic_mode='active'
+    call SyntasticCheck()
+  else
+    echom 'syntastic off'
+    let s:syntastic_mode='passive'
+    call SyntasticReset()
+  endif
+endfunction
 
 " FZF
 function! s:line_handler(l)
@@ -119,7 +131,7 @@ nnoremap <leader>q :cwindow<CR>
 nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>t :FZF<CR>
 nnoremap <leader>r :FZFMru<CR>
-nnoremap <leader>s :SyntasticCheck<CR>
+nnoremap <leader>s :call ToggleSyntastic()<CR>
 nnoremap <leader>b :call ToggleLightDarkBackground()<CR>
 
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
