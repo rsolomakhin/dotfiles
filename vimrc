@@ -64,6 +64,16 @@ Glaive codefmt plugin[mappings]
 " Colors
 set background=dark
 colorscheme hybrid
+function! ToggleLightDarkBackground()
+  if (&background == "dark")
+    set background=light
+    let g:solarized_termcolors=256
+    colorscheme solarized
+  else
+    set background=dark
+    colorscheme hybrid
+  endif
+endfunction
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -110,6 +120,7 @@ nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>t :FZF<CR>
 nnoremap <leader>r :FZFMru<CR>
 nnoremap <leader>s :SyntasticCheck<CR>
+nnoremap <leader>b :call ToggleLightDarkBackground()<CR>
 
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
