@@ -127,12 +127,13 @@ nnoremap ]q :cnext<CR>
 nnoremap [q :cprevious<CR>
 nnoremap ]l :lnext<CR>
 nnoremap [l :lprevious<CR>
-nnoremap <leader>q :cwindow<CR>
+nnoremap <leader>b :call ToggleLightDarkBackground()<CR>
+nnoremap <leader>f vip:FormatLines<CR>
 nnoremap <leader>l :lwindow<CR>
-nnoremap <leader>t :FZF<CR>
+nnoremap <leader>q :cwindow<CR>
 nnoremap <leader>r :FZFMru<CR>
 nnoremap <leader>s :call ToggleSyntastic()<CR>
-nnoremap <leader>b :call ToggleLightDarkBackground()<CR>
+nnoremap <leader>t :FZF<CR>
 
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
