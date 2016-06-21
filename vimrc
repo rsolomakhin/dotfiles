@@ -22,6 +22,7 @@ set backspace=indent,eol,start
 set completeopt= " Turn off YCM's previews on top
 set encoding=utf-8
 set expandtab
+set formatoptions+=j " Remove comment characters when joining lines.
 set hidden
 set ignorecase
 set incsearch

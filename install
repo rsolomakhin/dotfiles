@@ -73,7 +73,7 @@ export PATH=$GOPATH/bin:$PATH || die "Cannot add ~/go/bin to the path"
 export PATH=$HOME/node/bin:$PATH || die "Cannot add ~/node/bin to the path"
 export PATH=$HOME/python/bin:$PATH || die "Cannot add ~/python/bin to the path"
 
-CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc tern-config"
+CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc tern-config emacs"
 PROGS="cmake npm"
 
 which apt-get >& /dev/null
