@@ -12,7 +12,10 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-execute pathogen#infect()
+if !has('win32unix')
+  execute pathogen#infect()
+endif
+
 syntax on
 filetype plugin indent on
 
@@ -58,84 +61,90 @@ endif
 let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 
-" vim-codefmt
-call glaive#Install()
-Glaive codefmt plugin[mappings]
+if !has('win32unix')
+  " vim-codefmt
+  call glaive#Install()
+  Glaive codefmt plugin[mappings]
+endif
 
-" Colors
 set t_Co=256
 set background=dark
-colorscheme hybrid
-function! ToggleLightDarkBackground()
-  if (&background == "dark")
-    set background=light
-    let g:solarized_termcolors=256
-    colorscheme solarized
-  else
-    set background=dark
-    colorscheme hybrid
-  endif
-endfunction
 
-" vim-fugitive
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+if !has('win32unix')
+  " Colorschemes
+  colorscheme hybrid
+  function! ToggleLightDarkBackground()
+    if (&background == "dark")
+      set background=light
+      let g:solarized_termcolors=256
+      colorscheme solarized
+    else
+      set background=dark
+      colorscheme hybrid
+    endif
+  endfunction
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_args = '-c google --env browser'
-let g:syntastic_mode_map = {
-      \  'mode': 'passive',
-      \  'active_filetypes': [],
-      \  'passive_filetypes': []}
-let s:syntastic_mode='passive'
-function! ToggleSyntastic()
-  if (s:syntastic_mode == 'passive')
-    echom 'syntastic on'
-    let s:syntastic_mode='active'
-    call SyntasticCheck()
-  else
-    echom 'syntastic off'
-    let s:syntastic_mode='passive'
-    call SyntasticReset()
-  endif
-endfunction
+  " vim-fugitive
+  set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-" FZF
-function! s:line_handler(l)
-  let keys = split(a:l, ':\t')
-  exec 'buf' keys[0]
-  exec keys[1]
-  normal! ^zz
-endfunction
-function! s:buffer_lines()
-  let res = []
-  for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-    call extend(res, map(getbufline(b,0,"$"), 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
-  endfor
-  return res
-endfunction
-command! FZFMru call fzf#run({
-      \  'source':  v:oldfiles,
-      \  'sink':    'e',
-      \  'options': '-m -x +s',
-      \  'down':    '40%'})
+  " Syntastic
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+  let g:syntastic_auto_loc_list = 0
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_javascript_checkers = ['eslint']
+  let g:syntastic_javascript_eslint_args = '-c google --env browser'
+  let g:syntastic_mode_map = {
+        \  'mode': 'passive',
+        \  'active_filetypes': [],
+        \  'passive_filetypes': []}
+  let s:syntastic_mode='passive'
+  function! ToggleSyntastic()
+    if (s:syntastic_mode == 'passive')
+      echom 'syntastic on'
+      let s:syntastic_mode='active'
+      call SyntasticCheck()
+    else
+      echom 'syntastic off'
+      let s:syntastic_mode='passive'
+      call SyntasticReset()
+    endif
+  endfunction
+
+  " FZF
+  function! s:line_handler(l)
+    let keys = split(a:l, ':\t')
+    exec 'buf' keys[0]
+    exec keys[1]
+    normal! ^zz
+  endfunction
+  function! s:buffer_lines()
+    let res = []
+    for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
+      call extend(res, map(getbufline(b,0,"$"), 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
+    endfor
+    return res
+  endfunction
+  command! FZFMru call fzf#run({
+        \  'source':  v:oldfiles,
+        \  'sink':    'e',
+        \  'options': '-m -x +s',
+        \  'down':    '40%'})
+
+  nnoremap <leader>b :call ToggleLightDarkBackground()<CR>
+  nnoremap <leader>f vip:FormatLines<CR>
+  nnoremap <leader>r :FZFMru<CR>
+  nnoremap <leader>s :call ToggleSyntastic()<CR>
+  nnoremap <leader>t :FZF<CR>
+endif
 
 nnoremap ]q :cnext<CR>
 nnoremap [q :cprevious<CR>
 nnoremap ]l :lnext<CR>
 nnoremap [l :lprevious<CR>
-nnoremap <leader>b :call ToggleLightDarkBackground()<CR>
-nnoremap <leader>f vip:FormatLines<CR>
 nnoremap <leader>l :lwindow<CR>
 nnoremap <leader>q :cwindow<CR>
-nnoremap <leader>r :FZFMru<CR>
-nnoremap <leader>s :call ToggleSyntastic()<CR>
-nnoremap <leader>t :FZF<CR>
 
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
