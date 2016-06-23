@@ -63,6 +63,7 @@ call glaive#Install()
 Glaive codefmt plugin[mappings]
 
 " Colors
+set t_Co=256
 set background=dark
 colorscheme hybrid
 function! ToggleLightDarkBackground()

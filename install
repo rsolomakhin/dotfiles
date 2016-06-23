@@ -25,6 +25,8 @@ elif [ -n "$ARGS" ]; then
   exit 1
 fi
 
+[ "`uname | grep CYGWIN`" == "" ] && CYGWIN=0 || CYGWIN=1
+
 die() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
   exit 1
@@ -102,7 +104,7 @@ if [ $? -eq 0 ]; then
       https://gist.githubusercontent.com/w0ng/3278077/raw/4c9e1510a7ade25b787efed0ad435234c0af1ba5/.Xresources-hybrid \
       || die "Cannot download hybrid them for xterm"
   fi
-else
+elif [ "`uname | grep CYGWIN`" == "" ]; then
   export PATH=$HOME/homebrew/bin:$PATH \
     || die "Cannot add ~/homebrew/bin to the path"
   which brew >& /dev/null
@@ -131,13 +133,15 @@ for file in $CONFIGS; do
     || die "Cannot link $file to home dir"
 done
 
-NODE_MODULES="eslint eslint-config-google csslint typescript tern gulp bower"
-for mod in $NODE_MODULES; do
-  if [ ! -e ~/node/lib/node_modules/$mod -o $FORCE -eq 1 ]; then
-    npm install --global --prefix=$HOME/node $mod \
-      || die "Cannot install $mod"
-  fi
-done
+if [ $CYGWIN -eq 0 ]; then
+  NODE_MODULES="eslint eslint-config-google csslint typescript tern gulp bower"
+  for mod in $NODE_MODULES; do
+    if [ ! -e ~/node/lib/node_modules/$mod -o $FORCE -eq 1 ]; then
+      npm install --global --prefix=$HOME/node $mod \
+        || die "Cannot install $mod"
+    fi
+  done
+fi
 
 PYTHONPATH=$HOME/python:$PYTHONPATH
 PYTHON_APPS="yapf"
@@ -158,12 +162,14 @@ if [ ! -e ~/.vim/autoload/pathogen.vim -o $FORCE -eq 1 ]; then
     || die "Cannot download vim-pathogen"
 fi
 
-YCM_OUTPUT=vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so
-if [ ! -e $YCM_OUTPUT -o $FORCE -eq 1 ]; then
-  pushd vim/bundle/YouCompleteMe || die "Cannot change dir"
-  ./install.py --clang-completer --gocode-completer --tern-completer \
-    || die "Cannot install YCM"
-  popd || die "Cannot go back"
+if [ $CYGWIN -eq 0 ]; then
+  YCM_OUTPUT=vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so
+  if [ ! -e $YCM_OUTPUT -o $FORCE -eq 1 ]; then
+    pushd vim/bundle/YouCompleteMe || die "Cannot change dir"
+    ./install.py --clang-completer --gocode-completer --tern-completer \
+      || die "Cannot install YCM"
+    popd || die "Cannot go back"
+  fi
 fi
 
 if [ ! -e vim/bundle/mojom -o $FORCE -eq 1 ]; then
