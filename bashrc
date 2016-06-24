@@ -14,18 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+export EMACS="emacsclient -t"
+export VIM="vim"
+
 export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/android-sdk-linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
-export VIM="vim"
 export EDITOR="$VIM"
-export EMACS="emacsclient -t"
 export FZF_CTRL_T_COMMAND="git ls || find"
 export FZF_DEFAULT_COMMAND="git ls"
 export GOPATH=$HOME/go
+export GYP_CHROMIUM_NO_ACTION=1
 export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
 export PYTHONPATH=$HOME/python:$PYTHONPATH
+
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 
 HELPERS="$HOME/.fzf/shell/key-bindings.bash
@@ -73,7 +76,7 @@ $HOME/.rvm/bin
 $HOME/software/bin
 /opt/android-studio-stable/bin"
 for tool in $TOOLS; do
-  [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
+  [[ -d $tool && $PATH != *$tool* ]] && PATH=$PATH:$tool
 done
 export PATH
 
