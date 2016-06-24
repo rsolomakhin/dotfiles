@@ -30,6 +30,7 @@ export PYTHONPATH=$HOME/python:$PYTHONPATH
 
 HELPERS="$HOME/.fzf/shell/key-bindings.bash
 $HOME/google-cloud-sdk/completion.bash.inc
+$HOME/.rvm/scripts/rvm
 $HOME/.ssh_agent.sh
 /usr/lib/git-core/git-sh-prompt
 /usr/local/git/current/share/git-core/git-completion.bash
@@ -63,14 +64,16 @@ TOOLS="$GOPATH/bin
 $HOME/android-sdk-linux/platform-tools
 $HOME/android-sdk-linux/tools
 $HOME/depot_tools
+$HOME/emacs/bin
 $HOME/.fzf/bin
 $HOME/google-cloud-sdk/bin
 $HOME/node/bin
 $HOME/python/bin
+$HOME/.rvm/bin
 $HOME/software/bin
 /opt/android-studio-stable/bin"
 for tool in $TOOLS; do
-  [[ -d $tool && $PATH != *$tool* ]] && PATH=$PATH:$tool
+  [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
 export PATH
 

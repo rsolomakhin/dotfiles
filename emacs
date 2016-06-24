@@ -16,3 +16,5 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
+(define-key (current-global-map) "\C-t" 'fzf)
+(setq indent-tabs-mode nil)
