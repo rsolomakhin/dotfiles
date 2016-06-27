@@ -50,9 +50,6 @@ set ttimeoutlen=0
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
 
-" Format inside of the text paragraph or a block of code.
-nnoremap<leader> f gqip<CR>
-
 if has("win32")
   set spellfile=~/vimfiles/spell/en.utf-8.add
   set directory=~/vimfiles/swap,.
