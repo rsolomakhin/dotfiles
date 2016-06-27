@@ -133,12 +133,12 @@ if !has('win32unix')
   nnoremap <leader>t :FZF<CR>
 endif
 
-nnoremap ]q :cnext<CR>
-nnoremap [q :cprevious<CR>
-nnoremap ]l :lnext<CR>
-nnoremap [l :lprevious<CR>
-nnoremap <leader>l :lwindow<CR>
-nnoremap <leader>q :cwindow<CR>
+map ]q :cnext<CR>
+map [q :cprevious<CR>
+map ]l :lnext<CR>
+map [l :lprevious<CR>
+map <leader>l :lwindow<CR>
+map <leader>q :cwindow<CR>
 
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
