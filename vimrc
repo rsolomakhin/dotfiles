@@ -50,22 +50,15 @@ set ttimeoutlen=0
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
 
+" Format inside of the text paragraph or a block of code.
+nnoremap<leader> f gqip<CR>
+
 if has("win32")
   set spellfile=~/vimfiles/spell/en.utf-8.add
   set directory=~/vimfiles/swap,.
 else
   set spellfile=~/.vim/spell/en.utf-8.add
   set directory=~/.vim/swap,.
-endif
-
-" YCM
-let g:ycm_global_ycm_extra_conf =
-      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-
-if !has('win32unix')
-  " vim-codefmt
-  call glaive#Install()
-  Glaive codefmt plugin[mappings]
 endif
 
 set t_Co=256
@@ -84,6 +77,10 @@ if !has('win32unix')
       colorscheme hybrid
     endif
   endfunction
+
+  " YCM
+  let g:ycm_global_ycm_extra_conf =
+        \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 
   " vim-fugitive
   set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -134,7 +131,6 @@ if !has('win32unix')
         \  'down':    '40%'})
 
   nnoremap <leader>b :call ToggleLightDarkBackground()<CR>
-  nnoremap <leader>f vip:FormatLines<CR>
   nnoremap <leader>r :FZFMru<CR>
   nnoremap <leader>s :call ToggleSyntastic()<CR>
   nnoremap <leader>t :FZF<CR>
@@ -166,6 +162,7 @@ augroup custom
 
   autocmd FileType cpp nnoremap <C-]> :YcmCompleter GoTo<CR>
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
+  autocmd FileType cpp setlocal formatprg=clang-format\ -style=Chromium
 
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit setlocal textwidth=72
@@ -179,6 +176,8 @@ augroup custom
   autocmd BufNewFile,BufRead */WebKit/* setlocal softtabstop=4
   autocmd BufNewFile,BufRead */WebKit/* setlocal tabstop=4
   autocmd BufNewFile,BufRead */WebKit/* setlocal textwidth&
+  autocmd BufNewFile,BufRead */WebKit/* setlocal
+        \ formatprg=clang-format\ -style=WebKit
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
