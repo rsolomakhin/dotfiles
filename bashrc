@@ -24,7 +24,6 @@ export EDITOR="$VIM"
 export FZF_CTRL_T_COMMAND="git ls || find"
 export FZF_DEFAULT_COMMAND="git ls"
 export GOPATH=$HOME/go
-export GYP_CHROMIUM_NO_ACTION=1
 export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
 export PYTHONPATH=$HOME/python:$PYTHONPATH
