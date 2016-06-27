@@ -197,6 +197,5 @@ if [ ! -e ~/.fzf/bin/fzf -o $FORCE -eq 1 ]; then
 fi
 
 for dir in vim/bundle/*/doc; do
-  vim --not-a-term -u NONE -c "helptags $dir" -c q \
-    || die "Cannot install vim docs from $dir"
+  vim -u NONE -c "helptags $dir" -c q || die "Cannot install vim docs from $dir"
 done
