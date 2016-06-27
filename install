@@ -143,19 +143,6 @@ if [ $CYGWIN -eq 0 ]; then
   done
 fi
 
-PYTHONPATH=$HOME/python:$PYTHONPATH
-PYTHON_APPS="yapf"
-for app in $PYTHON_APPS; do
-  which $app >& /dev/null
-  if [ $? -ne 0 -o $FORCE -eq 1 ]; then
-    rm -rvf $HOME/python/${app}* || die "Cannot clean up $app"
-    pip install --target=$HOME/python $app || die "Cannot install $app"
-    echo -e "#!/bin/bash\nexec python \$HOME/python/$app" > ~/python/bin/$app \
-      || die "Cannot create $app launcher"
-    chmod +x ~/python/bin/$app || die "Cannot make $app launcher executable"
-  fi
-done
-
 if [ ! -e ~/.vim/autoload/pathogen.vim -o $FORCE -eq 1 ]; then
   echo "Installing vim-pathogen"
   curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim \
