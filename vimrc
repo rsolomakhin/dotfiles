@@ -36,6 +36,7 @@ set nojoinspaces
 set nonumber
 set nospell
 set ruler
+set shiftround
 set shiftwidth=2
 set showcmd
 set smartcase
