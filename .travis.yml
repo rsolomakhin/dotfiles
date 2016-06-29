@@ -19,5 +19,3 @@ dist: trusty
 os:
   - linux
   - osx
-git:
-  submodules: false
