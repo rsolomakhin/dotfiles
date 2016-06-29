@@ -171,6 +171,11 @@ augroup custom
   autocmd FileType java setlocal tabstop=4
   autocmd FileType java setlocal textwidth=100
 
+  autocmd FileType xml setlocal shiftwidth=4
+  autocmd FileType xml setlocal softtabstop=4
+  autocmd FileType xml setlocal tabstop=4
+  autocmd FileType xml setlocal textwidth&
+
   autocmd BufNewFile,BufRead */WebKit/* setlocal shiftwidth=4
   autocmd BufNewFile,BufRead */WebKit/* setlocal softtabstop=4
   autocmd BufNewFile,BufRead */WebKit/* setlocal tabstop=4
