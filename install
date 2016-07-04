@@ -76,7 +76,7 @@ export PATH=$HOME/node/bin:$PATH || die "Cannot add ~/node/bin to the path"
 export PATH=$HOME/python/bin:$PATH || die "Cannot add ~/python/bin to the path"
 
 CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc tern-config emacs"
-PROGS="cmake npm"
+PROGS="cmake npm tmux"
 
 which apt-get >& /dev/null
 if [ $? -eq 0 ]; then
@@ -118,7 +118,7 @@ elif [ "`uname | grep CYGWIN`" == "" ]; then
     brew update || die "Cannot update homebrew formulae"
     brew upgrade --all || die "Cannot upgrade all homebrew packages"
   fi
-  PROGS="$PROGS go bash vim clang-format tmux"
+  PROGS="$PROGS go bash vim clang-format"
   for prog in $PROGS; do
     which $prog >& /dev/null
     if [ $? -ne 0 -o $FORCE -eq 1 ]; then
@@ -129,8 +129,8 @@ fi
 
 for file in $CONFIGS; do
   mkdir -pv ~/.`dirname $file` || die "Cannot create the dir for $file"
-  [ -e ~/.$file ] || ln -sfv $PWD/$file ~/.$file \
-    || die "Cannot link $file to home dir"
+  rm -rfv ~/.$file || die "Cannot remove the old $file"
+  ln -sfv $PWD/$file ~/.$file || die "Cannot link $file to home dir"
 done
 
 if [ $CYGWIN -eq 0 ]; then
