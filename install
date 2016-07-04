@@ -133,6 +133,8 @@ for file in $CONFIGS; do
   ln -sfv $PWD/$file ~/.$file || die "Cannot link $file to home dir"
 done
 
+rm -rfv ~/.profile || die "Cannot clean up the .profile file"
+
 if [ $CYGWIN -eq 0 ]; then
   NODE_MODULES="eslint eslint-config-google csslint typescript tern gulp bower"
   for mod in $NODE_MODULES; do
