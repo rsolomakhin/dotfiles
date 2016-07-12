@@ -23,6 +23,7 @@ let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
 set backspace=indent,eol,start
 set completeopt= " Turn off YCM's previews on top
+set cursorline
 set encoding=utf-8
 set expandtab
 set nofixeol
@@ -32,7 +33,6 @@ set ignorecase
 set incsearch
 set laststatus=2
 set nocompatible
-set nocursorline
 set nojoinspaces
 set nonumber
 set nospell
