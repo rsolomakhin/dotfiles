@@ -163,6 +163,9 @@ augroup custom
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
   autocmd FileType cpp setlocal formatprg=clang-format\ -style=Chromium
 
+  autocmd FileType javascript setlocal
+        \ formatprg=js-beautify\ --stdin\ --indent-size=2
+
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit setlocal textwidth=72
 
