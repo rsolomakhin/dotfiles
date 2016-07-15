@@ -18,7 +18,7 @@ export EMACS="emacsclient -t"
 export VIM="vim"
 
 export ALTERNATE_EDITOR=""
-export ANDROID_HOME=$HOME/android-sdk-linux
+export ANDROID_HOME=$HOME/chrome/src/third_party/android_tools/sdk
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export EDITOR="$VIM"
 export FZF_CTRL_T_COMMAND="git ls"
@@ -96,18 +96,6 @@ alias vi="$VIM"
 # Disable flow control (Ctrl-S).
 stty -ixon
 
-# List keys in the SSH agent.
-ssh_agent_list_keys() {
-  ssh-add -l
-}
-
-# Add keys to SSH agent.
-ssh_agent_add_keys() {
-  for file in ~/.ssh/*.pub; do
-    ssh-add ${file/.pub}
-  done
-}
-
 # Resume SSH agent.
 ssh_agent_restart() {
   echo "Restarting ssh agent"
@@ -115,14 +103,28 @@ ssh_agent_restart() {
   killall -9 ssh-agent
   ssh-agent -s > ~/.ssh_agent.sh
   source ~/.ssh_agent.sh
-  ssh_agent_add_keys
+  for file in ~/.ssh/*.pub; do
+    ssh-add ${file/.pub}
+  done
+}
+
+# Generte the grade files for Chromium.
+gradle_chromium() {
+  echo "Generating gradle files for Chromium"
+  pushd ~/chrome/src \
+    && build/android/gradle/generate_gradle.py --output-directory out/and \
+        --project-dir ~/AndroidStudioProjects/chrome_public_test_apk \
+        --target //chrome/android:chrome_public_test_apk__apk \
+    && build/android/gradle/generate_gradle.py --output-directory out/and \
+        --project-dir ~/AndroidStudioProjects/chrome_public_apk \
+        --target //chrome/android:chrome_public_apk \
+    && popd
 }
 
 help() {
   echo "Commands:"
-  echo "  $ ssh_agent_list_keys - List keys in the SSH agent."
-  echo "  $ ssh_agent_add_keys  - Add keys to the SSH agent."
   echo "  $ ssh_agent_restart   - Restart the SSH agent."
+  echo "  $ gradle_chromium     - Generate the gradle files for Chromium."
 }
 
 if [ -f ~/.ssh_agent.sh ]; then
