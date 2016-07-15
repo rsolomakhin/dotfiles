@@ -27,6 +27,7 @@ export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
 export PYTHONPATH=$HOME/python:$PYTHONPATH
+export STUDIO_VM_OPTIONS="-Xmx2048m"
 
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 
