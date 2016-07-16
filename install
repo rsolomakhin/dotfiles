@@ -61,6 +61,7 @@ git config --global --replace-all http.cookiefile ~/.gitcookies \
   || die "Cannot set git cookie file"
 git config --global --replace-all user.name "Rouslan Solomakhin" \
   || die "Cannot set git user name"
+git config --global push.default simple || die "Cannot set simple push"
 
 git submodule update --init --recursive || die "Cannot update submodules"
 
