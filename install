@@ -92,11 +92,6 @@ if [ $? -eq 0 ]; then
   if [ $? -ne 0 -o $FORCE -eq 1 ]; then
     sudo apt-get install inotify-tools || die "Cannot install inotify-tools"
   fi
-  which gem2.0 >& /dev/null
-  if [ $? -ne 0 -o $FORCE -eq 1 ]; then
-    sudo apt-get install ruby2.0-dev \
-      || die "Cannot install ruby 2.0 with development headers"
-  fi
   ln -svf /usr/bin/nodejs ~/node/bin/node \
     || die "Cannot link node to nodejs"
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
