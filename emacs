@@ -18,3 +18,4 @@
 (package-initialize)
 (define-key (current-global-map) "\C-t" 'fzf)
 (setq indent-tabs-mode nil)
+(setq vc-follow-symlinks 't)
