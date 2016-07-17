@@ -73,6 +73,7 @@ $HOME/chrome/src/third_party/android_tools/sdk/tools
 $HOME/depot_tools
 $HOME/emacs/bin
 $HOME/google-cloud-sdk/bin
+$HOME/jdk/bin
 $HOME/node/bin
 $HOME/python/bin
 $HOME/software/bin
