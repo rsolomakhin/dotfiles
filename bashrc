@@ -26,6 +26,7 @@ export FZF_DEFAULT_COMMAND="git ls"
 export GOPATH=$HOME/go
 export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
+export JAVA_HOME=$HOME/jdk
 export PYTHONPATH=$HOME/python:$PYTHONPATH
 export STUDIO_VM_OPTIONS="-Xmx2048m"
 
