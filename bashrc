@@ -64,16 +64,17 @@ else
 fi
 
 TOOLS="$GOPATH/bin
+$HOME/.fzf/bin
+$HOME/.rvm/bin
 $HOME/android-sdk-linux/tools
+$HOME/android-studio/bin
 $HOME/chrome/src/third_party/android_tools/sdk/platform-tools
 $HOME/chrome/src/third_party/android_tools/sdk/tools
 $HOME/depot_tools
 $HOME/emacs/bin
-$HOME/.fzf/bin
 $HOME/google-cloud-sdk/bin
 $HOME/node/bin
 $HOME/python/bin
-$HOME/.rvm/bin
 $HOME/software/bin
 /opt/android-studio-stable/bin"
 for tool in $TOOLS; do
