@@ -67,9 +67,9 @@ fi
 TOOLS="$GOPATH/bin
 $HOME/.fzf/bin
 $HOME/.rvm/bin
+$HOME/android-sdk-linux/platform-tools
+$HOME/android-sdk-linux/tools
 $HOME/android-studio/bin
-$HOME/chrome/src/third_party/android_tools/sdk/platform-tools
-$HOME/chrome/src/third_party/android_tools/sdk/tools
 $HOME/depot_tools
 $HOME/emacs/bin
 $HOME/google-cloud-sdk/bin
