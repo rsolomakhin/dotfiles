@@ -113,11 +113,9 @@ ssh_agent_restart() {
 # Generte the grade files for Chromium.
 gradle_chromium() {
   echo "Generating gradle files for Chromium"
-  pushd ~/chrome/src \
-    && build/android/gradle/generate_gradle.py --output-directory out/and \
+  build/android/gradle/generate_gradle.py --output-directory out/and \
         --project-dir ~/AndroidStudioProjects/chrome_public_test_apk \
-        --target //chrome/android:chrome_public_test_apk__apk \
-    && popd
+        --target //chrome/android:chrome_public_test_apk__apk
 }
 
 help() {
