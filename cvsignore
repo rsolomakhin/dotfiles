@@ -15,6 +15,7 @@
 # limitations under the License.
 
 *.elc
+*.rsp
 .dir-locals.el
 .emacs.desktop
 .emacs.desktop.lock
