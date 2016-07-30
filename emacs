@@ -19,3 +19,5 @@
 (define-key (current-global-map) "\C-t" 'fzf)
 (setq indent-tabs-mode nil)
 (setq vc-follow-symlinks 't)
+(load-theme 'ample t)
+(enable-theme 'ample)
