@@ -13,21 +13,32 @@
 ;; limitations under the License.
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
-(define-key (current-global-map) "\C-t" 'fzf)
-(setq indent-tabs-mode nil)
-(setq vc-follow-symlinks 't)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (fzf))))
+ '(dynamic-completion-mode t)
+ '(indent-tabs-mode nil)
+ '(package-archives
+   (quote
+    (("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(package-selected-packages (quote (fzf)))
+ '(revert-without-query (quote (".*")))
+ '(standard-indent 2)
+ '(vc-follow-symlinks nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(package-initialize)
+(define-key (current-global-map) "\C-t" 'fzf)
+
+;; Run this to install package-selected-packages:
+;; (package-refresh-contents)
+;; (package-install-selected-packages)
