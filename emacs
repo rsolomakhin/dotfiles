@@ -48,6 +48,8 @@
 (package-initialize)
 (define-key (current-global-map) "\C-t" 'fzf)
 
+(windmove-default-keybindings)
+
 ;; Run this to install package-selected-packages:
 ;; (package-refresh-contents)
 ;; (package-install-selected-packages)
@@ -58,6 +60,7 @@
 
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'fci-mode)
+(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
 (add-hook 'c-mode-common-hook
           (function (lambda () (local-set-key (kbd "TAB") 'clang-format-region))))
 (add-hook 'java-mode-hook (lambda () (set-fill-column '100)))
