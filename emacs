@@ -28,8 +28,14 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages (quote (fzf)))
  '(revert-without-query (quote (".*")))
+ '(safe-local-variable-values
+   (quote
+    ((c++-mode
+      (c-file-style . "WebKit"))
+     (c-mode
+      (c-file-style . "WebKit")))))
  '(standard-indent 2)
- '(vc-follow-symlinks nil))
+ '(vc-follow-symlinks t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -43,3 +49,18 @@
 ;; Run this to install package-selected-packages:
 ;; (package-refresh-contents)
 ;; (package-install-selected-packages)
+
+;; https://chromium.googlesource.com/chromium/src/+/master/docs/emacs.md
+(load "~/.emacs.d/google-c-style.el")
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(c-add-style "WebKit" '("Google"
+                        (c-basic-offset . 4)
+                        (c-offsets-alist . ((innamespace . 0)
+                                            (access-label . -)
+                                            (case-label . 0)
+                                            (member-init-intro . +)
+                                            (topmost-intro . 0)
+                                            (arglist-cont-nonempty . +)))))
+(load "~/chrome/src/buildtools/clang_format/script/clang-format.el")
+(add-hook 'c-mode-common-hook
+          (function (lambda () (local-set-key (kbd "TAB") 'clang-format-region))))

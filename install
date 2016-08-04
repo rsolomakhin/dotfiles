@@ -123,6 +123,13 @@ elif [ "`uname | grep CYGWIN`" == "" ]; then
   done
 fi
 
+if [ ! -e ~/.emacs.d/google-c-style.el -o $FORCE -eq 1 ]; then
+  mkdir -p ~/.emacs.d/ || die "Cannot create .emacs.d dir"
+  curl -LSso ~/.emacs.d/google-c-style.el \
+    https://raw.githubusercontent.com/google/styleguide/gh-pages/google-c-style.el \
+    || die "Cannot download google-c-style.el"
+fi
+
 for file in $CONFIGS; do
   mkdir -pv ~/.`dirname $file` || die "Cannot create the dir for $file"
   rm -rfv ~/.$file || die "Cannot remove the old $file"
