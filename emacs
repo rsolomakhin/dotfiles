@@ -75,3 +75,6 @@
                                             (member-init-intro . +)
                                             (topmost-intro . 0)
                                             (arglist-cont-nonempty . +)))))
+(defalias 'list-buffers 'ibuffer)
+(recentf-mode 1)
+(global-set-key (kbd "<f7>") 'recentf-open-files)
