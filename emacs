@@ -78,4 +78,4 @@
 (defalias 'list-buffers 'ibuffer)
 (recentf-mode 1)
 (global-set-key (kbd "<f7>") 'recentf-open-files)
-(volatile-highlights-mode t)
+(volatile-highlights-mode 1)
