@@ -29,7 +29,9 @@
    (quote
     (("melpa" . "https://melpa.org/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/"))))
- '(package-selected-packages (quote (volatile-highlights fill-column-indicator fzf)))
+ '(package-selected-packages
+   (quote
+    (undo-tree volatile-highlights fill-column-indicator fzf)))
  '(revert-without-query (quote (".*")))
  '(safe-local-variable-values
    (quote
@@ -79,3 +81,4 @@
 (recentf-mode 1)
 (global-set-key (kbd "<f7>") 'recentf-open-files)
 (volatile-highlights-mode 1)
+(global-undo-tree-mode)
