@@ -29,7 +29,7 @@
    (quote
     (("melpa" . "https://melpa.org/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/"))))
- '(package-selected-packages (quote (fill-column-indicator fzf)))
+ '(package-selected-packages (quote (volatile-highlights fill-column-indicator fzf)))
  '(revert-without-query (quote (".*")))
  '(safe-local-variable-values
    (quote
@@ -78,3 +78,4 @@
 (defalias 'list-buffers 'ibuffer)
 (recentf-mode 1)
 (global-set-key (kbd "<f7>") 'recentf-open-files)
+(volatile-highlights-mode t)
