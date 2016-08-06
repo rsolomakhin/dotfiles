@@ -31,7 +31,7 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (company undo-tree volatile-highlights fill-column-indicator fzf)))
+    (flycheck company undo-tree volatile-highlights fill-column-indicator fzf)))
  '(revert-without-query (quote (".*")))
  '(safe-local-variable-values
    (quote
@@ -83,3 +83,4 @@
 (volatile-highlights-mode 1)
 (global-undo-tree-mode)
 (add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'after-init-hook #'global-flycheck-mode)
