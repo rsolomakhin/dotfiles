@@ -31,7 +31,7 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (undo-tree volatile-highlights fill-column-indicator fzf)))
+    (company undo-tree volatile-highlights fill-column-indicator fzf)))
  '(revert-without-query (quote (".*")))
  '(safe-local-variable-values
    (quote
@@ -82,3 +82,4 @@
 (global-set-key (kbd "<f7>") 'recentf-open-files)
 (volatile-highlights-mode 1)
 (global-undo-tree-mode)
+(add-hook 'after-init-hook 'global-company-mode)
