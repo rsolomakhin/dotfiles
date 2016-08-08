@@ -21,17 +21,19 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-default nil)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
+ '(column-number-mode t)
  '(custom-enabled-themes (quote (wombat)))
  '(dynamic-completion-mode t)
  '(fill-column 80)
  '(indent-tabs-mode nil)
+ '(menu-bar-mode nil)
  '(package-archives
    (quote
     (("melpa" . "https://melpa.org/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (flycheck-ycmd company-ycmd flycheck company undo-tree volatile-highlights fill-column-indicator fzf)))
+    (flycheck-ycmd company-ycmd flycheck company undo-tree volatile-highlights fzf)))
  '(revert-without-query (quote (".*")))
  '(safe-local-variable-values
    (quote
@@ -39,7 +41,9 @@
       (c-file-style . "WebKit"))
      (c-mode
       (c-file-style . "WebKit")))))
+ '(scroll-bar-mode nil)
  '(standard-indent 2)
+ '(tool-bar-mode nil)
  '(vc-follow-symlinks t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -62,7 +66,6 @@
 (load "~/chrome/src/buildtools/clang_format/script/clang-format.el")
 
 (add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'prog-mode-hook 'fci-mode)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 (add-hook 'c-mode-common-hook
           (function (lambda () (local-set-key (kbd "TAB") 'clang-format-region))))
@@ -89,11 +92,3 @@
 (set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
 (company-ycmd-setup)
 (flycheck-ycmd-setup)
-
-;; https://github.com/alpaker/Fill-Column-Indicator/issues/54
-(defun on-off-fci-before-company(command)
-  (when (string= "show" command)
-    (turn-off-fci-mode))
-  (when (string= "hide" command)
-    (turn-on-fci-mode)))
-(advice-add 'company-call-frontends :before #'on-off-fci-before-company)
