@@ -62,8 +62,8 @@
 (load "~/chrome/src/buildtools/clang_format/script/clang-format.el")
 
 (add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'after-change-major-mode-hook 'fci-mode)
-(add-hook 'after-change-major-mode-hook 'electric-pair-mode)
+(add-hook 'prog-mode-hook 'fci-mode)
+(add-hook 'prog-mode-hook 'electric-pair-mode)
 (add-hook 'c-mode-common-hook
           (function (lambda () (local-set-key (kbd "TAB") 'clang-format-region))))
 (add-hook 'java-mode-hook (lambda () (set-fill-column '100)))
