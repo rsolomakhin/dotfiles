@@ -85,8 +85,15 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-ycmd-mode)
-(set-variable 'ycmd-server-command '("python"))
-(add-to-list 'ycmd-server-command (expand-file-name "~/.third_party/ycmd/ycmd"))
+(set-variable 'ycmd-server-command '("ycmd-server-helper"))
 (set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
 (company-ycmd-setup)
 (flycheck-ycmd-setup)
+
+;; https://github.com/alpaker/Fill-Column-Indicator/issues/54
+(defun on-off-fci-before-company(command)
+  (when (string= "show" command)
+    (turn-off-fci-mode))
+  (when (string= "hide" command)
+    (turn-on-fci-mode)))
+(advice-add 'company-call-frontends :before #'on-off-fci-before-company)
