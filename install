@@ -159,7 +159,15 @@ if [ $CYGWIN -eq 0 ]; then
   if [ ! -e $YCM_OUTPUT -o $FORCE -eq 1 ]; then
     pushd vim/bundle/YouCompleteMe || die "Cannot change dir"
     ./install.py --clang-completer --gocode-completer --tern-completer \
-      || die "Cannot install YCM"
+      || die "Cannot install YouCompleteMe"
+    popd || die "Cannot go back"
+  fi
+
+  YCM_OUTPUT=third_party/ycmd/ycm_core.so
+  if [ ! -e $YCM_OUTPUT -o $FORCE -eq 1 ]; then
+    pushd third_party/ycmd || die "Cannot change dir"
+    ./build.py --clang-completer --gocode-completer --tern-completer \
+      || die "Cannot build ycmd"
     popd || die "Cannot go back"
   fi
 fi
