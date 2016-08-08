@@ -28,3 +28,6 @@
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "third_party/ycmd"]
+	path = third_party/ycmd
+	url = https://github.com/Valloric/ycmd.git

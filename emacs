@@ -31,7 +31,7 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (flycheck company undo-tree volatile-highlights fill-column-indicator fzf)))
+    (flycheck-ycmd company-ycmd flycheck company undo-tree volatile-highlights fill-column-indicator fzf)))
  '(revert-without-query (quote (".*")))
  '(safe-local-variable-values
    (quote
@@ -84,3 +84,9 @@
 (global-undo-tree-mode)
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'after-init-hook #'global-ycmd-mode)
+(set-variable 'ycmd-server-command '("python"))
+(add-to-list 'ycmd-server-command (expand-file-name "~/.third_party/ycmd/ycmd"))
+(set-variable 'ycmd-global-config "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
+(company-ycmd-setup)
+(flycheck-ycmd-setup)
