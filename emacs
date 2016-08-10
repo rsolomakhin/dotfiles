@@ -33,7 +33,7 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (flycheck-ycmd company-ycmd flycheck company undo-tree volatile-highlights fzf)))
+    (flycheck-ycmd company-ycmd flycheck company undo-tree volatile-highlights fzf google-c-style clang-format)))
  '(revert-without-query (quote (".*")))
  '(safe-local-variable-values
    (quote
@@ -60,10 +60,6 @@
 ;; Run this to install package-selected-packages:
 ;; (package-refresh-contents)
 ;; (package-install-selected-packages)
-
-;; https://chromium.googlesource.com/chromium/src/+/master/docs/emacs.md
-(load "~/.emacs.d/google-c-style.el")
-(load "~/chrome/src/buildtools/clang_format/script/clang-format.el")
 
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
