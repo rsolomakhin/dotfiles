@@ -69,7 +69,8 @@
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 (add-hook 'c-mode-common-hook
           (function (lambda () (local-set-key (kbd "TAB") 'clang-format-region))))
-(add-hook 'java-mode-hook (lambda () (set-fill-column '100)))
+(add-hook 'java-mode-hook (lambda () (setq c-basic-offset 4
+                                           fill-column 100)))
 
 (c-add-style "WebKit" '("Google"
                         (c-basic-offset . 4)
