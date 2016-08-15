@@ -76,8 +76,8 @@ export PATH=$GOPATH/bin:$PATH || die "Cannot add ~/go/bin to the path"
 export PATH=$HOME/node/bin:$PATH || die "Cannot add ~/node/bin to the path"
 export PATH=$HOME/python/bin:$PATH || die "Cannot add ~/python/bin to the path"
 
-CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc tern-config emacs"
-PROGS="cmake npm tmux"
+CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc tern-config emacs eslintrc"
+PROGS="cmake tmux"
 
 which apt-get >& /dev/null
 if [ $? -eq 0 ]; then
@@ -148,54 +148,19 @@ if [ $CYGWIN -eq 0 ]; then
   done
 fi
 
-if [ ! -e ~/.vim/autoload/pathogen.vim -o $FORCE -eq 1 ]; then
-  echo "Installing vim-pathogen"
-  curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim \
-    || die "Cannot download vim-pathogen"
+if [ ! -e ~/.vim/autoload/plug.vim -o $FORCE -eq 1 ]; then
+  echo "Installing vim-plug"
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+    || die "Cannot download vim-plug"
 fi
 
 if [ $CYGWIN -eq 0 ]; then
-  YCM_OUTPUT=vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so
-  if [ ! -e $YCM_OUTPUT -o $FORCE -eq 1 ]; then
-    pushd vim/bundle/YouCompleteMe || die "Cannot change dir"
-    ./install.py --clang-completer --gocode-completer --tern-completer \
-      || die "Cannot install YouCompleteMe"
-    popd || die "Cannot go back"
-  fi
-
   YCM_OUTPUT=third_party/ycmd/ycm_core.so
   if [ ! -e $YCM_OUTPUT -o $FORCE -eq 1 ]; then
-    pushd third_party/ycmd || die "Cannot change dir"
+    pushd third_party/ycmd || die "Cannot change dir to ycmd for emacs and atom"
     ./build.py --clang-completer --gocode-completer --tern-completer \
-      || die "Cannot build ycmd"
-    popd || die "Cannot go back"
+      || die "Cannot build ycmd for emacs and atom"
+    popd || die "Cannot go back from ycmd dir for emacs and atom"
   fi
 fi
-
-if [ ! -e vim/bundle/mojom -o $FORCE -eq 1 ]; then
-  rm -rfv vim/bundle/mojom || die "Cannot clear the old mojom directory"
-  if [ -e ~/chrome/src/tools/vim/mojom ]; then
-    cp -av ~/chrome/src/tools/vim/mojom vim/bundle/mojom \
-      || die "Cannot copy over the mojom vim syntax config"
-  fi
-fi
-
-if [ ! -e vim/bundle/gn -o $FORCE -eq 1 ]; then
-  rm -rfv vim/bundle/gn || die "Cannot clear the old gn directory"
-  if [ -e ~/chrome/src/tools/gn/misc/vim ]; then
-    cp -av ~/chrome/src/tools/gn/misc/vim  vim/bundle/gn \
-      || die "Cannot copy over the gn vim syntax config"
-  fi
-fi
-
-[ -e ~/.fzf ] || ln -sfv $PWD/vim/bundle/fzf ~/.fzf \
-  || die "Cannot link $HOME/.fzf"
-if [ ! -e ~/.fzf/bin/fzf -o $FORCE -eq 1 ]; then
-  pushd ~/.fzf || die "Cannot go to fzf dir"
-  ./install --all --no-update-rc || die "Cannot install fzf"
-  popd || die "Cannot go back"
-fi
-
-for dir in vim/bundle/*/doc; do
-  vim -u NONE -c "helptags $dir" -c q || die "Cannot install vim docs from $dir"
-done
