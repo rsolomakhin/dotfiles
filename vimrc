@@ -60,6 +60,10 @@ set encoding=utf-8
 set expandtab
 set nofixeol
 set formatoptions+=j " Remove comment characters when joining lines.
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
 set hidden
 set ignorecase
 set incsearch
