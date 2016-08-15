@@ -15,6 +15,42 @@
 syntax on
 filetype plugin indent on
 
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-unimpaired'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
+Plug 'w0ng/vim-hybrid'
+if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
+  Plug '~/chrome/src/tools/vim/mojom'
+  source ~/chrome/src/tools/vim/clang-format.vim
+  source ~/chrome/src/tools/vim/filetypes.vim
+  source ~/chrome/src/tools/vim/ninja-build.vim
+endif
+call plug#end()
+
+" Colorscheme
+set t_Co=256
+set background=dark
+colorscheme hybrid
+
+" YCM
+let g:ycm_global_ycm_extra_conf =
+      \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
+
+" vim-fugitive
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+" fzf.vim
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>t :GFiles<CR>
+
 let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
 set backspace=indent,eol,start
@@ -55,101 +91,8 @@ else
   set directory=~/.vim/swap,.
 endif
 
-set t_Co=256
-set background=dark
-
-if !has('win32unix')
-  " Colorschemes
-  colorscheme hybrid
-  function! ToggleLightDarkBackground()
-    if (&background == "dark")
-      set background=light
-      let g:solarized_termcolors=256
-      colorscheme solarized
-    else
-      set background=dark
-      colorscheme hybrid
-    endif
-  endfunction
-
-  " YCM
-  let g:ycm_global_ycm_extra_conf =
-        \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-
-  " vim-fugitive
-  set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-
-  " Syntastic
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-  let g:syntastic_auto_loc_list = 0
-  let g:syntastic_check_on_wq = 0
-  let g:syntastic_javascript_checkers = ['eslint']
-  let g:syntastic_javascript_eslint_args = '-c google --env browser'
-  let g:syntastic_mode_map = {
-        \  'mode': 'passive',
-        \  'active_filetypes': [],
-        \  'passive_filetypes': []}
-  let s:syntastic_mode='passive'
-  function! ToggleSyntastic()
-    if (s:syntastic_mode == 'passive')
-      echom 'syntastic on'
-      let s:syntastic_mode='active'
-      call SyntasticCheck()
-    else
-      echom 'syntastic off'
-      let s:syntastic_mode='passive'
-      call SyntasticReset()
-    endif
-  endfunction
-
-  " FZF
-  function! s:line_handler(l)
-    let keys = split(a:l, ':\t')
-    exec 'buf' keys[0]
-    exec keys[1]
-    normal! ^zz
-  endfunction
-  function! s:buffer_lines()
-    let res = []
-    for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-      call extend(res, map(getbufline(b,0,"$"), 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
-    endfor
-    return res
-  endfunction
-  command! FZFMru call fzf#run({
-        \  'source':  v:oldfiles,
-        \  'sink':    'e',
-        \  'options': '-m -x +s',
-        \  'down':    '40%'})
-
-  nnoremap <leader>b :call ToggleLightDarkBackground()<CR>
-  nnoremap <leader>r :FZFMru<CR>
-  nnoremap <leader>s :call ToggleSyntastic()<CR>
-  nnoremap <leader>t :FZF<CR>
-endif
-
-" 'nore' means the mappings should not recurse.
-noremap ]q :cnext<CR>
-noremap [q :cprevious<CR>
-noremap ]l :lnext<CR>
-noremap [l :lprevious<CR>
-noremap <leader>l :lwindow<CR>
-noremap <leader>q :cwindow<CR>
-
-if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
-  source ~/chrome/src/tools/vim/ninja-build.vim
-endif
-
-if filereadable(glob("~/chrome/src/tools/vim/filetypes.vim"))
-  source ~/chrome/src/tools/vim/filetypes.vim
-endif
-
 augroup custom
   autocmd!
-  autocmd BufRead,BufNewFile *.idl set filetype=widl
-  autocmd BufRead,BufNewFile .tern-project set filetype=json
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
   autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto
@@ -157,10 +100,6 @@ augroup custom
 
   autocmd FileType cpp nnoremap <C-]> :YcmCompleter GoTo<CR>
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
-  autocmd FileType cpp setlocal formatprg=clang-format\ -style=Chromium
-
-  autocmd FileType javascript setlocal
-        \ formatprg=js-beautify\ --stdin\ --indent-size=2
 
   autocmd FileType gitcommit setlocal spell
   autocmd FileType gitcommit setlocal textwidth=72
@@ -179,8 +118,6 @@ augroup custom
   autocmd BufNewFile,BufRead */WebKit/* setlocal softtabstop=4
   autocmd BufNewFile,BufRead */WebKit/* setlocal tabstop=4
   autocmd BufNewFile,BufRead */WebKit/* setlocal textwidth&
-  autocmd BufNewFile,BufRead */WebKit/* setlocal
-        \ formatprg=clang-format\ -style=WebKit
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
