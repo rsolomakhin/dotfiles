@@ -19,11 +19,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
+Plug 'milkypostman/vim-togglelist'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
 Plug 'w0ng/vim-hybrid'
@@ -49,7 +53,13 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " fzf.vim
 nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
+
+" vim-togglelist
+nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
+nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
+let g:toggle_list_copen_command='Copen'
 
 let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
@@ -87,7 +97,7 @@ set ttimeoutlen=0
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
 
-if has("win32")
+if has('win32')
   set spellfile=~/vimfiles/spell/en.utf-8.add
   set directory=~/vimfiles/swap,.
 else
