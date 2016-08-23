@@ -25,8 +25,9 @@ if not exist %USERPROFILE%\vimfiles\swap mkdir %USERPROFILE%\vimfiles\swap ^
 if not exist %USERPROFILE%\vimfiles\autoload mkdir %USERPROFILE%\vimfiles\autoload ^
   || echo "Cannot create vim autoload dir" && exit /b 1
 
-bitsadmin.exe /transfer "DownloadVimPathogen" https://tpo.pe/pathogen.vim ^
-  %USERPROFILE%\vimfiles\autoload\pathogen.vim ^
+bitsadmin.exe /transfer "DownloadVimPlug" ^
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim ^
+  %USERPROFILE%\vimfiles\autoload\plug.vim ^
   || echo "Cannot download vim pathogen" && exit /b 1
 
 pushd %~dp0 ^
@@ -83,9 +84,6 @@ git.exe config --replace-all user.email "rouslan.solomakhin@gmail.com" ^
 
 git.exe submodule update --init --recursive ^
   || echo "Cannot update submodules" && exit /b 1
-
-xcopy /Y/S/I ..\vim %USERPROFILE%\vimfiles ^
-  || echo "Cannot copy vimfiles dir" && exit /b 1
 
 popd ^
   || echo "Cannot return to original directory" && exit /b 1

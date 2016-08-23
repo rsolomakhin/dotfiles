@@ -15,7 +15,6 @@
 @echo off
 set ALTERNATE_EDITOR=emacs.exe
 set EDITOR=c:\vim\gvim.exe
-set GYP_DEFINES=component=shared_library fastbuild=2 disable_nacl=1 disable_pnacl=1
 set GYP_GENERATORS=ninja
 set HOME=%USERPROFILE%
 set JAVA_HOME=%SYSTEMDRIVE%\java\jdk
@@ -29,12 +28,9 @@ if not "%PATH%" == "%PATH:depot_tools=%" (
 
 for /d %%g in (%SYSTEMDRIVE%\src\depot_tools\git*chromium*) do set PATH=%PATH%;%%g\bin
 set PATH=%PATH%;%GOPATH%\bin
-set PATH=%PATH%;%HOME%\.third_party\cask\bin
 set PATH=%PATH%;%JAVA_HOME%\bin
-set PATH=%PATH%;%SYSTEMDRIVE%\console2
 set PATH=%PATH%;%SYSTEMDRIVE%\emacs\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\Go\bin
-set PATH=%PATH%;%SYSTEMDRIVE%\maven\bin
 set PATH=%PATH%;%SYSTEMDRIVE%\src\depot_tools
 set PATH=%PATH%;%SYSTEMDRIVE%\vim
 
