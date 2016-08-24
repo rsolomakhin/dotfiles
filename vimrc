@@ -16,6 +16,8 @@ syntax on
 filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
@@ -31,18 +33,17 @@ Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-c
 Plug 'w0ng/vim-hybrid'
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   Plug '~/chrome/src/tools/vim/mojom'
-  source ~/chrome/src/tools/vim/clang-format.vim
   source ~/chrome/src/tools/vim/filetypes.vim
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 call plug#end()
 
-" Colorscheme
+" vim-hybrid
 set t_Co=256
 set background=dark
 colorscheme hybrid
 
-" YCM
+" YouCompleteMe
 let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 
@@ -53,6 +54,12 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
+
+" vim-codefmt
+nnoremap <leader>= :FormatLines<CR>
+
+" http://eclim.org/vim/code_completion.html
+let g:EclimCompletionMethod = 'omnifunc'
 
 let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
