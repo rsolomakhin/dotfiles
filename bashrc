@@ -69,6 +69,7 @@ $HOME/.fzf/bin
 $HOME/.rvm/bin
 $HOME/chrome/src/third_party/android_tools/sdk/platform-tools
 $HOME/depot_tools
+$HOME/eclipse
 $HOME/google-cloud-sdk/bin
 $HOME/jdk/bin
 $HOME/node/bin
