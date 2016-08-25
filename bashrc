@@ -67,6 +67,7 @@ fi
 TOOLS="$GOPATH/bin
 $HOME/.fzf/bin
 $HOME/.rvm/bin
+$HOME/android-studio/bin
 $HOME/chrome/src/third_party/android_tools/sdk/platform-tools
 $HOME/depot_tools
 $HOME/eclipse
@@ -77,7 +78,7 @@ $HOME/python/bin
 $HOME/software/bin
 /opt/android-studio-stable/bin"
 for tool in $TOOLS; do
-  [[ -d $tool && $PATH != *$tool* ]] && PATH=$PATH:$tool
+  [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
 export PATH
 
