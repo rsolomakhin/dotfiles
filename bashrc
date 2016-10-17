@@ -56,8 +56,8 @@ if [ -d ~/homebrew/bin ]; then
   if [[ $PATH != $PREFIX:* ]]; then
     PATH=$PREFIX:${PATH/:$PREFIX}
   fi
-  if [ -d ~/homebrew/share/vim/vim74 ]; then
-    export VIMRUNTIME=$HOME/homebrew/share/vim/vim74
+  if [ -d ~/homebrew/share/vim/vim80 ]; then
+    export VIMRUNTIME=$HOME/homebrew/share/vim/vim80
   fi
   alias ls="ls -G"
 else
