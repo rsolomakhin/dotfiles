@@ -128,10 +128,5 @@ augroup custom
   autocmd FileType xml setlocal tabstop=4
   autocmd FileType xml setlocal textwidth&
 
-  autocmd BufNewFile,BufRead */WebKit/* setlocal shiftwidth=4
-  autocmd BufNewFile,BufRead */WebKit/* setlocal softtabstop=4
-  autocmd BufNewFile,BufRead */WebKit/* setlocal tabstop=4
-  autocmd BufNewFile,BufRead */WebKit/* setlocal textwidth&
-
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
