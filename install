@@ -139,7 +139,7 @@ done
 rm -rfv ~/.profile || die "Cannot clean up the .profile file"
 
 if [ $CYGWIN -eq 0 ]; then
-  NODE_MODULES="eslint eslint-config-google csslint typescript tern gulp bower"
+  NODE_MODULES="eslint eslint-config-google csslint typescript tern gulp bower js-beautify"
   for mod in $NODE_MODULES; do
     if [ ! -e ~/node/lib/node_modules/$mod -o $FORCE -eq 1 ]; then
       npm install --global --prefix=$HOME/node $mod \
