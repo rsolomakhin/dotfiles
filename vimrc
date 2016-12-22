@@ -31,6 +31,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
+Plug 'vim-syntastic/syntastic'
 Plug 'w0ng/vim-hybrid'
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   Plug '~/chrome/src/tools/vim/mojom'
