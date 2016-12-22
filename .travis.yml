@@ -19,3 +19,4 @@ dist: trusty
 os:
   - linux
   - osx
+osx_image: xcode8
