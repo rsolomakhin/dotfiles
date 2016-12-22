@@ -98,8 +98,10 @@ if [ $? -eq 0 ]; then
     sudo apt-get install inotify-tools || die "Cannot install inotify-tools"
   fi
   if [ ! -f ~/software/bin/node -o $FORCE -eq 1 ]; then
-    curl https://nodejs.org/dist/v7.3.0/node-v7.3.0-linux-x64.tar.xz | tar xJ \
-      --transform "s#node-v7.3.0-linux-x64#$HOME\/software#" \
+    echo "Installing nodejs"
+    curl https://nodejs.org/dist/v7.3.0/node-v7.3.0-linux-x64.tar.xz \
+      | tar xJ --strip 1 -C ~/software \
+      --exclude=LICENSE --exclude=README.md --exclude=CHANGELOG.md \
       || die "Cannot download nodejs"
   fi
   if [ ! -f ~/.rvm/bin/rvm -o $FORCE -eq 1 ]; then
