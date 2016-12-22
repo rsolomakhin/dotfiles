@@ -58,7 +58,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_args = '-c google --env browser'
+let g:syntastic_javascript_eslint_args = '-c google --env browser,es6'
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
