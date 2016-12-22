@@ -70,11 +70,15 @@ mkdir -pv ~/python/bin || die "Cannot create ~/python/bin dir"
 mkdir -pv ~/.vim/swap || die "Cannot create the vim swap dir"
 mkdir -pv ~/.vim/spell || die "Cannot create the vim spell dir"
 mkdir -pv ~/.vim/autoload || die "Cannot create vim autoload dir"
+mkdir -pv ~/software/bin || die "Cannot create the software dir"
 
 export GOPATH=$HOME/go || die "Cannot set the go path"
 export PATH=$GOPATH/bin:$PATH || die "Cannot add ~/go/bin to the path"
 export PATH=$HOME/node/bin:$PATH || die "Cannot add ~/node/bin to the path"
 export PATH=$HOME/python/bin:$PATH || die "Cannot add ~/python/bin to the path"
+export PATH=$HOME/.rvm/bin:$PATH || die "Cannot add ~/.rvm/bin to the path"
+export PATH=$HOME/software/bin:$PATH \
+  || die "Cannot add ~/software/bin to the path"
 
 CONFIGS="cvsignore tmux.conf vim/bundle bashrc bash_profile vimrc tern-config emacs eslintrc"
 PROGS="cmake tmux"
@@ -94,10 +98,24 @@ if [ $? -eq 0 ]; then
     sudo apt-get install inotify-tools || die "Cannot install inotify-tools"
   fi
   if [ ! -f ~/software/bin/node -o $FORCE -eq 1 ]; then
-    pushd ~/software || die "Cannot enter the software dir"
-    curl https://nodejs.org/dist/v7.3.0/node-v7.3.0-linux-x64.tar.xz | tar xJ \
-      --transform 's/node-v7.3.0-linux-x64\///' || die "Cannot download nodejs"
-    popd || die "Cannot go back to working dir"
+    curl https://nodejs.org/dist/v7.3.0/node-v7.3.0-linux-x64.tar.xz | tar x \
+      --transform "s#node-v7.3.0-linux-x64#$HOME\/software#" \
+      || die "Cannot download nodejs"
+  fi
+  if [ ! -f ~/.rvm/bin/rvm -o $FORCE -eq 1 ]; then
+    gpg --keyserver hkp://keys.gnupg.net --recv-keys \
+      409B6B1796C275462A1703113804BB82D39DC0E3 || die "Cannot get rvm key"
+    curl -LSso /tmp/rvm-installer \
+      https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer \
+      || die "Cannot download rvm-installer"
+    curl -LSso /tmp/rvm-installer.asc \
+      https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer.asc \
+      || die "Cannot download rvm signature"
+    gpg --verify /tmp/rvm-installer.asc || die "Rvm signature does not match"
+    bash /tmp/rvm-installer stable || die "Cannot install rvm"
+  fi
+  if [ ! -f ~/.rvm/rubies/ruby-2.3.3/bin/ruby -o $FORCE -eq 1 ]; then
+    rvm install 2.3 || die "Cannot install ruby"
   fi
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
     curl -LSso ~/.Xresources-hybrid \

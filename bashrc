@@ -67,6 +67,7 @@ fi
 TOOLS="$GOPATH/bin
 $HOME/.fzf/bin
 $HOME/.rvm/bin
+$HOME/.rvm/rubies/ruby-2.3.3/bin/ruby
 $HOME/android-studio/bin
 $HOME/chrome/src/third_party/android_tools/sdk/platform-tools
 $HOME/chrome/src/third_party/android_tools/sdk/tools
