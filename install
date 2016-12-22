@@ -95,7 +95,8 @@ if [ $? -eq 0 ]; then
   fi
   if [ ! -f ~/software/bin/node -o $FORCE -eq 1 ]; then
     pushd ~/software || die "Cannot enter the software dir"
-    curl https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-x64.tar.xz | tar xJ --transform 's/node-v6.9.2-linux-x64//' || die "Cannot download nodejs"
+    curl https://nodejs.org/dist/v7.3.0/node-v7.3.0-linux-x64.tar.xz | tar xJ \
+      --transform 's/node-v7.3.0-linux-x64\///' || die "Cannot download nodejs"
     popd || die "Cannot go back to working dir"
   fi
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
