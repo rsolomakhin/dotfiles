@@ -82,7 +82,7 @@ PROGS="cmake tmux"
 which apt-get >& /dev/null
 if [ $? -eq 0 ]; then
   CONFIGS="$CONFIGS fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu Xresources"
-  PROGS="$PROGS curl golang fluxbox python-dev npm nodejs"
+  PROGS="$PROGS curl golang fluxbox python-dev"
   for prog in $PROGS; do
     which $prog >& /dev/null
     if [ $? -ne 0 -o $FORCE -eq 1 ]; then
@@ -93,8 +93,11 @@ if [ $? -eq 0 ]; then
   if [ $? -ne 0 -o $FORCE -eq 1 ]; then
     sudo apt-get install inotify-tools || die "Cannot install inotify-tools"
   fi
-  ln -svf /usr/bin/nodejs ~/node/bin/node \
-    || die "Cannot link node to nodejs"
+  if [ ! -f ~/software/bin/node -o $FORCE -eq 1 ]; then
+    pushd ~/software || die "Cannot enter the software dir"
+    curl https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-x64.tar.xz | tar xJ --transform 's/node-v6.9.2-linux-x64//' || die "Cannot download nodejs"
+    popd || die "Cannot go back to working dir"
+  fi
   if [ ! -e ~/.Xresources-hybrid -o $FORCE -eq 1 ]; then
     curl -LSso ~/.Xresources-hybrid \
       https://gist.githubusercontent.com/w0ng/3278077/raw/4c9e1510a7ade25b787efed0ad435234c0af1ba5/.Xresources-hybrid \
