@@ -97,12 +97,10 @@ if [ $? -eq 0 ]; then
   if [ $? -ne 0 -o $FORCE -eq 1 ]; then
     sudo apt-get install inotify-tools || die "Cannot install inotify-tools"
   fi
-  if [ ! -f ~/software/bin/node -o $FORCE -eq 1 ]; then
-    echo "Installing nodejs"
+  if [ ! -f ~/node/bin/node -o $FORCE -eq 1 ]; then
+    echo "Downloading nodejs"
     curl https://nodejs.org/dist/v7.3.0/node-v7.3.0-linux-x64.tar.xz \
-      | tar xJ --strip 1 -C ~/software \
-      --exclude=LICENSE --exclude=README.md --exclude=CHANGELOG.md \
-      || die "Cannot download nodejs"
+      | tar xJ --strip 1 -C ~/node || die "Cannot download nodejs"
   fi
   if [ ! -f ~/.rvm/bin/rvm -o $FORCE -eq 1 ]; then
     gpg --keyserver hkp://keys.gnupg.net --recv-keys \
@@ -115,6 +113,11 @@ if [ $? -eq 0 ]; then
       || die "Cannot download rvm signature"
     gpg --verify /tmp/rvm-installer.asc || die "Rvm signature does not match"
     bash /tmp/rvm-installer stable || die "Cannot install rvm"
+  fi
+  if [ ! -f ~/google-cloud-sdk/bin/gcloud ]; then
+    echo "Downloading Google cloud SDK"
+    curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-139.0.1-linux-x86_64.tar.gz \
+      | tar xz -C ~ || die "Cannot download Google cloud SDK"
   fi
   if [ ! -f ~/.rvm/rubies/ruby-2.3.3/bin/ruby -o $FORCE -eq 1 ]; then
     rvm install 2.3 || die "Cannot install ruby"
