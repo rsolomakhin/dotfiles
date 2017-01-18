@@ -129,6 +129,15 @@ if [ $? -eq 0 ]; then
     unzip /tmp/android-sdk.zip || die "Cannot unzip Android SDK"
     popd || die "Cannot go back in directory stack"
   fi
+  if [ ! -f ~/android-studio/bin/studio.sh ]; then
+    echo "Downloading Android Studio"
+    curl -LSso /tmp/android-studio.zip \
+      https://dl.google.com/dl/android/studio/ide-zips/2.2.3.0/android-studio-ide-145.3537739-linux.zip \
+      || die "Cannot download Android Studio"
+    pushd ~ || die "Cannot change directory to home dir"
+    unzip /tmp/android-studio.zip || die "Cannot unzip Android Studio"
+    popd || die "Cannot go back in directory stack"
+  fi
   if [ ! -f ~/.rvm/rubies/ruby-2.3.3/bin/ruby -o $FORCE -eq 1 ]; then
     rvm install 2.3 || die "Cannot install ruby"
   fi

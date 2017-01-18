@@ -30,6 +30,9 @@ export JAVA_HOME=$HOME/jdk
 export PYTHONPATH=$HOME/python:$PYTHONPATH
 export STUDIO_VM_OPTIONS="-Xmx2048m"
 
+# https://youtrack.jetbrains.com/issue/IDEA-78860
+export IBUS_ENABLE_SYNC_MODE=1
+
 [ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 
 HELPERS="$HOME/.fzf/shell/key-bindings.bash
@@ -76,8 +79,7 @@ $HOME/google-cloud-sdk/bin
 $HOME/jdk/bin
 $HOME/node/bin
 $HOME/python/bin
-$HOME/software/bin
-/opt/android-studio-stable/bin"
+$HOME/software/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
