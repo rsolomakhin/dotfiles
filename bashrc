@@ -18,7 +18,7 @@ export EMACS="emacsclient -t"
 export VIM="vim"
 
 export ALTERNATE_EDITOR=""
-export ANDROID_HOME=$HOME/android-sdk-linux
+export ANDROID_HOME=$HOME/android-sdk
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export EDITOR="$VIM"
 export FZF_CTRL_T_COMMAND="git ls"
@@ -64,13 +64,12 @@ else
   alias ls="ls --color=auto"
 fi
 
-TOOLS="$GOPATH/bin
+TOOLS="$ANDROID_HOME/tools
+$GOPATH/bin
+$HOME/android-studio/bin
 $HOME/.fzf/bin
 $HOME/.rvm/bin
 $HOME/.rvm/rubies/ruby-2.3.3/bin/ruby
-$HOME/android-studio/bin
-$HOME/chrome/src/third_party/android_tools/sdk/platform-tools
-$HOME/chrome/src/third_party/android_tools/sdk/tools
 $HOME/depot_tools
 $HOME/eclipse
 $HOME/google-cloud-sdk/bin

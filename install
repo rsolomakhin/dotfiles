@@ -71,6 +71,7 @@ mkdir -pv ~/.vim/swap || die "Cannot create the vim swap dir"
 mkdir -pv ~/.vim/spell || die "Cannot create the vim spell dir"
 mkdir -pv ~/.vim/autoload || die "Cannot create vim autoload dir"
 mkdir -pv ~/software/bin || die "Cannot create the software dir"
+mkdir -pv ~/android-sdk || die "Cannot create the android-sdk dir"
 
 export GOPATH=$HOME/go || die "Cannot set the go path"
 export PATH=$GOPATH/bin:$PATH || die "Cannot add ~/go/bin to the path"
@@ -118,6 +119,15 @@ if [ $? -eq 0 ]; then
     echo "Downloading Google cloud SDK"
     curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-139.0.1-linux-x86_64.tar.gz \
       | tar xz -C ~ || die "Cannot download Google cloud SDK"
+  fi
+  if [ ! -f ~/android-sdk/tools/android ]; then
+    echo "Downloading Android SDK"
+    curl -LSso /tmp/android-sdk.zip \
+      https://dl.google.com/android/repository/tools_r25.2.3-linux.zip \
+      || die "Cannot download Android SDK"
+    pushd ~/android-sdk || die "Cannot change directory to Android SDK"
+    unzip /tmp/android-sdk.zip || die "Cannot unzip Android SDK"
+    popd || die "Cannot go back in directory stack"
   fi
   if [ ! -f ~/.rvm/rubies/ruby-2.3.3/bin/ruby -o $FORCE -eq 1 ]; then
     rvm install 2.3 || die "Cannot install ruby"
