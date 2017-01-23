@@ -52,6 +52,8 @@ fi
 
 if [ -z "$VIMRUNTIME" -a -d /usr/share/vim/vim74 ]; then
   export VIMRUNTIME=/usr/share/vim/vim74
+elif [ -z "$VIMRUNTIME" -a -d /usr/share/vim/vim80 ]; then
+  export VIMRUNTIME=/usr/share/vim/vim80
 fi
 
 if [ -d ~/homebrew/bin ]; then
