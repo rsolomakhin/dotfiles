@@ -70,6 +70,7 @@ else
 fi
 
 TOOLS="$ANDROID_HOME/tools
+$ANDROID_HOME/platform-tools
 $GOPATH/bin
 $HOME/android-studio/bin
 $HOME/.fzf/bin
