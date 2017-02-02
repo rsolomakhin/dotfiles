@@ -59,7 +59,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_args = '-c google --env browser,es6'
-let g:syntastic_mode_map = {'passive_filetypes': ['java']}
+let g:syntastic_mode_map = {'passive_filetypes': ['java', 'cpp']}
 
 " vim-fugitive
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
