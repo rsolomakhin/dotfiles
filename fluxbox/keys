@@ -47,7 +47,7 @@ OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 Mod1 F2 :Exec fbrun -bg black -fg white
 Mod4 r :Exec fbrun -bg black -fg white
 
-Control Mod1 s :Exec google-chrome-beta --show-app-list
+Control Mod1 s :Exec google-chrome --show-app-list
 Control Mod1 t :Exec xterm
 
 Control Mod1 Left :PrevWorkspace
@@ -55,10 +55,10 @@ Control Mod1 Right :NextWorkspace
 Shift Control Mod1 Left :TakeToPrevWorkspace
 Shift Control Mod1 Right :TakeToNextWorkspace
 
-Print :Exec gnome-screenshot --window --delay=10
+Print :Exec gnome-screenshot --interactive
 
-Control Mod1 l :Exec xscreensaver-command --lock
-Mod4 l :Exec xscreensaver-command --lock
-Shift Control l :Exec xscreensaver-command --lock
+Control Mod1 l :Exec gnome-screensaver-command --lock
+Mod4 l :Exec gnome-screensaver-command --lock
+Shift Control l :Exec gnome-screensaver-command --lock
 
 Control Mod1 Delete :Exit

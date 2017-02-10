@@ -87,7 +87,7 @@ PROGS="cmake tmux"
 which apt-get >& /dev/null
 if [ $? -eq 0 ]; then
   CONFIGS="$CONFIGS fluxbox/apps fluxbox/menu fluxbox/startup fluxbox/init fluxbox/keys fluxbox/windowmenu Xresources config/pulse/client.conf"
-  PROGS="$PROGS curl golang fluxbox python-dev xscreensaver gstreamer1.0-libav"
+  PROGS="$PROGS curl golang fluxbox python-dev gnome-screensaver gnome-screenshot gstreamer1.0-libav"
   for prog in $PROGS; do
     which $prog >& /dev/null
     if [ $? -ne 0 -o $FORCE -eq 1 ]; then

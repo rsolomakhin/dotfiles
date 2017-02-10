@@ -17,6 +17,6 @@
   [exec] (xterm) {xterm} </usr/share/pixmaps/xterm-color_32x32.xpm>
   [reconfig] (reconfig)
   [restart] (restart)
-  [exec] (lock) {xscreensaver-command -lock} </usr/share/pixmaps/xscreensaver.xpm>
+  [exec] (lock) {gnome-screensaver-command --lock} </usr/share/pixmaps/xscreensaver.xpm>
   [exit] (exit)
 [end]
