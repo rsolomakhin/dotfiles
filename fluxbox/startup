@@ -15,15 +15,15 @@
 # limitations under the License.
 
 eval `dbus-launch --sh-syntax --exit-with-session`
-google-chrome-beta &
+xscreensaver -no-splash &
+pulseaudio --start &&
 xrdb -I$HOME ~/.Xresources
 xterm -e tmux attach-session &
-xscreensaver -no-splash &
 empathy --start-hidden &
 
 # man xkeyboard-config
 # setxkbmap -option ctrl:nocaps  # Caps Lock as Ctrl
-setxkbmap -option caps:escape  # Make Caps Lock and additional ESC
+# setxkbmap -option caps:escape  # Make Caps Lock and additional ESC
 
 fbautostart
 exec fluxbox
