@@ -115,12 +115,12 @@ if [ $? -eq 0 ]; then
     gpg --verify /tmp/rvm-installer.asc || die "Rvm signature does not match"
     bash /tmp/rvm-installer stable || die "Cannot install rvm"
   fi
-  if [ ! -f ~/google-cloud-sdk/bin/gcloud ]; then
+  if [ ! -f ~/google-cloud-sdk/bin/gcloud -o $FORCE -eq 1 ]; then
     echo "Downloading Google cloud SDK"
     curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-139.0.1-linux-x86_64.tar.gz \
       | tar xz -C ~ || die "Cannot download Google cloud SDK"
   fi
-  if [ ! -f ~/android-sdk/tools/android ]; then
+  if [ ! -f ~/android-sdk/tools/android -o $FORCE -eq 1 ]; then
     echo "Downloading Android SDK"
     curl -LSso /tmp/android-sdk.zip \
       https://dl.google.com/android/repository/tools_r25.2.3-linux.zip \
@@ -129,7 +129,7 @@ if [ $? -eq 0 ]; then
     unzip /tmp/android-sdk.zip || die "Cannot unzip Android SDK"
     popd || die "Cannot go back in directory stack"
   fi
-  if [ ! -f ~/android-studio/bin/studio.sh ]; then
+  if [ ! -f ~/android-studio/bin/studio.sh -o $FORCE -eq 1 ]; then
     echo "Downloading Android Studio"
     curl -LSso /tmp/android-studio.zip \
       https://dl.google.com/dl/android/studio/ide-zips/2.2.3.0/android-studio-ide-145.3537739-linux.zip \
