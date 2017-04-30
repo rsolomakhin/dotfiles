@@ -120,6 +120,9 @@ gradle_chromium() {
   build/android/gradle/generate_gradle.py --output-directory out/and \
         --project-dir ~/AndroidStudioProjects/chrome_public_test_apk \
         --target //chrome/android:chrome_public_test_apk__apk
+  build/android/gradle/generate_gradle.py --output-directory out/and \
+        --project-dir ~/AndroidStudioProjects/chrome_junit_tests \
+        --target //chrome/android:chrome_junit_tests
 }
 
 help() {

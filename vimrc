@@ -124,7 +124,8 @@ augroup custom
   autocmd!
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
-  autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto
+  autocmd FileType
+        \ cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto,objcpp
         \ setlocal textwidth=80
 
   autocmd FileType cpp nnoremap <C-]> :YcmCompleter GoTo<CR>
