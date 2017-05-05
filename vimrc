@@ -110,7 +110,7 @@ set timeoutlen=1000
 set ttimeoutlen=0
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
-set path=.,third_party/WebKit/Source
+set path+=third_party/WebKit/Source
 
 if has('win32')
   set spellfile=~/vimfiles/spell/en.utf-8.add
