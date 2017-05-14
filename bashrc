@@ -18,7 +18,7 @@ export EMACS="emacsclient -t"
 export VIM="vim"
 
 export ALTERNATE_EDITOR=""
-export EDITOR="$VIM"
+export EDITOR="~/.default_editor || help"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
@@ -80,10 +80,24 @@ gradle_chromium() {
         --target //chrome/android:chrome_junit_tests
 }
 
+editor_vim() {
+    echo "VIM is the default editor"
+    echo "exec vim" > ~/.default_editor
+    chmod 700 ~/.default_editor
+}
+
+editor_emacs() {
+    echo "Emacs is the default editor"
+    echo "exec emacsclient -t" > ~/.default_editor
+    chmod 700 ~/.default_editor
+}
+
 help() {
   echo "Commands:"
   echo "  $ ssh_agent_restart   - Restart the SSH agent."
   echo "  $ gradle_chromium     - Generate the gradle files for Chromium."
+  echo "  $ editor_vim          - Launch vim as the default text editor."
+  echo "  $ editor_emacs        - Launch emacs as the default text editor."
 }
 
 if [ -f ~/.ssh_agent.sh ]; then
