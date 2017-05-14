@@ -46,13 +46,14 @@ alias e="$EDITOR"
 alias em="$EMACS"
 alias ema="$EMACS"
 alias emac="$EMACS"
-alias grep="grep --color=auto"
 alias ggrep="git grep"
+alias grep="grep --color=auto"
 alias j="jobs"
+alias ll="ls -l --color"
+alias ls="ls --color"
 alias so="source"
 alias v="$VIM"
 alias vi="$VIM"
-alias ll="ls -l"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
@@ -92,12 +93,18 @@ editor_emacs() {
     chmod 700 ~/.default_editor
 }
 
+gls() {
+    git ls | grep $@
+}
+
 help() {
   echo "Commands:"
   echo "  $ ssh_agent_restart   - Restart the SSH agent."
   echo "  $ gradle_chromium     - Generate the gradle files for Chromium."
   echo "  $ editor_vim          - Launch vim as the default text editor."
   echo "  $ editor_emacs        - Launch emacs as the default text editor."
+  echo "  $ gls <pattern>       - List file names matching the pattern."
+  echo "  $ ggrep <pattern>     - List files containing the pattern."
 }
 
 if [ -f ~/.ssh_agent.sh ]; then
