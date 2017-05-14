@@ -15,11 +15,13 @@
 # limitations under the License.
 
 for file in `git ls-files`; do
-  if [ "$file" == ".travis.yml" ]; then continue; fi
+  if [ "$file" == "appveyor.yml" ]; then continue; fi
+  if [ "$file" == "fonts/LICENCE.txt" ]; then continue; fi
+  if [ "$file" == "fonts/README.rst" ]; then continue; fi
+  if [ "$file" == "install" ]; then continue; fi
   if [ "$file" == "LICENSE" ]; then continue; fi
   if [ "$file" == "README.md" ]; then continue; fi
-  if [ "$file" == "appveyor.yml" ]; then continue; fi
-  if [ "$file" == "install" ]; then continue; fi
+  if [ "$file" == ".travis.yml" ]; then continue; fi
   if [ "$file" == "windows/env.bat" ]; then continue; fi
   if [ "$file" == "windows/install.bat" ]; then continue; fi
   mkdir -pv ~/.`dirname $file`
