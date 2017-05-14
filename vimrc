@@ -42,6 +42,9 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
 endif
 call plug#end()
 
+" vim-airline
+let g:airline_powerline_fonts = 1
+
 " vim-hybrid
 set background=dark
 let g:hybrid_custom_term_colors = 1
@@ -52,9 +55,6 @@ let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
 
 " syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
