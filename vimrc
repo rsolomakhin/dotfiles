@@ -35,6 +35,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'w0ng/vim-hybrid'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   Plug '~/chrome/src/tools/vim/mojom'
   source ~/chrome/src/tools/vim/filetypes.vim
@@ -62,9 +63,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_args = '-c google --env browser,es6'
 let g:syntastic_mode_map = {'passive_filetypes': ['java', 'cpp']}
-
-" vim-fugitive
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " fzf.vim
 nnoremap <leader>b :Buffers<CR>
