@@ -82,13 +82,13 @@ gradle_chromium() {
 
 editor_vim() {
     echo "VIM is the default editor"
-    echo "exec vim" > ~/.default_editor
+    echo "exec vim \$@" > ~/.default_editor
     chmod 700 ~/.default_editor
 }
 
 editor_emacs() {
     echo "Emacs is the default editor"
-    echo "exec emacsclient -t" > ~/.default_editor
+    echo "exec emacsclient -t \$@" > ~/.default_editor
     chmod 700 ~/.default_editor
 }
 
