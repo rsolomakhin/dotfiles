@@ -13,7 +13,9 @@
 # limitations under the License.
 
 [begin] (fluxbox)
-  [exec] (chrome) {google-chrome} </opt/google/chrome/product_logo_32.xpm>
+  [exec] (chrome) {google-chrome-stable} </opt/google/chrome/product_logo_32.xpm>
+  [exec] (chrome beta) {google-chrome-beta} </opt/google/chrome-beta/product_logo_32.xpm>
+  [exec] (chrome dev) {google-chrome-unstable} </opt/google/chrome-unstable/product_logo_32.xpm>
   [exec] (xterm) {xterm} </usr/share/pixmaps/xterm-color_32x32.xpm>
   [reconfig] (reconfig)
   [restart] (restart)
