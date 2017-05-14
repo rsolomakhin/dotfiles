@@ -110,3 +110,7 @@ help() {
 if [ -f ~/.ssh_agent.sh ]; then
   source ~/.ssh_agent.sh >& /dev/null
 fi
+
+if [ -f /usr/share/vim/vim80/syntax/syntax.vim ]; then
+  export VIMRUNTIME=/usr/share/vim/vim80
+fi
