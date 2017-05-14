@@ -36,7 +36,7 @@ else
   export PS1='[\u@\h \w]\$ '
 fi
 
-TOOLS="$HOME/depot_tools"
+TOOLS="$HOME/depot_tools $HOME/.fzf/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
