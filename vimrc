@@ -47,6 +47,9 @@ call plug#end()
 " vim-airline
 let g:airline_powerline_fonts = 1
 
+" promptline.vim
+let g:promptline_preset = 'clear'
+
 " vim-hybrid
 set background=dark
 let g:hybrid_custom_term_colors = 1
