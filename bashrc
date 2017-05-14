@@ -23,18 +23,8 @@ export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
 
-HELPERS="$HOME/.fzf/shell/key-bindings.bash
-$HOME/.ssh_agent.sh
-/usr/lib/git-core/git-sh-prompt
-/usr/local/git/current/share/git-core/git-completion.bash
-/usr/local/git/current/share/git-core/git-prompt.sh"
+HELPERS="$HOME/.fzf/shell/key-bindings.bash $HOME/.ssh_agent.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
-
-if type __git_ps1 >& /dev/null; then
-  export PS1='[\u@\h \w$(__git_ps1 " (%s)")]\$ '
-else
-  export PS1='[\u@\h \w]\$ '
-fi
 
 TOOLS="$HOME/depot_tools $HOME/.fzf/bin"
 for tool in $TOOLS; do
@@ -81,18 +71,21 @@ gradle_chromium() {
         --target //chrome/android:chrome_junit_tests
 }
 
+# Make VIM the default editor.
 editor_vim() {
     echo "VIM is the default editor"
     echo "exec vim \$@" > ~/.default_editor
     chmod 700 ~/.default_editor
 }
 
+# Make Emacs the default editor.
 editor_emacs() {
     echo "Emacs is the default editor"
     echo "exec emacsclient -t \$@" > ~/.default_editor
     chmod 700 ~/.default_editor
 }
 
+# List files in git.
 gls() {
     git ls | grep $@
 }
@@ -114,3 +107,6 @@ fi
 if [ -f /usr/share/vim/vim80/syntax/syntax.vim ]; then
   export VIMRUNTIME=/usr/share/vim/vim80
 fi
+
+# Apply the powerline theme.
+source ~/.sh-theme.sh

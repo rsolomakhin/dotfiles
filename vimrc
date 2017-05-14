@@ -36,6 +36,7 @@ Plug 'w0ng/vim-hybrid'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
+Plug 'edkolev/promptline.vim'
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   Plug '~/chrome/src/tools/vim/mojom'
   source ~/chrome/src/tools/vim/filetypes.vim
