@@ -18,26 +18,12 @@ export EMACS="emacsclient -t"
 export VIM="vim"
 
 export ALTERNATE_EDITOR=""
-export ANDROID_HOME=$HOME/android-sdk
-export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 export EDITOR="$VIM"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
-export GOPATH=$HOME/go
-export GYP_GENERATORS="ninja"
 export HISTCONTROL="ignoredups:erasedups"
-export JAVA_HOME=$HOME/jdk
-export PYTHONPATH=$HOME/python:$PYTHONPATH
-export STUDIO_VM_OPTIONS="-Xmx2048m"
-
-# https://youtrack.jetbrains.com/issue/IDEA-78860
-export IBUS_ENABLE_SYNC_MODE=1
-
-[ -z "$GYP_DEFINES" ] && export GYP_DEFINES="component=shared_library"
 
 HELPERS="$HOME/.fzf/shell/key-bindings.bash
-$HOME/google-cloud-sdk/completion.bash.inc
-$HOME/.rvm/scripts/rvm
 $HOME/.ssh_agent.sh
 /usr/lib/git-core/git-sh-prompt
 /usr/local/git/current/share/git-core/git-completion.bash
@@ -50,39 +36,7 @@ else
   export PS1='[\u@\h \w]\$ '
 fi
 
-if [ -z "$VIMRUNTIME" -a -d /usr/share/vim/vim74 ]; then
-  export VIMRUNTIME=/usr/share/vim/vim74
-elif [ -z "$VIMRUNTIME" -a -d /usr/share/vim/vim80 ]; then
-  export VIMRUNTIME=/usr/share/vim/vim80
-fi
-
-if [ -d ~/homebrew/bin ]; then
-  PREFIX=$HOME/homebrew/bin
-  if [[ $PATH != $PREFIX:* ]]; then
-    PATH=$PREFIX:${PATH/:$PREFIX}
-  fi
-  if [ -d ~/homebrew/share/vim/vim80 ]; then
-    export VIMRUNTIME=$HOME/homebrew/share/vim/vim80
-  fi
-  alias ls="ls -G"
-else
-  alias ls="ls --color=auto"
-fi
-
-TOOLS="$ANDROID_HOME/tools
-$ANDROID_HOME/platform-tools
-$GOPATH/bin
-$HOME/android-studio/bin
-$HOME/.fzf/bin
-$HOME/.rvm/bin
-$HOME/.rvm/rubies/ruby-2.3.3/bin/ruby
-$HOME/depot_tools
-$HOME/eclipse
-$HOME/google-cloud-sdk/bin
-$HOME/jdk/bin
-$HOME/node/bin
-$HOME/python/bin
-$HOME/software/bin"
+TOOLS="$HOME/depot_tools"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
@@ -98,6 +52,7 @@ alias j="jobs"
 alias so="source"
 alias v="$VIM"
 alias vi="$VIM"
+alias ll="ls -l"
 
 # Disable flow control (Ctrl-S).
 stty -ixon
