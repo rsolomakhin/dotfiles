@@ -1,0 +1,21 @@
+[user]
+	email = rouslan.solomakhin@gmail.com
+	name = Rouslan Solomakhin
+[alias]
+	br = branch
+	brv = branch -vv
+	can = commit -a --amend --no-edit
+	co = checkout
+	ls = ls-files
+	st = status
+	sub = submodule update --init --recursive
+[color]
+	ui = auto
+[core]
+	autocrlf = false
+	excludesfile = /home/rouslan/.cvsignore
+	filemode = false
+[http]
+	cookiefile = /home/rouslan/.gitcookies
+[push]
+	default = simple
