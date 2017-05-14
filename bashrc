@@ -56,7 +56,7 @@ alias v="$VIM"
 alias vi="$VIM"
 
 # Disable flow control (Ctrl-S).
-stty -ixon
+stty -ixon >& /dev/null
 
 # Resume SSH agent.
 ssh_agent_restart() {
