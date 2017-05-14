@@ -25,16 +25,11 @@ if not exist %USERPROFILE%\vimfiles\swap mkdir %USERPROFILE%\vimfiles\swap ^
 if not exist %USERPROFILE%\vimfiles\autoload mkdir %USERPROFILE%\vimfiles\autoload ^
   || echo "Cannot create vim autoload dir" && exit /b 1
 
-bitsadmin.exe /transfer "DownloadVimPlug" ^
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim ^
-  %USERPROFILE%\vimfiles\autoload\plug.vim ^
-  || echo "Cannot download vim pathogen" && exit /b 1
-
 pushd %~dp0 ^
   || echo "Cannot go into the directory of the install script" && exit /b 1
 
-copy /Y drmemory-env.bat %SYSTEMDRIVE%\src\ ^
-  || echo "Cannot copy drmemory-env.bat" && exit /b 1
+copy /Y ..\vim\autoload\plug.vim %USERPROFILE%\vimfiles\autoload ^
+  || echo "Cannot copy plug.vim" && exit /b 1
 copy /Y env.bat %SYSTEMDRIVE%\src\ ^
   || echo "Cannot copy env.bat" && exit /b 1
 copy /Y ..\cvsignore %USERPROFILE%\.cvsignore ^
