@@ -17,6 +17,7 @@
   [exec] (chrome beta) {google-chrome-beta} </opt/google/chrome-beta/product_logo_32.xpm>
   [exec] (chrome dev) {google-chrome-unstable} </opt/google/chrome-unstable/product_logo_32.xpm>
   [exec] (xterm) {xterm} </usr/share/pixmaps/xterm-color_32x32.xpm>
+  [exec] (gnome terminal) {gnome-terminal}
   [reconfig] (reconfig)
   [restart] (restart)
   [exec] (lock) {gnome-screensaver-command --lock} </usr/share/pixmaps/xscreensaver.xpm>

@@ -18,7 +18,7 @@ export EMACS="emacsclient -t"
 export VIM="vim"
 
 export ALTERNATE_EDITOR=""
-export EDITOR="~/.default_editor || help"
+export EDITOR="~/.default_editor"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
