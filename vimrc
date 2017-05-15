@@ -12,9 +12,6 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-syntax on
-filetype plugin indent on
-
 call plug#begin('~/.vim/plugged')
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
@@ -36,7 +33,7 @@ Plug 'w0ng/vim-hybrid'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-Plug 'edkolev/promptline.vim'
+Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   Plug '~/chrome/src/tools/vim/mojom'
   source ~/chrome/src/tools/vim/filetypes.vim
