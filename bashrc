@@ -18,7 +18,6 @@ export EMACS="emacsclient -t"
 export VIM="vim"
 
 export ALTERNATE_EDITOR=""
-export EDITOR="~/.default_editor"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
@@ -32,7 +31,6 @@ for tool in $TOOLS; do
 done
 export PATH
 
-alias e="$EDITOR"
 alias em="$EMACS"
 alias ema="$EMACS"
 alias emac="$EMACS"
@@ -73,16 +71,18 @@ gradle_chromium() {
 
 # Make VIM the default editor.
 editor_vim() {
-    echo "VIM is the default editor"
-    echo "exec vim \$@" > ~/.default_editor
-    chmod 700 ~/.default_editor
+  echo "VIM is the default editor"
+  echo "export EDITOR=\"$VIM\"" > ~/.default_editor.sh
+  export EDITOR="$VIM"
+  alias e="$EDITOR"
 }
 
 # Make Emacs the default editor.
 editor_emacs() {
-    echo "Emacs is the default editor"
-    echo "exec emacsclient -t \$@" > ~/.default_editor
-    chmod 700 ~/.default_editor
+  echo "Emacs is the default editor"
+  echo "export EDITOR=\"$EMACS\"" > ~/.default_editor.sh
+  export EDITOR="$EMACS"
+  alias e="$EDITOR"
 }
 
 # List files in git.
@@ -110,3 +110,11 @@ fi
 
 # Apply the powerline theme.
 source ~/.sh-theme.sh
+
+# Select the default editor.
+if [ -f ~/.default_editor.sh ]; then
+  source ~/.default_editor.sh
+  alias e="$EDITOR"
+else
+  echo "Run 'editor_vim' or 'editor_emacs' please."
+fi
