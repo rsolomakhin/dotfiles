@@ -37,11 +37,17 @@ alias emac="$EMACS"
 alias ggrep="git grep"
 alias grep="grep --color=auto"
 alias j="jobs"
-alias ll="ls -l --color"
-alias ls="ls --color"
 alias so="source"
 alias v="$VIM"
 alias vi="$VIM"
+
+if [ "`uname`" == "Darwin" ]; then
+  alias ll="ls -l -G"
+  alias ls="ls -G"
+else
+  alias ll="ls -l --color"
+  alias ls="ls --color"
+fi
 
 # Disable flow control (Ctrl-S).
 stty -ixon >& /dev/null
