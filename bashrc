@@ -112,6 +112,8 @@ fi
 
 if [ -f /usr/share/vim/vim80/syntax/syntax.vim ]; then
   export VIMRUNTIME=/usr/share/vim/vim80
+elif [ -f /usr/share/vim/vim74/syntax/syntax.vim ]; then
+  export VIMRUNTIME=/usr/share/vim/vim74
 fi
 
 # Apply the powerline theme.

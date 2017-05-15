@@ -48,8 +48,10 @@ let g:airline_powerline_fonts = 1
 let g:promptline_preset = 'clear'
 
 " vim-hybrid
-set background=dark
-let g:hybrid_custom_term_colors = 1
+if system("uname") != "Darwin\n"
+  set background=dark
+  let g:hybrid_custom_term_colors = 1
+endif
 colorscheme hybrid
 
 " YouCompleteMe
