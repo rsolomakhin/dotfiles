@@ -40,8 +40,8 @@ OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 OnWindow Mod4 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
 OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 
-123 :Exec amixer sset Master,0 1+
-122 :Exec amixer sset Master,0 1-
+123 :Exec amixer sset Master,0 10+
+122 :Exec amixer sset Master,0 10-
 121 :Exec amixer sset Master,0 toggle
 
 Mod1 F2 :Exec fbrun -bg black -fg white
