@@ -27,9 +27,9 @@
 	ui = auto
 [core]
 	autocrlf = false
-	excludesfile = /home/rouslan/.cvsignore
+	excludesfile = ~/.cvsignore
 	filemode = false
-[http]
-	cookiefile = /home/rouslan/.gitcookies
 [push]
 	default = simple
+[http]
+	cookiefile = ~/.gitcookies
