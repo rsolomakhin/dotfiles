@@ -73,8 +73,13 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
 
+" glaive
+call glaive#Install()
+
 " vim-codefmt
-nnoremap <leader>= :FormatLines<CR>
+" \== FormatLines
+" \=b FormatBuffer
+Glaive codefmt plugin[mappings]
 
 " http://eclim.org/vim/code_completion.html
 let g:EclimCompletionMethod = 'omnifunc'
@@ -157,11 +162,16 @@ augroup custom
   autocmd FileType java setlocal softtabstop=4
   autocmd FileType java setlocal tabstop=4
   autocmd FileType java setlocal textwidth=100
+  autocmd FileType java let b:codefmt_formatter = 'clang-format'
 
   autocmd FileType xml setlocal shiftwidth=4
   autocmd FileType xml setlocal softtabstop=4
   autocmd FileType xml setlocal tabstop=4
   autocmd FileType xml setlocal textwidth&
+
+  autocmd FileType c,cpp,proto,java AutoFormatBuffer clang-format
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,json,javascript AutoFormatBuffer js-beautify
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
