@@ -15,6 +15,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
