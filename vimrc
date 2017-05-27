@@ -84,21 +84,6 @@ Glaive codefmt plugin[mappings]
 " http://eclim.org/vim/code_completion.html
 let g:EclimCompletionMethod = 'omnifunc'
 
-" Auto-close parentheses and brackets.
-ino " ""<left>
-ino ' ''<left>
-ino ( ()<left>
-ino [ []<left>
-ino { {}<left>
-ino {<CR> {<CR>}<ESC>O
-
-" Don't auto-close already closed parentheses and brackets.
-ino "" ""
-ino '' ''
-ino () ()
-ino [] []
-ino {} {}
-
 let &colorcolumn='+' . join(range(1, 1), ',+')
 set autoindent
 set backspace=indent,eol,start
