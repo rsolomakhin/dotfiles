@@ -13,6 +13,7 @@
 " limitations under the License.
 
 call plug#begin('~/.vim/plugged')
+Plug 'chromium/vim-codesearch'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
