@@ -154,7 +154,7 @@ augroup custom
   autocmd FileType xml setlocal tabstop=4
   autocmd FileType xml setlocal textwidth&
 
-  autocmd FileType c,cpp,proto,java AutoFormatBuffer clang-format
+  autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
   autocmd FileType gn AutoFormatBuffer gn
   autocmd FileType html,css,json,javascript AutoFormatBuffer js-beautify
 
