@@ -25,7 +25,7 @@ export HISTCONTROL="ignoredups:erasedups"
 HELPERS="$HOME/.fzf/shell/key-bindings.bash $HOME/.ssh_agent.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
-TOOLS="$HOME/depot_tools $HOME/.fzf/bin"
+TOOLS="$HOME/depot_tools $HOME/.fzf/bin $HOME/node/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done

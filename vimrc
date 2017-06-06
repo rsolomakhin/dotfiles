@@ -157,7 +157,7 @@ augroup custom
 
   autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
   autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType css,json,javascript AutoFormatBuffer js-beautify
+  autocmd FileType css,json,javascript,html AutoFormatBuffer js-beautify
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
