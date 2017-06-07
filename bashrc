@@ -41,7 +41,7 @@ alias so="source"
 alias v="$VIM"
 alias vi="$VIM"
 
-if [ "`uname`" == "Darwin" ]; then
+if [[ "`uname`" == "Darwin" ]]; then
   alias ll="ls -l -G"
   alias ls="ls -G"
 else
