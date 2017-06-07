@@ -12,4 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source ~/.bashrc
+source ~/.common.sh
+
+HELPERS="$HOME/.fzf.zsh"
+for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
+
+# vi:ft=sh
