@@ -22,7 +22,9 @@ export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
 
-HELPERS="$HOME/.fzf/shell/key-bindings.bash $HOME/.ssh_agent.sh"
+HELPERS="$HOME/.ssh_agent.sh"
+[[ -n "$BASH_VERSION" ]] && HELPERS="$HELPERS $HOME/.fzf/shell/key-bindings.bash"
+[[ -n "$ZSH_VERSION" ]] && HELPERS="$HELPERS $HOME/.fzf/shell/key-bindings.zsh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 TOOLS="$HOME/depot_tools $HOME/.fzf/bin $HOME/node/bin"
@@ -93,7 +95,7 @@ editor_emacs() {
 
 # List files in git.
 gls() {
-    git ls | grep $@
+  git ls | grep $@
 }
 
 help() {
@@ -126,3 +128,5 @@ if [ -f ~/.default_editor.sh ]; then
 else
   echo "Run 'editor_vim' or 'editor_emacs' please."
 fi
+
+# vi:ft=sh

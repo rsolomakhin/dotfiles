@@ -15,3 +15,5 @@
 # limitations under the License.
 
 source ~/.bashrc
+
+# vi:ft=sh
