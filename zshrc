@@ -17,4 +17,7 @@ source ~/.common.sh
 HELPERS="$HOME/.fzf.zsh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
+# Turn off vim line editing, even if that's the default text editor.
+bindkey -e
+
 # vi:ft=sh

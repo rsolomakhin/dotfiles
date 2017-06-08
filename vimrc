@@ -86,6 +86,7 @@ Glaive codefmt plugin[mappings]
 let g:EclimCompletionMethod = 'omnifunc'
 
 let &colorcolumn='+' . join(range(1, 1), ',+')
+runtime macros/matchit.vim
 set autoindent
 set backspace=indent,eol,start
 set completeopt= " Turn off YCM's previews on top
