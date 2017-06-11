@@ -44,11 +44,13 @@ OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 122 :Exec amixer sset Master,0 10-
 121 :Exec amixer sset Master,0 toggle
 
-Mod1 F2 :Exec fbrun -bg black -fg white
-Mod4 r :Exec fbrun -bg black -fg white
+Mod1 F2 :Exec dmenu_run -l 10
+Mod1 p :Exec dmenu_run -l 10
+Mod4 r :Exec dmenu_run -l 10
 
-Control Mod1 s :Exec google-chrome --show-app-list
 Control Mod1 t :Exec xterm
+Mod1 Return :Exec xterm
+Shift Mod1 Return :Exec xterm
 
 Control Mod1 Left :PrevWorkspace
 Control Mod1 Right :NextWorkspace
