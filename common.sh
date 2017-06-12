@@ -23,7 +23,7 @@ export HISTCONTROL="ignoredups:erasedups"
 HELPERS="$HOME/.ssh_agent.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
-TOOLS="$HOME/depot_tools $HOME/.fzf/bin $HOME/node/bin"
+TOOLS="$HOME/depot_tools $HOME/.fzf/bin $HOME/node/bin $HOME/homebrew/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
@@ -108,7 +108,9 @@ if [ -f ~/.ssh_agent.sh ]; then
   source ~/.ssh_agent.sh >& /dev/null
 fi
 
-if [ -f /usr/share/vim/vim80/syntax/syntax.vim ]; then
+if [ -f $HOME/homebrew/share/vim/vim80/syntax/syntax.vim ]; then
+  export VIMRUNTIME=$HOME/homebrew/share/vim/vim80
+elif [ -f /usr/share/vim/vim80/syntax/syntax.vim ]; then
   export VIMRUNTIME=/usr/share/vim/vim80
 elif [ -f /usr/share/vim/vim74/syntax/syntax.vim ]; then
   export VIMRUNTIME=/usr/share/vim/vim74
