@@ -112,6 +112,8 @@ if [ -f $HOME/homebrew/share/vim/vim80/syntax/syntax.vim ]; then
   export VIMRUNTIME=$HOME/homebrew/share/vim/vim80
 elif [ -f /usr/share/vim/vim80/syntax/syntax.vim ]; then
   export VIMRUNTIME=/usr/share/vim/vim80
+elif [ -f $HOME/../usr/share/vim/vim80/syntax/syntax.vim ]; then
+  export VIMRUNTIME=$HOME/../usr/share/vim/vim80
 elif [ -f /usr/share/vim/vim74/syntax/syntax.vim ]; then
   export VIMRUNTIME=/usr/share/vim/vim74
 fi
