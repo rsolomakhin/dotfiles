@@ -29,7 +29,9 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
+if v:version >= 800 && has('python')
+  Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
+endif
 Plug 'vim-syntastic/syntastic'
 Plug 'w0ng/vim-hybrid'
 Plug 'vim-airline/vim-airline'
