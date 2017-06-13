@@ -52,7 +52,7 @@ let g:airline_powerline_fonts = 1
 let g:promptline_preset = 'clear'
 
 " vim-hybrid
-if !empty($XTERM_VERSION)
+if !empty($XTERM_VERSION) || !empty($ANDROID_DATA)
   set background=dark
   let g:hybrid_custom_term_colors = 1
 endif
