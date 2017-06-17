@@ -29,4 +29,10 @@ setopt BANG_HIST
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
+# Correct commands.
+setopt CORRECT
+
+# .. goes up a dir.
+setopt AUTO_CD
+
 # vi:ft=sh
