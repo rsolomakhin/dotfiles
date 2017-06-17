@@ -21,8 +21,11 @@ for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 bindkey -e
 
 # Turn on history.
-export HISTFILE=~/.bash_history
-export HISTSIZE=10000
-export SAVEHIST=10000
+export HISTFILE=~/.zsh_history
+export HISTSIZE=10000000
+export SAVEHIST=$HISTSIZE
+setopt BANG_HIST
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
 
 # vi:ft=sh
