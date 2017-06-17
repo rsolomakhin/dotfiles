@@ -24,6 +24,7 @@ bindkey -e
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000000
 export SAVEHIST=$HISTSIZE
+setopt APPEND_HISTORY
 setopt BANG_HIST
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
