@@ -20,4 +20,9 @@ for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 # Turn off vim line editing, even if that's the default text editor.
 bindkey -e
 
+# Turn on history.
+export HISTFILE=~/.bash_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+
 # vi:ft=sh
