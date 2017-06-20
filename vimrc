@@ -14,6 +14,7 @@
 
 call plug#begin('~/.vim/plugged')
 Plug 'chromium/vim-codesearch'
+Plug 'eagletmt/neco-ghc'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
@@ -44,6 +45,10 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 call plug#end()
+
+" neco-ghc
+let g:haskellmode_completion_ghc = 0
+let g:ycm_semantic_triggers = {'haskell': ['.']}
 
 " vim-airline
 let g:airline_powerline_fonts = 1
@@ -138,8 +143,8 @@ augroup custom
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
   autocmd FileType
-        \ cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto,objcpp
-        \ setlocal textwidth=80
+        \ cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto,objcpp,
+        \haskell setlocal textwidth=80
 
   autocmd FileType cpp nnoremap <C-]> :YcmCompleter GoTo<CR>
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
@@ -161,6 +166,8 @@ augroup custom
   autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
   autocmd FileType gn AutoFormatBuffer gn
   autocmd FileType css,json,javascript,html AutoFormatBuffer js-beautify
+
+  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end

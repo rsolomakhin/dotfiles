@@ -12,3 +12,13 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+import System.IO
+
+main = do
+  xmonad $ defaultConfig
+
