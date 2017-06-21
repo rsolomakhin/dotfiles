@@ -58,8 +58,12 @@ let g:promptline_preset = 'clear'
 
 " vim-hybrid
 if !empty($XTERM_VERSION) || !empty($ANDROID_DATA)
+  " xterm or termux.
   set background=dark
   let g:hybrid_custom_term_colors = 1
+elseif $TERM == "xterm"
+  " gnome-terminal
+  set background=dark
 endif
 colorscheme hybrid
 
