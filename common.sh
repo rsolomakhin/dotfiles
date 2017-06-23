@@ -98,8 +98,8 @@ help() {
   echo "Commands:"
   echo "  $ ssh_agent_restart   - Restart the SSH agent."
   echo "  $ gradle_chromium     - Generate the gradle files for Chromium."
-  echo "  $ editor_vim          - Launch vim as the default text editor."
-  echo "  $ editor_emacs        - Launch emacs as the default text editor."
+  echo "  $ editor_vim          - Set vim as the default text editor."
+  echo "  $ editor_emacs        - Set emacs as the default text editor."
   echo "  $ gls <pattern>       - List file names matching the pattern."
   echo "  $ ggrep <pattern>     - List files containing the pattern."
 }
