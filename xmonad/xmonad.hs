@@ -23,6 +23,7 @@ main = do
   xmonad $ defaultConfig
     { manageHook = manageDocks <+> manageHook defaultConfig
     , layoutHook = avoidStruts $ layoutHook defaultConfig
+    , terminal = "xterm"
     } `additionalKeys`
     [ ((0, xK_Print), spawn "gnome-screenshot --interactive")
     , ((controlMask .|. mod1Mask, xK_l), spawn "gnome-screensaver-command --lock")
