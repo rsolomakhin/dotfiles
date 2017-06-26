@@ -29,6 +29,9 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec xterm
 
+# lock the screen
+bindsym $mod+Control+l exec gnome-screensaver-command -l
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
