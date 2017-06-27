@@ -23,7 +23,7 @@ xterm -e tmux attach &
 empathy &
 
 # Compositor.
-compton -f &
+compton &
 
 # The window manager.
 exec i3
