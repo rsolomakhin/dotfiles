@@ -19,8 +19,6 @@ xrdb ~/.Xresources
 # Startup apps.
 google-chrome-unstable &
 xterm -e tmux attach &
-/opt/android-studio-3.0/bin/studio.sh &
-empathy &
 
 # Compositor.
 compton &
