@@ -94,14 +94,29 @@ gls() {
   git ls | grep $@
 }
 
+# Use the desktop configuration for i3 status bar.
+i3status_desktop() {
+  echo "Desktop configuration for i3 status bar"
+  ln -sfv ~/.i3status.desktop.conf ~/.i3status.conf
+}
+
+# Use the desktop configuration for i3 status bar.
+i3status_laptop() {
+  echo "Laptop configuration for i3 status bar"
+  ln -sfv ~/.i3status.laptop.conf ~/.i3status.conf
+}
+
+
 help() {
   echo "Commands:"
-  echo "  $ ssh_agent_restart   - Restart the SSH agent."
-  echo "  $ gradle_chromium     - Generate the gradle files for Chromium."
-  echo "  $ editor_vim          - Set vim as the default text editor."
   echo "  $ editor_emacs        - Set emacs as the default text editor."
-  echo "  $ gls <pattern>       - List file names matching the pattern."
+  echo "  $ editor_vim          - Set vim as the default text editor."
   echo "  $ ggrep <pattern>     - List files containing the pattern."
+  echo "  $ gls <pattern>       - List file names matching the pattern."
+  echo "  $ gradle_chromium     - Generate the gradle files for Chromium."
+  echo "  $ i3status_desktop    - Use the desktop configuration for i3 status."
+  echo "  $ i3status_laptop     - Use the laptop configuration for i3 status."
+  echo "  $ ssh_agent_restart   - Restart the SSH agent."
 }
 
 if [ -f ~/.ssh_agent.sh ]; then
