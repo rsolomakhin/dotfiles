@@ -97,8 +97,6 @@ set $workspace2 "2:Terminal"
 set $workspace3 "3:IRC"
 set $workspace4 "4:Android Studio"
 
-assign [class="Google-chrome-unstable"] $workspace1
-assign [class="XTerm"] $workspace2
 assign [class="Empathy"] $workspace3
 assign [class="jetbrains-studio"] $workspace4
 
