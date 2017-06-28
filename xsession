@@ -16,6 +16,9 @@
 # Xterm appearance.
 xrdb ~/.Xresources
 
+# Background
+eval $(cat ~/.fehbg)
+
 # Startup apps.
 google-chrome-unstable &
 xterm -e tmux attach &
