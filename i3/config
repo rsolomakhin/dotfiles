@@ -164,3 +164,6 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# No borders for windows, but keep the title bar.
+new_window normal 0
