@@ -163,5 +163,12 @@ bar {
         status_command i3status
 }
 
-# No borders for windows, but keep the title bar.
-new_window normal 0
+# 1 px borders for windows and keep the title bar.
+new_window normal 1
+
+# Pulse audio volumne control
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 0 -- '-5%'
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 0 -- '+5%'
+bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 0 0
+bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5

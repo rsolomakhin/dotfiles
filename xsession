@@ -22,5 +22,8 @@ eval $(cat ~/.fehbg)
 # Compositor.
 compton &
 
+# Volume control.
+pulseaudio --start
+
 # The window manager.
 exec i3
