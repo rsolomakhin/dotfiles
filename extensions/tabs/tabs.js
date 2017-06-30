@@ -142,13 +142,13 @@ function buildTabList() {
  */
 function onKeyDown(e) {
   // Enter key.
-  if (e.keyCode === '13') {
+  if (e.keyCode === 13) {
     goToSelectedTab();
     return false;
   }
 
   // Up arrow.
-  if (e.keyCode === '38') {
+  if (e.keyCode === 38) {
     if (selected > 0) {
       clearSelection();
       selected--;
@@ -158,7 +158,7 @@ function onKeyDown(e) {
   }
 
   // Down arrow.
-  if (e.keyCode === '40') {
+  if (e.keyCode === 40) {
     if (selected < displayedTabElements.length - 1) {
       clearSelection();
       selected++;
@@ -176,7 +176,7 @@ function onKeyDown(e) {
  * @return {bool} Whether the default key handler should be triggered.
  */
 function onKeyUp(e) {
-  if (e.keyCode === '13' || e.keyCode === '38' || e.keyCode === '40') {
+  if (e.keyCode === 13 || e.keyCode === 38 || e.keyCode === 40) {
     return false;
   }
 
