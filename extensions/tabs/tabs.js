@@ -20,6 +20,7 @@ let displayedTabElements = [];
 let query = new RegExp('');
 let tabsElement;
 let queryElement;
+let bgElement;
 let selected = 0;
 
 /**
@@ -47,7 +48,7 @@ function clearSelection() {
 
 /** Selects a tab. */
 function setSelection() {
-  if (displayedTabElements.length == 0) {
+  if (displayedTabElements.length === 0) {
     return;
   }
 
@@ -72,6 +73,12 @@ function filterTabList() {
     } else {
       tabElement.classList.add('hide');
     }
+  }
+
+  if (displayedTabElements.length === 0) {
+    onNoResults();
+  } else {
+    onHaveResults();
   }
 }
 
@@ -135,13 +142,13 @@ function buildTabList() {
  */
 function onKeyDown(e) {
   // Enter key.
-  if (e.keyCode == '13') {
+  if (e.keyCode === '13') {
     goToSelectedTab();
     return false;
   }
 
   // Up arrow.
-  if (e.keyCode == '38') {
+  if (e.keyCode === '38') {
     if (selected > 0) {
       clearSelection();
       selected--;
@@ -151,7 +158,7 @@ function onKeyDown(e) {
   }
 
   // Down arrow.
-  if (e.keyCode == '40') {
+  if (e.keyCode === '40') {
     if (selected < displayedTabElements.length - 1) {
       clearSelection();
       selected++;
@@ -169,7 +176,7 @@ function onKeyDown(e) {
  * @return {bool} Whether the default key handler should be triggered.
  */
 function onKeyUp(e) {
-  if (e.keyCode == '13' || e.keyCode == '38' || e.keyCode == '40') {
+  if (e.keyCode === '13' || e.keyCode === '38' || e.keyCode === '40') {
     return false;
   }
 
@@ -197,6 +204,8 @@ function goToSelectedTab() {
  * @param {Tab[]} t - Tabs.
  */
 function onTabsQueried(t) {
+  bgElement = document.getElementById('bg');
+
   tabs = t;
   tabsElement = document.getElementById('tabs');
   buildTabList();
@@ -206,6 +215,18 @@ function onTabsQueried(t) {
   queryElement = document.getElementById('query');
   queryElement.onkeydown = onKeyDown;
   queryElement.onkeyup = onKeyUp;
+}
+
+/** Called when some results are available in search. */
+function onHaveResults() {
+  bgElement.classList.remove('unblur');
+  bgElement.classList.add('blur');
+}
+
+/** Called when no results are available in search. */
+function onNoResults() {
+  bgElement.classList.remove('blur');
+  bgElement.classList.add('unblur');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
