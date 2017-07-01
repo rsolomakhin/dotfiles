@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,13 +15,13 @@
  */
 
 body {
-  width: 350px;
   margin-bottom: 30px;
+  width: 350px;
 }
 
 .bg {
-  position: fixed;
   left: -10px;
+  position: fixed;
   top: -10px;
   z-index: -1;
 }
@@ -48,13 +48,13 @@ body {
 }
 
 .tab {
-  padding: 10px;
-  margin: 20px;
   background-color: white;
-  color: black;
-  opacity: 0.6;
   border-radius: 5px;
+  color: black;
+  margin: 20px;
+  opacity: 0.6;
   overflow: hidden;
+  padding: 10px;
 }
 
 .hide {
@@ -72,5 +72,6 @@ body {
 }
 
 .tab:hover {
+  box-shadow: 0 0 20px white;
   cursor: pointer;
 }
