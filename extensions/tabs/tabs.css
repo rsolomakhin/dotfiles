@@ -48,11 +48,11 @@ body {
 }
 
 .tab {
-  background-color: white;
+  background: black;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
-  color: black;
+  color: white;
   margin: 20px;
-  opacity: 0.6;
   overflow: hidden;
   padding: 10px;
 }
@@ -62,16 +62,16 @@ body {
 }
 
 .select {
-  opacity: 1.0;
+  background: white;
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
   transition: 0.3s;
 }
 
 .url {
-  color: slategray;
   font-family: monospace;
 }
 
 .tab:hover {
-  box-shadow: 0 0 20px white;
   cursor: pointer;
 }
