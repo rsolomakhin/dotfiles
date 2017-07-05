@@ -16,6 +16,7 @@ export EMACS="emacsclient -t"
 export VIM="vim"
 
 export ALTERNATE_EDITOR=""
+export ANDROID_HOME="$HOME/android-sdk"
 export BROWSER="google-chrome-unstable"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
@@ -24,7 +25,7 @@ export HISTCONTROL="ignoredups:erasedups"
 HELPERS="$HOME/.ssh_agent.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
-TOOLS="$HOME/depot_tools $HOME/.fzf/bin $HOME/node/bin $HOME/homebrew/bin"
+TOOLS="$HOME/depot_tools $HOME/.fzf/bin $HOME/node/bin $HOME/homebrew/bin $ANDROID_HOME"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
