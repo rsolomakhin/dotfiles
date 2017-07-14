@@ -21,11 +21,19 @@ export BROWSER="google-chrome-unstable"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
+export JAVA_HOME="$HOME/jdk"
 
 HELPERS="$HOME/.ssh_agent.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
-TOOLS="$HOME/depot_tools $HOME/.fzf/bin $HOME/node/bin $HOME/homebrew/bin $ANDROID_HOME"
+TOOLS=""
+TOOLS="$TOOLS $ANDROID_HOME"
+TOOLS="$TOOLS $HOME/depot_tools"
+TOOLS="$TOOLS $HOME/.fzf/bin"
+TOOLS="$TOOLS $HOME/homebrew/bin"
+TOOLS="$TOOLS $HOME/node/bin"
+TOOLS="$TOOLS $HOME/sublime"
+TOOLS="$TOOLS $JAVA_HOME/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
