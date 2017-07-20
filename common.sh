@@ -22,8 +22,9 @@ export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
 export JAVA_HOME="$HOME/jdk"
+export SDKMAN_DIR="$HOME/.sdkman"
 
-HELPERS="$HOME/.ssh_agent.sh"
+HELPERS="$HOME/.ssh_agent.sh $SDKMAN_DIR/bin/sdkman-init.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 TOOLS=""
