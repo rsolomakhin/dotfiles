@@ -14,7 +14,10 @@
 
 source ~/.common.sh
 
-HELPERS="$HOME/.fzf.bash"
+HELPERS=""
+HELPERS="$HELPERS $HOME/.fzf.bash"
+HELPERS="$HELPERS $HOME/google-cloud-sdk/path.bash.inc"
+HELPERS="$HELPERS $HOME/google-cloud-sdk/completion.bash.inc"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 # vi:ft=sh

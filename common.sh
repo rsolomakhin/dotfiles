@@ -24,7 +24,9 @@ export HISTCONTROL="ignoredups:erasedups"
 export JAVA_HOME="$HOME/jdk"
 export SDKMAN_DIR="$HOME/.sdkman"
 
-HELPERS="$HOME/.ssh_agent.sh $SDKMAN_DIR/bin/sdkman-init.sh"
+HELPERS=""
+HELPERS="$HELPERS $HOME/.ssh_agent.sh"
+HELPERS="$HELPERS $SDKMAN_DIR/bin/sdkman-init.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 TOOLS=""
@@ -33,6 +35,7 @@ TOOLS="$TOOLS $HOME/depot_tools"
 TOOLS="$TOOLS $HOME/.fzf/bin"
 TOOLS="$TOOLS $HOME/homebrew/bin"
 TOOLS="$TOOLS $HOME/node/bin"
+TOOLS="$TOOLS $HOME/software/bin"
 TOOLS="$TOOLS $HOME/sublime"
 TOOLS="$TOOLS $JAVA_HOME/bin"
 for tool in $TOOLS; do
