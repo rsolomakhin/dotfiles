@@ -31,6 +31,8 @@ for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 TOOLS=""
 TOOLS="$TOOLS $ANDROID_HOME"
+TOOLS="$TOOLS $ANDROID_HOME/bin"
+TOOLS="$TOOLS $ANDROID_HOME/platform-tools"
 TOOLS="$TOOLS $HOME/depot_tools"
 TOOLS="$TOOLS $HOME/.fzf/bin"
 TOOLS="$TOOLS $HOME/homebrew/bin"
