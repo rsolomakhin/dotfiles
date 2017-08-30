@@ -31,7 +31,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 if v:version >= 800 && has('python')
-  Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
+  Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer --system-libclang'}
 endif
 Plug 'vim-syntastic/syntastic'
 Plug 'w0ng/vim-hybrid'
