@@ -16,22 +16,26 @@ export EMACS="emacsclient -t"
 export VIM="vim"
 
 export ALTERNATE_EDITOR=""
-export ANDROID_HOME="$HOME/android-sdk"
 export BROWSER="google-chrome-unstable"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
-export JAVA_HOME="$HOME/jdk"
-export SDKMAN_DIR="$HOME/.sdkman"
+
+[[ -d $HOME/jdk ]] && export JAVA_HOME="$HOME/jdk"
+
+if [[ -d $HOME/chrome/src/third_party/android_tools/sdk ]]; then
+  export ANDROID_HOME="$HOME/chrome/src/third_party/android_tools/sdk"
+elif [[ -d $HOME/android-sdk ]]; then
+  export ANDROID_HOME="$HOME/android-sdk"
+fi
 
 HELPERS=""
 HELPERS="$HELPERS $HOME/.ssh_agent.sh"
-HELPERS="$HELPERS $SDKMAN_DIR/bin/sdkman-init.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 TOOLS=""
-TOOLS="$TOOLS $ANDROID_HOME"
-TOOLS="$TOOLS $ANDROID_HOME/bin"
+TOOLS="$TOOLS $ANDROID_HOME/tools"
+TOOLS="$TOOLS $ANDROID_HOME/tools/bin"
 TOOLS="$TOOLS $ANDROID_HOME/platform-tools"
 TOOLS="$TOOLS $HOME/depot_tools"
 TOOLS="$TOOLS $HOME/.fzf/bin"
