@@ -82,17 +82,6 @@ ssh_agent_restart() {
   done
 }
 
-# Generte the grade files for Chromium.
-gradle_chromium() {
-  echo "Generating gradle files for Chromium"
-  build/android/gradle/generate_gradle.py --output-directory out/and \
-        --project-dir ~/AndroidStudioProjects/chrome_public_test_apk \
-        --target //chrome/android:chrome_public_test_apk__apk
-  build/android/gradle/generate_gradle.py --output-directory out/and \
-        --project-dir ~/AndroidStudioProjects/chrome_junit_tests \
-        --target //chrome/android:chrome_junit_tests
-}
-
 # Make VIM the default editor.
 editor_vim() {
   echo "VIM is the default editor"
@@ -133,7 +122,6 @@ help() {
   echo "  $ editor_vim          - Set vim as the default text editor."
   echo "  $ ggrep <pattern>     - List files containing the pattern."
   echo "  $ gls <pattern>       - List file names matching the pattern."
-  echo "  $ gradle_chromium     - Generate the gradle files for Chromium."
   echo "  $ i3status_desktop    - Use the desktop configuration for i3 status."
   echo "  $ i3status_laptop     - Use the laptop configuration for i3 status."
   echo "  $ ssh_agent_restart   - Restart the SSH agent."

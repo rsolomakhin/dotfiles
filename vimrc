@@ -21,6 +21,8 @@ Plug 'google/vim-glaive'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
@@ -31,7 +33,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 if v:version >= 800 && has('python')
-  Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer --system-libclang'}
+  Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
 endif
 Plug 'vim-syntastic/syntastic'
 Plug 'w0ng/vim-hybrid'
@@ -94,6 +96,9 @@ Glaive codefmt plugin[mappings]
 
 " http://eclim.org/vim/code_completion.html
 let g:EclimCompletionMethod = 'omnifunc'
+
+" tidy
+command! Thtml :%!tidy -config tidyconfig.txt -q --show-errors 0
 
 let &colorcolumn='+' . join(range(1, 1), ',+')
 runtime macros/matchit.vim
