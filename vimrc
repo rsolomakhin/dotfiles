@@ -171,9 +171,9 @@ augroup custom
   autocmd FileType xml setlocal tabstop=4
   autocmd FileType xml setlocal textwidth&
 
-  autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
   autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType css,json,javascript AutoFormatBuffer js-beautify
+  autocmd FileType css,json AutoFormatBuffer js-beautify
 
   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
