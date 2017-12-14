@@ -19,6 +19,7 @@ Plug 'google/vim-glaive'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
@@ -39,6 +40,9 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 call plug#end()
+
+" vim-prettier
+let g:prettier#autoformat = 0
 
 " vim-airline
 let g:airline_powerline_fonts = 1
@@ -150,6 +154,16 @@ augroup custom
   autocmd FileType xml setlocal softtabstop=4
   autocmd FileType xml setlocal tabstop=4
   autocmd FileType xml setlocal textwidth&
+
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+
+  autocmd FileType css,json,javascript Prettier
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
