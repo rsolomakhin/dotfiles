@@ -13,29 +13,21 @@
 " limitations under the License.
 
 call plug#begin('~/.vim/plugged')
-Plug 'chromium/vim-codesearch'
-Plug 'eagletmt/neco-ghc'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
 if v:version >= 800 && has('python')
   Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
 endif
-Plug 'vim-syntastic/syntastic'
 Plug 'w0ng/vim-hybrid'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -47,10 +39,6 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 call plug#end()
-
-" neco-ghc
-let g:haskellmode_completion_ghc = 0
-let g:ycm_semantic_triggers = {'haskell': ['.']}
 
 " vim-airline
 let g:airline_powerline_fonts = 1
@@ -72,14 +60,6 @@ colorscheme hybrid
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf =
       \ expand('~/chrome/src/tools/vim/chromium.ycm_extra_conf.py')
-
-" syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_args = '-c google --env browser,es6'
-let g:syntastic_mode_map = {'passive_filetypes': ['java', 'cpp']}
 
 " fzf.vim
 nnoremap <leader>b :Buffers<CR>
@@ -170,12 +150,6 @@ augroup custom
   autocmd FileType xml setlocal softtabstop=4
   autocmd FileType xml setlocal tabstop=4
   autocmd FileType xml setlocal textwidth&
-
-  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
-  autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType css,json AutoFormatBuffer js-beautify
-
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
