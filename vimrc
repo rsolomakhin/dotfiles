@@ -163,7 +163,7 @@ augroup custom
   autocmd FileType java AutoFormatBuffer google-java-format
   autocmd FileType python AutoFormatBuffer yapf
 
-  autocmd FileType css,json,javascript Prettier
+  autocmd BufWritePre *.css,*.json,*.js Prettier
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
