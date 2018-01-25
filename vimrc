@@ -92,20 +92,22 @@ set completeopt= " Turn off YCM's previews on top
 set cursorline
 set encoding=utf-8
 set expandtab
-set nofixeol
 set formatoptions+=j " Remove comment characters when joining lines.
-set guioptions-=m
-set guioptions-=T
-set guioptions-=r
 set guioptions-=L
+set guioptions-=m
+set guioptions-=r
+set guioptions-=T
 set hidden
+set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
 set nocompatible
+set nofixeol
 set nojoinspaces
 set nonumber
 set nospell
+set path+=third_party/WebKit/Source
 set ruler
 set shiftround
 set shiftwidth=2
@@ -120,7 +122,6 @@ set timeoutlen=1000
 set ttimeoutlen=0
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
-set path+=third_party/WebKit/Source
 
 if has('win32')
   set spellfile=~/vimfiles/spell/en.utf-8.add
