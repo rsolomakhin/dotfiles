@@ -30,10 +30,7 @@ if v:version >= 800 && has('python')
   Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
 endif
 Plug 'w0ng/vim-hybrid'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-Plug 'edkolev/promptline.vim', {'on': 'PromptlineSnapshot'}
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   Plug '~/chrome/src/tools/vim/mojom'
   source ~/chrome/src/tools/vim/filetypes.vim
@@ -44,21 +41,8 @@ call plug#end()
 " vim-prettier
 let g:prettier#autoformat = 0
 
-" vim-airline
-let g:airline_powerline_fonts = 1
-
-" promptline.vim
-let g:promptline_preset = 'clear'
-
 " vim-hybrid
-if !empty($XTERM_VERSION) || !empty($ANDROID_DATA)
-  " xterm or termux.
-  set background=dark
-  let g:hybrid_custom_term_colors = 1
-elseif $TERM == "xterm"
-  " gnome-terminal
-  set background=dark
-endif
+set background=light
 colorscheme hybrid
 
 " YouCompleteMe
@@ -157,14 +141,13 @@ augroup custom
   autocmd FileType xml setlocal textwidth&
 
   autocmd FileType bzl AutoFormatBuffer buildifier
-  autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
+  "autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
   autocmd FileType dart AutoFormatBuffer dartfmt
   autocmd FileType go AutoFormatBuffer gofmt
   autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType java AutoFormatBuffer google-java-format
   autocmd FileType python AutoFormatBuffer yapf
 
-  autocmd BufWritePre *.css,*.json,*.js Prettier
+  "autocmd BufWritePre *.css,*.json,*.js Prettier
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end

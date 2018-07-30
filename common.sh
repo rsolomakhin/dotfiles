@@ -141,8 +141,9 @@ elif [ -f /usr/share/vim/vim74/syntax/syntax.vim ]; then
   export VIMRUNTIME=/usr/share/vim/vim74
 fi
 
-# Apply the powerline theme.
-source ~/.sh-theme.sh
+# Default PS1 theme.
+export PS1='\u@\h:\w\$ '
+
 
 # Select the default editor.
 if [ -f ~/.default_editor.sh ]; then

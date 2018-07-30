@@ -18,7 +18,7 @@ xterm*saveLines: 4096
 xterm*utf8: 1
 xterm*termName: xterm-256color
 
-xterm*faceName: Ubuntu Mono derivative Powerline:style=Regular:antialias=false
+xterm*faceName: Ubuntu Mono derivative Powerline:style=Regular:antialias=true
 xterm*faceSize: 12
 xterm*faceSize1: 4
 xterm*faceSize2: 6
