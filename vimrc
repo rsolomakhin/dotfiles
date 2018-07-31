@@ -29,8 +29,6 @@ Plug 'Valloric/ListToggle'
 if v:version >= 800 && has('python')
   Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
 endif
-Plug 'w0ng/vim-hybrid'
-Plug 'edkolev/tmuxline.vim'
 if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   Plug '~/chrome/src/tools/vim/mojom'
   source ~/chrome/src/tools/vim/filetypes.vim
@@ -40,10 +38,6 @@ call plug#end()
 
 " vim-prettier
 let g:prettier#autoformat = 0
-
-" vim-hybrid
-set background=light
-colorscheme hybrid
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf =
@@ -71,6 +65,7 @@ command! Thtml :%!tidy -config tidyconfig.txt -q --show-errors 0
 let &colorcolumn='+' . join(range(1, 1), ',+')
 runtime macros/matchit.vim
 set autoindent
+set background=light
 set backspace=indent,eol,start
 set completeopt= " Turn off YCM's previews on top
 set cursorline
