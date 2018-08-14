@@ -15,14 +15,10 @@
 source ~/.common.sh
 
 HELPERS=""
+HELPERS="$HELPERS /etc/bash_completion"
 HELPERS="$HELPERS $HOME/.fzf.bash"
-HELPERS="$HELPERS $HOME/google-cloud-sdk/path.bash.inc"
 HELPERS="$HELPERS $HOME/google-cloud-sdk/completion.bash.inc"
+HELPERS="$HELPERS $HOME/google-cloud-sdk/path.bash.inc"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
-
-# enable programmable completion features
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-  . /etc/bash_completion
-fi
 
 # vi:ft=sh
