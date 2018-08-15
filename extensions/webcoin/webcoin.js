@@ -14,6 +14,20 @@
  * limitations under the License.
  */
 
+chrome.browserAction.setBadgeText({text: "0"});
+
+function getPublicKey() {
+  const decoded_cookie = decodeURIComponent(document.cookie);
+  return 'hello world';
+}
+
+function setPublicKey(public_key) {
+  document.cookie = 'public_key=' + public_key;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOMContentLoaded');
+  document.getElementById('public_key').value = getPublicKey();
+  document.getElementById('public_key').addEventListener('keyup', function() {
+    setPublicKey(document.getElementById('public_key').value);
+  });
 });
