@@ -7,6 +7,11 @@
   ],
   "web_accessible_resources": [],
   "browser_action": {
-    "default_popup": "webcoin.html"
+    "default_popup": "webcoin.html",
+    "default_icon": {
+      "16": "images/webcoin.png",
+      "24": "images/webcoin.png",
+      "32": "images/webcoin.png"
+    }
   }
 }
