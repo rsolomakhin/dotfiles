@@ -21,6 +21,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'tpope/vim-dispatch'
+Plug 'w0ng/vim-hybrid'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-sensible'
@@ -35,6 +36,10 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 call plug#end()
+
+" vim-hybrid
+set bg=dark
+colorscheme hybrid
 
 " vim-prettier
 let g:prettier#autoformat = 0
@@ -66,7 +71,6 @@ command! ThtmlWithoutConfig :%!tidy -q --show-errors 0 -indent -wrap 80 -omit --
 let &colorcolumn='+' . join(range(1, 1), ',+')
 runtime macros/matchit.vim
 set autoindent
-set background=light
 set backspace=indent,eol,start
 set completeopt= " Turn off YCM's previews on top
 set cursorline
