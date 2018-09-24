@@ -61,6 +61,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 
 " tidy
 command! Thtml :%!tidy -config tidyconfig.txt -q --show-errors 0
+command! ThtmlWithoutConfig :%!tidy -q --show-errors 0 -indent -wrap 80 -omit --tidy-mark false -access 3 -clean
 
 let &colorcolumn='+' . join(range(1, 1), ',+')
 runtime macros/matchit.vim
