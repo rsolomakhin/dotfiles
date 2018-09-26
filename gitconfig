@@ -32,4 +32,4 @@
 [push]
 	default = simple
 [http]
-	cookiefile = /usr/local/google/home/rouslan/.gitcookies
+	cookiefile = ~/.gitcookies
