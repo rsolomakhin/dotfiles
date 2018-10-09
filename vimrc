@@ -38,7 +38,11 @@ endif
 call plug#end()
 
 " vim-hybrid
-set bg=dark
+if filereadable(glob("~/.godark"))
+  set bg=dark
+else
+  set bg=light
+endif
 colorscheme hybrid
 
 " vim-prettier

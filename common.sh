@@ -55,6 +55,8 @@ alias em="$EMACS"
 alias ema="$EMACS"
 alias emac="$EMACS"
 alias ggrep="git grep"
+alias godark="touch ~/.godark"
+alias golight="rm -f ~/.godark"
 alias grep="grep --color=auto"
 alias j="jobs"
 alias so="source"
@@ -127,6 +129,8 @@ help() {
   echo "  $ i3status_desktop    - Use the desktop configuration for i3 status."
   echo "  $ i3status_laptop     - Use the laptop configuration for i3 status."
   echo "  $ ssh_agent_restart   - Restart the SSH agent."
+  echo "  $ godark              - Set dark background in vim."
+  echo "  $ golight             - Set light background in vim."
 }
 
 if [ -f ~/.ssh_agent.sh ]; then
