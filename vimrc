@@ -74,6 +74,9 @@ let g:EclimCompletionMethod = 'omnifunc'
 command! Thtml :%!tidy -config tidyconfig.txt -q --show-errors 0
 command! ThtmlWithoutConfig :%!tidy -q --show-errors 0 -indent -wrap 80 -omit --tidy-mark false -access 3 -clean
 
+" Don't highlight the matching paren.
+let loaded_matchparen = 1
+
 let &colorcolumn='+' . join(range(1, 1), ',+')
 runtime macros/matchit.vim
 set autoindent
