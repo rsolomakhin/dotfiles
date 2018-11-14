@@ -148,7 +148,7 @@ elif [ -f /usr/share/vim/vim74/syntax/syntax.vim ]; then
 fi
 
 # Default PS1 theme.
-export PS1='\u@\h:\w\$ '
+export PS1='[\[\e[32m\]\u\[\e[m\]@\e[34m\]\h\[\e[m\]:\w]\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
 
 
 # Select the default editor.
