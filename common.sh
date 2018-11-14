@@ -42,9 +42,9 @@ TOOLS="$TOOLS $GOPATH/bin"
 TOOLS="$TOOLS $HOME/depot_tools"
 TOOLS="$TOOLS $HOME/.fzf/bin"
 TOOLS="$TOOLS $HOME/homebrew/bin"
+TOOLS="$TOOLS $HOME/.local/bin"
 TOOLS="$TOOLS $HOME/node/bin"
 TOOLS="$TOOLS $HOME/software/bin"
-TOOLS="$TOOLS $HOME/sublime"
 TOOLS="$TOOLS $JAVA_HOME/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
