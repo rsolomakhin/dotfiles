@@ -154,7 +154,7 @@ augroup custom
   autocmd FileType dart AutoFormatBuffer dartfmt
   autocmd FileType go AutoFormatBuffer gofmt
   autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType python AutoFormatBuffer yapf
+  "autocmd FileType python AutoFormatBuffer yapf
 
   "autocmd BufWritePre *.css,*.json,*.js Prettier
 
