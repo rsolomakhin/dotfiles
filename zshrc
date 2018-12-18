@@ -14,7 +14,9 @@
 
 source ~/.common.sh
 
-HELPERS="$HOME/.fzf.zsh"
+HELPERS=""
+HELPERS="$HELPERS $HOME/.fzf.zsh"
+HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-completion.zsh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 # Turn off vim line editing, even if that's the default text editor.

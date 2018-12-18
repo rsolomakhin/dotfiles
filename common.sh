@@ -32,6 +32,7 @@ fi
 
 HELPERS=""
 HELPERS="$HELPERS $HOME/.ssh_agent.sh"
+HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-prompt.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 TOOLS=""
