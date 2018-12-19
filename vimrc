@@ -35,6 +35,7 @@ if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/filetypes.vim
   if has('python')
     source ~/chrome/src/tools/vim/ninja-build.vim
+  endif
 endif
 call plug#end()
 
