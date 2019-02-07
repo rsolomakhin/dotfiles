@@ -113,8 +113,8 @@ set smarttab
 set softtabstop=2
 set tabstop=2
 set timeout
-set timeoutlen=1000
-set ttimeoutlen=0
+"set timeoutlen=1000
+"set ttimeoutlen=0
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
 
