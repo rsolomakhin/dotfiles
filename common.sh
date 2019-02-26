@@ -17,6 +17,7 @@ export VIM="vim"
 
 export ALTERNATE_EDITOR=""
 export BROWSER="google-chrome-unstable"
+export CHROMIUM_OUTPUT_DIR="out/and"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export GOPATH="$HOME/go"
