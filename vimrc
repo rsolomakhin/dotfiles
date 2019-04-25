@@ -16,17 +16,22 @@ call plug#begin('~/.vim/plugged')
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
+
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
+
 Plug 'junegunn/vim-peekaboo'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'sheerun/vim-polyglot'
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
-Plug 'w0ng/vim-hybrid'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
+Plug 'w0ng/vim-hybrid'
+
 if v:version >= 800 && has('python')
   Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
 endif
@@ -60,6 +65,9 @@ let g:ycm_global_ycm_extra_conf =
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
+
+" tcomment_vim
+vnoremap <silent> <Leader>cc :TComment<CR>
 
 " glaive
 call glaive#Install()
