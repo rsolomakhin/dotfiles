@@ -23,6 +23,7 @@ export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export GOPATH="$HOME/go"
 export HISTCONTROL="ignoredups:erasedups"
+export NINJA_SUMMARIZE_BUILD="1"
 
 [[ -d $HOME/jdk ]] && export JAVA_HOME="$HOME/jdk"
 
