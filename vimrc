@@ -13,46 +13,40 @@
 " limitations under the License.
 
 call plug#begin('~/.vim/plugged')
-Plug 'google/vim-maktaba'
+Plug 'chriskempson/base16-vim'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
-
+Plug 'google/vim-maktaba'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
 Plug 'junegunn/fzf.vim'
-
 Plug 'junegunn/vim-peekaboo'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'sheerun/vim-polyglot'
-Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/ListToggle'
-Plug 'w0ng/vim-hybrid'
 
 if v:version >= 800 && has('python')
   Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer --tern-completer'}
 endif
-if filereadable(glob("~/chrome/src/tools/vim/ninja-build.vim"))
+
+if filereadable(expand("~/chrome/src/tools/vim/ninja-build.vim"))
   Plug '~/chrome/src/tools/vim/mojom'
   source ~/chrome/src/tools/vim/filetypes.vim
   if has('python')
     source ~/chrome/src/tools/vim/ninja-build.vim
   endif
 endif
+
 call plug#end()
 
-" vim-hybrid
-let g:hybrid_custom_term_colors = 0
-let g:hybrid_reduced_contrast = 0
-if filereadable(glob("~/.godark"))
-  set bg=dark
-else
-  set bg=light
+" base16-vim
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
 endif
-colorscheme hybrid
 
 " vim-prettier
 let g:prettier#autoformat = 0
@@ -65,9 +59,6 @@ let g:ycm_global_ycm_extra_conf =
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
-
-" tcomment_vim
-vnoremap <silent> <Leader>cc :TComment<CR>
 
 " glaive
 call glaive#Install()

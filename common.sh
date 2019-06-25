@@ -58,8 +58,6 @@ alias em="$EMACS"
 alias ema="$EMACS"
 alias emac="$EMACS"
 alias ggrep="git grep"
-alias godark="touch ~/.godark"
-alias golight="rm -f ~/.godark"
 alias grep="grep --color=auto"
 alias j="jobs"
 alias so="source"
@@ -110,18 +108,11 @@ gls() {
   git ls | grep $@
 }
 
-# Use the desktop configuration for i3 status bar.
-i3status_desktop() {
-  echo "Desktop configuration for i3 status bar"
-  ln -sfv ~/.i3status.desktop.conf ~/.i3status.conf
-}
-
-# Use the desktop configuration for i3 status bar.
-i3status_laptop() {
-  echo "Laptop configuration for i3 status bar"
-  ln -sfv ~/.i3status.laptop.conf ~/.i3status.conf
-}
-
+# Base16 Shell
+BASE16_SHELL="$HOME/.dotfiles/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 help() {
   echo "Commands:"
@@ -129,11 +120,8 @@ help() {
   echo "  $ editor_vim          - Set vim as the default text editor."
   echo "  $ ggrep <pattern>     - List files containing the pattern."
   echo "  $ gls <pattern>       - List file names matching the pattern."
-  echo "  $ i3status_desktop    - Use the desktop configuration for i3 status."
-  echo "  $ i3status_laptop     - Use the laptop configuration for i3 status."
   echo "  $ ssh_agent_restart   - Restart the SSH agent."
-  echo "  $ godark              - Set dark background in vim."
-  echo "  $ golight             - Set light background in vim."
+  echo "  $ base16<tab>         - Change colorscheme of terminal and vim."
 }
 
 if [ -f ~/.ssh_agent.sh ]; then
