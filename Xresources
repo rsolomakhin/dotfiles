@@ -27,5 +27,9 @@ xterm*faceSize4: 16
 xterm*faceSize5: 24
 xterm*faceSize6: 32
 
-! double-click should select URLs
+! Double-click should select URLs.
 xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+
+! Alt-O opens the selected URL.
+*VT100.Translations: #override \n\
+  Alt <Key>o: exec-formatted("google-chrome '%t'", PRIMARY) select-start() select-end()
