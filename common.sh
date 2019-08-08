@@ -27,8 +27,8 @@ export NINJA_SUMMARIZE_BUILD="1"
 
 [[ -d $HOME/jdk ]] && export JAVA_HOME="$HOME/jdk"
 
-if [[ -d $HOME/chrome/src/third_party/android_tools/sdk ]]; then
-  export ANDROID_HOME="$HOME/chrome/src/third_party/android_tools/sdk"
+if [[ -d $HOME/chrome/src/third_party/android_sdk/public ]]; then
+  export ANDROID_HOME="$HOME/chrome/src/third_party/android_sdk/public"
 elif [[ -d $HOME/android-sdk ]]; then
   export ANDROID_HOME="$HOME/android-sdk"
 fi
