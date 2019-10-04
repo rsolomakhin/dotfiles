@@ -16,7 +16,6 @@ xterm*locale: true
 xterm*metaSendsEscape: true
 xterm*saveLines: 4096
 xterm*utf8: 1
-xterm*termName: xterm-256color
 
 xterm*faceName: Ubuntu Mono derivative Powerline:style=Regular:antialias=true
 xterm*faceSize: 12

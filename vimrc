@@ -12,12 +12,6 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all --no-update-rc'}
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-dispatch'
-call plug#end()
-
 if filereadable(expand("~/chrome/src/tools/vim/ninja-build.vim"))
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
@@ -60,7 +54,6 @@ set spellfile=~/.vim/spell/en.utf-8.add
 set tabstop=2
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
-syntax off
 
 augroup custom
   autocmd!
@@ -88,4 +81,3 @@ augroup custom
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
-
