@@ -85,3 +85,6 @@ augroup custom
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
+
+" Enable the 'autocmd FileType' commands above.
+filetype plugin on
