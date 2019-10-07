@@ -27,3 +27,7 @@ for file in `git ls-files`; do
   mkdir -pv ~/.`dirname $file`
   ln --symbolic --force --verbose --no-target-directory ~/.dotfiles/$file ~/.$file
 done
+
+for file in ~/.vim/pack/rsolomakhin/start/*; do
+  if [ -e $file/doc ]; then vim -u NONE -c "helptags $file/doc" -c q; fi
+done
