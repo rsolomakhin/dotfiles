@@ -19,7 +19,6 @@ HELPERS="$HELPERS $HOME/.fzf.bash"
 HELPERS="$HELPERS $HOME/google-cloud-sdk/completion.bash.inc"
 HELPERS="$HELPERS $HOME/google-cloud-sdk/path.bash.inc"
 HELPERS="$HELPERS /etc/bash_completion"
-HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-completion.bash"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 # vi:ft=sh
