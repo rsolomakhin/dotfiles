@@ -22,6 +22,7 @@ export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
 export NINJA_SUMMARIZE_BUILD="1"
+export VIMRUNTIME="/usr/share/vim/vim81"
 export VIM="vim"
 
 TOOLS=""
@@ -34,6 +35,7 @@ for tool in $TOOLS; do
 done
 export PATH
 
+alias e="$VIM"
 alias em="$EMACS"
 alias ema="$EMACS"
 alias emac="$EMACS"
