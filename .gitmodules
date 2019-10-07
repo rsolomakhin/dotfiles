@@ -4,3 +4,6 @@
 [submodule "vim/pack/rsolomakhin/start/fzf.vim"]
 	path = vim/pack/rsolomakhin/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule "vim/pack/rsolomakhin/start/vim-dispatch"]
+	path = vim/pack/rsolomakhin/start/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git
