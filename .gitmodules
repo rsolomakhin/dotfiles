@@ -7,3 +7,6 @@
 [submodule "vim/pack/rsolomakhin/start/vim-dispatch"]
 	path = vim/pack/rsolomakhin/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "vim/pack/rsolomakhin/start/vim-fugitive"]
+	path = vim/pack/rsolomakhin/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
