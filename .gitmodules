@@ -1,0 +1,3 @@
+[submodule "vim/pack/rsolomakhin/start/fzf"]
+	path = vim/pack/rsolomakhin/start/fzf
+	url = https://github.com/junegunn/fzf.git
