@@ -23,6 +23,7 @@ nnoremap <leader>t :GFiles<CR>
 
 let &colorcolumn='+' . join(range(1, 1), ',+')
 highlight ColorColumn ctermbg=0
+highlight ColorColumn ctermfg=7
 
 set autoindent
 set backspace=indent,eol,start
