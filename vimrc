@@ -25,6 +25,21 @@ let &colorcolumn='+' . join(range(1, 1), ',+')
 highlight ColorColumn ctermbg=0
 highlight ColorColumn ctermfg=7
 
+" Xterm cursor shape:
+" 30 - blinking block
+" 31 - blinking block also
+" 32 - steady block
+" 33 - blinking underline
+" 34 - steady underline
+" 35 - blinking bar
+" 36 - steady bar
+" Insert mode - blinking bar.
+let &t_SI.="\x1b[\x35 q"
+" Replace mode - blinking underline.
+let &t_SR.="\x1b[\x33 q"
+" Normal mode - steady block.
+let &t_EI.="\x1b[\x32 q"
+
 set autoindent
 set backspace=indent,eol,start
 set completeopt= " Turn off YCM's previews on top
