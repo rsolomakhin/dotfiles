@@ -21,9 +21,9 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
 
+" Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
-highlight ColorColumn ctermbg=0
-highlight ColorColumn ctermfg=7
+highlight ColorColumn ctermbg=LightGray
 
 " Xterm cursor shape:
 " 30 - blinking block
