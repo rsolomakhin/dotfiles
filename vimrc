@@ -21,6 +21,8 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
 
+nnoremap <F11> :wa|:CrBuild<Up><CR>
+
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
 highlight ColorColumn ctermbg=LightGray
