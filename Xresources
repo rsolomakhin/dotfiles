@@ -33,42 +33,82 @@ xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35
 *VT100.Translations: #override \n\
   Alt <Key>o: exec-formatted("google-chrome '%t'", PRIMARY) select-start() select-end()
 
+! https://terminal.sexy
 
-! https://terminal.sexy - /xcolors.net/baserville-ivorylight
+! /base16/brewer.light
 
 ! special
-xterm*foreground:   #6d727e
-xterm*background:   #fef9ec
-xterm*cursorColor:  #6d727e
+*.foreground:   #515253
+*.background:   #fcfdfe
+*.cursorColor:  #515253
 
 ! black
-xterm*color0:       #c5c1b4
-xterm*color8:       #a1a6b2
+*.color0:       #0c0d0e
+*.color8:       #737475
 
 ! red
-xterm*color1:       #e75c58
-xterm*color9:       #b22b31
+*.color1:       #e31a1c
+*.color9:       #e31a1c
 
 ! green
-xterm*color2:       #00a250
-xterm*color10:      #007427
+*.color2:       #31a354
+*.color10:      #31a354
 
 ! yellow
-xterm*color3:       #a08a00
-xterm*color11:      #715f00
+*.color3:       #dca060
+*.color11:      #dca060
 
 ! blue
-xterm*color4:       #208ffb
-xterm*color12:      #0065ca
+*.color4:       #3182bd
+*.color12:      #3182bd
 
 ! magenta
-xterm*color5:       #d160c4
-xterm*color13:      #a03196
+*.color5:       #756bb1
+*.color13:      #756bb1
 
 ! cyan
-xterm*color6:       #00a4c1
-xterm*color14:      #007693
+*.color6:       #80b1d3
+*.color14:      #80b1d3
 
 ! white
-xterm*color7:       #3e424d
-xterm*color15:      #282c36
+*.color7:       #b7b8b9
+*.color15:      #fcfdfe
+
+!! /xcolors.net/baserville-ivorylight
+!
+!! special
+!xterm*foreground:   #6d727e
+!xterm*background:   #fef9ec
+!xterm*cursorColor:  #6d727e
+!
+!! black
+!xterm*color0:       #c5c1b4
+!xterm*color8:       #a1a6b2
+!
+!! red
+!xterm*color1:       #e75c58
+!xterm*color9:       #b22b31
+!
+!! green
+!xterm*color2:       #00a250
+!xterm*color10:      #007427
+!
+!! yellow
+!xterm*color3:       #a08a00
+!xterm*color11:      #715f00
+!
+!! blue
+!xterm*color4:       #208ffb
+!xterm*color12:      #0065ca
+!
+!! magenta
+!xterm*color5:       #d160c4
+!xterm*color13:      #a03196
+!
+!! cyan
+!xterm*color6:       #00a4c1
+!xterm*color14:      #007693
+!
+!! white
+!xterm*color7:       #3e424d
+!xterm*color15:      #282c36
