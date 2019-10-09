@@ -14,6 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+LINKER="ln --symbolic --force --verbose --no-target-directory"
+if [ "`uname`" == "Darwin" ]; then
+  LINKER="ln -f -s -v"
+fi
+
 for file in `git ls-files`; do
   if [ "$file" == "appveyor.yml" ]; then continue; fi
   if [ "$file" == "fonts/LICENCE.txt" ]; then continue; fi
@@ -25,7 +30,7 @@ for file in `git ls-files`; do
   if [ "$file" == "windows/env.bat" ]; then continue; fi
   if [ "$file" == "windows/install.bat" ]; then continue; fi
   mkdir -pv ~/.`dirname $file`
-  ln --symbolic --force --verbose --no-target-directory ~/.dotfiles/$file ~/.$file
+  $LINKER ~/.dotfiles/$file ~/.$file
 done
 
 for file in ~/.vim/pack/rsolomakhin/start/*; do

@@ -42,7 +42,6 @@ alias emac="$EMACS"
 alias ggrep="git grep"
 alias grep="grep --color=auto"
 alias j="jobs"
-alias ls="ls --color=auto"
 alias so="source"
 alias v="$VIM"
 alias vi="$VIM"
@@ -50,7 +49,10 @@ alias vi="$VIM"
 # Disable flow control (Ctrl-S).
 stty -ixon >& /dev/null
 
-# Default PS1 theme.
-export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+if [ "`uname`" == "Darwin" ]; then
+  . ~/.darwin.sh
+else
+  . ~/.linux.sh
+fi
 
 # vi:ft=sh

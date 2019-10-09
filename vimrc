@@ -12,7 +12,7 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-if filereadable(expand("~/chrome/src/tools/vim/ninja-build.vim"))
+if filereadable(expand("~/chrome/src/tools/vim/ninja-build.vim")) && has("python")
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 
