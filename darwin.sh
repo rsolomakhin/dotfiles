@@ -14,7 +14,4 @@
 
 alias ls="ls -G"
 
-# Default PS1 theme.
-export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\$ '
-
 # vi:ft=sh
