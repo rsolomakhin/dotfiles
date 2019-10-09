@@ -10,3 +10,6 @@
 [submodule "vim/pack/rsolomakhin/start/vim-fugitive"]
 	path = vim/pack/rsolomakhin/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/pack/rsolomakhin/start/vim-unimpaired"]
+	path = vim/pack/rsolomakhin/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
