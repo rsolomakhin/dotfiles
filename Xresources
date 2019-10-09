@@ -32,3 +32,43 @@ xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35
 ! Alt-O opens the selected URL.
 *VT100.Translations: #override \n\
   Alt <Key>o: exec-formatted("google-chrome '%t'", PRIMARY) select-start() select-end()
+
+
+! https://terminal.sexy - /xcolors.net/baserville-ivorylight
+
+! special
+xterm*foreground:   #6d727e
+xterm*background:   #fef9ec
+xterm*cursorColor:  #6d727e
+
+! black
+xterm*color0:       #c5c1b4
+xterm*color8:       #a1a6b2
+
+! red
+xterm*color1:       #e75c58
+xterm*color9:       #b22b31
+
+! green
+xterm*color2:       #00a250
+xterm*color10:      #007427
+
+! yellow
+xterm*color3:       #a08a00
+xterm*color11:      #715f00
+
+! blue
+xterm*color4:       #208ffb
+xterm*color12:      #0065ca
+
+! magenta
+xterm*color5:       #d160c4
+xterm*color13:      #a03196
+
+! cyan
+xterm*color6:       #00a4c1
+xterm*color14:      #007693
+
+! white
+xterm*color7:       #3e424d
+xterm*color15:      #282c36

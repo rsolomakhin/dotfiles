@@ -40,6 +40,8 @@ let &t_SR.="\x1b[\x33 q"
 " Normal mode - steady block.
 let &t_EI.="\x1b[\x32 q"
 
+syntax on
+
 set autoindent
 set backspace=indent,eol,start
 set completeopt= " Turn off YCM's previews on top
