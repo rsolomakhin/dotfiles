@@ -13,3 +13,6 @@
 [submodule "vim/pack/rsolomakhin/start/vim-unimpaired"]
 	path = vim/pack/rsolomakhin/start/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
+[submodule "vim/pack/rsolomakhin/start/YouCompleteMe"]
+	path = vim/pack/rsolomakhin/start/YouCompleteMe
+	url = git@github.com:ycm-core/YouCompleteMe.git
