@@ -16,6 +16,10 @@ if filereadable(expand("~/chrome/src/tools/vim/ninja-build.vim")) && has("python
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 
+if filereadable(expand("~/chrome/src/tools/vim/chromium.ycm_extra_conf.py"))
+  let g:ycm_global_ycm_extra_conf = expand("~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
+endif
+
 " fzf.vim
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
