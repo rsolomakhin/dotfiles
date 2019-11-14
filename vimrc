@@ -25,11 +25,12 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
 
-nnoremap <F11> ==:wa<CR>:CrBuild<Up><CR>
-
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
 highlight ColorColumn ctermbg=LightGray
+
+" Same color for misspellings and error messages.
+highlight! link SpellBad ErrorMsg
 
 " Xterm cursor shape:
 " 30 - blinking block
