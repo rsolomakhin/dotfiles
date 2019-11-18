@@ -16,3 +16,15 @@
 [submodule "vim/pack/rsolomakhin/start/YouCompleteMe"]
 	path = vim/pack/rsolomakhin/start/YouCompleteMe
 	url = git@github.com:ycm-core/YouCompleteMe.git
+[submodule "vim/pack/rsolomakhin/start/vim-maktaba"]
+	path = vim/pack/rsolomakhin/start/vim-maktaba
+	url = git@github.com:google/vim-maktaba.git
+[submodule "vim/pack/rsolomakhin/start/vim-codefmt"]
+	path = vim/pack/rsolomakhin/start/vim-codefmt
+	url = git@github.com:google/vim-codefmt.git
+[submodule "vim/pack/rsolomakhin/start/vim-glaive"]
+	path = vim/pack/rsolomakhin/start/vim-glaive
+	url = git@github.com:google/vim-glaive.git
+[submodule "vim/pack/rsolomakhin/start/ListToggle"]
+	path = vim/pack/rsolomakhin/start/ListToggle
+	url = git@github.com:Valloric/ListToggle.git

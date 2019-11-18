@@ -16,9 +16,10 @@ if filereadable(expand("~/chrome/src/tools/vim/ninja-build.vim")) && has("python
   source ~/chrome/src/tools/vim/ninja-build.vim
 endif
 
-if filereadable(expand("~/chrome/src/tools/vim/chromium.ycm_extra_conf.py"))
-  let g:ycm_global_ycm_extra_conf = expand("~/chrome/src/tools/vim/chromium.ycm_extra_conf.py")
-endif
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py"
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_always_populate_location_list = 1
 
 " fzf.vim
 nnoremap <leader>b :Buffers<CR>
@@ -65,6 +66,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
+set list listchars=tab:»\ 
 set nocompatible
 set nofixeol
 set nojoinspaces
@@ -108,6 +110,18 @@ augroup custom
   autocmd FileType xml setlocal textwidth&
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
+augroup end
+
+augroup autoformat_settings
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+augroup end
+
+augroup ycm_settings
+  autocmd FileType cpp map <buffer> <c-]> :YcmCompleter GoTo<CR>
+  autocmd FileType cpp map <buffer> <F5> ::YcmForceCompileAndDiagnostics<CR>
 augroup end
 
 " Enable the 'autocmd FileType' commands above.
