@@ -33,8 +33,3 @@
 	default = simple
 [http]
 	cookiefile = ~/.gitcookies
-[merge]
-	conflictstyle = diff3
-	tool = vimdiff
-[mergetool]
-	prompt = false
