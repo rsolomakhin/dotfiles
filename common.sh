@@ -22,8 +22,12 @@ export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
 export NINJA_SUMMARIZE_BUILD="1"
-export VIMRUNTIME="/usr/share/vim/vim81"
 export VIM="vim"
+
+export VIMRUNTIME="/usr/local/homebrew/share/vim/vim82"
+if [ ! -d $VIMRUNTIME ]; then
+  export VIMRUNTIME="/usr/share/vim/vim81"
+fi
 
 TOOLS=""
 TOOLS="$TOOLS $ANDROID_HOME/platform-tools"
