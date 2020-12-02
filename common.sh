@@ -54,9 +54,6 @@ alias vi="$VIM"
 # Disable flow control (Ctrl-S).
 stty -ixon >& /dev/null
 
-# Default PS1 theme.
-export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
-
 if [ "`uname`" = "Darwin" ]; then
   . ~/.darwin.sh
 else

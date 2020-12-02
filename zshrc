@@ -26,4 +26,10 @@ HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-completion.zsh"
 HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-prompt.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
+# Default PS1 theme.
+autoload -U colors
+colors
+setopt prompt_subst
+export PS1='[%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}:%~]%{$fg[blue]%}$(__git_ps1 "(%s)")%{$reset_color%}\$ '
+
 # vi:ft=sh

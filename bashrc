@@ -23,4 +23,7 @@ HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-completion.bash"
 HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-prompt.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
+# Default PS1 theme.
+export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+
 # vi:ft=sh
