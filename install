@@ -15,7 +15,7 @@
 # limitations under the License.
 
 LINKER="ln --symbolic --force --verbose --no-target-directory"
-if [ "`uname`" == "Darwin" ]; then
+if [ "`uname`" = "Darwin" ]; then
   LINKER="ln -f -s -v"
 fi
 
