@@ -26,6 +26,9 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :GFiles<CR>
 
+" F10 to run the last build command.
+nnoremap <F10> :CrBuild<UP><CR>
+
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
 highlight ColorColumn ctermbg=LightGray
