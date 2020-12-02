@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Looping over $TOOLS and $HELPERS should split the string by whitespace:
+setopt shwordsplit
+
 source ~/.common.sh
 
 HELPERS=""
