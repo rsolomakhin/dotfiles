@@ -40,6 +40,10 @@ for tool in $TOOLS; do
 done
 export PATH
 
+HELPERS=""
+HELPERS="$HELPERS ~/.local.sh"
+for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
+
 alias e="$VIM"
 alias em="$EMACS"
 alias ema="$EMACS"
