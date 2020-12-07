@@ -41,7 +41,7 @@ done
 export PATH
 
 HELPERS=""
-HELPERS="$HELPERS ~/.local.sh"
+HELPERS="$HELPERS $HOME/.local.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 alias e="$VIM"
