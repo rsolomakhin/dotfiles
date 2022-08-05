@@ -26,6 +26,9 @@ export VIM="vim"
 
 export VIMRUNTIME="/usr/local/homebrew/share/vim/vim82"
 if [ ! -d $VIMRUNTIME ]; then
+  export VIMRUNTIME="/usr/share/vim/vim82"
+fi
+if [ ! -d $VIMRUNTIME ]; then
   export VIMRUNTIME="/usr/share/vim/vim81"
 fi
 

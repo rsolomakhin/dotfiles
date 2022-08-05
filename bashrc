@@ -26,4 +26,7 @@ for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 # Default PS1 theme.
 export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
 
+# Blinking bar cursor.
+echo -e -n "\x1b[\x35 q"
+
 # vi:ft=sh
