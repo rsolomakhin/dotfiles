@@ -14,7 +14,7 @@
 
 export ALTERNATE_EDITOR=""
 export BROWSER="google-chrome"
-export CHROMIUM_OUTPUT_DIR="out/and"
+export CHROMIUM_OUTPUT_DIR="out/emu"
 export CHROMIUM_SRC="$HOME/chrome/src"
 export ANDROID_HOME="$CHROMIUM_SRC/third_party/android_sdk/public"
 export EMACS="emacsclient -t"
