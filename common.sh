@@ -24,12 +24,9 @@ export HISTCONTROL="ignoredups:erasedups"
 export NINJA_SUMMARIZE_BUILD="1"
 export VIM="vim"
 
-export VIMRUNTIME="/usr/local/homebrew/share/vim/vim82"
+export VIMRUNTIME="/usr/local/homebrew/share/vim/vim90"
 if [ ! -d $VIMRUNTIME ]; then
-  export VIMRUNTIME="/usr/share/vim/vim82"
-fi
-if [ ! -d $VIMRUNTIME ]; then
-  export VIMRUNTIME="/usr/share/vim/vim81"
+  export VIMRUNTIME="/usr/share/vim/vim90"
 fi
 
 TOOLS=""
