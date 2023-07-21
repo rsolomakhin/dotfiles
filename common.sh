@@ -21,7 +21,7 @@ export EMACS="emacsclient -t"
 export FZF_CTRL_T_COMMAND="git ls"
 export FZF_DEFAULT_COMMAND="git ls"
 export HISTCONTROL="ignoredups:erasedups"
-export NINJA_SUMMARIZE_BUILD="1"
+export NINJA_SUMMARIZE_BUILD="0"
 export VIM="vim"
 
 export VIMRUNTIME="/usr/local/homebrew/share/vim/vim90"
