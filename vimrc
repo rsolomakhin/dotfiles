@@ -115,11 +115,11 @@ augroup custom
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
 
-augroup autoformat_settings
-  autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
-  autocmd FileType gn AutoFormatBuffer gn
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-augroup end
+" augroup autoformat_settings
+"   autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
+"   autocmd FileType gn AutoFormatBuffer gn
+"   autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+" augroup end
 
 augroup ycm_settings
   autocmd FileType cpp map <buffer> <c-]> :YcmCompleter GoTo<CR>
