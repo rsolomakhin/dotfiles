@@ -36,6 +36,7 @@ TOOLS="$TOOLS $ANDROID_HOME/tools/bin"
 TOOLS="$TOOLS $HOME/depot_tools"
 TOOLS="$TOOLS $HOME/software/bin"
 TOOLS="$TOOLS /usr/local/homebrew/bin"
+TOOLS="$TOOLS /opt/homebrew/bin"
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
