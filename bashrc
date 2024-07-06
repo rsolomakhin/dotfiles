@@ -21,6 +21,10 @@ HELPERS="$HELPERS $HOME/google-cloud-sdk/path.bash.inc"
 HELPERS="$HELPERS /etc/bash_completion"
 HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-completion.bash"
 HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-prompt.sh"
+HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/brew"
+HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/npm"
+HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/git-completion.bash"
+HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/git-prompt.sh"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 # Default PS1 theme.
