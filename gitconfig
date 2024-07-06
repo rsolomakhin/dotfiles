@@ -34,3 +34,5 @@
 	default = simple
 [http]
 	cookiefile = ~/.gitcookies
+[init]
+	defaultBranc = main
