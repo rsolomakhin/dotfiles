@@ -25,6 +25,7 @@ HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/brew"
 HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/npm"
 HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/git-completion.bash"
 HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/git-prompt.sh"
+HELPERS="$HELPERS /opt/homebrew/etc/bash_completion.d/tmux"
 for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
 
 # Default PS1 theme.
@@ -32,5 +33,8 @@ export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 
 
 # Blinking bar cursor.
 echo -e -n "\x1b[\x35 q"
+
+# Silence the warning the default interactive shell is now zsh.
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # vi:ft=sh
