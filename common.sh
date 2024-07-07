@@ -25,6 +25,8 @@ export NINJA_SUMMARIZE_BUILD="0"
 export VIM="vim"
 
 VIMRUNTIMES=""
+VIMRUNTIMES="$VIMRUNTIMES /opt/homebrew/share/vim/vim91"
+VIMRUNTIMES="$VIMRUNTIMES /opt/homebrew/share/vim/vim90"
 VIMRUNTIMES="$VIMRUNTIMES /usr/local/homebrew/share/vim/vim91"
 VIMRUNTIMES="$VIMRUNTIMES /usr/local/homebrew/share/vim/vim90"
 VIMRUNTIMES="$VIMRUNTIMES /usr/share/vim/vim91"
