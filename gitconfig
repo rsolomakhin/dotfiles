@@ -35,4 +35,4 @@
 [http]
 	cookiefile = ~/.gitcookies
 [init]
-	defaultBranc = main
+	defaultBranch = main
