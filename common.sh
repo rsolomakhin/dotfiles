@@ -24,10 +24,17 @@ export HISTCONTROL="ignoredups:erasedups"
 export NINJA_SUMMARIZE_BUILD="0"
 export VIM="vim"
 
-export VIMRUNTIME="/usr/local/homebrew/share/vim/vim90"
-if [ ! -d $VIMRUNTIME ]; then
-  export VIMRUNTIME="/usr/share/vim/vim90"
-fi
+VIMRUNTIMES=""
+VIMRUNTIMES="$VIMRUNTIMES /usr/local/homebrew/share/vim/vim91"
+VIMRUNTIMES="$VIMRUNTIMES /usr/local/homebrew/share/vim/vim90"
+VIMRUNTIMES="$VIMRUNTIMES /usr/share/vim/vim91"
+VIMRUNTIMES="$VIMRUNTIMES /usr/share/vim/vim90"
+for vimruntime in $VIMRUNTIMES; do
+  if [ -d $vimruntime ]; then
+    export VIMRUNTIME="$vimruntime"
+    break
+  fi
+done
 
 TOOLS=""
 TOOLS="$TOOLS $ANDROID_HOME/platform-tools"
