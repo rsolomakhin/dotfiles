@@ -112,6 +112,11 @@ augroup custom
   autocmd FileType xml setlocal tabstop=4
   autocmd FileType xml setlocal textwidth&
 
+  autocmd FileType python setlocal shiftwidth=2
+  autocmd FileType python setlocal softtabstop=2
+  autocmd FileType python setlocal tabstop=2
+  autocmd FileType python setlocal expandtab
+
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
 
