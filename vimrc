@@ -19,6 +19,7 @@ call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'Valloric/ListToggle'
 
 " Local plugins.
 let s:local_plugins = expand('~/.local-plugins.vimrc')
