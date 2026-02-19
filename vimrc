@@ -17,6 +17,7 @@ set nocompatible
 " vim-plug.
 call plug#begin()
 Plug 'tpope/vim-sensible'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 " Local plugins.
