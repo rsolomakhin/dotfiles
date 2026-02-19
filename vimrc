@@ -12,8 +12,9 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-if filereadable(expand("~/chrome/src/tools/vim/ninja-build.vim")) && has("python3")
-  source ~/chrome/src/tools/vim/ninja-build.vim
+let s:local_vimrc = expand('~/.local.vimrc')
+if filereadable(s:local_vimrc)
+  source ~/.local.vimrc
 endif
 
 " YouCompleteMe
@@ -24,10 +25,7 @@ let g:ycm_always_populate_location_list = 1
 " fzf.vim
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
-nnoremap <leader>t :GFiles<CR>
-
-" F10 to run the last build command.
-nnoremap <F10> :CrBuild<UP><CR>
+nnoremap <leader>t :Files<CR>
 
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
