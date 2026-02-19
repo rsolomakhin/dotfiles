@@ -12,17 +12,27 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
+set nocompatible
+
+" vim-plug.
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'junegunn/fzf.vim'
+
+" Local plugins.
+let s:local_plugins = expand('~/.local-plugins.vimrc')
+if filereadable(s:local_plugins)
+  source ~/.local-plugins.vimrc
+endif
+call plug#end()
+
+" Local config.
 let s:local_vimrc = expand('~/.local.vimrc')
 if filereadable(s:local_vimrc)
   source ~/.local.vimrc
 endif
 
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/chrome/src/tools/vim/chromium.ycm_extra_conf.py"
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_always_populate_location_list = 1
-
-" fzf.vim
+" fzf.vim.
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :Files<CR>
@@ -49,44 +59,7 @@ let &t_SR.="\x1b[\x33 q"
 " Normal mode - steady block.
 let &t_EI.="\x1b[\x32 q"
 
-syntax on
-
-set autoindent
-set backspace=indent,eol,start
-set completeopt= " Turn off YCM's previews on top
-set directory=~/.vim/swap,.
-set encoding=utf-8
-set expandtab
-set formatoptions+=j " Remove comment characters when joining lines.
-set guioptions-=L
-set guioptions-=m
-set guioptions-=r
-set guioptions-=T
-set hidden
-set hlsearch
-set ignorecase
-set incsearch
-set laststatus=2
-set list listchars=tab:»\ 
-set nocompatible
-set nofixeol
-set nojoinspaces
-set nonumber
-set nospell
-set ruler
-set shiftround
-set shiftwidth=2
-set showcmd
-set smartcase
-set smartindent
-set smarttab
-set softtabstop=2
-set spellfile=~/.vim/spell/en.utf-8.add
-set tabstop=2
-set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
-set wildmenu
-
-augroup custom
+augroup FileFormatSettings
   autocmd!
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
 
@@ -118,16 +91,40 @@ augroup custom
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
 
-" augroup autoformat_settings
-"   autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
-"   autocmd FileType gn AutoFormatBuffer gn
-"   autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-" augroup end
+syntax on
+filetype plugin indent on
 
-augroup ycm_settings
-  autocmd FileType cpp map <buffer> <c-]> :YcmCompleter GoTo<CR>
-  autocmd FileType cpp map <buffer> <F5> ::YcmForceCompileAndDiagnostics<CR>
-augroup end
-
-" Enable the 'autocmd FileType' commands above.
-filetype plugin on
+set autoindent
+set backspace=indent,eol,start
+set directory=~/.vim/swap,.
+set encoding=utf-8
+set expandtab
+set formatoptions+=j " Remove comment characters when joining lines.
+set guioptions-=L
+set guioptions-=m
+set guioptions-=r
+set guioptions-=T
+set hidden
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set list listchars=tab:»\ 
+set nofixeol
+set nojoinspaces
+set nonumber
+set nospell
+set nowrap " Do not soft wrap lines.
+set ruler
+set scrolloff=5 " Keep 5 lines above/below cursor.
+set shiftround
+set shiftwidth=2
+set showcmd
+set smartcase
+set smartindent
+set smarttab
+set softtabstop=2
+set spellfile=~/.vim/spell/en.utf-8.add
+set tabstop=2
+set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
+set wildmenu
