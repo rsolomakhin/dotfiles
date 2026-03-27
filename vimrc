@@ -20,6 +20,7 @@ Plug 'tpope/vim-sensible'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'Valloric/ListToggle'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Local plugins.
 let s:local_plugins = expand('~/.local-plugins.vimrc')
@@ -38,6 +39,26 @@ endif
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :Files<CR>
+
+" coc.nvim.
+" Navigate diagnostics.
+nmap [g <Plug>(coc-diagnostic-prev)
+nmap ]g <Plug>(coc-diagnostic-next)
+" Navigate to locations.
+nmap <leader>d <Plug>(coc-definition)
+nmap <leader>e <Plug>(coc-references)
+" Code formatting.
+nnoremap <leader>f <Plug>(coc-format-selected)
+" Hover.
+nnoremap <silent> <leader>k :call ShowDocumentation()<CR>
+" Show hover when provider exists, fallback to vim's builtin behavior.
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('definitionHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
@@ -64,6 +85,7 @@ let &t_EI.="\x1b[\x32 q"
 augroup FileFormatSettings
   autocmd!
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
+  autocmd BufRead,BufNewFile /tmp/hg-editor* set filetype=gitcommit
 
   autocmd FileType
         \ cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto,objcpp,
@@ -89,6 +111,7 @@ augroup FileFormatSettings
   autocmd FileType python setlocal softtabstop=2
   autocmd FileType python setlocal tabstop=2
   autocmd FileType python setlocal expandtab
+  autocmd FileType python setlocal formatexpr=CocAction('formatSelected')
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end
@@ -116,17 +139,19 @@ set nofixeol
 set nojoinspaces
 set nonumber
 set nospell
-set nowrap " Do not soft wrap lines.
 set ruler
 set scrolloff=5 " Keep 5 lines above/below cursor.
 set shiftround
 set shiftwidth=2
 set showcmd
+set signcolumn=no
 set smartcase
 set smartindent
 set smarttab
 set softtabstop=2
 set spellfile=~/.vim/spell/en.utf-8.add
 set tabstop=2
+set updatetime=300
 set viminfo='100,<100,:100,s100,h,%,n~/.viminfo
 set wildmenu
+set wrap " Soft wrap lines.
