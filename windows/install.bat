@@ -14,7 +14,7 @@
 
 @echo off
 
-if not exist %SYSTEMDRIVE%\src mkdir %SYSTEMDRIVE%\src ^
+if not exist %USERPROFILE%\src mkdir %USERPROFILE%\src ^
   || echo "Cannot create src dir" && exit /b 1
 if not exist %USERPROFILE%\vimfiles mkdir %USERPROFILE%\vimfiles ^
   || echo "Cannot create vim dir" && exit /b 1
@@ -28,9 +28,8 @@ if not exist %USERPROFILE%\vimfiles\autoload mkdir %USERPROFILE%\vimfiles\autolo
 pushd %~dp0 ^
   || echo "Cannot go into the directory of the install script" && exit /b 1
 
-copy /Y ..\vim\autoload\plug.vim %USERPROFILE%\vimfiles\autoload ^
-  || echo "Cannot copy plug.vim" && exit /b 1
-copy /Y env.bat %SYSTEMDRIVE%\src\ ^
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni $HOME/vimfiles/autoload/plug.vim -Force" || echo "Cannot download plug.vim" && exit /b 1
+copy /Y env.bat %USERPROFILE%\src\ ^
   || echo "Cannot copy env.bat" && exit /b 1
 copy /Y ..\cvsignore %USERPROFILE%\.cvsignore ^
   || echo "Cannot copy cvsignore" && exit /b 1

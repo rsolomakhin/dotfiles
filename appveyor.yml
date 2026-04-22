@@ -14,6 +14,8 @@
 
 version: '{build}'
 install:
+- cmd: mkdir C:\temp_sandbox
+- cmd: set USERPROFILE=C:\temp_sandbox
 - cmd: windows\install.bat
 build: off
 test: off

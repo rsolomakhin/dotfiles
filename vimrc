@@ -59,6 +59,8 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+" Tab accepts the inline or dropdown suggestion.
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#select_confirm() : coc#inline#visible() ? coc#inline#accept() : "<TAB>"
 
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
