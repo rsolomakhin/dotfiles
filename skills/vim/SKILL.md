@@ -1,5 +1,5 @@
 ---
-name: Vim Configuration
+name: vim
 description: Skill for managing and improving Vim configuration files.
 ---
 
@@ -31,8 +31,3 @@ When modifying Vim configuration:
 -   Ensure cursor shape changes correctly between modes.
 -   Normal and Visual mode should have a block cursor.
 -   Insert mode should have a pipe (line) cursor.
-
-### Environment Variables
-
--   Be cautious with VIMRUNTIME environment variable updates as it points to
-    a versioned directory that changes.

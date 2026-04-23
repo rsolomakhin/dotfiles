@@ -1,3 +1,4 @@
+# README
 
 [![Windows build status](https://ci.appveyor.com/api/projects/status/y9929cmeqn390syq/branch/master?svg=true)](https://ci.appveyor.com/project/rsolomakhin/dotfiles/branch/master)
 
@@ -8,3 +9,23 @@
 > means it is to be attained.
 
 -- Aristotle, Nicomachean Ethics
+
+## Installation
+
+On Linux and macOS, the `install` script will take files from this repository
+and symlink to them from the `$HOME` directory, with a leading dot added. For
+example, `vimrc` in the repository becomes `~/.vimrc`, and `vim/coc.vim` becomes
+`~/.vim/coc.vim`.
+
+## Vim Shortcuts for coc.nvim
+
+If Node.js is installed and `coc.nvim` is active, the following shortcuts are
+available:
+
+-   `[g` : Navigate to previous diagnostic (error/warning).
+-   `]g` : Navigate to next diagnostic (error/warning).
+-   `<leader>d` : Go to definition of symbol under cursor.
+-   `<leader>e` : Show references to symbol under cursor.
+-   `<leader>f` : Format selected code.
+-   `<leader>k` : Show documentation hover for symbol under cursor.
+-   `<TAB>` : Accept auto-completion suggestion.

@@ -23,10 +23,7 @@ The primary goals are to:
 
 ### Current Priorities
 
--   Fix the plug.vim missing file error in Windows installation.
--   Update AppVeyor configuration to run tests in a sandbox.
 -   Address cursor shape issues in Vim and Shell.
--   Manage VIMRUNTIME environment variable updates.
 
 ## Personas & Behavior
 
@@ -46,9 +43,23 @@ When proposing file changes, the agent must provide:
 -   E: How the proposed code change will improve the situation: The benefit.
 -   F: What other alternatives could be considered and explored: Other options.
 
+## Environment Assumptions
+
+-   Installation: The `install` script on Linux and macOS symlinks files from
+    the repository to `$HOME` (e.g., `<dir>/vimrc` -> `$HOME/.vimrc`).
+-   Discovery: The `install` script uses `git ls-files`, so new files must be
+    tracked by Git to be installed.
+-   License Headers: All new source files must include the Apache 2.0 license
+    header. Markdown files (`.md`) should omit it to preserve LLM context space.
+-   Comments: Comments should have some kind of indication at the end of phrases
+    (period, comma, colon, semi-colon, etc.) and sentences (period) to avoid the
+    reader getting confused where comments end.
+
 ## Skills
 
 Skills are modularly organized in the skills/ directory:
 
--   [Bash Skill](file:///usr/local/google/home/rouslan/.dotfiles/skills/bash/SKILL.md)
--   [Vim Skill](file:///usr/local/google/home/rouslan/.dotfiles/skills/vim/SKILL.md)
+-   [Bash Skill](skills/bash/SKILL.md)
+-   [Vim Skill](skills/vim/SKILL.md)
+-   [Markdown Skill](skills/markdown/SKILL.md)
+-   [Git Skill](skills/git/SKILL.md)

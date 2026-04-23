@@ -1,5 +1,5 @@
 ---
-name: Bash Configuration
+name: bash
 description: Skill for managing and improving Bash configuration files.
 ---
 
@@ -21,6 +21,11 @@ When modifying Bash configuration:
 -   Prefer adding modular files or using existing structure rather than
     dumping everything in bashrc.
 -   Document every new alias or function clearly.
+-   Be aware that `common.sh` (sourced by `bashrc` and `bash_profile`)
+    manages environment variables for other tools, such as `VIMRUNTIME` for
+    Vim.
+-   Be cautious with `VIMRUNTIME` environment variable updates as it points to
+    a versioned directory that changes.
 -   Follow the A-F review protocol for any changes.
 
 ### FZF Integration

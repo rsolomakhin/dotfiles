@@ -24,22 +24,7 @@ export HISTCONTROL="ignoredups:erasedups"
 export NINJA_SUMMARIZE_BUILD="0"
 export VIM="vim"
 
-VIMRUNTIMES=""
-VIMRUNTIMES="$VIMRUNTIMES /opt/homebrew/share/vim/vim90"
-VIMRUNTIMES="$VIMRUNTIMES /opt/homebrew/share/vim/vim91"
-VIMRUNTIMES="$VIMRUNTIMES /opt/homebrew/share/vim/vim92"
-VIMRUNTIMES="$VIMRUNTIMES /usr/local/homebrew/share/vim/vim90"
-VIMRUNTIMES="$VIMRUNTIMES /usr/local/homebrew/share/vim/vim91"
-VIMRUNTIMES="$VIMRUNTIMES /usr/local/homebrew/share/vim/vim92"
-VIMRUNTIMES="$VIMRUNTIMES /usr/share/vim/vim90"
-VIMRUNTIMES="$VIMRUNTIMES /usr/share/vim/vim91"
-VIMRUNTIMES="$VIMRUNTIMES /usr/share/vim/vim92"
-for vimruntime in $VIMRUNTIMES; do
-  if [ -d $vimruntime ]; then
-    export VIMRUNTIME="$vimruntime"
-    break
-  fi
-done
+
 
 TOOLS=""
 TOOLS="$TOOLS $ANDROID_HOME/platform-tools"
@@ -55,6 +40,18 @@ for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
 export PATH
+
+# Dynamically set VIMRUNTIME based on the active vim executable's fallback path.
+if command -v vim >/dev/null 2>&1; then
+  VIM_FALLBACK=$(vim --version | grep 'fall-back for $VIM:' | awk -F\" '{print $2}')
+  if [ -n "$VIM_FALLBACK" ] && [ -d "$VIM_FALLBACK" ]; then
+    for dir in "$VIM_FALLBACK"/vim[0-9]*; do
+      if [ -d "$dir" ]; then
+        export VIMRUNTIME="$dir"
+      fi
+    done
+  fi
+fi
 
 HELPERS=""
 HELPERS="$HELPERS $HOME/.local.sh"

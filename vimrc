@@ -20,7 +20,10 @@ Plug 'tpope/vim-sensible'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'Valloric/ListToggle'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" coc.nvim requires node.
+if executable('node')
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 
 " Local plugins.
 let s:local_plugins = expand('~/.local-plugins.vimrc')
@@ -40,27 +43,15 @@ nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :Files<CR>
 
-" coc.nvim.
-" Navigate diagnostics.
-nmap [g <Plug>(coc-diagnostic-prev)
-nmap ]g <Plug>(coc-diagnostic-next)
-" Navigate to locations.
-nmap <leader>d <Plug>(coc-definition)
-nmap <leader>e <Plug>(coc-references)
-" Code formatting.
-nnoremap <leader>f <Plug>(coc-format-selected)
-" Hover.
-nnoremap <silent> <leader>k :call ShowDocumentation()<CR>
-" Show hover when provider exists, fallback to vim's builtin behavior.
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('definitionHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-" Tab accepts the inline or dropdown suggestion.
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#select_confirm() : coc#inline#visible() ? coc#inline#accept() : "<TAB>"
+" coc.nvim configuration is in a separate file.
+let s:coc_config = expand('~/.vim/coc.vim')
+if filereadable(s:coc_config)
+  execute 'source' s:coc_config
+else
+  echohl WarningMsg
+  echom "Warning: ~/.vim/coc.vim not found. Please run ./install script again."
+  echohl None
+endif
 
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
@@ -113,7 +104,6 @@ augroup FileFormatSettings
   autocmd FileType python setlocal softtabstop=2
   autocmd FileType python setlocal tabstop=2
   autocmd FileType python setlocal expandtab
-  autocmd FileType python setlocal formatexpr=CocAction('formatSelected')
 
   autocmd BufReadPost * call setpos(".", getpos("'\""))
 augroup end

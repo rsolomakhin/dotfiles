@@ -17,6 +17,3 @@
 source ~/.bashrc
 
 # vi:ft=sh
-
-# Added by Jetski
-export PATH="/Users/rouslan/.jetski/jetski/bin:$PATH"
