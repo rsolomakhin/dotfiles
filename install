@@ -19,18 +19,13 @@ if [ "`uname`" = "Darwin" ]; then
   LINKER="ln -f -s -v"
 fi
 
-for file in `git ls-files`; do
-  if [ "$file" == "appveyor.yml" ]; then continue; fi
+for src_file in `git ls-files src/`; do
+  file=`echo $src_file | sed 's|^src/||'`
   if [ "$file" == "fonts/LICENCE.txt" ]; then continue; fi
   if [ "$file" == "fonts/README.rst" ]; then continue; fi
-  if [ "$file" == "install" ]; then continue; fi
-  if [ "$file" == "LICENSE" ]; then continue; fi
-  if [ "$file" == "README.md" ]; then continue; fi
-  if [ "$file" == ".travis.yml" ]; then continue; fi
-  if [ "$file" == "windows/env.bat" ]; then continue; fi
-  if [ "$file" == "windows/install.bat" ]; then continue; fi
+
   mkdir -pv ~/.`dirname $file`
-  $LINKER ~/.dotfiles/$file ~/.$file
+  $LINKER ~/.dotfiles/$src_file ~/.$file
 done
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

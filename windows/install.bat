@@ -31,9 +31,9 @@ pushd %~dp0 ^
 powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni $HOME/vimfiles/autoload/plug.vim -Force" || echo "Cannot download plug.vim" && exit /b 1
 copy /Y env.bat %USERPROFILE%\src\ ^
   || echo "Cannot copy env.bat" && exit /b 1
-copy /Y ..\cvsignore %USERPROFILE%\.cvsignore ^
+copy /Y ..\src\cvsignore %USERPROFILE%\.cvsignore ^
   || echo "Cannot copy cvsignore" && exit /b 1
-copy /Y ..\vimrc %USERPROFILE%\.vimrc ^
+copy /Y ..\src\vimrc %USERPROFILE%\.vimrc ^
   || echo "Cannot copy vim config" && exit /b 1
 
 git.exe config --global --replace-all alias.br branch ^
