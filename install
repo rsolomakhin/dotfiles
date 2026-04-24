@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Get the directory where this script is located
+REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 LINKER="ln --symbolic --force --verbose --no-target-directory"
 if [ "`uname`" = "Darwin" ]; then
   LINKER="ln -f -s -v"
@@ -63,7 +66,7 @@ for src_file in `git ls-files src/`; do
     mv "$dest" "$dest.bak"
   fi
 
-  $LINKER ~/.dotfiles/$src_file "$dest"
+  $LINKER "$REPO_DIR/$src_file" "$dest"
 done
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
