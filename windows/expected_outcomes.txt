@@ -8,3 +8,4 @@ C:\temp_sandbox\vimfiles\coc.vim
 C:\temp_sandbox\src\env.bat
 C:\temp_sandbox\.cvsignore
 C:\temp_sandbox\.vimrc
+C:\temp_sandbox\.gitconfig.user
