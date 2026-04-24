@@ -19,6 +19,39 @@ if [ "`uname`" = "Darwin" ]; then
   LINKER="ln -f -s -v"
 fi
 
+# Parse arguments for Git identity
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --name)
+      GIT_NAME="$2"
+      shift 2
+      ;;
+    --email)
+      GIT_EMAIL="$2"
+      shift 2
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+if [ ! -f ~/.gitconfig.user ]; then
+  if [ -z "$GIT_NAME" ]; then
+    read -p "Enter your Git name: " GIT_NAME
+  fi
+  if [ -z "$GIT_EMAIL" ]; then
+    read -p "Enter your Git email: " GIT_EMAIL
+  fi
+
+  if [ -n "$GIT_NAME" ] && [ -n "$GIT_EMAIL" ]; then
+    echo "[user]" > ~/.gitconfig.user
+    echo "	name = $GIT_NAME" >> ~/.gitconfig.user
+    echo "	email = $GIT_EMAIL" >> ~/.gitconfig.user
+    echo "Created ~/.gitconfig.user with your identity."
+  fi
+fi
+
 for src_file in `git ls-files src/`; do
   file=`echo $src_file | sed 's|^src/||'`
   dest=~/.$file

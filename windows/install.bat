@@ -42,6 +42,42 @@ if exist %USERPROFILE%\.vimrc del /q %USERPROFILE%\.vimrc
 mklink %USERPROFILE%\.vimrc %~dp0..\src\vimrc ^
   || echo "Cannot link vim config" && exit /b 1
 
+:: Parse arguments for Git identity
+:parse_args
+if "%~1"=="" goto end_parse
+if "%~1"=="--name" (
+    set GIT_NAME=%~2
+    shift
+    shift
+    goto parse_args
+)
+if "%~1"=="--email" (
+    set GIT_EMAIL=%~2
+    shift
+    shift
+    goto parse_args
+)
+shift
+goto parse_args
+:end_parse
+
+if not exist %USERPROFILE%\.gitconfig.user (
+    if "%GIT_NAME%"=="" (
+        set /p GIT_NAME="Enter your Git name: "
+    )
+    if "%GIT_EMAIL%"=="" (
+        set /p GIT_EMAIL="Enter your Git email: "
+    )
+    if not "%GIT_NAME%"=="" (
+        if not "%GIT_EMAIL%"=="" (
+            echo [user]> %USERPROFILE%\.gitconfig.user
+            echo 	name = %GIT_NAME%>> %USERPROFILE%\.gitconfig.user
+            echo 	email = %GIT_EMAIL%>> %USERPROFILE%\.gitconfig.user
+            echo Created %USERPROFILE%\.gitconfig.user with your identity.
+        )
+    )
+)
+
 git.exe config --global --replace-all alias.br branch ^
   || echo "Cannot set git br alias" && exit /b 1
 git.exe config --global --replace-all alias.brv "branch -vv" ^
@@ -71,16 +107,6 @@ git.exe config --global --replace-all ^
   || echo "Cannot set git cookie file location" && exit /b 1
 git.exe config --global --replace-all push.default simple ^
   || echo "Cannot set git push preferences" && exit /b 1
-git.exe config --global --replace-all user.name "Rouslan Solomakhin" ^
-  || echo "Cannot set git user name preference" && exit /b 1
-git.exe config --global --get user.email
-if errorlevel 1 (
-  git.exe config --global --replace-all user.email ^
-    "rouslan.solomakhin@gmail.com" ^
-    || echo "Cannot set global git email address" && exit /b 1
-)
-git.exe config --replace-all user.email "rouslan.solomakhin@gmail.com" ^
-  || echo "Cannot set this repository's git email address" && exit /b 1
 
 git.exe submodule update --init --recursive ^
   || echo "Cannot update submodules" && exit /b 1
