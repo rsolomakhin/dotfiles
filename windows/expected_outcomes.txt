@@ -1,12 +1,10 @@
-[Directories]
 C:\temp_sandbox\vimfiles
 C:\temp_sandbox\vimfiles\spell
 C:\temp_sandbox\vimfiles\swap
 C:\temp_sandbox\vimfiles\autoload
 C:\temp_sandbox\src
-
-[Files]
 C:\temp_sandbox\vimfiles\autoload\plug.vim
+C:\temp_sandbox\vimfiles\coc.vim
 C:\temp_sandbox\src\env.bat
 C:\temp_sandbox\.cvsignore
 C:\temp_sandbox\.vimrc

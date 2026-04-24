@@ -33,6 +33,8 @@ copy /Y env.bat %USERPROFILE%\src\ ^
   || echo "Cannot copy env.bat" && exit /b 1
 copy /Y ..\src\cvsignore %USERPROFILE%\.cvsignore ^
   || echo "Cannot copy cvsignore" && exit /b 1
+copy /Y ..\src\vim\coc.vim %USERPROFILE%\vimfiles\coc.vim ^
+  || echo "Cannot copy coc config" && exit /b 1
 copy /Y ..\src\vimrc %USERPROFILE%\.vimrc ^
   || echo "Cannot copy vim config" && exit /b 1
 

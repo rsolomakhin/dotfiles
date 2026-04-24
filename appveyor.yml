@@ -18,5 +18,6 @@ install:
 - cmd: set USERPROFILE=C:\temp_sandbox
 - cmd: windows\install.bat
 build: off
-test: off
+test_script:
+- ps: Get-Content windows\expected_outcomes.txt | ForEach-Object { if (-not (Test-Path $_)) { throw "Missing: $_" } }
 deploy: off
