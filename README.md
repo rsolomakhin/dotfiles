@@ -21,10 +21,11 @@ to them from the `$HOME` directory, with a leading dot added. For example,
 
 ### Windows
 
-The `windows/install.bat` on Windows will copy files from `src/` to the
-`%USERPROFILE%` directory. For example, `src/cvsignore` becomes
-`%USERPROFILE%\.cvsignore` and `src/vimrc` becomes `%USERPROFILE%\.vimrc`. Note
-that `src/vim/coc.vim` is copied to `%USERPROFILE%\vimfiles\coc.vim`.
+The `windows/install.bat` on Windows will create symbolic links from the `src/`
+directory to the `%USERPROFILE%` directory. For example, `src/cvsignore` in the
+repository becomes `%USERPROFILE%\.cvsignore`, and `src/vimrc` becomes
+`%USERPROFILE%\.vimrc`. Note that `src/vim/coc.vim` is linked to
+`%USERPROFILE%\vimfiles\coc.vim`.
 
 ## Vim Shortcuts for coc.nvim
 
