@@ -37,7 +37,7 @@ if command -v brew >/dev/null 2>&1; then
   HELPERS="$HELPERS $BREW_PREFIX/etc/bash_completion.d/tmux"
 fi
 
-for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
+for helper in $HELPERS; do [ -f "$helper" ] && source "$helper"; done
 
 # Default PS1 theme.
 export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '

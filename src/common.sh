@@ -59,7 +59,7 @@ fi
 
 HELPERS=""
 HELPERS="$HELPERS $HOME/.local.sh"
-for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
+for helper in $HELPERS; do [ -f "$helper" ] && source "$helper"; done
 
 alias e="$VIM"
 alias em="$EMACS"
