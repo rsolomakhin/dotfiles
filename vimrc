@@ -82,7 +82,7 @@ augroup FileFormatSettings
 
   autocmd FileType
         \ cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto,objcpp,
-        \haskell setlocal textwidth=80
+        \haskell,markdown setlocal textwidth=80
 
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
 
