@@ -21,9 +21,16 @@ fi
 
 for src_file in `git ls-files src/`; do
   file=`echo $src_file | sed 's|^src/||'`
+  dest=~/.$file
 
   mkdir -pv ~/.`dirname $file`
-  $LINKER ~/.dotfiles/$src_file ~/.$file
+
+  if [ -f "$dest" ] && [ ! -L "$dest" ]; then
+    echo "Backing up $dest to $dest.bak"
+    mv "$dest" "$dest.bak"
+  fi
+
+  $LINKER ~/.dotfiles/$src_file "$dest"
 done
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
