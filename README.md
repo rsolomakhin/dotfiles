@@ -12,10 +12,10 @@
 
 ## Installation
 
-On Linux and macOS, the `install` script will take files from this repository
-and symlink to them from the `$HOME` directory, with a leading dot added. For
-example, `vimrc` in the repository becomes `~/.vimrc`, and `vim/coc.vim` becomes
-`~/.vim/coc.vim`.
+The `install` script on Linux and macOS and `windows/install.bat` on Windows
+will take files from `src/` and symlink to them from the `$HOME` directory, with
+a leading dot added. For example, `src/vimrc` in the repository becomes
+`~/.vimrc`, and `src/vim/coc.vim` becomes `~/.vim/coc.vim`.
 
 ## Vim Shortcuts for coc.nvim
 
