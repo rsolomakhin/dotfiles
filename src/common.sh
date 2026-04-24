@@ -33,6 +33,14 @@ TOOLS="$TOOLS $ANDROID_HOME/tools/bin"
 TOOLS="$TOOLS $HOME/depot_tools"
 TOOLS="$TOOLS $HOME/software/bin"
 
+# Bootstrap Homebrew path if not already present.
+for brew_path in /opt/homebrew/bin /usr/local/bin /home/linuxbrew/.linuxbrew/bin; do
+  if [[ -x "$brew_path/brew" && $PATH != *"$brew_path"* ]]; then
+    PATH="$brew_path:$PATH"
+    break
+  fi
+done
+
 if command -v brew >/dev/null 2>&1; then
   BREW_PREFIX=$(brew --prefix)
   TOOLS="$TOOLS $BREW_PREFIX/bin"

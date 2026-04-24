@@ -40,7 +40,11 @@ fi
 for helper in $HELPERS; do [ -f "$helper" ] && source "$helper"; done
 
 # Default PS1 theme.
-export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+if command -v __git_ps1 >/dev/null 2>&1; then
+  export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+else
+  export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\$ '
+fi
 
 # Blinking bar cursor.
 echo -e -n "\x1b[\x35 q"
