@@ -28,7 +28,11 @@ if not exist %USERPROFILE%\vimfiles\autoload mkdir %USERPROFILE%\vimfiles\autolo
 pushd %~dp0 ^
   || echo "Cannot go into the directory of the install script" && exit /b 1
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni $HOME/vimfiles/autoload/plug.vim -Force" || echo "Cannot download plug.vim" && exit /b 1
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  "$p = '$HOME\vimfiles\autoload\plug.vim'; ^
+   if (!(Test-Path $p) -or (Get-Item $p).LastWriteTime -lt (Get-Date).AddDays(-1)) { ^
+     iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni $p -Force ^
+   }" || echo "Cannot download plug.vim" && exit /b 1
 if exist %USERPROFILE%\src\env.bat del /q %USERPROFILE%\src\env.bat
 mklink %USERPROFILE%\src\env.bat %~dp0env.bat ^
   || echo "Cannot link env.bat" && exit /b 1
