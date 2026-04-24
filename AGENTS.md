@@ -49,6 +49,8 @@ When proposing file changes, the agent must provide:
     the repository to `$HOME` (e.g., `<dir>/vimrc` -> `$HOME/.vimrc`).
 -   Discovery: The `install` script uses `git ls-files`, so new files must be
     tracked by Git to be installed.
+-   File Operations: Always use `git rm` and `git mv` instead of `rm` and `mv`
+    to ensure the Git index is updated correctly.
 -   License Headers: All new source files must include the Apache 2.0 license
     header. Markdown files (`.md`) should omit it to preserve LLM context space.
 -   Comments: Comments should have some kind of indication at the end of phrases

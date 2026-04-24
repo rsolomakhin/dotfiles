@@ -21,8 +21,6 @@ fi
 
 for src_file in `git ls-files src/`; do
   file=`echo $src_file | sed 's|^src/||'`
-  if [ "$file" == "fonts/LICENCE.txt" ]; then continue; fi
-  if [ "$file" == "fonts/README.rst" ]; then continue; fi
 
   mkdir -pv ~/.`dirname $file`
   $LINKER ~/.dotfiles/$src_file ~/.$file
