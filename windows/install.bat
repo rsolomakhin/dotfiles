@@ -29,14 +29,18 @@ pushd %~dp0 ^
   || echo "Cannot go into the directory of the install script" && exit /b 1
 
 powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni $HOME/vimfiles/autoload/plug.vim -Force" || echo "Cannot download plug.vim" && exit /b 1
-copy /Y env.bat %USERPROFILE%\src\ ^
-  || echo "Cannot copy env.bat" && exit /b 1
-copy /Y ..\src\cvsignore %USERPROFILE%\.cvsignore ^
-  || echo "Cannot copy cvsignore" && exit /b 1
-copy /Y ..\src\vim\coc.vim %USERPROFILE%\vimfiles\coc.vim ^
-  || echo "Cannot copy coc config" && exit /b 1
-copy /Y ..\src\vimrc %USERPROFILE%\.vimrc ^
-  || echo "Cannot copy vim config" && exit /b 1
+if exist %USERPROFILE%\src\env.bat del /q %USERPROFILE%\src\env.bat
+mklink %USERPROFILE%\src\env.bat %~dp0env.bat ^
+  || echo "Cannot link env.bat" && exit /b 1
+if exist %USERPROFILE%\.cvsignore del /q %USERPROFILE%\.cvsignore
+mklink %USERPROFILE%\.cvsignore %~dp0..\src\cvsignore ^
+  || echo "Cannot link cvsignore" && exit /b 1
+if exist %USERPROFILE%\vimfiles\coc.vim del /q %USERPROFILE%\vimfiles\coc.vim
+mklink %USERPROFILE%\vimfiles\coc.vim %~dp0..\src\vim\coc.vim ^
+  || echo "Cannot link coc config" && exit /b 1
+if exist %USERPROFILE%\.vimrc del /q %USERPROFILE%\.vimrc
+mklink %USERPROFILE%\.vimrc %~dp0..\src\vimrc ^
+  || echo "Cannot link vim config" && exit /b 1
 
 git.exe config --global --replace-all alias.br branch ^
   || echo "Cannot set git br alias" && exit /b 1
