@@ -32,10 +32,14 @@ TOOLS="$TOOLS $ANDROID_HOME/tools"
 TOOLS="$TOOLS $ANDROID_HOME/tools/bin"
 TOOLS="$TOOLS $HOME/depot_tools"
 TOOLS="$TOOLS $HOME/software/bin"
-TOOLS="$TOOLS /usr/local/homebrew/bin"
-TOOLS="$TOOLS /opt/homebrew/bin"
-TOOLS="$TOOLS /opt/homebrew/opt/openjdk/bin"
-TOOLS="$TOOLS /opt/homebrew/opt/llvm/bin"
+
+if command -v brew >/dev/null 2>&1; then
+  BREW_PREFIX=$(brew --prefix)
+  TOOLS="$TOOLS $BREW_PREFIX/bin"
+  TOOLS="$TOOLS $BREW_PREFIX/opt/openjdk/bin"
+  TOOLS="$TOOLS $BREW_PREFIX/opt/llvm/bin"
+fi
+
 for tool in $TOOLS; do
   [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
 done
