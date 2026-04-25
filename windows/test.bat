@@ -24,9 +24,7 @@ call %~dp0install.bat --name "Test User" --email "test@example.com" ^
   || (echo "Installation failed" && exit /b 1)
 
 :: Verify the outcomes.
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-  "Get-Content %~dp0expected_outcomes.txt | ForEach-Object { if (-not (Test-Path $_)) { throw 'Missing: $_' } }" ^
-  || (echo "Verification failed" && exit /b 1)
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-Content %~dp0expected_outcomes.txt | ForEach-Object { if (-not (Test-Path $_)) { throw \"Missing: $_\" } }" || (echo "Verification failed" && exit /b 1)
 
 echo Test passed successfully.
 endlocal
