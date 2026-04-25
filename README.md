@@ -1,7 +1,8 @@
 # README
 
 [![Windows build status](https://ci.appveyor.com/api/projects/status/y9929cmeqn390syq/branch/master?svg=true)](https://ci.appveyor.com/project/rsolomakhin/dotfiles/branch/master)
-[![Linux & macOS build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml)
+[![Linux build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg?job=test-linux)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml?query=job%3Atest-linux)
+[![macOS build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg?job=test-macos)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml?query=job%3Atest-macos)
 
 > We deliberate not about ends but about means. For a doctor does not deliberate
 > whether he shall heal, nor an orator whether he shall persuade, nor a
