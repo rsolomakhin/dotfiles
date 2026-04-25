@@ -13,11 +13,7 @@
 # limitations under the License.
 
 version: '{build}'
-install:
-- cmd: mkdir C:\temp_sandbox
-- cmd: set USERPROFILE=C:\temp_sandbox
-- cmd: windows\install.bat --name "AppVeyor" --email "appveyor@example.com"
 build: off
 test_script:
-- ps: Get-Content windows\expected_outcomes.txt | ForEach-Object { if (-not (Test-Path $_)) { throw "Missing: $_" } }
+- cmd: windows\test.bat
 deploy: off
