@@ -30,8 +30,10 @@ pushd %~dp0 ^
 
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
   "$p = '$HOME\vimfiles\autoload\plug.vim'; ^
-   if (!(Test-Path $p) -or (Get-Item $p).LastWriteTime -lt (Get-Date).AddDays(-1)) { ^
-     iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | ni $p -Force ^
+   $corrupt = (Test-Path $p) -and ((Get-Content $p -Tail 1) -notmatch 'unlet s:cpo_save'); ^
+   if (!(Test-Path $p) -or (Get-Item $p).LastWriteTime -lt (Get-Date).AddDays(-1) -or $corrupt) { ^
+     iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -OutFile \"$p.tmp\"; ^
+     Move-Item -Path \"$p.tmp\" -Destination $p -Force ^
    }" || echo "Cannot download plug.vim" && exit /b 1
 if exist %USERPROFILE%\src\env.bat del /q %USERPROFILE%\src\env.bat
 mklink %USERPROFILE%\src\env.bat %~dp0env.bat ^
