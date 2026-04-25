@@ -1,6 +1,6 @@
 # README
 
-[![Windows build status](https://ci.appveyor.com/api/projects/status/y9929cmeqn390syq/branch/master?svg=true)](https://ci.appveyor.com/project/rsolomakhin/dotfiles/branch/master)
+[![Windows build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg?job=test-windows)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml?query=job%3Atest-windows)
 [![Linux build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg?job=test-linux)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml?query=job%3Atest-linux)
 [![macOS build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg?job=test-macos)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml?query=job%3Atest-macos)
 
