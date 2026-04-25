@@ -1,8 +1,8 @@
 # README
 
-[![Windows build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg?job=test-windows)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml?query=job%3Atest-windows)
-[![Linux build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg?job=test-linux)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml?query=job%3Atest-linux)
-[![macOS build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml/badge.svg?job=test-macos)](https://github.com/rsolomakhin/dotfiles/actions/workflows/ci.yml?query=job%3Atest-macos)
+[![Windows build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/windows.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/windows.yml)
+[![Linux build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/linux.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/linux.yml)
+[![macOS build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/macos.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/macos.yml)
 
 > We deliberate not about ends but about means. For a doctor does not deliberate
 > whether he shall heal, nor an orator whether he shall persuade, nor a
