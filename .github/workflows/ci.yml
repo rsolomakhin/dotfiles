@@ -1,0 +1,14 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test-unix:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Unix installation test
+        run: ./test
