@@ -24,6 +24,14 @@ function! SourceIfExists(path, ...)
   endif
 endfunction
 
+" Ensure ~/vimfiles is in runtimepath on Windows/MSYS/Cygwin.
+if has('win32') || has('win64') || has('win32unix')
+  if isdirectory(expand('~/vimfiles'))
+    set runtimepath^=~/vimfiles
+    set runtimepath+=~/vimfiles/after
+  endif
+endif
+
 " vim-plug.
 call plug#begin()
 Plug 'tpope/vim-sensible'
@@ -48,7 +56,7 @@ nnoremap <leader>h :History<CR>
 nnoremap <leader>t :Files<CR>
 
 " coc.nvim configuration is in a separate file.
-if has('win32') || has('win64')
+if has('win32') || has('win64') || has('win32unix')
   call SourceIfExists('~/vimfiles/coc.vim', 'Warning: ~/vimfiles/coc.vim not found. Please run windows\install.bat again.')
 else
   call SourceIfExists('~/.vim/coc.vim', 'Warning: ~/.vim/coc.vim not found. Please run ./install again.')
