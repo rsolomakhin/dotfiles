@@ -12,7 +12,13 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-set nocompatible
+" Source a file if it exists.
+function! SourceIfExists(path)
+  let l:full_path = expand(a:path)
+  if filereadable(l:full_path)
+    execute 'source' l:full_path
+  endif
+endfunction
 
 " vim-plug.
 call plug#begin()
@@ -26,17 +32,11 @@ if executable('node')
 endif
 
 " Local plugins.
-let s:local_plugins = expand('~/.local-plugins.vimrc')
-if filereadable(s:local_plugins)
-  source ~/.local-plugins.vimrc
-endif
+call SourceIfExists('~/.local-plugins.vimrc')
 call plug#end()
 
 " Local config.
-let s:local_vimrc = expand('~/.local.vimrc')
-if filereadable(s:local_vimrc)
-  source ~/.local.vimrc
-endif
+call SourceIfExists('~/.local.vimrc')
 
 " fzf.vim.
 nnoremap <leader>b :Buffers<CR>
@@ -44,14 +44,7 @@ nnoremap <leader>h :History<CR>
 nnoremap <leader>t :Files<CR>
 
 " coc.nvim configuration is in a separate file.
-let s:coc_config = expand('~/.vim/coc.vim')
-if filereadable(s:coc_config)
-  execute 'source' s:coc_config
-else
-  echohl WarningMsg
-  echom "Warning: ~/.vim/coc.vim not found. Please run ./install script again."
-  echohl None
-endif
+call SourceIfExists('~/.vim/coc.vim')
 
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
@@ -60,14 +53,13 @@ highlight ColorColumn ctermbg=LightGray
 " Same color for misspellings and error messages.
 highlight! link SpellBad ErrorMsg
 
-" Xterm cursor shape:
-" 30 - blinking block
-" 31 - blinking block also
-" 32 - steady block
-" 33 - blinking underline
-" 34 - steady underline
-" 35 - blinking bar
-" 36 - steady bar
+" Terminal cursor shape (DECSCUSR):
+" 1 - blinking block
+" 2 - steady block
+" 3 - blinking underline
+" 4 - steady underline
+" 5 - blinking bar (pipe)
+" 6 - steady bar (pipe)
 " Insert mode - blinking bar.
 let &t_SI.="\x1b[\x35 q"
 " Replace mode - blinking underline.
