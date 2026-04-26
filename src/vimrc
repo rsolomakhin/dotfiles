@@ -75,6 +75,12 @@ let &t_SR.="\x1b[\x33 q"
 " Normal mode - steady block.
 let &t_EI.="\x1b[\x32 q"
 
+" Restore blinking bar (pipe) on exit.
+augroup RestoreCursor
+  autocmd!
+  autocmd VimLeave * silent !echo -ne "\x1b[5 q"
+augroup END
+
 augroup FileFormatSettings
   autocmd!
   autocmd BufRead,BufNewFile /tmp/cl_description* set filetype=gitcommit
