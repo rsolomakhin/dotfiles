@@ -53,8 +53,10 @@ the changes:
 
 ## Environment Assumptions
 
--   Installation: The `install` script on Linux and macOS symlinks files from
-    the repository to `$HOME` (e.g., `<dir>/vimrc` -> `$HOME/.vimrc`).
+-   Installation: The installation scripts on all platforms create symbolic
+    links from the user's home directory back to the repository.
+    - Linux/macOS: `$HOME/.vimrc -> <repo>/src/vimrc`
+    - Windows: `%USERPROFILE%\.vimrc -> <repo>\src\vimrc`
 -   Discovery: The `install` script uses `git ls-files`, so new files must be
     tracked by Git to be installed.
 -   File Operations: Always use `git rm` and `git mv` instead of `rm` and `mv`
