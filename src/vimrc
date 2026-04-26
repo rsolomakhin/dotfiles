@@ -75,9 +75,10 @@ let &t_SR.="\x1b[\x33 q"
 " Normal mode - steady block.
 let &t_EI.="\x1b[\x32 q"
 
-" Restore blinking bar (pipe) on exit.
-augroup RestoreCursor
+" Set steady block on startup and restore blinking bar on exit.
+augroup CursorShape
   autocmd!
+  autocmd VimEnter * silent !echo -ne "\x1b[2 q"
   autocmd VimLeave * silent !echo -ne "\x1b[5 q"
 augroup END
 
