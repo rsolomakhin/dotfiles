@@ -40,14 +40,12 @@ fi
 for helper in $HELPERS; do [ -f "$helper" ] && source "$helper"; done
 
 # Default PS1 theme.
+# \[\e[5 q\] resets the cursor to a blinking bar.
 if command -v __git_ps1 >/dev/null 2>&1; then
-  export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
 else
-  export PS1='[\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\$ '
+  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\$ '
 fi
-
-# Blinking bar cursor.
-echo -e -n "\x1b[\x35 q"
 
 # Silence the warning the default interactive shell is now zsh.
 export BASH_SILENCE_DEPRECATION_WARNING=1
