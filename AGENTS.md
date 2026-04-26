@@ -57,8 +57,11 @@ the changes:
     links from the user's home directory back to the repository.
     - Linux/macOS: `$HOME/.vimrc -> <repo>/src/vimrc`
     - Windows: `%USERPROFILE%\.vimrc -> <repo>\src\vimrc`
--   Discovery: The `install` script uses `git ls-files`, so new files must be
-    tracked by Git to be installed.
+-   Discovery:
+    - Linux/macOS: The `install` script uses `git ls-files`, so new files in
+      `src/` must be tracked by Git to be installed.
+    - Windows: The `windows/install.bat` script has a hardcoded list of files;
+      new files must be manually added to the script.
 -   File Operations: Always use `git rm` and `git mv` instead of `rm` and `mv`
     to ensure the Git index is updated correctly.
 -   License Headers: All new source files must include the Apache 2.0 license
