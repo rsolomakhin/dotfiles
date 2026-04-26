@@ -1,4 +1,4 @@
-# README
+# Rouslan's Dotfiles
 
 [![Windows build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/windows.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/windows.yml)
 [![Linux build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/linux.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/linux.yml)
