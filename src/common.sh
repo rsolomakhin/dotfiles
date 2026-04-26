@@ -26,6 +26,11 @@ export VIM="vim"
 
 
 
+# Source a file if it exists.
+source_if_exists() {
+  [ -f "$1" ] && source "$1"
+}
+
 # Add to PATH only if directory exists and is not already in PATH.
 # Prepend to ensure local versions take precedence.
 path_prepend() {

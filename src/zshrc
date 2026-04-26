@@ -14,19 +14,18 @@
 
 source ~/.common.sh
 
-HELPERS=""
-HELPERS="$HELPERS $HOME/.fzf.zsh"
-HELPERS="$HELPERS $HOME/google-cloud-sdk/completion.zsh.inc"
-HELPERS="$HELPERS $HOME/google-cloud-sdk/path.zsh.inc"
-HELPERS="$HELPERS /etc/zsh_completion"
-HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-completion.zsh"
-HELPERS="$HELPERS /usr/local/git/current/share/git-core/git-prompt.sh"
-for helper in $HELPERS; do [ -f $helper ] && source $helper >& /dev/null; done
+source_if_exists "$HOME/.fzf.zsh"
+source_if_exists "$HOME/google-cloud-sdk/completion.zsh.inc"
+source_if_exists "$HOME/google-cloud-sdk/path.zsh.inc"
+source_if_exists "/etc/zsh_completion"
+source_if_exists "/usr/local/git/current/share/git-core/git-completion.zsh"
+source_if_exists "/usr/local/git/current/share/git-core/git-prompt.sh"
 
 # Default PS1 theme.
 autoload -U colors
 colors
 setopt prompt_subst
-export PS1='[%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}:%~]%{$fg[blue]%}$(__git_ps1 "(%s)")%{$reset_color%}\$ '
+# %{\e[5 q%} resets the cursor to a blinking bar.
+export PS1='%{\e[5 q%}[%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}:%~]%{$fg[blue]%}$(__git_ps1 "(%s)")%{$reset_color%}\$ '
 
 # vi:ft=sh
