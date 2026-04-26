@@ -26,12 +26,19 @@ export VIM="vim"
 
 
 
-TOOLS=""
-TOOLS="$TOOLS $ANDROID_HOME/platform-tools"
-TOOLS="$TOOLS $ANDROID_HOME/tools"
-TOOLS="$TOOLS $ANDROID_HOME/tools/bin"
-TOOLS="$TOOLS $HOME/depot_tools"
-TOOLS="$TOOLS $HOME/software/bin"
+# Add to PATH only if directory exists and is not already in PATH.
+# Prepend to ensure local versions take precedence.
+path_prepend() {
+  if [[ -d "$1" ]] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="$1:$PATH"
+  fi
+}
+
+path_prepend "$ANDROID_HOME/platform-tools"
+path_prepend "$ANDROID_HOME/tools"
+path_prepend "$ANDROID_HOME/tools/bin"
+path_prepend "$HOME/depot_tools"
+path_prepend "$HOME/software/bin"
 
 # Bootstrap Homebrew path if not already present.
 for brew_path in /opt/homebrew/bin /usr/local/bin /home/linuxbrew/.linuxbrew/bin; do
@@ -43,14 +50,11 @@ done
 
 if command -v brew >/dev/null 2>&1; then
   BREW_PREFIX=$(brew --prefix)
-  TOOLS="$TOOLS $BREW_PREFIX/bin"
-  TOOLS="$TOOLS $BREW_PREFIX/opt/openjdk/bin"
-  TOOLS="$TOOLS $BREW_PREFIX/opt/llvm/bin"
+  path_prepend "$BREW_PREFIX/bin"
+  path_prepend "$BREW_PREFIX/opt/openjdk/bin"
+  path_prepend "$BREW_PREFIX/opt/llvm/bin"
 fi
 
-for tool in $TOOLS; do
-  [[ -d $tool && $PATH != *$tool* ]] && PATH=$tool:$PATH
-done
 export PATH
 
 # Dynamically set VIMRUNTIME based on the active vim executable's fallback path.
