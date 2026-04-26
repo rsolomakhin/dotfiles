@@ -69,7 +69,9 @@ done
 
 echo "[Test] Verifying Vim configuration..."
 # Run vim in silent Ex mode (-es) to avoid interactive prompts.
-HOME="$TEST_HOME" vim -u "$TEST_HOME/.vimrc" -es -c "redir! > $TEST_HOME/vim_messages | messages | qall!"
+# -u ensures we use the sandboxed config.
+# --cmd ensures the runtimepath is correct before the config is loaded.
+HOME="$TEST_HOME" vim -u "$TEST_HOME/.vimrc" --cmd "set rtp+=$TEST_HOME/.vim" -es -c "redir! > $TEST_HOME/vim_messages | messages | qall!"
 
 if grep -qi "error" "$TEST_HOME/vim_messages"; then
   echo "[Error] Vim reported errors during startup:"
@@ -80,7 +82,7 @@ fi
 echo "[Test] Verifying Vim warning for missing coc.vim..."
 # Intentionally remove coc.vim and check for the warning.
 rm "$TEST_HOME/.vim/coc.vim"
-HOME="$TEST_HOME" vim -u "$TEST_HOME/.vimrc" -es -c "redir! > $TEST_HOME/vim_warning | messages | qall!"
+HOME="$TEST_HOME" vim -u "$TEST_HOME/.vimrc" --cmd "set rtp+=$TEST_HOME/.vim" -es -c "redir! > $TEST_HOME/vim_warning | messages | qall!"
 if ! grep -q "Warning: ~/.vim/coc.vim not found" "$TEST_HOME/vim_warning"; then
   echo "[Error] Vim failed to warn about missing coc.vim"
   FAILED=1

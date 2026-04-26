@@ -28,7 +28,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-Content %~dp0expecte
 
 echo [Test] Verifying Vim configuration...
 :: Run vim in silent Ex mode (-es) to avoid interactive prompts.
-vim -u %USERPROFILE%\.vimrc -es -c "redir! > %USERPROFILE%\vim_messages | messages | qall!"
+:: -u ensures we use the sandboxed config.
+:: --cmd ensures the runtimepath is correct before the config is loaded.
+vim -u %USERPROFILE%\.vimrc --cmd "set rtp+=%USERPROFILE%\vimfiles" -es -c "redir! > %USERPROFILE%\vim_messages | messages | qall!"
 findstr /I "error" %USERPROFILE%\vim_messages && (
   echo [Error] Vim reported errors during startup:
   type %USERPROFILE%\vim_messages
@@ -37,7 +39,7 @@ findstr /I "error" %USERPROFILE%\vim_messages && (
 
 echo [Test] Verifying Vim warning for missing coc.vim...
 del %USERPROFILE%\vimfiles\coc.vim
-vim -u %USERPROFILE%\.vimrc -es -c "redir! > %USERPROFILE%\vim_warning | messages | qall!"
+vim -u %USERPROFILE%\.vimrc --cmd "set rtp+=%USERPROFILE%\vimfiles" -es -c "redir! > %USERPROFILE%\vim_warning | messages | qall!"
 findstr /C:"Warning: ~/vimfiles/coc.vim not found. Please run windows\install.bat again." %USERPROFILE%\vim_warning || (
   echo [Error] Vim failed to warn about missing coc.vim
   exit /b 1
