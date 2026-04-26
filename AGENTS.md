@@ -41,7 +41,15 @@ When proposing file changes, the agent must provide:
 -   C: What's the issue with this code: Explanation of the problem.
 -   D: Proposed code change: The new code.
 -   E: How the proposed code change will improve the situation: The benefit.
--   F: What other alternatives could be considered and explored: Other options.
+- F: What other alternatives could be considered and explored: Other options.
+
+### Validation
+
+After each modification, the agent MUST run the appropriate test script to verify
+the changes:
+
+-   Linux/macOS: Run `./test`
+-   Windows: Run `windows/test.bat`
 
 ## Environment Assumptions
 
