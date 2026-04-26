@@ -12,11 +12,15 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-" Source a file if it exists.
-function! SourceIfExists(path)
+" Source a file if it exists, otherwise optionally print a warning.
+function! SourceIfExists(path, ...)
   let l:full_path = expand(a:path)
   if filereadable(l:full_path)
     execute 'source' l:full_path
+  elseif a:0 > 0
+    echohl WarningMsg
+    echom a:1
+    echohl None
   endif
 endfunction
 
@@ -44,7 +48,7 @@ nnoremap <leader>h :History<CR>
 nnoremap <leader>t :Files<CR>
 
 " coc.nvim configuration is in a separate file.
-call SourceIfExists('~/.vim/coc.vim')
+call SourceIfExists('~/.vim/coc.vim', 'Warning: ~/.vim/coc.vim not found. Please run ./install again.')
 
 " Light gray color column to the right of textwidth.
 let &colorcolumn='+' . join(range(1, 1), ',+')
