@@ -25,7 +25,16 @@ source_if_exists "/usr/local/git/current/share/git-core/git-prompt.sh"
 autoload -U colors
 colors
 setopt prompt_subst
+
+# Detect environment and set host color name.
+# Alternative colors: cyan, magenta
+if [ -n "$SSH_CONNECTION" ]; then
+  HOST_COLOR_NAME="blue"
+else
+  HOST_COLOR_NAME="red"
+fi
+
 # %{\e[5 q%} resets the cursor to a blinking bar.
-export PS1='%{\e[5 q%}[%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}:%~]%{$fg[blue]%}$(__git_ps1 "(%s)")%{$reset_color%}\$ '
+export PS1='%{\e[5 q%}[%{$fg[green]%}%n%{$reset_color%}@%{$fg['$HOST_COLOR_NAME']%}%m%{$reset_color%}:%~]%{$fg[blue]%}$(__git_ps1 "(%s)")%{$reset_color%}\$ '
 
 # vi:ft=sh

@@ -38,10 +38,18 @@ fi
 
 # Default PS1 theme.
 # \[\e[5 q\] resets the cursor to a blinking bar.
-if command -v __git_ps1 >/dev/null 2>&1; then
-  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+# Detect environment and set host color.
+# Alternative colors: Cyan '\[\e[36m\]', Magenta '\[\e[35m\]'
+if [ -n "$SSH_CONNECTION" ]; then
+  HOST_COLOR='\[\e[34m\]' # Blue for SSH (Regular)
 else
-  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\]:\w]\$ '
+  HOST_COLOR='\[\e[31m\]' # Red for Local (Different)
+fi
+
+if command -v __git_ps1 >/dev/null 2>&1; then
+  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+else
+  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]\$ '
 fi
 
 # Silence the warning the default interactive shell is now zsh.
