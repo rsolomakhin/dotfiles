@@ -47,6 +47,15 @@ def batch_commit() -> int:
 
   args = parser.parse_args()
 
+  if "\n" in args.message:
+    print("Error: Commit message must be a single line.", file=sys.stderr)
+    return _FAILURE
+
+  import re
+  if re.search(r"\b[A-Z]+=", args.message):
+    print("Error: Tags are not allowed in commit messages.", file=sys.stderr)
+    return _FAILURE
+
   # Find repo root relative to script.
   script_dir = os.path.dirname(os.path.abspath(__file__))
   repo_root = os.path.abspath(os.path.join(script_dir, "../../.."))

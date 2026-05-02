@@ -20,8 +20,13 @@ from the user:
 -   `git commit`
 -   `git push`
 
-## 3. Commit changes
+
+## 3. Determine commit message
+
+A commit message should be a single line sentence.
+
+## 4. Commit changes
 
 Always request explicit approval from the user before executing
-`skills/git/scripts/batch_commit.py --message "The commit message"`, which adds
-files, tests changes, commits them, and pushes the update to GitHub.
+`skills/git/scripts/batch_commit.py --message "Address issue X by fixing Y"`,
+which adds files, tests changes, commits them, and pushes the update to GitHub.
