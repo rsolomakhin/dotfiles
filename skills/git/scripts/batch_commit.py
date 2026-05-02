@@ -33,7 +33,7 @@ def run_command(cmd, description) -> bool:
     print(f"Error: {description} failed.", file=sys.stderr)
     return False
   else:
-    print result
+    print(result)
     return True
 
 
