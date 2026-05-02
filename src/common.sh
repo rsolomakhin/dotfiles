@@ -44,15 +44,19 @@ path_prepend "$HOME/depot_tools"
 path_prepend "$HOME/software/bin"
 
 # Bootstrap Homebrew path if not already present.
-for brew_path in /opt/homebrew/bin /usr/local/bin; do
-  if [[ -x "$brew_path/brew" && $PATH != *"$brew_path"* ]]; then
-    PATH="$brew_path:$PATH"
+for brew_path in /opt/homebrew /usr/local; do
+  if [[ -x "$brew_path/bin/brew" ]]; then
+    export BREW_PREFIX="$brew_path"
     break
   fi
 done
 
-if command -v brew >/dev/null 2>&1; then
-  BREW_PREFIX=$(brew --prefix)
+# Fallback to calling brew if not found in standard paths.
+if [ -z "$BREW_PREFIX" ] && command -v brew >/dev/null 2>&1; then
+  export BREW_PREFIX=$(brew --prefix)
+fi
+
+if [ -n "$BREW_PREFIX" ]; then
   path_prepend "$BREW_PREFIX/bin"
   path_prepend "$BREW_PREFIX/opt/openjdk/bin"
   path_prepend "$BREW_PREFIX/opt/llvm/bin"
