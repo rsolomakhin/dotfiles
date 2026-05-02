@@ -17,6 +17,7 @@ if !has_key(g:plugs, 'coc.nvim')
   finish
 endif
 
+
 " --- Mappings ---
 
 " Navigate diagnostics (errors/warnings).

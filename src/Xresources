@@ -35,7 +35,7 @@ xterm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35
 
 ! https://terminal.sexy
 
-! /base16/brewer.light
+! https://github.com/tinted-theming/base16-schemes/blob/main/brewer.yaml
 
 ! special
 *.foreground:   #515253

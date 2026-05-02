@@ -97,6 +97,9 @@ augroup FileFormatSettings
 
   autocmd FileType cpp,c,html,javascript,sh,zsh,vim,python,go,dosbatch,proto,objcpp,haskell,markdown setlocal textwidth=80
 
+  " Define :FormatCode command for markdown files.
+  autocmd FileType markdown command! -buffer FormatCode silent! %!/google/bin/releases/corpeng-engdoc/tools/mdformat -
+
   autocmd FileType cpp setlocal cinoptions=N-s,g.5s,h.5s
 
   autocmd FileType gitcommit setlocal spell

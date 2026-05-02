@@ -24,8 +24,6 @@ export HISTCONTROL="ignoredups:erasedups"
 export NINJA_SUMMARIZE_BUILD="0"
 export VIM="vim"
 
-
-
 # Source a file if it exists.
 source_if_exists() {
   [ -f "$1" ] && source "$1"
@@ -46,7 +44,7 @@ path_prepend "$HOME/depot_tools"
 path_prepend "$HOME/software/bin"
 
 # Bootstrap Homebrew path if not already present.
-for brew_path in /opt/homebrew/bin /usr/local/bin /home/linuxbrew/.linuxbrew/bin; do
+for brew_path in /opt/homebrew/bin /usr/local/bin; do
   if [[ -x "$brew_path/brew" && $PATH != *"$brew_path"* ]]; then
     PATH="$brew_path:$PATH"
     break

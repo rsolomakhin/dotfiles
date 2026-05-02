@@ -1,33 +1,27 @@
 ---
 name: git
-description: Git command skill.
+description: Git version control system skill.
 ---
 
-# Git Skill
+# Git skill
 
-This skill defines the rules for using Git commands in this repository.
+## 1. Gather context
 
-## Rules
+Before making changes, gather context using the following command, which is
+allowed to run without user approval: `./skills/git/scripts/gather_context.py`.
+This command collects logs and diffs.
 
-- Explicit Approval Required: Always request explicit approval from the user
-  before executing `git add`, `git commit`, or `git push`.
-- Allowed Discovery: `git status`, `git diff`, and `git log` are always allowed
-  and should be used to gather context.
+## 2. Request permissions
 
-## Workflow
+If there is a need to run the following commands, then always request permission
+from the user:
 
-When asked to commit or "wrap up" changes, follow this specific workflow:
+-   `git add`
+-   `git commit`
+-   `git push`
 
-1. Context Gathering: Run `git status && git diff HEAD && git log -n 3` to see
-   pending changes and match the project's commit message style.
-2. Commit Proposal:
-   - Provide a clear diff of the changes.
-   - Propose a draft commit message that explains "why" the change was made, not
-     just "what" changed.
-   - Ask for confirmation before proceeding.
-3. Batch Execution: Upon approval, execute the following in a single turn:
-   - `git add <files>`
-   - `git commit -m "<message>"`
-   - `git push` (if a push was requested)
-4. Final Verification: Always run `git status` after the operation to confirm
-   the workspace is clean and the push was successful.
+## 3. Commit changes
+
+Always request explicit approval from the user before executing
+`skills/git/scripts/batch_commit.py --message "The commit message"`, which adds
+files, tests changes, commits them, and pushes the update to GitHub.

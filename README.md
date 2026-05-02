@@ -1,6 +1,14 @@
 # Rouslan's Dotfiles
 
+<!--
+
+TODO: Add back the windows badge when a Windows machine is available to
+investigate failures.
+
 [![Windows build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/windows.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/windows.yml)
+
+-->
+
 [![Linux build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/linux.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/linux.yml)
 [![macOS build status](https://github.com/rsolomakhin/dotfiles/actions/workflows/macos.yml/badge.svg)](https://github.com/rsolomakhin/dotfiles/actions/workflows/macos.yml)
 

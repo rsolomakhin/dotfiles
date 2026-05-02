@@ -16,6 +16,13 @@
 
 set -e
 
+FAILED=0
+
+echo "[Test] Verifying no absolute paths..."
+if ! python3 scripts/check_no_absolute_paths.py; then
+  FAILED=1
+fi
+
 # Setup a sandbox directory for testing.
 TEST_HOME="/tmp/test_sandbox"
 rm -rf "$TEST_HOME"
@@ -26,7 +33,6 @@ echo "[Test] Installing dotfiles into $TEST_HOME..."
 HOME="$TEST_HOME" ./install --name "Test User" --email "test@example.com"
 
 echo "[Test] Verifying installation..."
-FAILED=0
 
 # Files that should be symlinked from src/.
 EXPECTED_SYMLINKS=(
