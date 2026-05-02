@@ -55,11 +55,11 @@ if [ ! -f ~/.gitconfig.user ]; then
   fi
 fi
 
-for src_file in `git ls-files src/`; do
-  file=`echo $src_file | sed 's|^src/||'`
+git ls-files -z src/ | while IFS= read -r -d '' src_file; do
+  file="${src_file#src/}"
   dest=~/.$file
 
-  mkdir -pv ~/.`dirname $file`
+  mkdir -pv ~/.`dirname "$file"`
 
   if [ -f "$dest" ] && [ ! -L "$dest" ]; then
     echo "Backing up $dest to $dest.bak"
