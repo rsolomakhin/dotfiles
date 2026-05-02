@@ -72,9 +72,7 @@ if command -v vim >/dev/null 2>&1; then
   fi
 fi
 
-HELPERS=""
-HELPERS="$HELPERS $HOME/.local.sh"
-for helper in $HELPERS; do [ -f "$helper" ] && source "$helper"; done
+source_if_exists "$HOME/.local.sh"
 
 alias e="$VIM"
 alias em="$EMACS"
