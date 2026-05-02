@@ -18,9 +18,14 @@ set -e
 
 FAILED=0
 
-echo "[Test] Verifying no absolute paths..."
-if ! python3 scripts/check_no_absolute_paths.py; then
+echo "[Test] Running unit tests for absolute path checker..."
+if ! python3 scripts/check_no_absolute_paths_test.py; then
   FAILED=1
+else
+  echo "[Test] Verifying no absolute paths..."
+  if ! python3 scripts/check_no_absolute_paths.py; then
+    FAILED=1
+  fi
 fi
 
 # Setup a sandbox directory for testing.

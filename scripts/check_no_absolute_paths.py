@@ -24,22 +24,29 @@ _SUCCESS = 0
 _FAILURE = 1
 
 
+def check_line(line, allow_list):
+  violations = []
+  # Match paths starting with / and having at least one more slash.
+  # Ignore paths preceded by . or ~ to avoid false positives for relative paths.
+  matches = re.finditer(r"(?:^|[^a-zA-Z0-9_.~-])((?:/[a-zA-Z0-9_-]+){2,})", line)
+  for match in matches:
+    matched_path = match.group(1)
+    if not any(matched_path.startswith(prefix) for prefix in allow_list):
+      violations.append(matched_path)
+  return violations
+
+
 def check_file(file_path):
   """Check a single file for absolute paths."""
   violations = []
-  # Allow-list of acceptable absolute path prefixes.
-  allow_list = ["/usr/", "/dev/", "/tmp/", "/opt/"]
+  allow_list = ["/usr/", "/dev/", "/tmp/", "/opt/", "/bin/", "/example/", "/etc/"]
 
   try:
     with open(file_path, "r", errors="ignore") as f:
       for line_num, line in enumerate(f, 1):
-        # Match paths starting with / and having at least one more slash.
-        matches = re.finditer(r"(^|\s)(/[a-zA-Z0-9_-]+){2,}", line)
-        for match in matches:
-          matched_path = match.group().strip()
-          # Check if the path starts with any allow-listed prefix.
-          if not any(matched_path.startswith(prefix) for prefix in allow_list):
-            violations.append(f"Line {line_num}: {matched_path}")
+        line_violations = check_line(line, allow_list)
+        for v in line_violations:
+          violations.append(f"Line {line_num}: {v}")
   except Exception as e:
     print(f"Error reading {file_path}: {e}", file=sys.stderr)
 

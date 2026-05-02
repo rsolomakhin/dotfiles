@@ -25,3 +25,4 @@
 TAGS
 vim/autoload/plug.vim*
 workbench.xmi
+__pycache__
