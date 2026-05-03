@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Copyright 2015 Rouslan Solomakhin
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +18,9 @@ case $- in
   *) return ;;
 esac
 
+# Silence the ShellCheck warning by explicitly telling it not to follow the
+# file, as it is checked separately.
+# shellcheck source=/dev/null
 source ~/.common.sh
 
 source_if_exists "$HOME/.fzf.bash"

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Copyright 2017 Rouslan Solomakhin
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,6 +27,9 @@ export VIM="vim"
 
 # Source a file if it exists.
 source_if_exists() {
+  # Silence the ShellCheck warning by explicitly telling it not to follow the
+  # file, as it is dynamic.
+  # shellcheck source=/dev/null
   [ -f "$1" ] && source "$1"
 }
 
@@ -53,7 +57,9 @@ done
 
 # Fallback to calling brew if not found in standard paths.
 if [ -z "$BREW_PREFIX" ] && command -v brew >/dev/null 2>&1; then
-  export BREW_PREFIX=$(brew --prefix)
+  # Separate declaration and assignment to avoid masking return value.
+  BREW_PREFIX=$(brew --prefix)
+  export BREW_PREFIX
 fi
 
 if [ -n "$BREW_PREFIX" ]; then
@@ -66,6 +72,7 @@ export PATH
 
 # Dynamically set VIMRUNTIME based on the active vim executable's fallback path.
 if command -v vim >/dev/null 2>&1; then
+  # shellcheck disable=SC2016 # Match literal '$VIM' in vim --version output.
   VIM_FALLBACK=$(vim --version | grep 'fall-back for $VIM:' | \
     awk -F\" '{print $2}')
   if [ -n "$VIM_FALLBACK" ] && [ -d "$VIM_FALLBACK" ]; then
@@ -79,23 +86,32 @@ fi
 
 source_if_exists "$HOME/.local.sh"
 
-alias e="$VIM"
-alias em="$EMACS"
-alias ema="$EMACS"
-alias emac="$EMACS"
+# Use single quotes to delay variable expansion until the alias is used.
+# This allows the alias to pick up changes to VIM or EMACS variables.
+alias e='$VIM'
+alias em='$EMACS'
+alias ema='$EMACS'
+alias emac='$EMACS'
 alias ggrep="git grep"
 alias grep="grep --color=auto"
 alias j="jobs"
 alias so="source"
-alias v="$VIM"
-alias vi="$VIM"
+# Use single quotes to delay variable expansion until the alias is used.
+alias v='$VIM'
+alias vi='$VIM'
 
 # Disable flow control (Ctrl-S).
 stty -ixon >& /dev/null
 
-if [ "`uname`" = "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
+  # Silence the ShellCheck warning by explicitly telling it not to follow the
+  # file, as it is checked separately.
+  # shellcheck source=/dev/null
   . ~/.darwin.sh
 else
+  # Silence the ShellCheck warning by explicitly telling it not to follow the
+  # file, as it is checked separately.
+  # shellcheck source=/dev/null
   . ~/.linux.sh
 fi
 

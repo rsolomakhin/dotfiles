@@ -40,8 +40,9 @@ fi
 
 if command -v shellcheck >/dev/null 2>&1; then
   echo "[Test] Running ShellCheck..."
+  # ShellCheck does not support zsh at this time.
   if ! find src -type f \
-      \( -name "*.sh" -o -name "bash*" -o -name "zsh*" -o -name "profile" \) \
+      \( -name "*.sh" -o -name "bash*" -o -name "profile" \) \
       -print0 | xargs -0 shellcheck; then
     FAILED=1
   fi

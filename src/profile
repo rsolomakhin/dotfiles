@@ -16,4 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Silence the ShellCheck warning by explicitly telling it not to follow the
+# file, as bashrc is checked separately
+# shellcheck source=/dev/null
 source ~/.bashrc
