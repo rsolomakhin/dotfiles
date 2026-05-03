@@ -28,7 +28,8 @@ def check_line(line, allow_list):
   violations = []
   # Match paths starting with / and having at least one more slash.
   # Ignore paths preceded by . or ~ to avoid false positives for relative paths.
-  matches = re.finditer(r"(?:^|[^a-zA-Z0-9_.~-])((?:/[a-zA-Z0-9_-]+){2,})", line)
+  path_pattern = r"(?:^|[^a-zA-Z0-9_.~-])((?:/[a-zA-Z0-9_-]+){2,})"
+  matches = re.finditer(path_pattern, line)
   for match in matches:
     matched_path = match.group(1)
     if not any(matched_path.startswith(prefix) for prefix in allow_list):
@@ -39,7 +40,9 @@ def check_line(line, allow_list):
 def check_file(file_path):
   """Check a single file for absolute paths."""
   violations = []
-  allow_list = ["/usr/", "/dev/", "/tmp/", "/opt/", "/bin/", "/example/", "/etc/"]
+  allow_list = [
+      "/usr/", "/dev/", "/tmp/", "/opt/", "/bin/", "/example/", "/etc/"
+  ]
 
   try:
     with open(file_path, "r", errors="ignore") as f:

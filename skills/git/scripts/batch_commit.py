@@ -69,7 +69,8 @@ def batch_commit() -> int:
   if not run_command(["./test"], "Running tests"):
     return _FAILURE
 
-  if not run_command(["git", "commit", "-m", args.message], "Committing changes"):
+  if not run_command(["git", "commit", "-m", args.message],
+                     "Committing changes"):
     return _FAILURE
 
   if not run_command(["git", "push"], "Pushing changes"):

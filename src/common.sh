@@ -66,7 +66,8 @@ export PATH
 
 # Dynamically set VIMRUNTIME based on the active vim executable's fallback path.
 if command -v vim >/dev/null 2>&1; then
-  VIM_FALLBACK=$(vim --version | grep 'fall-back for $VIM:' | awk -F\" '{print $2}')
+  VIM_FALLBACK=$(vim --version | grep 'fall-back for $VIM:' | \
+    awk -F\" '{print $2}')
   if [ -n "$VIM_FALLBACK" ] && [ -d "$VIM_FALLBACK" ]; then
     for dir in "$VIM_FALLBACK"/vim[0-9]*; do
       if [ -d "$dir" ]; then

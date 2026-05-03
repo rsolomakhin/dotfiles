@@ -46,7 +46,8 @@ else
 fi
 
 if command -v __git_ps1 >/dev/null 2>&1; then
-  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]'\
+'\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
 else
   export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]\$ '
 fi

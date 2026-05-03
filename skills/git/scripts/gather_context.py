@@ -45,22 +45,26 @@ def gather_context() -> int:
   # Change directory to repo root.
   os.chdir(repo_root)
 
-  if not run_command(["env", "PAGER=cat", "git", "log", "-n", "3", "--stat"], "Git log"):
+  if not run_command(["env", "PAGER=cat", "git", "log", "-n", "3", "--stat"],
+                     "Git log"):
     return _FAILURE
 
   if not run_command(["env", "PAGER=cat", "git", "status"], "Git status"):
     return _FAILURE
 
-  if not run_command(["env", "PAGER=cat", "git", "diff", "--stat"], "Git diff stat"):
+  if not run_command(["env", "PAGER=cat", "git", "diff", "--stat"],
+                     "Git diff stat"):
     return _FAILURE
 
-  if not run_command(["env", "PAGER=cat", "git", "diff", "--cached", "--stat"], "Git diff stat staged for commit"):
+  if not run_command(["env", "PAGER=cat", "git", "diff", "--cached", "--stat"],
+                     "Git diff stat staged for commit"):
     return _FAILURE
 
   if not run_command(["env", "PAGER=cat", "git", "diff"], "Git diff"):
     return _FAILURE
 
-  if not run_command(["env", "PAGER=cat", "git", "diff", "--cached"], "Git diff staged for commit"):
+  if not run_command(["env", "PAGER=cat", "git", "diff", "--cached"],
+                     "Git diff staged for commit"):
     return _FAILURE
 
   return _SUCCESS

@@ -50,7 +50,15 @@ class TestFormatProposal(unittest.TestCase):
         parser.parse_args([])
 
   def test_generate_proposal(self):
-    template = "Title: {title}\nSuggestion: {suggestion}\nExisting: {existing_code}\nIssue: {issue}\nProposed: {proposed_code}\nImprovement: {improvement}\nAlternatives: {alternatives}"
+    template = (
+        "Title: {title}\n"
+        "Suggestion: {suggestion}\n"
+        "Existing: {existing_code}\n"
+        "Issue: {issue}\n"
+        "Proposed: {proposed_code}\n"
+        "Improvement: {improvement}\n"
+        "Alternatives: {alternatives}"
+    )
     
     class MockArgs:
       def __init__(self):
@@ -65,7 +73,15 @@ class TestFormatProposal(unittest.TestCase):
     args = MockArgs()
     output = generate_proposal(template, args)
     
-    expected = "Title: T\nSuggestion: S\nExisting: E\nIssue: I\nProposed: P\nImprovement: Im\nAlternatives: A"
+    expected = (
+        "Title: T\n"
+        "Suggestion: S\n"
+        "Existing: E\n"
+        "Issue: I\n"
+        "Proposed: P\n"
+        "Improvement: Im\n"
+        "Alternatives: A"
+    )
     self.assertEqual(output, expected)
 
 if __name__ == "__main__":

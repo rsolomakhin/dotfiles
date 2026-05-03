@@ -24,7 +24,8 @@ class TestCheckNoAbsolutePaths(unittest.TestCase):
     test_cases = [
         ("Line with /example/bin/tools", ["/example/bin/tools"]),
         ("Line with %!/example/bin/tools", ["/example/bin/tools"]),
-        ("Multiple paths: /example/bin and /etc/passwd", ["/example/bin", "/etc/passwd"]),
+        ("Multiple paths: /example/bin and /etc/passwd",
+         ["/example/bin", "/etc/passwd"]),
     ]
     for line, expected in test_cases:
       with self.subTest(line=line):

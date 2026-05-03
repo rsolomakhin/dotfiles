@@ -35,6 +35,8 @@ else
 fi
 
 # %{\e[5 q%} resets the cursor to a blinking bar.
-export PS1='%{\e[5 q%}[%{$fg[green]%}%n%{$reset_color%}@%{$fg['$HOST_COLOR_NAME']%}%m%{$reset_color%}:%~]%{$fg[blue]%}$(__git_ps1 "(%s)")%{$reset_color%}\$ '
+export PS1='%{\e[5 q%}[%{$fg[green]%}%n%{$reset_color%}@'
+PS1+='%{$fg['$HOST_COLOR_NAME']%}%m%{$reset_color%}:%~]'
+PS1+='%{$fg[blue]%}$(__git_ps1 "(%s)")%{$reset_color%}\$ '
 
 # vi:ft=sh

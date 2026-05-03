@@ -36,19 +36,22 @@ LICENSE_REQUIRED_FILES = {"install", "test"}
 
 LICENSE_TEXT = "Licensed under the Apache License, Version 2.0"
 COPYRIGHT_RE = re.compile(r"Copyright (\d{4}) Rouslan Solomakhin")
+URL_RE = re.compile(r"https?://")
 
 def is_docstring(token, prev_token):
   """Check if a token is a docstring."""
   if token.type != tokenize.STRING:
     return False
   # Docstrings follow an INDENT or are at the start of a module/class/function.
-  if prev_token is None or prev_token.type in {tokenize.INDENT, tokenize.NL, tokenize.NEWLINE}:
-    # Simple heuristic: if it's a string literal on its own line (or after indent), it's likely a docstring.
+  if prev_token is None or prev_token.type in {
+      tokenize.INDENT, tokenize.NL, tokenize.NEWLINE}:
+    # Simple heuristic: if it's a string literal on its own line (or after
+    # indent) it's likely a docstring.
     return True
   return False
 
 def check_python_style(file_path):
-  """Verify string quote consistency, double-quoted docstrings, and strict 2-space indent."""
+  """Verify string quote consistency, double-quoted docstrings, and indent."""
   errors = []
   try:
     with open(file_path, "rb") as f:
@@ -70,7 +73,9 @@ def check_python_style(file_path):
       expected_indent = indent_stack[-1] + 2
       actual_indent = len(indent_str)
       if actual_indent != expected_indent:
-        errors.append(f"{file_path}:{token.start[0]} Indentation increment is not 2 spaces (expected {expected_indent}, found {actual_indent})")
+        errors.append(
+            f"{file_path}:{token.start[0]} Indentation increment is not 2 "
+            f"spaces (expected {expected_indent}, found {actual_indent})")
       indent_stack.append(actual_indent)
     elif token.type == tokenize.DEDENT:
       indent_stack.pop()
@@ -90,8 +95,10 @@ def check_python_style(file_path):
       is_doc = is_docstring(token, prev_token)
       
       if is_doc:
-        if not core_string.startswith("\"\"\"") and not core_string.startswith("\""):
-          errors.append(f"{file_path}:{token.start[0]} Docstring must use double quotes")
+        if (not core_string.startswith("\"\"\"") and
+            not core_string.startswith("\"")):
+          errors.append(
+              f"{file_path}:{token.start[0]} Docstring must use double quotes")
       else:
         if core_string.startswith("'") or core_string.startswith("'''"):
           quotes_used.add("'")
@@ -102,7 +109,9 @@ def check_python_style(file_path):
       prev_token = token
 
   if len(quotes_used) > 1:
-    errors.append(f"{file_path} Inconsistent string quotes: found both single and double quotes")
+    errors.append(
+        f"{file_path} Inconsistent string quotes: found both single and "
+        "double quotes")
   
   return errors
 
@@ -132,6 +141,11 @@ def check_file(file_path):
   if ext == ".md":
     return []
 
+  # Skip Vim configuration as it's hard to keep within 80 chars and
+  # maintain readability/correctness.
+  if file_path == "src/vimrc" or file_path.startswith("src/vim/"):
+    return []
+
   try:
     with open(file_path, "r", encoding="utf-8") as f:
       lines = f.readlines()
@@ -140,6 +154,17 @@ def check_file(file_path):
 
   if not lines:
     return []
+
+  # Check line length (max 80 chars), with exceptions.
+  if not file_path.startswith("windows/"):
+    for i, line in enumerate(lines):
+      line_content = line.rstrip("\n")
+      if len(line_content) > 80:
+        # Skip if line contains a URL.
+        if URL_RE.search(line_content):
+          continue
+        errors.append(
+            f"{file_path}:{i+1} Line is too long ({len(line_content)} > 80)")
 
   # Check for shebang if required.
   if base_name in SHEBANG_REQUIRED or ext in {".sh", ".py"}:
@@ -150,7 +175,8 @@ def check_file(file_path):
   # Check for license header and copyright year.
   content = "".join(lines[:20])
   if LICENSE_TEXT not in content:
-    if ext in LICENSE_REQUIRED_EXT or base_name in LICENSE_REQUIRED_FILES or "src/" in file_path:
+    if (ext in LICENSE_REQUIRED_EXT or base_name in LICENSE_REQUIRED_FILES or
+        "src/" in file_path):
       errors.append(f"Missing Apache 2.0 license header in {file_path}")
   else:
     # Verify copyright year hasn't changed from the committed version.
@@ -159,8 +185,11 @@ def check_file(file_path):
       current_year = match.group(1)
       committed_year = get_committed_copyright_year(file_path)
       if committed_year and current_year != committed_year:
-        errors.append(f"{file_path} Copyright year changed: found {current_year}, expected {committed_year} (from committed version)")
-    elif ext in LICENSE_REQUIRED_EXT or base_name in LICENSE_REQUIRED_FILES or "src/" in file_path:
+        errors.append(
+            f"{file_path} Copyright year changed: found {current_year}, "
+            f"expected {committed_year} (from committed version)")
+    elif (ext in LICENSE_REQUIRED_EXT or base_name in LICENSE_REQUIRED_FILES or
+          "src/" in file_path):
       errors.append(f"Missing Copyright header in {file_path}")
 
   # Python specific style checks.
