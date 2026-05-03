@@ -10,5 +10,5 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run macOS installation test
+      - name: Run tests
         run: ./test

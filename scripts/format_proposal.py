@@ -23,7 +23,7 @@ _SUCCESS = 0
 _FAILURE = 1
 
 
-def format_proposal():
+def get_parser():
   parser = argparse.ArgumentParser(
       description="Format a proposal according to the A-F protocol."
   )
@@ -44,8 +44,24 @@ def format_proposal():
       required=True,
       help="Alternatives considered.",
   )
+  return parser
 
-  args = parser.parse_args()
+
+def generate_proposal(template, args):
+  return template.format(
+      title=args.title,
+      suggestion=args.suggestion,
+      existing_code=args.existing_code,
+      issue=args.issue,
+      proposed_code=args.proposed_code,
+      improvement=args.improvement,
+      alternatives=args.alternatives,
+  )
+
+
+def format_proposal(argv=None):
+  parser = get_parser()
+  args = parser.parse_args(argv)
 
   # Find template relative to script.
   script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -58,15 +74,7 @@ def format_proposal():
   with open(template_path, "r") as f:
     template = f.read()
 
-  output = template.format(
-      title=args.title,
-      suggestion=args.suggestion,
-      existing_code=args.existing_code,
-      issue=args.issue,
-      proposed_code=args.proposed_code,
-      improvement=args.improvement,
-      alternatives=args.alternatives,
-  )
+  output = generate_proposal(template, args)
 
   print(output)
   return _SUCCESS

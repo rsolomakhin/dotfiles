@@ -21,11 +21,38 @@ FAILED=0
 echo "[Test] Running unit tests for absolute path checker..."
 if ! python3 scripts/check_no_absolute_paths_test.py; then
   FAILED=1
-else
-  echo "[Test] Verifying no absolute paths..."
-  if ! python3 scripts/check_no_absolute_paths.py; then
+fi
+
+echo "[Test] Running unit tests for repository standards checker..."
+if ! python3 scripts/check_standards_test.py; then
+  FAILED=1
+fi
+
+echo "[Test] Verifying repository standards (headers, shebangs)..."
+if ! python3 scripts/check_standards.py; then
+  FAILED=1
+fi
+
+echo "[Test] Verifying no absolute paths..."
+if ! python3 scripts/check_no_absolute_paths.py; then
+  FAILED=1
+fi
+
+if command -v shellcheck >/dev/null 2>&1; then
+  echo "[Test] Running ShellCheck..."
+  if ! find src -type f \( -name "*.sh" -o -name "bash*" -o -name "zsh*" -o -name "profile" \) -print0 | xargs -0 shellcheck; then
     FAILED=1
   fi
+  if ! shellcheck install test; then
+    FAILED=1
+  fi
+else
+  echo "[Test] ShellCheck not found, skipping linting."
+fi
+
+echo "[Test] Running unit tests for proposal formatter..."
+if ! python3 scripts/format_proposal_test.py; then
+  FAILED=1
 fi
 
 # Setup a sandbox directory for testing.
