@@ -16,6 +16,7 @@
 
 import io
 import os
+import subprocess
 import sys
 import tokenize
 
@@ -127,13 +128,18 @@ def check_file(file_path):
 def main():
     all_errors = []
     
-    files_to_check = ["install", "test"]
-    
-    for dir_name in ["scripts", "src"]:
-        if os.path.exists(dir_name):
-            for root, _, files in os.walk(dir_name):
-                for file in files:
-                    files_to_check.append(os.path.join(root, file))
+    # Get all tracked files using git ls-files.
+    try:
+        result = subprocess.run(
+            ["git", "ls-files"],
+            stdout=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+        files_to_check = result.stdout.splitlines()
+    except subprocess.CalledProcessError as e:
+        print(f"Error running git ls-files: {e}", file=sys.stderr)
+        sys.exit(1)
 
     for file_path in files_to_check:
         if os.path.isfile(file_path):
