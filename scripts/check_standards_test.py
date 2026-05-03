@@ -273,5 +273,17 @@ class TestCheckStandards(unittest.TestCase):
     path = self.create_test_file("test.py", content)
     self.assertEqual(check_file(path), [])
 
+  def test_python_test_function_no_return_type_allowed(self) -> None:
+    content = (
+        "#!/usr/bin/env python3\n"
+        "# Copyright 2026 Rouslan Solomakhin\n"
+        "# Licensed under the Apache License, Version 2.0\n"
+        "def test_foo():\n"
+        "  pass"
+    )
+    # File name must end in _test.py
+    path = self.create_test_file("foo_test.py", content)
+    self.assertEqual(check_file(path), [])
+
 if __name__ == "__main__":
   unittest.main()

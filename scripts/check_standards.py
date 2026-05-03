@@ -184,7 +184,9 @@ def check_python_ast(file_path: str) -> list[str]:
               f"{file_path}:{node.lineno} Missing type hint for argument "
               f"'{arg.arg}'")
       
-      if node.returns is None and node.name != "__init__":
+      is_test_func = (
+          file_path.endswith("_test.py") and node.name.startswith("test_"))
+      if node.returns is None and node.name != "__init__" and not is_test_func:
         errors.append(f"{file_path}:{node.lineno} Missing return type hint")
 
       # Check for Args: in docstring if there are arguments.
