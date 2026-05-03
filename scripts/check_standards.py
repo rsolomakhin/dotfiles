@@ -48,7 +48,7 @@ def is_docstring(token, prev_token):
     return False
 
 def check_python_style(file_path):
-    """Verify string quote consistency and double-quoted docstrings."""
+    """Verify string quote consistency, double-quoted docstrings, and 2-space indent."""
     errors = []
     try:
         with open(file_path, "rb") as f:
@@ -60,6 +60,15 @@ def check_python_style(file_path):
     prev_token = None
     
     for token in tokens:
+        # Check indentation.
+        if token.type == tokenize.INDENT:
+            indent_str = token.string
+            if "\t" in indent_str:
+                errors.append(f"{file_path}:{token.start[0]} Tab used for indentation")
+            elif len(indent_str) % 2 != 0:
+                errors.append(f"{file_path}:{token.start[0]} Indentation is not a multiple of 2 spaces")
+
+        # Check quotes.
         if token.type == tokenize.STRING:
             s = token.string
             # Remove prefixes like u, r, f, b
@@ -75,8 +84,7 @@ def check_python_style(file_path):
             
             if is_doc:
                 if not core_string.startswith("\"\"\"") and not core_string.startswith("\""):
-                     errors.append(f"{file_path}:{token.start[0]} Docstring must use double quotes")
-                # Docstrings are always double quoted, don't add to quotes_used for consistency check
+                    errors.append(f"{file_path}:{token.start[0]} Docstring must use double quotes")
             else:
                 if core_string.startswith("'") or core_string.startswith("'''"):
                     quotes_used.add("'")

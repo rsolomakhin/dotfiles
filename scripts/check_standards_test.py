@@ -86,6 +86,18 @@ class TestCheckStandards(unittest.TestCase):
         path = self.create_test_file("test.py", content)
         self.assertEqual(check_file(path), [])
 
+    def test_python_indent_fail(self):
+        content = "#!/usr/bin/env python3\n# Copyright 2026 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0\ndef foo():\n   pass" # 3 spaces
+        path = self.create_test_file("test.py", content)
+        errors = check_file(path)
+        self.assertTrue(any("Indentation is not a multiple of 2 spaces" in e for e in errors))
+
+    def test_python_tab_indent_fail(self):
+        content = "#!/usr/bin/env python3\n# Copyright 2026 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0\ndef foo():\n\tpass"
+        path = self.create_test_file("test.py", content)
+        errors = check_file(path)
+        self.assertTrue(any("Tab used for indentation" in e for e in errors))
+
     def test_copyright_year_change_fail(self):
         # We need to run this in a real git repo.
         subprocess.run(["git", "init"], cwd=self.test_dir, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
