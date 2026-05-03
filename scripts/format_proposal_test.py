@@ -41,7 +41,7 @@ class TestFormatProposal(unittest.TestCase):
       self.assertEqual(args.improvement, "Test Improvement")
     with self.subTest(name="Code"):
       self.assertEqual(args.existing_code, "") # Default value
-      self.assertEqual(args.proposed_code, "Test Proposed Code")      
+      self.assertEqual(args.proposed_code, "Test Proposed Code")
 
   def test_get_parser_missing_args(self) -> None:
     parser = get_parser()
@@ -59,7 +59,7 @@ class TestFormatProposal(unittest.TestCase):
         "Improvement: {improvement}\n"
         "Alternatives: {alternatives}"
     )
-    
+
     class MockArgs:
       def __init__(self) -> None:
         self.title = "T"
@@ -69,10 +69,10 @@ class TestFormatProposal(unittest.TestCase):
         self.proposed_code = "P"
         self.improvement = "Im"
         self.alternatives = "A"
-        
+
     args = MockArgs()
     output = generate_proposal(template, args)
-    
+
     expected = (
         "Title: T\n"
         "Suggestion: S\n"

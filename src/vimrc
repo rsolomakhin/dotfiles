@@ -139,7 +139,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-set list listchars=tab:»\ 
+set list listchars=tab:»\
 set nofixeol
 set nojoinspaces
 set nonumber

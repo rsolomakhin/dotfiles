@@ -181,7 +181,7 @@ class TestCheckStandards(unittest.TestCase):
                    cwd=self.test_dir)
     subprocess.run(["git", "config", "user.name", "Test User"],
                    cwd=self.test_dir)
-    
+
     content = (
         "# Copyright 2017 Rouslan Solomakhin\n"
         "# Licensed under the Apache License, Version 2.0"
@@ -191,12 +191,12 @@ class TestCheckStandards(unittest.TestCase):
                    stdout=subprocess.PIPE)
     subprocess.run(["git", "commit", "-m", "initial"], cwd=self.test_dir,
                    stdout=subprocess.PIPE)
-    
+
     # Now change the year in the working directory.
     with open(path, "w") as f:
       f.write("# Copyright 2015 Rouslan Solomakhin\n"
               "# Licensed under the Apache License, Version 2.0")
-      
+
     orig_cwd = os.getcwd()
     os.chdir(self.test_dir)
     try:
@@ -284,6 +284,15 @@ class TestCheckStandards(unittest.TestCase):
     # File name must end in _test.py
     path = self.create_test_file("foo_test.py", content)
     self.assertEqual(check_file(path), [])
+
+  def test_trailing_whitespace_fail(self) -> None:
+    content = "line with space \nline with tab\t\nclean line\n"
+    path = self.create_test_file("test.txt", content)
+    errors = check_file(path)
+    self.assertTrue(any("Trailing whitespace" in e for e in errors))
+    # Check that both lines with trailing whitespace are reported.
+    self.assertTrue(any("test.txt:1" in e for e in errors))
+    self.assertTrue(any("test.txt:2" in e for e in errors))
 
 if __name__ == "__main__":
   unittest.main()

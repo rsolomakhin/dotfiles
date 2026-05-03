@@ -81,14 +81,14 @@ def check_python_style(file_path: str) -> list[str]:
   quotes_used = set()
   prev_token = None
   indent_stack = [0]
-  
+
   for token in tokens:
     # Check indentation.
     if token.type == tokenize.INDENT:
       indent_str = token.string
       if "\t" in indent_str:
         errors.append(f"{file_path}:{token.start[0]} Tab used for indentation")
-      
+
       expected_indent = indent_stack[-1] + 2
       actual_indent = len(indent_str)
       if actual_indent != expected_indent:
@@ -110,9 +110,9 @@ def check_python_style(file_path: str) -> list[str]:
         else:
           break
       core_string = s[len(prefix):]
-      
+
       is_doc = is_docstring(token, prev_token)
-      
+
       if is_doc:
         if (not core_string.startswith("\"\"\"") and
             not core_string.startswith("\"")):
@@ -123,7 +123,7 @@ def check_python_style(file_path: str) -> list[str]:
           quotes_used.add("'")
         elif core_string.startswith("\"") or core_string.startswith("\"\"\""):
           quotes_used.add("\"")
-    
+
     if token.type not in {tokenize.NL, tokenize.COMMENT, tokenize.ENCODING}:
       prev_token = token
 
@@ -131,7 +131,7 @@ def check_python_style(file_path: str) -> list[str]:
     errors.append(
         f"{file_path} Inconsistent string quotes: found both single and "
         "double quotes")
-  
+
   return errors
 
 def get_committed_copyright_year(file_path: str) -> str | None:
@@ -183,7 +183,7 @@ def check_python_ast(file_path: str) -> list[str]:
           errors.append(
               f"{file_path}:{node.lineno} Missing type hint for argument "
               f"'{arg.arg}'")
-      
+
       is_test_func = (
           file_path.endswith("_test.py") and node.name.startswith("test_"))
       if node.returns is None and node.name != "__init__" and not is_test_func:
@@ -197,7 +197,7 @@ def check_python_ast(file_path: str) -> list[str]:
         if has_params and "Args:" not in doc:
           errors.append(
               f"{file_path}:{node.lineno} Docstring missing 'Args:' section")
-        
+
         # Check for Returns: in docstring if it returns something other
         # than None.
         returns_something = False
@@ -210,7 +210,7 @@ def check_python_ast(file_path: str) -> list[str]:
           elif not isinstance(node.returns, (ast.Name, ast.Constant)):
             # Complex types like List[int] or Optional[str]
             returns_something = True
-            
+
         if returns_something and "Returns:" not in doc:
           errors.append(
               f"{file_path}:{node.lineno} Docstring missing 'Returns:' section")
@@ -247,16 +247,20 @@ def check_file(file_path: str) -> list[str]:
   if not lines:
     return []
 
-  # Check line length (max 80 chars), with exceptions.
+  # Check line length and trailing whitespace.
   if not file_path.startswith("windows/"):
     for i, line in enumerate(lines):
       line_content = line.rstrip("\n")
       if len(line_content) > 80:
         # Skip if line contains a URL.
         if URL_RE.search(line_content):
-          continue
-        errors.append(
-            f"{file_path}:{i+1} Line is too long ({len(line_content)} > 80)")
+          pass
+        else:
+          errors.append(
+              f"{file_path}:{i+1} Line is too long ({len(line_content)} > 80)")
+
+      if line_content.endswith(" ") or line_content.endswith("\t"):
+        errors.append(f"{file_path}:{i+1} Trailing whitespace")
 
   # Check for shebang if required.
   if base_name in SHEBANG_REQUIRED or ext in {".sh", ".py"}:
@@ -298,7 +302,7 @@ def main() -> None:
     None.
   """
   all_errors = []
-  
+
   # Get all tracked files using git ls-files.
   try:
     result = subprocess.run(
