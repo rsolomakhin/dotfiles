@@ -16,12 +16,30 @@
 
 from __future__ import annotations
 import ast
+from dataclasses import dataclass, asdict
 import io
+import json
 import os
 import re
 import subprocess
 import sys
 import tokenize
+
+_SUCCESS = 0
+_FAILURE = 1
+
+@dataclass(frozen=True)
+class StandardError:
+  """A standard compliance error.
+
+  Attributes:
+    file: The path to the file with the error.
+    message: The error message.
+    line: The line number where the error occurred, or None if not applicable.
+  """
+  file: str
+  message: str
+  line: int | None = None
 
 # Files that should have a shebang.
 SHEBANG_REQUIRED = {
@@ -62,21 +80,24 @@ def is_docstring(
     return True
   return False
 
-def check_python_style(file_path: str) -> list[str]:
+def check_python_style(file_path: str) -> list[StandardError]:
   """Verify string quote consistency, double-quoted docstrings, and indent.
 
   Args:
     file_path: The path to the file to check.
 
   Returns:
-    A list of error messages.
+    A list of StandardError objects.
   """
   errors = []
   try:
     with open(file_path, "rb") as f:
       tokens = list(tokenize.tokenize(f.readline))
   except Exception as e:
-    return [f"Could not tokenize {file_path}: {e}"]
+    return [StandardError(
+        file=file_path,
+        message=f"Could not tokenize {file_path}: {e}"
+    )]
 
   quotes_used = set()
   prev_token = None
@@ -87,14 +108,21 @@ def check_python_style(file_path: str) -> list[str]:
     if token.type == tokenize.INDENT:
       indent_str = token.string
       if "\t" in indent_str:
-        errors.append(f"{file_path}:{token.start[0]} Tab used for indentation")
+        errors.append(StandardError(
+            file=file_path,
+            line=token.start[0],
+            message="Tab used for indentation"
+        ))
 
       expected_indent = indent_stack[-1] + 2
       actual_indent = len(indent_str)
       if actual_indent != expected_indent:
-        errors.append(
-            f"{file_path}:{token.start[0]} Indentation increment is not 2 "
-            f"spaces (expected {expected_indent}, found {actual_indent})")
+        errors.append(StandardError(
+            file=file_path,
+            line=token.start[0],
+            message=(f"Indentation increment is not 2 spaces "
+                     f"(expected {expected_indent}, found {actual_indent})")
+        ))
       indent_stack.append(actual_indent)
     elif token.type == tokenize.DEDENT:
       indent_stack.pop()
@@ -116,8 +144,11 @@ def check_python_style(file_path: str) -> list[str]:
       if is_doc:
         if (not core_string.startswith("\"\"\"") and
             not core_string.startswith("\"")):
-          errors.append(
-              f"{file_path}:{token.start[0]} Docstring must use double quotes")
+          errors.append(StandardError(
+              file=file_path,
+              line=token.start[0],
+              message="Docstring must use double quotes"
+          ))
       else:
         if core_string.startswith("'") or core_string.startswith("'''"):
           quotes_used.add("'")
@@ -128,9 +159,11 @@ def check_python_style(file_path: str) -> list[str]:
       prev_token = token
 
   if len(quotes_used) > 1:
-    errors.append(
-        f"{file_path} Inconsistent string quotes: found both single and "
-        "double quotes")
+    errors.append(StandardError(
+        file=file_path,
+        message=("Inconsistent string quotes: found both single and "
+                 "double quotes")
+    ))
 
   return errors
 
@@ -158,14 +191,14 @@ def get_committed_copyright_year(file_path: str) -> str | None:
     pass
   return None
 
-def check_python_ast(file_path: str) -> list[str]:
+def check_python_ast(file_path: str) -> list[StandardError]:
   """Verify type annotations and docstring content using AST.
 
   Args:
     file_path: The path to the file to check.
 
   Returns:
-    A list of error messages.
+    A list of StandardError objects.
   """
   errors = []
   try:
@@ -173,21 +206,30 @@ def check_python_ast(file_path: str) -> list[str]:
       content = f.read()
     tree = ast.parse(content)
   except Exception as e:
-    return [f"Could not parse {file_path}: {e}"]
+    return [StandardError(
+        file=file_path,
+        message=f"Could not parse {file_path}: {e}"
+    )]
 
   for node in ast.walk(tree):
     if isinstance(node, ast.FunctionDef):
       # Check for type annotations on arguments.
       for arg in node.args.args:
         if arg.arg not in ("self", "cls") and arg.annotation is None:
-          errors.append(
-              f"{file_path}:{node.lineno} Missing type hint for argument "
-              f"'{arg.arg}'")
+          errors.append(StandardError(
+              file=file_path,
+              line=node.lineno,
+              message=f"Missing type hint for argument '{arg.arg}'"
+          ))
 
       is_test_func = (
           file_path.endswith("_test.py") and node.name.startswith("test_"))
       if node.returns is None and node.name != "__init__" and not is_test_func:
-        errors.append(f"{file_path}:{node.lineno} Missing return type hint")
+        errors.append(StandardError(
+            file=file_path,
+            line=node.lineno,
+            message="Missing return type hint"
+        ))
 
       # Check for Args: in docstring if there are arguments.
       doc = ast.get_docstring(node)
@@ -195,8 +237,11 @@ def check_python_ast(file_path: str) -> list[str]:
         has_params = any(
             arg.arg not in ("self", "cls") for arg in node.args.args)
         if has_params and "Args:" not in doc:
-          errors.append(
-              f"{file_path}:{node.lineno} Docstring missing 'Args:' section")
+          errors.append(StandardError(
+              file=file_path,
+              line=node.lineno,
+              message="Docstring missing 'Args:' section"
+          ))
 
         # Check for Returns: in docstring if it returns something other
         # than None.
@@ -212,18 +257,20 @@ def check_python_ast(file_path: str) -> list[str]:
             returns_something = True
 
         if returns_something and "Returns:" not in doc:
-          errors.append(
-              f"{file_path}:{node.lineno} Docstring missing 'Returns:' section")
+          errors.append(StandardError(
+              file=file_path,
+              line=node.lineno,
+              message="Docstring missing 'Returns:' section"
+          ))
   return errors
-
-def check_file(file_path: str) -> list[str]:
+def check_file(file_path: str) -> list[StandardError]:
   """Check a single file for standards compliance.
 
   Args:
     file_path: The path to the file to check.
 
   Returns:
-    A list of error messages.
+    A list of StandardError objects.
   """
   errors = []
   base_name = os.path.basename(file_path)
@@ -242,7 +289,10 @@ def check_file(file_path: str) -> list[str]:
     with open(file_path, "r", encoding="utf-8") as f:
       lines = f.readlines()
   except Exception as e:
-    return [f"Could not read {file_path}: {e}"]
+    return [StandardError(
+        file=file_path,
+        message=f"Could not read {file_path}: {e}"
+    )]
 
   if not lines:
     return []
@@ -256,24 +306,37 @@ def check_file(file_path: str) -> list[str]:
         if URL_RE.search(line_content):
           pass
         else:
-          errors.append(
-              f"{file_path}:{i+1} Line is too long ({len(line_content)} > 80)")
+          errors.append(StandardError(
+              file=file_path,
+              line=i + 1,
+              message=f"Line is too long ({len(line_content)} > 80)"
+          ))
 
       if line_content.endswith(" ") or line_content.endswith("\t"):
-        errors.append(f"{file_path}:{i+1} Trailing whitespace")
+        errors.append(StandardError(
+            file=file_path,
+            line=i + 1,
+            message="Trailing whitespace"
+        ))
 
   # Check for shebang if required.
   if base_name in SHEBANG_REQUIRED or ext in {".sh", ".py"}:
     if "src/" not in file_path:
       if not lines[0].startswith("#!"):
-        errors.append(f"Missing shebang in {file_path}")
+        errors.append(StandardError(
+            file=file_path,
+            message="Missing shebang"
+        ))
 
   # Check for license header and copyright year.
   content = "".join(lines[:20])
   if LICENSE_TEXT not in content:
     if (ext in LICENSE_REQUIRED_EXT or base_name in LICENSE_REQUIRED_FILES or
         "src/" in file_path):
-      errors.append(f"Missing Apache 2.0 license header in {file_path}")
+      errors.append(StandardError(
+          file=file_path,
+          message="Missing Apache 2.0 license header"
+      ))
   else:
     # Verify copyright year hasn't changed from the committed version.
     match = COPYRIGHT_RE.search(content)
@@ -281,12 +344,17 @@ def check_file(file_path: str) -> list[str]:
       current_year = match.group(1)
       committed_year = get_committed_copyright_year(file_path)
       if committed_year and current_year != committed_year:
-        errors.append(
-            f"{file_path} Copyright year changed: found {current_year}, "
-            f"expected {committed_year} (from committed version)")
+        errors.append(StandardError(
+            file=file_path,
+            message=(f"Copyright year changed: found {current_year}, "
+                     f"expected {committed_year} (from committed version)")
+        ))
     elif (ext in LICENSE_REQUIRED_EXT or base_name in LICENSE_REQUIRED_FILES or
           "src/" in file_path):
-      errors.append(f"Missing Copyright header in {file_path}")
+      errors.append(StandardError(
+          file=file_path,
+          message="Missing Copyright header"
+      ))
 
   # Python specific style checks.
   if ext == ".py":
@@ -295,14 +363,12 @@ def check_file(file_path: str) -> list[str]:
 
   return errors
 
-def main() -> None:
-  """Main entry point for the standards checker.
+def get_all_errors() -> list[StandardError]:
+  """Get all standards errors in the repository.
 
   Returns:
-    None.
+    A list of StandardError objects.
   """
-  all_errors = []
-
   # Get all tracked files using git ls-files.
   try:
     result = subprocess.run(
@@ -313,19 +379,29 @@ def main() -> None:
     )
     files_to_check = result.stdout.splitlines()
   except subprocess.CalledProcessError as e:
-    print(f"Error running git ls-files: {e}", file=sys.stderr)
-    sys.exit(1)
+    return [StandardError(
+        file="git",
+        message=f"Error running git ls-files: {e!r}"
+    )]
 
+  all_errors = []
   for file_path in files_to_check:
-    if os.path.isfile(file_path):
-      all_errors.extend(check_file(file_path))
+    all_errors.extend(check_file(file_path))
 
-  if all_errors:
-    for error in all_errors:
-      print(f"[Error] {error}")
-    sys.exit(1)
-  else:
-    print("[Success] All files passed standards check.")
+  return all_errors
+
+def main() -> int:
+  """Main entry point for the standards checker.
+
+  Returns:
+    0 on success, 1 on failure.
+  """
+  all_errors = get_all_errors()
+  result = {"result": "success" if len(all_errors) == 0 else "failure",
+            "errors": [asdict(e) for e in all_errors]}
+  print(json.dumps(result, indent=2))
+
+  return _FAILURE if all_errors else _SUCCESS
 
 if __name__ == "__main__":
-  main()
+  sys.exit(main())

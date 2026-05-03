@@ -18,11 +18,24 @@ import os
 import re
 import subprocess
 import sys
-
+import json
+from dataclasses import dataclass, asdict
 
 _SUCCESS = 0
 _FAILURE = 1
 
+@dataclass(frozen=True)
+class AbsolutePathError:
+  """An unallowed absolute path error.
+
+  Attributes:
+    file: The path to the file with the error.
+    line: The line number where the error occurred.
+    message: The error message containing the unallowed path.
+  """
+  file: str
+  line: int
+  message: str
 
 def check_line(line: str, allow_list: list[str]) -> list[str]:
   """Check a single line for absolute paths.
@@ -46,14 +59,14 @@ def check_line(line: str, allow_list: list[str]) -> list[str]:
   return violations
 
 
-def check_file(file_path: str) -> list[str]:
+def check_file(file_path: str) -> list[AbsolutePathError]:
   """Check a single file for absolute paths.
 
   Args:
     file_path: The path to the file to check.
 
   Returns:
-    A list of violation messages.
+    A list of AbsolutePathError objects.
   """
   violations = []
   allow_list = [
@@ -61,28 +74,31 @@ def check_file(file_path: str) -> list[str]:
   ]
 
   try:
-    with open(file_path, "r", errors="ignore") as f:
+    with open(file_path, "r") as f:
       for line_num, line in enumerate(f, 1):
         line_violations = check_line(line, allow_list)
         for v in line_violations:
-          violations.append(f"Line {line_num}: {v}")
+          violations.append(AbsolutePathError(
+              file=file_path,
+              line=line_num,
+              message=f"Absolute path found: {v}"
+          ))
   except Exception as e:
-    print(f"Error reading {file_path}: {e}", file=sys.stderr)
+    violations.append(AbsolutePathError(
+        file=file_path,
+        line=0,
+        message=f"Error reading {file_path}: {e!r}"
+    ))
 
   return violations
 
 
-def check_no_absolute_paths() -> int:
-  """Check all tracked files for absolute paths.
+def get_all_errors() -> list[AbsolutePathError]:
+  """Get all absolute path violations in the repository.
 
   Returns:
-    0 for success, 1 for failure.
+    A list of AbsolutePathError objects.
   """
-  # Find repo root.
-  script_dir = os.path.dirname(os.path.abspath(__file__))
-  repo_root = os.path.abspath(os.path.join(script_dir, ".."))
-  os.chdir(repo_root)
-
   # Get all tracked files.
   try:
     result = subprocess.run(
@@ -93,25 +109,31 @@ def check_no_absolute_paths() -> int:
     )
     files = result.stdout.splitlines()
   except subprocess.CalledProcessError as e:
-    print(f"Error running git ls-files: {e}", file=sys.stderr)
-    return _FAILURE
+    return [AbsolutePathError(
+        file="git ls-files",
+        line=0,
+        message=f"Error running git ls-files: {e!r}"
+    )]
 
-  success = True
+  all_errors = []
   for file_path in files:
-    violations = check_file(file_path)
-    if violations:
-      print(f"Absolute paths found in {file_path}:", file=sys.stderr)
-      for v in violations:
-        print(f"  {v}", file=sys.stderr)
-      success = False
+    all_errors.extend(check_file(file_path))
 
-  if not success:
-    print("Error: Unallowed absolute paths found in the repo.", file=sys.stderr)
-    return _FAILURE
+  return all_errors
 
-  print("No unallowed absolute paths found.")
-  return _SUCCESS
 
+def main() -> int:
+  """Main entry point for the absolute path checker.
+
+  Returns:
+    0 on success, 1 on failure.
+  """
+  all_errors = get_all_errors()
+  result = {"result": "success" if len(all_errors) == 0 else "failure",
+            "errors": [asdict(e) for e in all_errors]}
+  print(json.dumps(result, indent=2))
+
+  return _FAILURE if all_errors else _SUCCESS
 
 if __name__ == "__main__":
-  sys.exit(check_no_absolute_paths())
+  sys.exit(main())

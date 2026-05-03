@@ -19,7 +19,8 @@ import os
 import tempfile
 import shutil
 import subprocess
-from check_standards import check_file
+from check_standards import check_file, StandardError
+from dataclasses import asdict
 
 class TestCheckStandards(unittest.TestCase):
   def setUp(self) -> None:
@@ -62,7 +63,7 @@ class TestCheckStandards(unittest.TestCase):
     )
     path = self.create_test_file("install", content) # install requires shebang
     errors = check_file(path)
-    self.assertTrue(any("Missing shebang" in e for e in errors))
+    self.assertTrue(any("Missing shebang" in e.message for e in errors))
 
   def test_missing_license(self) -> None:
     content = (
@@ -73,7 +74,7 @@ class TestCheckStandards(unittest.TestCase):
     path = self.create_test_file("test.sh", content)
     errors = check_file(path)
     self.assertTrue(
-        any("Missing Apache 2.0 license header" in e for e in errors))
+        any("Missing Apache 2.0 license header" in e.message for e in errors))
 
   def test_markdown_skipped(self) -> None:
     content = "# Just a header\nNo license here."
@@ -96,7 +97,7 @@ class TestCheckStandards(unittest.TestCase):
     path = self.create_test_file("src/bashrc", content)
     errors = check_file(path)
     self.assertTrue(
-        any("Missing Apache 2.0 license header" in e for e in errors))
+        any("Missing Apache 2.0 license header" in e.message for e in errors))
 
   def test_python_quote_consistency_fail(self) -> None:
     content = (
@@ -108,7 +109,9 @@ class TestCheckStandards(unittest.TestCase):
     )
     path = self.create_test_file("test.py", content)
     errors = check_file(path)
-    self.assertTrue(any("Inconsistent string quotes" in e for e in errors))
+    self.assertTrue(
+        any("Inconsistent string quotes" in e.message for e in errors)
+    )
 
   def test_python_docstring_fail(self) -> None:
     content = (
@@ -122,7 +125,7 @@ class TestCheckStandards(unittest.TestCase):
     path = self.create_test_file("test.py", content)
     errors = check_file(path)
     self.assertTrue(
-        any("Docstring must use double quotes" in e for e in errors))
+        any("Docstring must use double quotes" in e.message for e in errors))
 
   def test_python_valid_style(self) -> None:
     content = (
@@ -157,8 +160,9 @@ class TestCheckStandards(unittest.TestCase):
     )
     path = self.create_test_file("test.py", content)
     errors = check_file(path)
-    self.assertTrue(
-        any("Indentation increment is not 2 spaces" in e for e in errors))
+    self.assertTrue(any(
+        "Indentation increment is not 2 spaces" in e.message for e in errors
+    ))
 
   def test_python_tab_indent_fail(self) -> None:
     content = (
@@ -170,7 +174,9 @@ class TestCheckStandards(unittest.TestCase):
     )
     path = self.create_test_file("test.py", content)
     errors = check_file(path)
-    self.assertTrue(any("Tab used for indentation" in e for e in errors))
+    self.assertTrue(
+        any("Tab used for indentation" in e.message for e in errors)
+    )
 
   def test_copyright_year_change_fail(self) -> None:
     # We need to run this in a real git repo.
@@ -201,7 +207,9 @@ class TestCheckStandards(unittest.TestCase):
     os.chdir(self.test_dir)
     try:
       errors = check_file("test.sh")
-      self.assertTrue(any("Copyright year changed" in e for e in errors))
+      self.assertTrue(
+          any("Copyright year changed" in e.message for e in errors)
+      )
     finally:
       os.chdir(orig_cwd)
 
@@ -217,7 +225,7 @@ class TestCheckStandards(unittest.TestCase):
     path = self.create_test_file("test.py", content)
     errors = check_file(path)
     self.assertTrue(
-        any("Missing type hint for argument 'x'" in e for e in errors))
+        any("Missing type hint for argument 'x'" in e.message for e in errors))
 
   def test_python_missing_return_annotation(self) -> None:
     content = (
@@ -230,7 +238,9 @@ class TestCheckStandards(unittest.TestCase):
     )
     path = self.create_test_file("test.py", content)
     errors = check_file(path)
-    self.assertTrue(any("Missing return type hint" in e for e in errors))
+    self.assertTrue(
+        any("Missing return type hint" in e.message for e in errors)
+    )
 
   def test_python_missing_args_docstring(self) -> None:
     content = (
@@ -244,7 +254,7 @@ class TestCheckStandards(unittest.TestCase):
     path = self.create_test_file("test.py", content)
     errors = check_file(path)
     self.assertTrue(
-        any("Docstring missing 'Args:' section" in e for e in errors))
+        any("Docstring missing 'Args:' section" in e.message for e in errors))
 
   def test_python_missing_returns_docstring(self) -> None:
     content = (
@@ -257,8 +267,9 @@ class TestCheckStandards(unittest.TestCase):
     )
     path = self.create_test_file("test.py", content)
     errors = check_file(path)
-    self.assertTrue(
-        any("Docstring missing 'Returns:' section" in e for e in errors))
+    self.assertTrue(any(
+        "Docstring missing 'Returns:' section" in e.message for e in errors
+    ))
 
   def test_python_init_no_return_type_allowed(self) -> None:
     content = (
@@ -289,10 +300,10 @@ class TestCheckStandards(unittest.TestCase):
     content = "line with space \nline with tab\t\nclean line\n"
     path = self.create_test_file("test.txt", content)
     errors = check_file(path)
-    self.assertTrue(any("Trailing whitespace" in e for e in errors))
+    self.assertTrue(any("Trailing whitespace" in e.message for e in errors))
     # Check that both lines with trailing whitespace are reported.
-    self.assertTrue(any("test.txt:1" in e for e in errors))
-    self.assertTrue(any("test.txt:2" in e for e in errors))
+    self.assertTrue(any(e.line == 1 for e in errors))
+    self.assertTrue(any(e.line == 2 for e in errors))
 
 if __name__ == "__main__":
   unittest.main()
