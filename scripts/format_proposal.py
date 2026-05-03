@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import annotations
 import argparse
 import os
 import sys
@@ -23,7 +24,12 @@ _SUCCESS = 0
 _FAILURE = 1
 
 
-def get_parser():
+def get_parser() -> argparse.ArgumentParser:
+  """Get the argument parser for formatting a proposal.
+
+  Returns:
+    The argument parser.
+  """
   parser = argparse.ArgumentParser(
       description="Format a proposal according to the A-F protocol."
   )
@@ -47,7 +53,16 @@ def get_parser():
   return parser
 
 
-def generate_proposal(template, args):
+def generate_proposal(template: str, args: argparse.Namespace) -> str:
+  """Generate a proposal from a template and arguments.
+
+  Args:
+    template: The template string.
+    args: The parsed arguments.
+
+  Returns:
+    The formatted proposal string.
+  """
   return template.format(
       title=args.title,
       suggestion=args.suggestion,
@@ -59,7 +74,15 @@ def generate_proposal(template, args):
   )
 
 
-def format_proposal(argv=None):
+def format_proposal(argv: list[str] | None = None) -> int:
+  """Format a proposal.
+
+  Args:
+    argv: The command line arguments.
+
+  Returns:
+    0 for success, 1 for failure.
+  """
   parser = get_parser()
   args = parser.parse_args(argv)
 

@@ -19,7 +19,7 @@ import re
 from check_no_absolute_paths import check_line
 
 class TestCheckNoAbsolutePaths(unittest.TestCase):
-  def test_absolute_paths(self):
+  def test_absolute_paths(self) -> None:
     allow_list = ["/usr/", "/dev/", "/tmp/", "/opt/"]
     test_cases = [
         ("Line with /example/bin/tools", ["/example/bin/tools"]),
@@ -31,7 +31,7 @@ class TestCheckNoAbsolutePaths(unittest.TestCase):
       with self.subTest(line=line):
         self.assertEqual(check_line(line, allow_list), expected)
 
-  def test_allowed_and_relative_paths(self):
+  def test_allowed_and_relative_paths(self) -> None:
     allow_list = ["/usr/", "/dev/", "/tmp/", "/opt/"]
     test_cases = [
         "Line with ./scripts/foo",

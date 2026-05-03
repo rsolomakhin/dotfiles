@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import annotations
+import ast
 import io
 import os
 import re
@@ -38,8 +40,18 @@ LICENSE_TEXT = "Licensed under the Apache License, Version 2.0"
 COPYRIGHT_RE = re.compile(r"Copyright (\d{4}) Rouslan Solomakhin")
 URL_RE = re.compile(r"https?://")
 
-def is_docstring(token, prev_token):
-  """Check if a token is a docstring."""
+def is_docstring(
+    token: tokenize.TokenInfo,
+    prev_token: tokenize.TokenInfo | None) -> bool:
+  """Check if a token is a docstring.
+
+  Args:
+    token: The token to check.
+    prev_token: The previous token.
+
+  Returns:
+    True if the token is likely a docstring.
+  """
   if token.type != tokenize.STRING:
     return False
   # Docstrings follow an INDENT or are at the start of a module/class/function.
@@ -50,8 +62,15 @@ def is_docstring(token, prev_token):
     return True
   return False
 
-def check_python_style(file_path):
-  """Verify string quote consistency, double-quoted docstrings, and indent."""
+def check_python_style(file_path: str) -> list[str]:
+  """Verify string quote consistency, double-quoted docstrings, and indent.
+
+  Args:
+    file_path: The path to the file to check.
+
+  Returns:
+    A list of error messages.
+  """
   errors = []
   try:
     with open(file_path, "rb") as f:
@@ -115,8 +134,15 @@ def check_python_style(file_path):
   
   return errors
 
-def get_committed_copyright_year(file_path):
-  """Get the copyright year from the version of the file in HEAD."""
+def get_committed_copyright_year(file_path: str) -> str | None:
+  """Get the copyright year from the version of the file in HEAD.
+
+  Args:
+    file_path: The path to the file to check.
+
+  Returns:
+    The copyright year as a string, or None if not found.
+  """
   try:
     result = subprocess.run(
         ["git", "show", f"HEAD:{file_path}"],
@@ -132,7 +158,71 @@ def get_committed_copyright_year(file_path):
     pass
   return None
 
-def check_file(file_path):
+def check_python_ast(file_path: str) -> list[str]:
+  """Verify type annotations and docstring content using AST.
+
+  Args:
+    file_path: The path to the file to check.
+
+  Returns:
+    A list of error messages.
+  """
+  errors = []
+  try:
+    with open(file_path, "r", encoding="utf-8") as f:
+      content = f.read()
+    tree = ast.parse(content)
+  except Exception as e:
+    return [f"Could not parse {file_path}: {e}"]
+
+  for node in ast.walk(tree):
+    if isinstance(node, ast.FunctionDef):
+      # Check for type annotations on arguments.
+      for arg in node.args.args:
+        if arg.arg not in ("self", "cls") and arg.annotation is None:
+          errors.append(
+              f"{file_path}:{node.lineno} Missing type hint for argument "
+              f"'{arg.arg}'")
+      
+      if node.returns is None and node.name != "__init__":
+        errors.append(f"{file_path}:{node.lineno} Missing return type hint")
+
+      # Check for Args: in docstring if there are arguments.
+      doc = ast.get_docstring(node)
+      if doc:
+        has_params = any(
+            arg.arg not in ("self", "cls") for arg in node.args.args)
+        if has_params and "Args:" not in doc:
+          errors.append(
+              f"{file_path}:{node.lineno} Docstring missing 'Args:' section")
+        
+        # Check for Returns: in docstring if it returns something other
+        # than None.
+        returns_something = False
+        if node.returns is not None:
+          if isinstance(node.returns, ast.Name) and node.returns.id != "None":
+            returns_something = True
+          elif (isinstance(node.returns, ast.Constant) and
+                node.returns.value is not None):
+            returns_something = True
+          elif not isinstance(node.returns, (ast.Name, ast.Constant)):
+            # Complex types like List[int] or Optional[str]
+            returns_something = True
+            
+        if returns_something and "Returns:" not in doc:
+          errors.append(
+              f"{file_path}:{node.lineno} Docstring missing 'Returns:' section")
+  return errors
+
+def check_file(file_path: str) -> list[str]:
+  """Check a single file for standards compliance.
+
+  Args:
+    file_path: The path to the file to check.
+
+  Returns:
+    A list of error messages.
+  """
   errors = []
   base_name = os.path.basename(file_path)
   _, ext = os.path.splitext(file_path)
@@ -195,10 +285,16 @@ def check_file(file_path):
   # Python specific style checks.
   if ext == ".py":
     errors.extend(check_python_style(file_path))
+    errors.extend(check_python_ast(file_path))
 
   return errors
 
-def main():
+def main() -> None:
+  """Main entry point for the standards checker.
+
+  Returns:
+    None.
+  """
   all_errors = []
   
   # Get all tracked files using git ls-files.

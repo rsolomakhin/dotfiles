@@ -24,7 +24,16 @@ _SUCCESS = 0
 _FAILURE = 1
 
 
-def check_line(line, allow_list):
+def check_line(line: str, allow_list: list[str]) -> list[str]:
+  """Check a single line for absolute paths.
+
+  Args:
+    line: The line to check.
+    allow_list: List of allowed absolute path prefixes.
+
+  Returns:
+    A list of violated absolute paths found in the line.
+  """
   violations = []
   # Match paths starting with / and having at least one more slash.
   # Ignore paths preceded by . or ~ to avoid false positives for relative paths.
@@ -37,8 +46,15 @@ def check_line(line, allow_list):
   return violations
 
 
-def check_file(file_path):
-  """Check a single file for absolute paths."""
+def check_file(file_path: str) -> list[str]:
+  """Check a single file for absolute paths.
+
+  Args:
+    file_path: The path to the file to check.
+
+  Returns:
+    A list of violation messages.
+  """
   violations = []
   allow_list = [
       "/usr/", "/dev/", "/tmp/", "/opt/", "/bin/", "/example/", "/etc/"
@@ -57,6 +73,11 @@ def check_file(file_path):
 
 
 def check_no_absolute_paths() -> int:
+  """Check all tracked files for absolute paths.
+
+  Returns:
+    0 for success, 1 for failure.
+  """
   # Find repo root.
   script_dir = os.path.dirname(os.path.abspath(__file__))
   repo_root = os.path.abspath(os.path.join(script_dir, ".."))

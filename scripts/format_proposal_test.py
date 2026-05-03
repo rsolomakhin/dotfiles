@@ -22,7 +22,7 @@ import io
 from format_proposal import get_parser, generate_proposal
 
 class TestFormatProposal(unittest.TestCase):
-  def test_get_parser(self):
+  def test_get_parser(self) -> None:
     parser = get_parser()
     args = parser.parse_args([
         "--title", "Test Title",
@@ -43,13 +43,13 @@ class TestFormatProposal(unittest.TestCase):
       self.assertEqual(args.existing_code, "") # Default value
       self.assertEqual(args.proposed_code, "Test Proposed Code")      
 
-  def test_get_parser_missing_args(self):
+  def test_get_parser_missing_args(self) -> None:
     parser = get_parser()
     with self.assertRaises(SystemExit):
       with contextlib.redirect_stderr(io.StringIO()):
         parser.parse_args([])
 
-  def test_generate_proposal(self):
+  def test_generate_proposal(self) -> None:
     template = (
         "Title: {title}\n"
         "Suggestion: {suggestion}\n"
@@ -61,7 +61,7 @@ class TestFormatProposal(unittest.TestCase):
     )
     
     class MockArgs:
-      def __init__(self):
+      def __init__(self) -> None:
         self.title = "T"
         self.suggestion = "S"
         self.existing_code = "E"

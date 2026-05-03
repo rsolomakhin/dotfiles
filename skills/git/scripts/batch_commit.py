@@ -24,8 +24,16 @@ _SUCCESS = 0
 _FAILURE = 1
 
 
-def run_command(cmd, description) -> bool:
-  """Run a command and print output."""
+def run_command(cmd: list[str], description: str) -> bool:
+  """Run a command and print output.
+
+  Args:
+    cmd: The command to run.
+    description: A description of the command.
+
+  Returns:
+    True if the command succeeded, False otherwise.
+  """
   print(f"--- Running: {description} ---")
   try:
     result = subprocess.run(cmd, check=True, text=True)
@@ -38,6 +46,11 @@ def run_command(cmd, description) -> bool:
 
 
 def batch_commit() -> int:
+  """Batch execute tests, add, commit, and push.
+
+  Returns:
+    0 for success, 1 for failure.
+  """
   parser = argparse.ArgumentParser(
       description="Batch execute tests, add, commit, and push."
   )
