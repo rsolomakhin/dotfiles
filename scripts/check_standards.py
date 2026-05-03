@@ -16,6 +16,7 @@
 
 import io
 import os
+import re
 import subprocess
 import sys
 import tokenize
@@ -34,6 +35,7 @@ LICENSE_REQUIRED_EXT = {
 LICENSE_REQUIRED_FILES = {"install", "test"}
 
 LICENSE_TEXT = "Licensed under the Apache License, Version 2.0"
+COPYRIGHT_RE = re.compile(r"Copyright (\d{4}) Rouslan Solomakhin")
 
 def is_docstring(token, prev_token):
     """Check if a token is a docstring."""
@@ -89,6 +91,23 @@ def check_python_style(file_path):
     
     return errors
 
+def get_committed_copyright_year(file_path):
+    """Get the copyright year from the version of the file in HEAD."""
+    try:
+        result = subprocess.run(
+            ["git", "show", f"HEAD:{file_path}"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+        match = COPYRIGHT_RE.search(result.stdout)
+        if match:
+            return match.group(1)
+    except subprocess.CalledProcessError:
+        pass
+    return None
+
 def check_file(file_path):
     errors = []
     base_name = os.path.basename(file_path)
@@ -113,11 +132,21 @@ def check_file(file_path):
             if not lines[0].startswith("#!"):
                 errors.append(f"Missing shebang in {file_path}")
 
-    # Check for license header.
+    # Check for license header and copyright year.
     content = "".join(lines[:20])
     if LICENSE_TEXT not in content:
         if ext in LICENSE_REQUIRED_EXT or base_name in LICENSE_REQUIRED_FILES or "src/" in file_path:
             errors.append(f"Missing Apache 2.0 license header in {file_path}")
+    else:
+        # Verify copyright year hasn't changed from the committed version.
+        match = COPYRIGHT_RE.search(content)
+        if match:
+            current_year = match.group(1)
+            committed_year = get_committed_copyright_year(file_path)
+            if committed_year and current_year != committed_year:
+                errors.append(f"{file_path} Copyright year changed: found {current_year}, expected {committed_year} (from committed version)")
+        elif ext in LICENSE_REQUIRED_EXT or base_name in LICENSE_REQUIRED_FILES or "src/" in file_path:
+            errors.append(f"Missing Copyright header in {file_path}")
 
     # Python specific style checks.
     if ext == ".py":

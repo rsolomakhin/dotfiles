@@ -18,6 +18,7 @@ import unittest
 import os
 import tempfile
 import shutil
+import subprocess
 from check_standards import check_file
 
 class TestCheckStandards(unittest.TestCase):
@@ -35,18 +36,18 @@ class TestCheckStandards(unittest.TestCase):
         return file_path
 
     def test_valid_shell_script(self):
-        content = "#!/bin/bash\n# Licensed under the Apache License, Version 2.0\necho hello"
+        content = "#!/bin/bash\n# Copyright 2026 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0\necho hello"
         path = self.create_test_file("test.sh", content)
         self.assertEqual(check_file(path), [])
 
     def test_missing_shebang(self):
-        content = "# Licensed under the Apache License, Version 2.0\necho hello"
+        content = "# Copyright 2026 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0\necho hello"
         path = self.create_test_file("install", content) # install requires shebang
         errors = check_file(path)
         self.assertTrue(any("Missing shebang" in e for e in errors))
 
     def test_missing_license(self):
-        content = "#!/bin/bash\necho hello"
+        content = "#!/bin/bash\n# Copyright 2026 Rouslan Solomakhin\necho hello"
         path = self.create_test_file("test.sh", content)
         errors = check_file(path)
         self.assertTrue(any("Missing Apache 2.0 license header" in e for e in errors))
@@ -58,32 +59,56 @@ class TestCheckStandards(unittest.TestCase):
 
     def test_src_file_no_shebang_allowed(self):
         # Files in src/ are often sourced and don't need shebangs, but need licenses.
-        content = "# Licensed under the Apache License, Version 2.0\nalias ll=\"ls -l\""
+        content = "# Copyright 2026 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0\nalias ll=\"ls -l\""
         path = self.create_test_file("src/bashrc", content)
         self.assertEqual(check_file(path), [])
 
     def test_src_file_missing_license(self):
-        content = "alias ll=\"ls -l\""
+        content = "# Copyright 2026 Rouslan Solomakhin\nalias ll=\"ls -l\""
         path = self.create_test_file("src/bashrc", content)
         errors = check_file(path)
         self.assertTrue(any("Missing Apache 2.0 license header" in e for e in errors))
 
     def test_python_quote_consistency_fail(self):
-        content = "#!/usr/bin/env python3\n# Licensed under the Apache License, Version 2.0\ns1 = \"double\"\ns2 = 'single'"
+        content = "#!/usr/bin/env python3\n# Copyright 2026 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0\ns1 = \"double\"\ns2 = 'single'"
         path = self.create_test_file("test.py", content)
         errors = check_file(path)
         self.assertTrue(any("Inconsistent string quotes" in e for e in errors))
 
     def test_python_docstring_fail(self):
-        content = "#!/usr/bin/env python3\n# Licensed under the Apache License, Version 2.0\n'''Single quoted docstring'''\ndef foo():\n    pass"
+        content = "#!/usr/bin/env python3\n# Copyright 2026 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0\n'''Single quoted docstring'''\ndef foo():\n    pass"
         path = self.create_test_file("test.py", content)
         errors = check_file(path)
         self.assertTrue(any("Docstring must use double quotes" in e for e in errors))
 
     def test_python_valid_style(self):
-        content = "#!/usr/bin/env python3\n# Licensed under the Apache License, Version 2.0\n\"\"\"Double quoted docstring\"\"\"\ns1 = \"double\"\ns2 = \"double also\""
+        content = "#!/usr/bin/env python3\n# Copyright 2026 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0\n\"\"\"Double quoted docstring\"\"\"\ns1 = \"double\"\ns2 = \"double also\""
         path = self.create_test_file("test.py", content)
         self.assertEqual(check_file(path), [])
+
+    def test_copyright_year_change_fail(self):
+        # We need to run this in a real git repo.
+        subprocess.run(["git", "init"], cwd=self.test_dir, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # Git needs a user to commit.
+        subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=self.test_dir)
+        subprocess.run(["git", "config", "user.name", "Test User"], cwd=self.test_dir)
+        
+        content = "# Copyright 2017 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0"
+        path = self.create_test_file("test.sh", content)
+        subprocess.run(["git", "add", "test.sh"], cwd=self.test_dir, stdout=subprocess.PIPE)
+        subprocess.run(["git", "commit", "-m", "initial"], cwd=self.test_dir, stdout=subprocess.PIPE)
+        
+        # Now change the year in the working directory.
+        with open(path, "w") as f:
+            f.write("# Copyright 2015 Rouslan Solomakhin\n# Licensed under the Apache License, Version 2.0")
+            
+        orig_cwd = os.getcwd()
+        os.chdir(self.test_dir)
+        try:
+            errors = check_file("test.sh")
+            self.assertTrue(any("Copyright year changed" in e for e in errors))
+        finally:
+            os.chdir(orig_cwd)
 
 if __name__ == "__main__":
     unittest.main()
