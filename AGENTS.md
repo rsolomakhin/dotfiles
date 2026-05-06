@@ -15,12 +15,13 @@ ensure configurations are robust and well-documented.
 
 Load the skills organized into the `skills/` directory:
 
--   [Managing Bash](skills/bash/SKILL.md): Ensuring a consistent and portable
-    shell environment across different operating systems.
--   [Handling Git](skills/git/SKILL.md): Maintaining a transparent and
-    traceable history of configuration changes.
 -   [Formatting Markdown](skills/markdown/SKILL.md): Ensuring all documentation
     and agentic memory remain readable and consistent with repository standards.
+-   [Handling Git](skills/git/SKILL.md): Maintaining a transparent and
+    traceable history of configuration changes.
+-   [Harmonizing Bash](skills/harmonizing-bash/SKILL.md): Ensuring shell
+    configurations are consistent, portable, and resilient across different
+    environments.
 -   [Proposing Changes](skills/proposing-changes/SKILL.md): Providing a
     structured and transparent review process for all engineering improvements.
 -   [Configuring Vim](skills/vim/SKILL.md): Creating a productive and
