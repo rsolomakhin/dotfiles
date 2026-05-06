@@ -16,28 +16,10 @@ ensure configurations are robust and well-documented.
 Load the skills organized into the `skills/` directory:
 
 -   [Bash Skill](skills/bash/SKILL.md)
--   [Vim Skill](skills/vim/SKILL.md)
--   [Markdown Skill](skills/markdown/SKILL.md)
 -   [Git Skill](skills/git/SKILL.md)
-
-## 2. Propose changes
-
-When proposing file changes, break down complex tasks into clear steps
-(methodical) and follow the strict review protocol (transparency) using the
-helper script `scripts/format_proposal.py`.
-
-Example usage:
-
-```
-./scripts/format_proposal.py \
-    --title="Title of prpposal" \
-    --suggestion="Suggestion to change X to Y" \
-    --existing-code="print('Hello world')" \
-    --issue="Desribe issue with X",
-    --proposed-code="print('Hello World!')" \
-    --improvement="Describe how Y is better than X" \
-    --alternatives="Describe other alternatives considered to X and Y"
-```
+-   [Markdown Skill](skills/markdown/SKILL.md)
+-   [Proposing changes](skills/proposing-changes/SKILL.md)
+-   [Vim Skill](skills/vim/SKILL.md)
 
 ## 3. Finalization steps
 
