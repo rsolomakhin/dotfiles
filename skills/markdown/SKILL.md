@@ -1,6 +1,7 @@
 ---
 name: markdown
-description: Skill for managing and improving Markdown files in this repository.
+description: Ensuring all documentation and agentic memory remain readable and
+consistent with repository standards.
 ---
 
 # Markdown files skill

@@ -58,10 +58,9 @@ else
   echo "[Test] ShellCheck not found, skipping linting."
 fi
 
-# Setup a sandbox directory for testing.
-TEST_HOME="/tmp/test_sandbox"
-rm -rf "$TEST_HOME"
-mkdir -p "$TEST_HOME"
+# Setup a dynamic sandbox directory for testing.
+TEST_HOME=$(mktemp -d -t dotfiles-test.XXXXXX)
+trap 'rm -rf "$TEST_HOME"' EXIT
 
 echo "[Test] Installing dotfiles into $TEST_HOME..."
 # Run the installation script with HOME overridden.

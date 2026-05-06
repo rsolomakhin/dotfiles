@@ -1,6 +1,7 @@
 ---
 name: bash
-description: Skill for managing and improving Bash configuration files.
+description: Ensuring a consistent and portable shell environment across
+different operating systems.
 ---
 
 # Bash configuration skill

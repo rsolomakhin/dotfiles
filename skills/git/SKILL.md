@@ -1,6 +1,7 @@
 ---
 name: git
-description: Git version control system skill.
+description: Maintaining a transparent and traceable history of configuration
+changes.
 ---
 
 # Git skill

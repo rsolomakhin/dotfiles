@@ -1,6 +1,7 @@
 ---
 name: vim
-description: Skill for managing and improving Vim configuration files.
+description: Creating a productive and predictable text editing experience
+across different environments.
 ---
 
 # Vim Configuration Skill
