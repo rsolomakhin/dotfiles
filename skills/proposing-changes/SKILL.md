@@ -1,6 +1,7 @@
 ---
 name: proposing-changes
-description: Providing a structured and transparent review process for all engineering improvements.
+description: Provides a structured and transparent review process for all
+engineering improvements.
 ---
 
 When proposing file changes, break down complex tasks into clear steps
