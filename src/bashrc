@@ -28,7 +28,7 @@ source_if_exists "$HOME/.fzf.bash"
 # Fix fzf history stripping on older Bash (like macOS default 3.2).
 # This handles negative indices (e.g., "-17") that fzf fails to strip on Darwin.
 if [ "$(uname)" = "Darwin" ] && [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
-  __fzf_history_with_strip() {
+  __fzf_history_with_strip__() {
     if type __fzf_history__ >/dev/null 2>&1; then
       __fzf_history__ "$@" | sed -E 's/^-?[0-9]+[[:space:]]+//'
     fi
