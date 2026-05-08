@@ -83,11 +83,11 @@ let &t_SR.="\x1b[\x33 q"
 " Normal mode - steady block.
 let &t_EI.="\x1b[\x32 q"
 
-" Set steady block on startup and restore blinking bar on exit.
+" Set steady block on startup/resume and restore blinking bar on exit/suspend.
 augroup CursorShape
   autocmd!
-  autocmd VimEnter * silent !echo -ne "\x1b[2 q"
-  autocmd VimLeave * silent !echo -ne "\x1b[5 q"
+  autocmd VimEnter,VimResume * silent !echo -ne "\x1b[2 q"
+  autocmd VimLeave,VimSuspend * silent !echo -ne "\x1b[5 q"
 augroup END
 
 augroup FileFormatSettings
