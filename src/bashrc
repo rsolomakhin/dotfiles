@@ -40,20 +40,21 @@ if [ -n "$BREW_PREFIX" ]; then
 fi
 
 # Default PS1 theme.
-# \[\e[5 q\] resets the cursor to a blinking bar.
+# \[\033[5 q\] resets the cursor to a blinking bar.
 # Detect environment and set host color.
-# Alternative colors: Cyan '\[\e[36m\]', Magenta '\[\e[35m\]'
+# Alternative colors: Cyan '\[\033[36m\]', Magenta '\[\033[35m\]'
 if [ -n "$SSH_CONNECTION" ]; then
-  HOST_COLOR='\[\e[34m\]' # Blue for SSH (Regular)
+  HOST_COLOR='\[\033[34m\]' # Blue for SSH (Regular)
 else
-  HOST_COLOR='\[\e[31m\]' # Red for Local (Different)
+  HOST_COLOR='\[\033[31m\]' # Red for Local (Different)
 fi
 
 if command -v __git_ps1 >/dev/null 2>&1; then
-  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]'\
-'\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+  export PS1='\[\033[5 q\][\[\033[32m\]\u\[\033[m\]@'"$HOST_COLOR"'\h'\
+'\[\033[m\]:\w]\[\033[34m\]$(__git_ps1 \(%s\))\[\033[m\]\$ '
 else
-  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]\$ '
+  export PS1='\[\033[5 q\][\[\033[32m\]\u\[\033[m\]@'"$HOST_COLOR"'\h'\
+'\[\033[m\]:\w]\$ '
 fi
 
 # Silence the warning the default interactive shell is now zsh.

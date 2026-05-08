@@ -16,4 +16,8 @@
 
 alias ls="ls -G"
 
+# Disable bracketed paste to prevent ~2 artifacts in older Bash/Readline
+# (like the system default Bash 3.2 on macOS).
+bind 'set enable-bracketed-paste off' 2>/dev/null
+
 # vi:ft=sh
