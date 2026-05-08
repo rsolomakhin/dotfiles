@@ -17,4 +17,3 @@
 alias ls="ls -G"
 
 # vi:ft=sh
-

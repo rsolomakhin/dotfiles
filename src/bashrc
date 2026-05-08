@@ -24,38 +24,6 @@ esac
 source ~/.common.sh
 
 source_if_exists "$HOME/.fzf.bash"
-
-# Fix fzf history stripping on older Bash (like macOS default 3.2).
-# This handles negative indices (e.g., "-17") that fzf fails to strip on Darwin.
-# "$(uname)" = "Darwin": Only apply this on macOS.
-# "${BASH_VERSINFO[0]}" -lt 4: Only apply for Bash version 3 or older.
-if [ "$(uname)" = "Darwin" ] && [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
-  # Define a wrapper function that strips indices correctly.
-  __fzf_history_with_strip__() {
-    # Check if the original fzf function exists before calling it.
-    if type __fzf_history__ >/dev/null 2>&1; then
-      # Call the original function and pipe output through sed.
-      # ^-?[0-9]+: Matches a leading optional minus sign and digits.
-      # [[:space:]]+: Matches the whitespace separator (space or tab).
-      __fzf_history__ "$@" | sed -E 's/^-?[0-9]+[[:space:]]+//'
-    fi
-  }
-
-  # Re-bind Ctrl-R only if fzf was successfully loaded.
-  if type __fzf_history__ >/dev/null 2>&1; then
-    # Use bind -m emacs-standard for the default Bash editing mode.
-    # The complex string is Readline syntax for:
-    # \C-e: Move to end of line.
-    # \C-u: Clear the line (save to kill ring).
-    # \C-y\ey: Yank (paste) the original line back.
-    # \C-u: Clear it again (but keep it in history).
-    # `...`: Execute the wrapper and place its output on the line.
-    # \e\C-e: Execute the command on the line (standard fzf behavior).
-    # \C-\e(": Redraw the current line.
-    bind -m emacs-standard \
-      '"\C-r": "\C-e \C-u\C-y\ey\C-u`__fzf_history_with_strip__`\e\C-e\C-\e("'
-  fi
-fi
 source_if_exists "$HOME/google-cloud-sdk/completion.bash.inc"
 source_if_exists "$HOME/google-cloud-sdk/path.bash.inc"
 source_if_exists "/etc/bash_completion"
@@ -82,11 +50,10 @@ else
 fi
 
 if command -v __git_ps1 >/dev/null 2>&1; then
-  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h'\
-'\[\e[m\]:\w]\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
+  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]'\
+'\[\e[34m\]$(__git_ps1 \(%s\))\[\e[m\]\$ '
 else
-  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h'\
-'\[\e[m\]:\w]\$ '
+  export PS1='\[\e[5 q\][\[\e[32m\]\u\[\e[m\]@'"$HOST_COLOR"'\h\[\e[m\]:\w]\$ '
 fi
 
 # Silence the warning the default interactive shell is now zsh.
