@@ -86,6 +86,18 @@ fi
 
 source_if_exists "$HOME/.local.sh"
 
+# Clear the screen after an SSH session to avoid clutter.
+ssh() {
+  command ssh "$@"
+  local ret=$?
+  # Only clear if stdout is a terminal to avoid breaking pipes/redirection.
+  if [ -t 1 ]; then
+    # \033[J clears from the cursor to the end of the screen.
+    printf "\n\033[JSSH disconnected\n"
+  fi
+  return $ret
+}
+
 # Use single quotes to delay variable expansion until the alias is used.
 # This allows the alias to pick up changes to VIM or EMACS variables.
 alias e='$VIM'
