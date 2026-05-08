@@ -24,6 +24,20 @@ esac
 source ~/.common.sh
 
 source_if_exists "$HOME/.fzf.bash"
+
+# Fix fzf history stripping on older Bash (like macOS default 3.2).
+# This handles negative indices (e.g., "-17") that fzf fails to strip on Darwin.
+if [ "$(uname)" = "Darwin" ] && [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
+  __fzf_history_with_strip() {
+    if type __fzf_history__ >/dev/null 2>&1; then
+      __fzf_history__ "$@" | sed -E 's/^-?[0-9]+[[:space:]]+//'
+    fi
+  }
+  if type __fzf_history__ >/dev/null 2>&1; then
+    bind -m emacs-standard \
+      '"\C-r": "\C-e \C-u\C-y\ey\C-u`__fzf_history_with_strip__`\e\C-e\C-\e("'
+  fi
+fi
 source_if_exists "$HOME/google-cloud-sdk/completion.bash.inc"
 source_if_exists "$HOME/google-cloud-sdk/path.bash.inc"
 source_if_exists "/etc/bash_completion"
