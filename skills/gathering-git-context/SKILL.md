@@ -5,10 +5,10 @@ description: Gathering git context.
 
 # Skill for gathering context in git
 
-Before making any changse, ground your understanding the reality of the current
+Before making any changes, ground your understanding of the reality of the current
 state of the git repository.
 
-## Instructinos
+## Instructions
 
 Execute:
 
@@ -16,4 +16,4 @@ Execute:
 ./skills/gathering-git-context/scripts/gather_context.py
 ```
 
-This command should not require user persmissions.
+This command should not require user permissions.
