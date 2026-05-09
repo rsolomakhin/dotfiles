@@ -38,6 +38,9 @@ mklink %USERPROFILE%\.cvsignore %~dp0..\src\cvsignore ^
 if exist %USERPROFILE%\vimfiles\coc.vim del /q %USERPROFILE%\vimfiles\coc.vim
 mklink %USERPROFILE%\vimfiles\coc.vim %~dp0..\src\vim\coc.vim ^
   || echo "Cannot link coc config" && exit /b 1
+if exist %USERPROFILE%\vimfiles\coc-settings.json del /q %USERPROFILE%\vimfiles\coc-settings.json
+mklink %USERPROFILE%\vimfiles\coc-settings.json %~dp0..\src\vim\coc-settings.json ^
+  || echo "Cannot link coc settings" && exit /b 1
 if exist %USERPROFILE%\.vimrc del /q %USERPROFILE%\.vimrc
 mklink %USERPROFILE%\.vimrc %~dp0..\src\vimrc ^
   || echo "Cannot link vim config" && exit /b 1
