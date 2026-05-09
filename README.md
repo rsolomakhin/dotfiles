@@ -40,4 +40,7 @@ available:
 -   `<leader>e` : Show references to symbol under cursor.
 -   `<leader>f` : Format selected code.
 -   `<leader>k` : Show documentation hover for symbol under cursor.
+-   `<leader>r` : Rename symbol under cursor.
+-   `<leader>a` : Show code actions for current line.
+-   `<leader>q` : Apply AutoFix for current line.
 -   `<TAB>` : Accept auto-completion suggestion.

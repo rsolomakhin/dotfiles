@@ -47,6 +47,15 @@ function! ShowDocumentation()
   endif
 endfunction
 
+" Symbol renaming.
+nmap <leader>r <Plug>(coc-rename)
+
+" Run the Code Action selector for the current line.
+nmap <leader>a <Plug>(coc-codeaction)
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>q <Plug>(coc-fix-current)
+
 " Auto-completion.
 " Tab accepts the inline or dropdown suggestion if visible.
 " Fallback to normal Tab behavior if no suggestion is visible.
