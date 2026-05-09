@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import argparse
 import os
 import subprocess
 import sys
@@ -37,7 +36,7 @@ def run_command(cmd: list[str], description: str) -> bool:
   print(f"--- Running: {description} ---")
   try:
     result = subprocess.run(cmd, check=True, text=True)
-  except subprocess.CalledProcessError as e:
+  except subprocess.CalledProcessError:
     print(f"Error: {description} failed.", file=sys.stderr)
     return False
   else:

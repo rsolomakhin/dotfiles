@@ -43,6 +43,9 @@ if executable('node')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
+" Automatically install these coc.nvim extensions.
+let g:coc_global_extensions = ['coc-json', 'coc-markdownlint', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-yaml']
+
 " Local plugins.
 call SourceIfExists('~/.local-plugins.vimrc')
 call plug#end()

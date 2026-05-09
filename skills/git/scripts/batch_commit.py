@@ -37,7 +37,7 @@ def run_command(cmd: list[str], description: str) -> bool:
   print(f"--- Running: {description} ---")
   try:
     result = subprocess.run(cmd, check=True, text=True)
-  except subprocess.CalledProcessError as e:
+  except subprocess.CalledProcessError:
     print(f"Error: {description} failed.", file=sys.stderr)
     return False
   else:

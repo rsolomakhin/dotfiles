@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import unittest
-import re
 from check_no_absolute_paths import check_line
 
 class TestCheckNoAbsolutePaths(unittest.TestCase):

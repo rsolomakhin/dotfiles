@@ -15,8 +15,6 @@
 # limitations under the License.
 
 import unittest
-import argparse
-import sys
 import contextlib
 import io
 from format_proposal import get_parser, generate_proposal

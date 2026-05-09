@@ -19,8 +19,7 @@ import os
 import tempfile
 import shutil
 import subprocess
-from check_standards import check_file, StandardError
-from dataclasses import asdict
+from check_standards import check_file
 
 class TestCheckStandards(unittest.TestCase):
   def setUp(self) -> None:
