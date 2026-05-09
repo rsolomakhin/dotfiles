@@ -54,7 +54,7 @@ nmap <leader>r <Plug>(coc-rename)
 nmap <leader>a <Plug>(coc-codeaction)
 
 " Apply AutoFix to problem on the current line.
-nmap <leader>q <Plug>(coc-fix-current)
+nmap <leader>x <Plug>(coc-fix-current)
 
 " Auto-completion.
 " Tab accepts the inline or dropdown suggestion if visible.
