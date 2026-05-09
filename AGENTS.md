@@ -24,8 +24,8 @@ Load the skills organized into the `skills/` directory:
     environments.
 -   [Proposing Changes](skills/proposing-changes/SKILL.md): Providing a
     structured and transparent review process for all engineering improvements.
--   [Configuring Vim](skills/vim/SKILL.md): Creating a productive and
-    predictable text editing experience across different environments.
+-   [Configuring Vim](skills/configuring-vim/SKILL.md): Creating a productive
+    and predictable text editing experience across different environments.
 
 ## 2. Propose changes
 
