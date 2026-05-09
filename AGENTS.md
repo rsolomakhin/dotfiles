@@ -17,8 +17,14 @@ Load the skills organized into the `skills/` directory:
 
 -   [Formatting Markdown](skills/markdown/SKILL.md): Ensuring all documentation
     and agentic memory remain readable and consistent with repository standards.
--   [Handling Git](skills/git/SKILL.md): Maintaining a transparent and
-    traceable history of configuration changes.
+-   [Committing git changes](skills/committing-git-changes/SKILL.md): Committing
+    git changes.
+-   [Determining commit message](skills/determining-commit-message/SKILL.md):
+    Determining the commit message.
+-   [Gathering git context](skills/gathering-git-context/SKILL.md): Gathering
+    git context.
+-   [Requesting git permission](skills/requesting-git-permission/SKILL.md):
+    Requesting git permission.
 -   [Harmonizing Bash](skills/harmonizing-bash/SKILL.md): Ensuring shell
     configurations are consistent, portable, and resilient across different
     environments.
