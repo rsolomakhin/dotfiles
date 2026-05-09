@@ -15,72 +15,64 @@
 # limitations under the License.
 
 import unittest
-import contextlib
 import io
-from format_proposal import get_parser, generate_proposal
+import sys
+import json
+import builtins
+from unittest.mock import patch, mock_open
+import format_proposal
 
 class TestFormatProposal(unittest.TestCase):
-  def test_get_parser(self) -> None:
-    parser = get_parser()
-    args = parser.parse_args([
-        "--title", "Test Title",
-        "--suggestion", "Test Suggestion",
-        "--issue", "Test Issue",
-        "--proposed-code", "Test Proposed Code",
-        "--improvement", "Test Improvement",
-        "--alternatives", "Test Alternatives"
-    ])
-    with self.subTest(name="Overview"):
-      self.assertEqual(args.title, "Test Title")
-      self.assertEqual(args.alternatives, "Test Alternatives")
-    with self.subTest(name="Description"):
-      self.assertEqual(args.suggestion, "Test Suggestion")
-      self.assertEqual(args.issue, "Test Issue")
-      self.assertEqual(args.improvement, "Test Improvement")
-    with self.subTest(name="Code"):
-      self.assertEqual(args.existing_code, "") # Default value
-      self.assertEqual(args.proposed_code, "Test Proposed Code")
 
-  def test_get_parser_missing_args(self) -> None:
-    parser = get_parser()
-    with self.assertRaises(SystemExit):
-      with contextlib.redirect_stderr(io.StringIO()):
-        parser.parse_args([])
+  def test_format_proposal_success(self) -> None:
+    data = {
+        "title": "T",
+        "suggestion": "S",
+        "existing_code": "E",
+        "issue": "I",
+        "proposed_code": "P",
+        "improvement": "Im",
+        "alternatives": "A"
+    }
+    mock_stdin = io.StringIO(json.dumps(data))
+    mock_stdout = io.StringIO()
 
-  def test_generate_proposal(self) -> None:
-    template = (
-        "Title: {title}\n"
-        "Suggestion: {suggestion}\n"
-        "Existing: {existing_code}\n"
-        "Issue: {issue}\n"
-        "Proposed: {proposed_code}\n"
-        "Improvement: {improvement}\n"
-        "Alternatives: {alternatives}"
+    template_content = (
+        "{title} {suggestion} {existing_code} {issue} "
+        "{proposed_code} {improvement} {alternatives}"
     )
 
-    class MockArgs:
-      def __init__(self) -> None:
-        self.title = "T"
-        self.suggestion = "S"
-        self.existing_code = "E"
-        self.issue = "I"
-        self.proposed_code = "P"
-        self.improvement = "Im"
-        self.alternatives = "A"
+    with patch.object(sys, "stdin", mock_stdin):
+      with patch.object(sys, "stdout", mock_stdout):
+        with patch.object(builtins, "open",
+                          mock_open(read_data=template_content),
+                          spec_set=True):
+          result = format_proposal.format_proposal()
 
-    args = MockArgs()
-    output = generate_proposal(template, args)
+    self.assertEqual(result, 0)
+    self.assertIn("T S E I P Im A", mock_stdout.getvalue())
 
-    expected = (
-        "Title: T\n"
-        "Suggestion: S\n"
-        "Existing: E\n"
-        "Issue: I\n"
-        "Proposed: P\n"
-        "Improvement: Im\n"
-        "Alternatives: A"
-    )
-    self.assertEqual(output, expected)
+  def test_format_proposal_invalid_json(self) -> None:
+    mock_stdin = io.StringIO("not json")
+    mock_stderr = io.StringIO()
+
+    with patch.object(sys, "stdin", mock_stdin):
+      with patch.object(sys, "stderr", mock_stderr):
+        result = format_proposal.format_proposal()
+
+    self.assertEqual(result, 1)
+    self.assertIn("Error: Invalid JSON input", mock_stderr.getvalue())
+
+  def test_format_proposal_missing_key(self) -> None:
+    mock_stdin = io.StringIO(json.dumps({"title": "T"}))
+    mock_stderr = io.StringIO()
+
+    with patch.object(sys, "stdin", mock_stdin):
+      with patch.object(sys, "stderr", mock_stderr):
+        result = format_proposal.format_proposal()
+
+    self.assertEqual(result, 1)
+    self.assertIn("Error: Missing required key", mock_stderr.getvalue())
 
 if __name__ == "__main__":
   unittest.main()

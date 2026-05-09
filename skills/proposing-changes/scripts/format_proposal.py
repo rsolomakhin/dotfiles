@@ -14,8 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import annotations
-import argparse
+import json
 import os
 import sys
 
@@ -24,67 +23,26 @@ _SUCCESS = 0
 _FAILURE = 1
 
 
-def get_parser() -> argparse.ArgumentParser:
-  """Get the argument parser for formatting a proposal.
-
-  Returns:
-    The argument parser.
-  """
-  parser = argparse.ArgumentParser(
-      description="Format a proposal according to the A-F protocol."
-  )
-  parser.add_argument("--title", required=True, help="Title of the proposal.")
-  parser.add_argument("--suggestion", required=True, help="Suggestion.")
-  parser.add_argument("--existing-code", default="", help="Existing Code.")
-  parser.add_argument("--issue", required=True, help="Issue with the code.")
-  parser.add_argument(
-      "--proposed-code", required=True, help="Proposed code change."
-  )
-  parser.add_argument(
-      "--improvement",
-      required=True,
-      help="How it improves the situation.",
-  )
-  parser.add_argument(
-      "--alternatives",
-      required=True,
-      help="Alternatives considered.",
-  )
-  return parser
-
-
-def generate_proposal(template: str, args: argparse.Namespace) -> str:
-  """Generate a proposal from a template and arguments.
-
-  Args:
-    template: The template string.
-    args: The parsed arguments.
-
-  Returns:
-    The formatted proposal string.
-  """
-  return template.format(
-      title=args.title,
-      suggestion=args.suggestion,
-      existing_code=args.existing_code,
-      issue=args.issue,
-      proposed_code=args.proposed_code,
-      improvement=args.improvement,
-      alternatives=args.alternatives,
-  )
-
-
-def format_proposal(argv: list[str] | None = None) -> int:
-  """Format a proposal.
-
-  Args:
-    argv: The command line arguments.
+def format_proposal() -> int:
+  """Format a proposal from JSON input on stdin.
 
   Returns:
     0 for success, 1 for failure.
   """
-  parser = get_parser()
-  args = parser.parse_args(argv)
+  try:
+    data = json.load(sys.stdin)
+  except json.JSONDecodeError as e:
+    print(f"Error: Invalid JSON input: {e}", file=sys.stderr)
+    return _FAILURE
+
+  required_keys = [
+      "title", "suggestion", "existing_code", "issue", "proposed_code",
+      "improvement", "alternatives"
+  ]
+  for key in required_keys:
+    if key not in data:
+      print(f"Error: Missing required key: {key}", file=sys.stderr)
+      return _FAILURE
 
   # Find template relative to script.
   script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -97,7 +55,11 @@ def format_proposal(argv: list[str] | None = None) -> int:
   with open(template_path, "r") as f:
     template = f.read()
 
-  output = generate_proposal(template, args)
+  try:
+    output = template.format(**data)
+  except KeyError as e:
+    print(f"Error: Template key mismatch: {e}", file=sys.stderr)
+    return _FAILURE
 
   print(output)
   return _SUCCESS
