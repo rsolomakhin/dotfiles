@@ -44,10 +44,23 @@ def shell_execute(command: str) -> dict:
   except Exception as e:
     return {"error": str(e)}
 
+def gather_git_context() -> dict:
+  """Gathers git context by running the gather_context.py script.
+
+  Returns:
+    A dictionary containing the git context output.
+  """
+  script_path = "./skills/gathering-git-context/scripts/gather_context.py"
+  return shell_execute(script_path)
+
 TOOL_MAP = {
   "shell_execute": {
     "func": shell_execute,
     "requires_permission": True,
+  },
+  "gather_git_context": {
+    "func": gather_git_context,
+    "requires_permission": False,
   },
 }
 
@@ -69,6 +82,18 @@ TOOLS = [
         }
       },
       "required": ["command"]
+    }
+  },
+  {
+    "type": "function",
+    "name": "gather_git_context",
+    "description": (
+      "Gathers detailed git context including log, status, and diffs. "
+      "This is a read-only operation and does not require user permission."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {}
     }
   },
   {"type": "google_search"}
