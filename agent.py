@@ -113,7 +113,7 @@ def main() -> None:
     print("  - README.md")
   if os.path.exists("TERMS.md"):
     print("  - TERMS.md")
-  print(f"  - Skills: {' '.join(loaded_skills)}")
+  print(f"  - Skills: {" ".join(loaded_skills)}")
   print("Type '/exit' or '/quit' to stop.")
 
   while True:
