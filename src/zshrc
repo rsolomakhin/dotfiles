@@ -17,7 +17,6 @@ source ~/.common.sh
 
 source_if_exists "$HOME/.fzf.zsh"
 source_if_exists "$HOME/google-cloud-sdk/completion.zsh.inc"
-source_if_exists "$HOME/google-cloud-sdk/path.zsh.inc"
 source_if_exists "/etc/zsh_completion"
 source_if_exists "/usr/local/git/current/share/git-core/git-completion.zsh"
 source_if_exists "/usr/local/git/current/share/git-core/git-prompt.sh"
