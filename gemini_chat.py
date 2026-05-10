@@ -16,7 +16,60 @@
 
 import os
 import sys
+import subprocess
+import json
 from google import genai
+
+def shell_execute(command: str) -> dict:
+  """Executes a shell command and returns the output.
+
+  Args:
+    command: The shell command to execute.
+
+  Returns:
+    A dictionary containing stdout, stderr, and exit_code, or an error message.
+  """
+  try:
+    # Use a timeout to prevent hanging
+    result = subprocess.run(
+      command, shell=True, capture_output=True, text=True, timeout=30
+    )
+    return {
+      "stdout": result.stdout,
+      "stderr": result.stderr,
+      "exit_code": result.returncode
+    }
+  except subprocess.TimeoutExpired:
+    return {"error": "Command timed out after 30 seconds"}
+  except Exception as e:
+    return {"error": str(e)}
+
+TOOL_MAP = {
+  "shell_execute": shell_execute,
+}
+
+TOOLS = [
+  {
+    "type": "function",
+    "name": "shell_execute",
+    "description": (
+      "Executes a shell command in the local environment and returns stdout, "
+      "stderr, and exit code. Use this for file operations, git commands, "
+      "and system checks."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "The shell command to execute."
+        }
+      },
+      "required": ["command"]
+    }
+  },
+  {"type": "google_search"}
+]
 
 def main() -> None:
   # Check for GEMINI_API_KEY
@@ -98,38 +151,102 @@ def main() -> None:
       if not user_input:
         continue
 
-      # Create interaction
+      # Create initial interaction
       interaction = client.interactions.create(
         model=model_id,
         input=user_input,
         system_instruction=system_instruction,
-        previous_interaction_id=previous_interaction_id
+        previous_interaction_id=previous_interaction_id,
+        tools=TOOLS
       )
 
-      # Update state for the next turn
-      previous_interaction_id = interaction.id
+      # Handle multi-step interaction (tool calls)
+      while True:
+        # Update state for the next turn (last interaction in the chain)
+        previous_interaction_id = interaction.id
 
-      # Print model output using the new steps schema
-      output_text = ""
-      for step in reversed(interaction.steps):
-        if step.type == "model_output":
-          for part in step.content:
-            if part.type == "text":
-              output_text = part.text
-              break
-          if output_text:
-            break
+        # Print outputs from this step
+        for step in interaction.steps:
+          if step.type == "model_output":
+            for part in step.content:
+              if part.type == "text":
+                print(f"Gemini: {part.text}")
+          elif step.type == "thought":
+            if hasattr(step, "summary") and step.summary:
+              for part in step.summary:
+                if part.type == "text":
+                  # Abbreviate thought summary
+                  thought_text = part.text.replace("\n", " ")
+                  if len(thought_text) > 80:
+                    thought_text = thought_text[:77] + "..."
+                  print(f"[Thought] {thought_text}")
 
-      if output_text:
-        print(f"Gemini: {output_text}")
-      else:
-        print("Gemini: [No text output received]")
+        if interaction.status != "requires_action":
+          break
+
+        # Collect tool results
+        tool_results = []
+        for step in interaction.steps:
+          if step.type == "function_call":
+            tool_name = step.name
+            tool_args = step.arguments
+            tool_id = step.id
+
+            print(f"  [Calling Tool] {tool_name}({json.dumps(tool_args)})")
+
+            if tool_name in TOOL_MAP:
+              try:
+                result = TOOL_MAP[tool_name](**tool_args)
+                tool_results.append({
+                  "type": "function_result",
+                  "name": tool_name,
+                  "call_id": tool_id,
+                  "result": result
+                })
+                # Show abbreviated result on success
+                result_str = json.dumps(result).replace("\n", " ")
+                if len(result_str) > 100:
+                  result_str = result_str[:97] + "..."
+                print(f"  [Tool Success] {tool_name}: {result_str}")
+              except Exception as e:
+                print(f"  [Tool Error] {tool_name}: {e}")
+                tool_results.append({
+                  "type": "function_result",
+                  "name": tool_name,
+                  "call_id": tool_id,
+                  "is_error": True,
+                  "result": {"error": str(e)}
+                })
+            else:
+              print(f"  [Tool Error] Tool '{tool_name}' not found.")
+              tool_results.append({
+                "type": "function_result",
+                "name": tool_name,
+                "call_id": tool_id,
+                "is_error": True,
+                "result": {"error": f"Tool '{tool_name}' not found."}
+              })
+
+        # Send tool results back
+        if tool_results:
+          interaction = client.interactions.create(
+            model=model_id,
+            input=tool_results,
+            system_instruction=system_instruction,
+            previous_interaction_id=interaction.id,
+            tools=TOOLS
+          )
+        else:
+          # Should not happen if status is requires_action
+          break
 
     except (EOFError, KeyboardInterrupt):
       print("\nGoodbye!")
       break
     except Exception as e:
       print(f"\nError during interaction: {e}")
+      # Reset session on error to avoid broken chains
+      previous_interaction_id = None
 
 if __name__ == "__main__":
   main()
