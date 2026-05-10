@@ -126,6 +126,7 @@ def main() -> None:
   # Load all skills from skills/*/SKILL.md
   import glob
   skill_files = glob.glob("skills/*/SKILL.md")
+  loaded_skills = []
   if skill_files:
     system_instruction += "\n\n# Available Skills\n"
     for skill_path in skill_files:
@@ -134,11 +135,19 @@ def main() -> None:
         with open(skill_path, "r") as f:
           system_instruction += f"\n## Skill: {skill_name}\n\n" + \
                                 f.read() + "\n"
+        loaded_skills.append(skill_name)
       except Exception as e:
         print(f"Warning: Could not read skill at {skill_path}: {e}")
 
   print(f"Chatting with {model_id}.")
-  print(f"Loaded standards from {agents_file} and {len(skill_files)} skills.")
+  print("Loaded context from:")
+  if os.path.exists("README.md"):
+    print("  - README.md")
+  if os.path.exists("TERMS.md"):
+    print("  - TERMS.md")
+  print(f"  - {agents_file}")
+  for skill in loaded_skills:
+    print(f"  - Skill: {skill}")
   print("Type '/exit' or '/quit' to stop.")
 
   while True:
