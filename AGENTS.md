@@ -21,7 +21,7 @@ Load the skills organized into the `skills/` directory:
     git changes.
 -   [Determining commit message](skills/determining-commit-message/SKILL.md):
     Determining the commit message.
--   [Gathering git context](skills/gathering-git-context/SKILL.md): Gathering
+-   [Gathering git context](skills/gathering_git_context/SKILL.md): Gathering
     git context.
 -   [Requesting git permission](skills/requesting-git-permission/SKILL.md):
     Requesting git permission.

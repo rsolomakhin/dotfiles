@@ -13,7 +13,7 @@ state of the git repository.
 Execute:
 
 ```bash
-./skills/gathering-git-context/scripts/gather_context.py
+./skills/gathering_git_context/scripts/gather_context.py
 ```
 
 This command should not require user permissions.

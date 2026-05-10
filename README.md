@@ -44,3 +44,11 @@ available:
 -   `<leader>a` : Show code actions for current line.
 -   `<leader>x` : Apply AutoFix for current line.
 -   `<TAB>` : Accept auto-completion suggestion.
+
+## Agentic development
+
+To execute a very simple agent for system configuration, run:
+
+```bash
+python3 -m agent
+```

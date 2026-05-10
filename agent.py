@@ -16,74 +16,18 @@
 
 import os
 import sys
-import subprocess
 import json
 from google import genai
-
-def shell_execute(command: str) -> dict:
-  """Executes a shell command and returns the output.
-
-  Args:
-    command: The shell command to execute.
-
-  Returns:
-    A dictionary containing stdout, stderr, and exit_code, or an error message.
-  """
-  try:
-    # Use a timeout to prevent hanging
-    result = subprocess.run(
-      command, shell=True, capture_output=True, text=True, timeout=30
-    )
-    return {
-      "stdout": result.stdout,
-      "stderr": result.stderr,
-      "exit_code": result.returncode
-    }
-  except subprocess.TimeoutExpired:
-    return {"error": "Command timed out after 30 seconds"}
-  except Exception as e:
-    return {"error": str(e)}
-
-def gather_git_context() -> dict:
-  """Gathers git context by running the gather_context.py script.
-
-  Returns:
-    A dictionary containing the git context output.
-  """
-  script_path = "./skills/gathering-git-context/scripts/gather_context.py"
-  return shell_execute(script_path)
+from skills.gathering_git_context.scripts import gather_context
 
 TOOL_MAP = {
-  "shell_execute": {
-    "func": shell_execute,
-    "requires_permission": True,
-  },
   "gather_git_context": {
-    "func": gather_git_context,
+    "func": gather_context.gather_git_context,
     "requires_permission": False,
   },
 }
 
 TOOLS = [
-  {
-    "type": "function",
-    "name": "shell_execute",
-    "description": (
-      "Executes a shell command in the local environment and returns stdout, "
-      "stderr, and exit code. Use this for file operations, git commands, "
-      "and system checks."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "command": {
-          "type": "string",
-          "description": "The shell command to execute."
-        }
-      },
-      "required": ["command"]
-    }
-  },
   {
     "type": "function",
     "name": "gather_git_context",
@@ -96,17 +40,16 @@ TOOLS = [
       "properties": {}
     }
   },
-  {"type": "google_search"}
 ]
 
 def main() -> None:
-  # Check for GEMINI_API_KEY
+  # Check for GEMINI_API_KEY.
   api_key = os.environ.get("GEMINI_API_KEY")
   if not api_key:
     print("Error: GEMINI_API_KEY environment variable is not set.")
     sys.exit(1)
 
-  # Initialize client
+  # Initialize client.
   try:
     client = genai.Client()
   except Exception as e:
@@ -116,10 +59,22 @@ def main() -> None:
   model_id = "gemini-3-flash-preview"
   previous_interaction_id = None
 
-  # Initialize system instruction
+  # Initialize system instruction.
   system_instruction = ""
 
-  # Load Project Overview (README.md)
+  # Load project context from AGENTS.md.
+  agents_file = "AGENTS.md"
+  if not os.path.exists(agents_file):
+    print(f"Error: {agents_file} not found in the current directory.")
+    sys.exit(1)
+  try:
+    with open(agents_file, "r") as f:
+      system_instruction += "# Core Standards\n\n" + f.read()
+  except Exception as e:
+    print(f"Error reading {agents_file}: {e}")
+    sys.exit(1)
+
+  # Load Project Overview from README.md.
   if os.path.exists("README.md"):
     try:
       with open("README.md", "r") as f:
@@ -127,26 +82,13 @@ def main() -> None:
     except Exception as e:
       print(f"Warning: Could not read README.md: {e}")
 
-  # Load Legal & Terms (TERMS.md)
+  # Load the terminology definitions from TERMS.md.
   if os.path.exists("TERMS.md"):
     try:
       with open("TERMS.md", "r") as f:
-        system_instruction += "# Legal & Terms\n\n" + f.read() + "\n\n"
+        system_instruction += "# Terminology definitions\n\n" + f.read() + "\n\n"
     except Exception as e:
       print(f"Warning: Could not read TERMS.md: {e}")
-
-  # Load core standards from AGENTS.md (Mandatory)
-  agents_file = "AGENTS.md"
-  if not os.path.exists(agents_file):
-    print(f"Error: {agents_file} not found in the current directory.")
-    sys.exit(1)
-
-  try:
-    with open(agents_file, "r") as f:
-      system_instruction += "# Core Standards\n\n" + f.read()
-  except Exception as e:
-    print(f"Error reading {agents_file}: {e}")
-    sys.exit(1)
 
   # Load all skills from skills/*/SKILL.md
   import glob
@@ -166,13 +108,12 @@ def main() -> None:
 
   print(f"Chatting with {model_id}.")
   print("Loaded context from:")
+  print(f"  - {agents_file}")
   if os.path.exists("README.md"):
     print("  - README.md")
   if os.path.exists("TERMS.md"):
     print("  - TERMS.md")
-  print(f"  - {agents_file}")
-  for skill in loaded_skills:
-    print(f"  - Skill: {skill}")
+  print(f"  - Skills: {' '.join(loaded_skills)}")
   print("Type '/exit' or '/quit' to stop.")
 
   while True:
