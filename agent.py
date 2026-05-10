@@ -17,6 +17,7 @@
 import os
 import sys
 import json
+import subprocess
 from dataclasses import asdict
 from google import genai
 from scripts import check_no_absolute_paths
@@ -25,9 +26,88 @@ from skills.committing_git_changes.scripts import batch_commit
 from skills.gathering_git_context.scripts import gather_context
 from skills.proposing_changes.scripts import format_proposal
 
+def read_file(path: str) -> dict:
+  """Reads the content of a file using Python's built-in open().
+
+  Args:
+    path: The path to the file to read.
+
+  Returns:
+    A dictionary containing stdout, stderr, and exit_code.
+  """
+  try:
+    with open(path, "r", encoding="utf-8") as f:
+      content = f.read()
+    return {
+        "stdout": content,
+        "stderr": "",
+        "exit_code": 0
+    }
+  except Exception as e:
+    return {
+        "stdout": "",
+        "stderr": str(e),
+        "exit_code": 1
+    }
+
+def write_file(path: str, content: str) -> dict:
+  """Writes content to a file using Python's built-in open().
+
+  Args:
+    path: The path to the file to write.
+    content: The content to write to the file.
+
+  Returns:
+    A dictionary containing stdout, stderr, and exit_code.
+  """
+  try:
+    with open(path, "w", encoding="utf-8") as f:
+      f.write(content)
+    return {
+        "stdout": f"Successfully wrote to {path}",
+        "stderr": "",
+        "exit_code": 0
+    }
+  except Exception as e:
+    return {
+        "stdout": "",
+        "stderr": str(e),
+        "exit_code": 1
+    }
+
+def list_files() -> dict:
+  """Lists all files tracked by git.
+
+  Returns:
+    A dictionary containing stdout, stderr, and exit_code.
+  """
+  try:
+    result = subprocess.run(
+        ["git", "ls-files"], capture_output=True, text=True, check=False
+    )
+    return {
+        "stdout": result.stdout,
+        "stderr": result.stderr,
+        "exit_code": result.returncode
+    }
+  except Exception as e:
+    return {
+        "stdout": "",
+        "stderr": str(e),
+        "exit_code": 1
+    }
+
 TOOL_MAP = {
   "gather_git_context": {
     "func": gather_context.gather_git_context,
+    "requires_permission": False,
+  },
+  "read_file": {
+    "func": read_file,
+    "requires_permission": False,
+  },
+  "list_files": {
+    "func": list_files,
     "requires_permission": False,
   },
   "check_standards": {
@@ -42,7 +122,6 @@ TOOL_MAP = {
     ],
     "requires_permission": False,
   },
-
   "batch_commit": {
     "func": batch_commit.batch_commit,
     "requires_permission": True,
@@ -68,6 +147,59 @@ TOOLS = [
   },
   {
     "type": "function",
+    "name": "read_file",
+    "description": (
+      "Reads the content of a file. "
+      "This is a read-only operation and does not require user permission."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the file to read."
+        }
+      },
+      "required": ["path"]
+    }
+  },
+  {
+    "type": "function",
+    "name": "write_file",
+    "description": (
+      "Writes content to a file. "
+      "Requires explicit user permission as it modifies the file system."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the file to write."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content to write to the file."
+        }
+      },
+      "required": ["path", "content"]
+    }
+  },
+  {
+    "type": "function",
+    "name": "list_files",
+    "description": (
+      "Lists all files tracked by git using 'git ls-files'. "
+      "This is a read-only operation and does not require user permission."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "type": "function",
+
     "name": "check_standards",
     "description": (
         "Runs repository-wide standards compliance checks (license headers, "
