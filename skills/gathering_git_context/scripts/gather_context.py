@@ -49,7 +49,8 @@ def gather_git_context() -> dict:
       output.append(result.stdout)
       error_output.append(result.stderr)
       if result.returncode != _SUCCESS:
-        output.append(f"Error: {description} failed with exit code {result.returncode}.\n")
+        output.append(
+            f"Error: {description} failed with exit code {result.returncode}.\n")
         exit_code = result.returncode
         return False
       return True

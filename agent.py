@@ -86,7 +86,7 @@ def main() -> None:
   if os.path.exists("TERMS.md"):
     try:
       with open("TERMS.md", "r") as f:
-        system_instruction += "# Terminology definitions\n\n" + f.read() + "\n\n"
+        system_instruction += "# Terminology\n\n" + f.read() + "\n\n"
     except Exception as e:
       print(f"Warning: Could not read TERMS.md: {e}")
 
