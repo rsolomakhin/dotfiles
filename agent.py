@@ -50,21 +50,26 @@ def read_file(path: str) -> dict:
         "exit_code": 1
     }
 
-def write_file(path: str, content: str) -> dict:
-  """Writes content to a file using Python's built-in open().
+def edit_file(path: str, start: int, end: int, content: str) -> dict:
+  """Edits a file by replacing a range of lines.
 
   Args:
-    path: The path to the file to write.
-    content: The content to write to the file.
+    path: The path to the file to edit.
+    start: The 0-based start line index (inclusive).
+    end: The 0-based end line index (exclusive).
+    content: The new content to insert in the range.
 
   Returns:
     A dictionary containing stdout, stderr, and exit_code.
   """
   try:
+    with open(path, "r", encoding="utf-8") as f:
+      lines = f.readlines()
+    lines[start:end] = [content]
     with open(path, "w", encoding="utf-8") as f:
-      f.write(content)
+      f.writelines(lines)
     return {
-        "stdout": f"Successfully wrote to {path}",
+        "stdout": f"Successfully edited {path}",
         "stderr": "",
         "exit_code": 0
     }
@@ -106,8 +111,8 @@ TOOL_MAP = {
     "func": read_file,
     "requires_permission": False,
   },
-  "write_file": {
-    "func": write_file,
+  "edit_file": {
+    "func": edit_file,
     "requires_permission": True,
   },
   "list_files": {
@@ -381,10 +386,18 @@ def main() -> None:
   print(f"  - Skills: {" ".join(loaded_skills)}")
   print("Type '/exit' or '/quit' to stop.")
 
+  # Initial automated interaction to gather context and greet the user.
+  user_input = (
+      "Gather git context and greet me. Your greeting should be exactly two "
+      "sentences. The first sentence should state your purpose. The second "
+      "sentence should summarize the current git context."
+  )
+
   while True:
     try:
-      # Get user input
-      user_input = input("You: ").strip()
+      # Get user input if not already set (e.g., for the initial prompt)
+      if not user_input:
+        user_input = input("You: ").strip()
 
       # Handle exit commands
       if user_input.lower() in ["/exit", "/quit"]:
@@ -498,6 +511,9 @@ def main() -> None:
         else:
           # Should not happen if status is requires_action
           break
+
+      # Reset user_input to prompt the user in the next iteration.
+      user_input = None
 
     except (EOFError, KeyboardInterrupt):
       print("\nGoodbye!")
