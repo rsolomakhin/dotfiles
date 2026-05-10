@@ -45,7 +45,10 @@ def shell_execute(command: str) -> dict:
     return {"error": str(e)}
 
 TOOL_MAP = {
-  "shell_execute": shell_execute,
+  "shell_execute": {
+    "func": shell_execute,
+    "requires_permission": True,
+  },
 }
 
 TOOLS = [
@@ -195,8 +198,24 @@ def main() -> None:
             print(f"  [Calling Tool] {tool_name}({json.dumps(tool_args)})")
 
             if tool_name in TOOL_MAP:
+              config = TOOL_MAP[tool_name]
+              if config.get("requires_permission"):
+                prompt = f"  [Permission Request] Allow {tool_name}? (y/n): "
+                if input(prompt).strip().lower() != "y":
+                  print(f"  [Tool Denied] {tool_name}")
+                  tool_results.append({
+                    "type": "function_result",
+                    "name": tool_name,
+                    "call_id": tool_id,
+                    "is_error": True,
+                    "result": {
+                      "error": "User denied permission to run this tool."
+                    }
+                  })
+                  continue
+
               try:
-                result = TOOL_MAP[tool_name](**tool_args)
+                result = config["func"](**tool_args)
                 tool_results.append({
                   "type": "function_result",
                   "name": tool_name,
