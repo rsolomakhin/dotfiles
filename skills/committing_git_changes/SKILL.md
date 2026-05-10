@@ -14,7 +14,7 @@ changes.
 2.  Execute:
 
     ```bash
-    ./skills/committing-git-changes/scripts/batch_commit.py --message \
+    ./skills/committing_git_changes/scripts/batch_commit.py --message \
         "Message that was approved by the user"`
     ```
 

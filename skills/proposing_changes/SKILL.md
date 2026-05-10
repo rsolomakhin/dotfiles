@@ -8,7 +8,7 @@ engineering improvements.
 
 When proposing file changes, break down complex tasks into clear steps
 methodically and follow the strict review protocol for transparency, using the
-helper script `./skills/proposing-changes/scripts/format_proposal.py`.
+helper script `./skills/proposing_changes/scripts/format_proposal.py`.
 
 Example usage:
 
@@ -21,5 +21,5 @@ echo '{
   "proposed_code": "print('\''Hello World!'\'')",
   "improvement": "Describe how Y is better than X",
   "alternatives": "Describe other alternatives considered"
-}' | ./skills/proposing-changes/scripts/format_proposal.py
+}' | ./skills/proposing_changes/scripts/format_proposal.py
 ```

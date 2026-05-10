@@ -29,7 +29,7 @@ if ! python3 scripts/check_standards_test.py; then
 fi
 
 echo "[Test] Running unit tests for proposal formatter..."
-if ! python3 skills/proposing-changes/scripts/format_proposal_test.py; then
+if ! python3 skills/proposing_changes/scripts/format_proposal_test.py; then
   FAILED=1
 fi
 

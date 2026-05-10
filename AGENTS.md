@@ -17,25 +17,25 @@ Load the skills organized into the `skills/` directory:
 
 -   [Formatting Markdown](skills/markdown/SKILL.md): Ensuring all documentation
     and agentic memory remain readable and consistent with repository standards.
--   [Committing git changes](skills/committing-git-changes/SKILL.md): Committing
+-   [Committing git changes](skills/committing_git_changes/SKILL.md): Committing
     git changes.
--   [Determining commit message](skills/determining-commit-message/SKILL.md):
+-   [Determining commit message](skills/determining_commit_message/SKILL.md):
     Determining the commit message.
 -   [Gathering git context](skills/gathering_git_context/SKILL.md): Gathering
     git context.
--   [Requesting git permission](skills/requesting-git-permission/SKILL.md):
+-   [Requesting git permission](skills/requesting_git_permission/SKILL.md):
     Requesting git permission.
--   [Harmonizing Bash](skills/harmonizing-bash/SKILL.md): Ensuring shell
+-   [Harmonizing Bash](skills/harmonizing_bash/SKILL.md): Ensuring shell
     configurations are consistent, portable, and resilient across different
     environments.
--   [Proposing Changes](skills/proposing-changes/SKILL.md): Providing a
+-   [Proposing Changes](skills/proposing_changes/SKILL.md): Providing a
     structured and transparent review process for all engineering improvements.
--   [Configuring Vim](skills/configuring-vim/SKILL.md): Creating a productive
+-   [Configuring Vim](skills/configuring_vim/SKILL.md): Creating a productive
     and predictable text editing experience across different environments.
 
 ## 2. Propose changes
 
-Use the [Proposing Changes](skills/proposing-changes/SKILL.md) skill to propose
+Use the [Proposing Changes](skills/proposing_changes/SKILL.md) skill to propose
 changes.
 
 ## 3. Finalize

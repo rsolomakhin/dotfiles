@@ -17,12 +17,38 @@
 import os
 import sys
 import json
+from dataclasses import asdict
 from google import genai
+from scripts import check_no_absolute_paths
+from scripts import check_standards
+from skills.committing_git_changes.scripts import batch_commit
 from skills.gathering_git_context.scripts import gather_context
+from skills.proposing_changes.scripts import format_proposal
 
 TOOL_MAP = {
   "gather_git_context": {
     "func": gather_context.gather_git_context,
+    "requires_permission": False,
+  },
+  "check_standards": {
+    "func": lambda: [
+        asdict(e) for e in check_standards.get_all_errors()
+    ],
+    "requires_permission": False,
+  },
+  "check_no_absolute_paths": {
+    "func": lambda: [
+        asdict(e) for e in check_no_absolute_paths.get_all_errors()
+    ],
+    "requires_permission": False,
+  },
+
+  "batch_commit": {
+    "func": batch_commit.batch_commit,
+    "requires_permission": True,
+  },
+  "format_proposal": {
+    "func": format_proposal.format_proposal,
     "requires_permission": False,
   },
 }
@@ -38,6 +64,99 @@ TOOLS = [
     "parameters": {
       "type": "object",
       "properties": {}
+    }
+  },
+  {
+    "type": "function",
+    "name": "check_standards",
+    "description": (
+        "Runs repository-wide standards compliance checks (license headers, "
+        "shebangs, Python style, etc.). Returns a list of errors."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "type": "function",
+    "name": "check_no_absolute_paths",
+    "description": (
+        "Scans for unauthorized absolute paths in tracked files. "
+        "Returns a list of violations."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "type": "function",
+    "name": "batch_commit",
+    "description": (
+        "Stages all changes, runs tests, commits with a message, and pushes. "
+        "Requires explicit user permission as it modifies the repository."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The commit message explaining why the change is made."
+        }
+      },
+      "required": ["message"]
+    }
+  },
+  {
+    "type": "function",
+    "name": "format_proposal",
+    "description": (
+        "Formats a structured change proposal into a standard Markdown "
+        "template. Useful for preparing formal suggestions for review."
+    ),
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "title": {
+                "type": "string",
+                "description": "Title of the proposal"
+            },
+            "suggestion": {
+                "type": "string",
+                "description": "Short summary of the suggestion"
+            },
+            "existing_code": {
+                "type": "string",
+                "description": "Code snippet of the current state"
+            },
+            "issue": {
+                "type": "string",
+                "description": "Description of the problem being solved"
+            },
+            "proposed_code": {
+                "type": "string",
+                "description": "Code snippet of the proposed change"
+            },
+            "improvement": {
+                "type": "string",
+                "description": "Detailed explanation of why this is better"
+            },
+            "alternatives": {
+                "type": "string",
+                "description": "Other approaches considered"
+            }
+          },
+          "required": [
+              "title", "suggestion", "existing_code", "issue", "proposed_code",
+              "improvement", "alternatives"
+          ]
+        }
+      },
+      "required": ["data"]
     }
   },
 ]

@@ -34,44 +34,26 @@ class TestFormatProposal(unittest.TestCase):
         "improvement": "Im",
         "alternatives": "A"
     }
-    mock_stdin = io.StringIO(json.dumps(data))
-    mock_stdout = io.StringIO()
-
     template_content = (
         "{title} {suggestion} {existing_code} {issue} "
         "{proposed_code} {improvement} {alternatives}"
     )
 
-    with patch.object(sys, "stdin", mock_stdin):
-      with patch.object(sys, "stdout", mock_stdout):
-        with patch.object(builtins, "open",
-                          mock_open(read_data=template_content),
-                          spec_set=True):
-          result = format_proposal.format_proposal()
+    with patch.object(builtins, "open",
+                      mock_open(read_data=template_content),
+                      spec_set=True):
+      result = format_proposal.format_proposal(data)
 
-    self.assertEqual(result, 0)
-    self.assertIn("T S E I P Im A", mock_stdout.getvalue())
+    self.assertIsNotNone(result)
+    self.assertEqual(result, "T S E I P Im A")
 
-  def test_format_proposal_invalid_json(self) -> None:
-    mock_stdin = io.StringIO("not json")
+  def test_format_proposal_invalid_data(self) -> None:
     mock_stderr = io.StringIO()
 
-    with patch.object(sys, "stdin", mock_stdin):
-      with patch.object(sys, "stderr", mock_stderr):
-        result = format_proposal.format_proposal()
+    with patch.object(sys, "stderr", mock_stderr):
+      result = format_proposal.format_proposal({})
 
-    self.assertEqual(result, 1)
-    self.assertIn("Error: Invalid JSON input", mock_stderr.getvalue())
-
-  def test_format_proposal_missing_key(self) -> None:
-    mock_stdin = io.StringIO(json.dumps({"title": "T"}))
-    mock_stderr = io.StringIO()
-
-    with patch.object(sys, "stdin", mock_stdin):
-      with patch.object(sys, "stderr", mock_stderr):
-        result = format_proposal.format_proposal()
-
-    self.assertEqual(result, 1)
+    self.assertIsNone(result)
     self.assertIn("Error: Missing required key", mock_stderr.getvalue())
 
 if __name__ == "__main__":

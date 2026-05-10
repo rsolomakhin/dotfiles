@@ -45,27 +45,21 @@ def run_command(cmd: list[str], description: str) -> bool:
     return True
 
 
-def batch_commit() -> int:
+def batch_commit(message: str) -> int:
   """Batch execute tests, add, commit, and push.
+
+  Args:
+    message: Commit message, explaining why.
 
   Returns:
     0 for success, 1 for failure.
   """
-  parser = argparse.ArgumentParser(
-      description="Batch execute tests, add, commit, and push."
-  )
-  parser.add_argument(
-      "--message", required=True, help="Commit message, explaining why."
-  )
-
-  args = parser.parse_args()
-
-  if "\n" in args.message:
+  if "\n" in message:
     print("Error: Commit message must be a single line.", file=sys.stderr)
     return _FAILURE
 
   import re
-  if re.search(r"\b[A-Z]+=", args.message):
+  if re.search(r"\b[A-Z]+=", message):
     print("Error: Tags are not allowed in commit messages.", file=sys.stderr)
     return _FAILURE
 
@@ -82,7 +76,7 @@ def batch_commit() -> int:
   if not run_command(["./test"], "Running tests"):
     return _FAILURE
 
-  if not run_command(["git", "commit", "-m", args.message],
+  if not run_command(["git", "commit", "-m", message],
                      "Committing changes"):
     return _FAILURE
 
@@ -92,5 +86,22 @@ def batch_commit() -> int:
   return _SUCCESS
 
 
+def main() -> int:
+  """Main entry point.
+
+  Returns:
+    0 for success, 1 for failure.
+  """
+  parser = argparse.ArgumentParser(
+      description="Batch execute tests, add, commit, and push."
+  )
+  parser.add_argument(
+      "--message", required=True, help="Commit message, explaining why."
+  )
+
+  args = parser.parse_args()
+  return batch_commit(args.message)
+
+
 if __name__ == "__main__":
-  sys.exit(batch_commit())
+  sys.exit(main())
