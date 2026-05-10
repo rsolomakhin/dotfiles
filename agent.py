@@ -106,6 +106,10 @@ TOOL_MAP = {
     "func": read_file,
     "requires_permission": False,
   },
+  "write_file": {
+    "func": write_file,
+    "requires_permission": True,
+  },
   "list_files": {
     "func": list_files,
     "requires_permission": False,
@@ -165,9 +169,11 @@ TOOLS = [
   },
   {
     "type": "function",
-    "name": "write_file",
+    "name": "edit_file",
     "description": (
-      "Writes content to a file. "
+      "Edits a file by replacing a range of lines (0-indexed). "
+      "start is inclusive, end is exclusive. For insertion, use start=end. "
+      "Content should include any necessary trailing newlines. "
       "Requires explicit user permission as it modifies the file system."
     ),
     "parameters": {
@@ -175,14 +181,22 @@ TOOLS = [
       "properties": {
         "path": {
           "type": "string",
-          "description": "The path to the file to write."
+          "description": "The path to the file to edit."
+        },
+        "start": {
+          "type": "integer",
+          "description": "The 0-based start line index (inclusive)."
+        },
+        "end": {
+          "type": "integer",
+          "description": "The 0-based end line index (exclusive)."
         },
         "content": {
           "type": "string",
-          "description": "The content to write to the file."
+          "description": "The new content to insert in the range."
         }
       },
-      "required": ["path", "content"]
+      "required": ["path", "start", "end", "content"]
     }
   },
   {
