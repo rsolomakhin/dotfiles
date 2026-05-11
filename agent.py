@@ -383,7 +383,8 @@ def main() -> None:
     print("  - README.md")
   if os.path.exists("TERMS.md"):
     print("  - TERMS.md")
-  print(f"  - Skills: {" ".join(loaded_skills)}")
+  skill_list_separator = " "
+  print(f"  - Skills: {skill_list_separator.join(loaded_skills)}")
   print("Type '/exit' or '/quit' to stop.")
 
   # Initial automated interaction to gather context and greet the user.

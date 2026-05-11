@@ -17,13 +17,14 @@
 import json
 import os
 import sys
+from typing import Optional
 
 
 _SUCCESS = 0
 _FAILURE = 1
 
 
-def format_proposal(data: dict) -> str | None:
+def format_proposal(data: dict) -> Optional[str]:
   """Format a proposal from data.
 
   Args:
