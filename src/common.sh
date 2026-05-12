@@ -44,9 +44,10 @@ path_prepend() {
 path_prepend "$ANDROID_HOME/platform-tools"
 path_prepend "$ANDROID_HOME/tools"
 path_prepend "$ANDROID_HOME/tools/bin"
-path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/depot_tools"
 path_prepend "$HOME/google-cloud-sdk/bin"
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/node/bin"
 path_prepend "$HOME/software/bin"
 
 # Bootstrap Homebrew path if not already present.

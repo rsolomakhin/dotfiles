@@ -17,6 +17,8 @@ if !has_key(g:plugs, 'coc.nvim')
   finish
 endif
 
+" Automatically install these coc.nvim extensions.
+let g:coc_global_extensions = ['coc-json', 'coc-markdownlint', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-yaml']
 
 " --- Mappings ---
 

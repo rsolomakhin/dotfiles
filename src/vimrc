@@ -38,13 +38,16 @@ Plug 'tpope/vim-sensible'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'Valloric/ListToggle'
+
 " coc.nvim requires node.
+" Download it from https://nodejs.org/en/download/current.
+" For example:
+"   wget https://nodejs.org/dist/v26.1.0/node-v26.1.0-linux-x64.tar.xz.
+"   tar -xvf node-v26.1.0-linux-x64.tar.xz
+"   ln -s node-v26.1.0-linux-x64 node
 if executable('node')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
-
-" Automatically install these coc.nvim extensions.
-let g:coc_global_extensions = ['coc-json', 'coc-markdownlint', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-yaml']
 
 " Local plugins.
 call SourceIfExists('~/.local-plugins.vimrc')
