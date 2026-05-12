@@ -50,7 +50,7 @@ function! ShowDocumentation()
 endfunction
 
 " Symbol renaming.
-nmap <leader>e <Plug>(coc-rename)
+nmap <leader>m <Plug>(coc-rename)
 
 " Run the Code Action selector for the current line.
 nmap <leader>a <Plug>(coc-codeaction)
