@@ -1,4 +1,6 @@
 {
+  "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.functionReturnTypes": false,
   "markdownlint.config": {
     "MD007": {
       "indent": 4
