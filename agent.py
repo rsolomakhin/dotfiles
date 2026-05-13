@@ -335,14 +335,11 @@ def main() -> None:
 
   # Load Project Overview from README.md.
   if os.path.exists("README.md"):
-    # Show abbreviated result on success.
-    if tool_name == "format_proposal":
-      print(f"\n{result}\n")
-    else:
-      result_str = json.dumps(result).replace("\n", " ")
-      if len(result_str) > 100:
-        result_str = result_str[:97] + "..."
-      print(f"  [Tool Success] {tool_name}: {result_str}")
+    try:
+      with open("README.md", "r") as f:
+        system_instruction += "# Project Overview\n\n" + f.read() + "\n\n"
+    except Exception as e:
+      print(f"Warning: Could not read README.md: {e}")
 
   # Load the terminology definitions from TERMS.md.
   if os.path.exists("TERMS.md"):
@@ -470,11 +467,14 @@ def main() -> None:
                     "call_id": tool_id,
                     "result": result,
                 })
-                # Show abbreviated result on success
-                result_str = json.dumps(result).replace("\n", " ")
-                if len(result_str) > 100:
-                  result_str = result_str[:97] + "..."
-                print(f"  [Tool Success] {tool_name}: {result_str}")
+                # Show abbreviated result on success.
+                if tool_name == "format_proposal":
+                  print(f"\n{result}\n")
+                else:
+                  result_str = json.dumps(result).replace("\n", " ")
+                  if len(result_str) > 100:
+                    result_str = result_str[:97] + "..."
+                  print(f"  [Tool Success] {tool_name}: {result_str}")
               except Exception as e:
                 print(f"  [Tool Error] {tool_name}: {e}")
                 tool_results.append({
