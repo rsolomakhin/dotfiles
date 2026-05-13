@@ -14,17 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
-import json
-import subprocess
 from dataclasses import asdict
+import json
+import os
+import subprocess
+import sys
 from google import genai
 from scripts import check_no_absolute_paths
 from scripts import check_standards
 from skills.committing_git_changes.scripts import batch_commit
 from skills.gathering_git_context.scripts import gather_context
 from skills.proposing_changes.scripts import format_proposal
+
 
 def read_file(path: str) -> dict:
   """Reads the content of a file using Python's built-in open().
@@ -38,17 +39,10 @@ def read_file(path: str) -> dict:
   try:
     with open(path, "r", encoding="utf-8") as f:
       content = f.read()
-    return {
-        "stdout": content,
-        "stderr": "",
-        "exit_code": 0
-    }
+    return {"stdout": content, "stderr": "", "exit_code": 0}
   except Exception as e:
-    return {
-        "stdout": "",
-        "stderr": str(e),
-        "exit_code": 1
-    }
+    return {"stdout": "", "stderr": str(e), "exit_code": 1}
+
 
 def edit_file(path: str, start: int, end: int, content: str) -> dict:
   """Edits a file by replacing a range of lines.
@@ -71,14 +65,11 @@ def edit_file(path: str, start: int, end: int, content: str) -> dict:
     return {
         "stdout": f"Successfully edited {path}",
         "stderr": "",
-        "exit_code": 0
+        "exit_code": 0,
     }
   except Exception as e:
-    return {
-        "stdout": "",
-        "stderr": str(e),
-        "exit_code": 1
-    }
+    return {"stdout": "", "stderr": str(e), "exit_code": 1}
+
 
 def list_files() -> dict:
   """Lists all files tracked by git.
@@ -93,224 +84,222 @@ def list_files() -> dict:
     return {
         "stdout": result.stdout,
         "stderr": result.stderr,
-        "exit_code": result.returncode
+        "exit_code": result.returncode,
     }
   except Exception as e:
-    return {
-        "stdout": "",
-        "stderr": str(e),
-        "exit_code": 1
-    }
+    return {"stdout": "", "stderr": str(e), "exit_code": 1}
+
 
 TOOL_MAP = {
-  "gather_git_context": {
-    "func": gather_context.gather_git_context,
-    "requires_permission": False,
-  },
-  "read_file": {
-    "func": read_file,
-    "requires_permission": False,
-  },
-  "edit_file": {
-    "func": edit_file,
-    "requires_permission": True,
-  },
-  "list_files": {
-    "func": list_files,
-    "requires_permission": False,
-  },
-  "check_standards": {
-    "func": lambda: [
-        asdict(e) for e in check_standards.get_all_errors()
-    ],
-    "requires_permission": False,
-  },
-  "check_no_absolute_paths": {
-    "func": lambda: [
-        asdict(e) for e in check_no_absolute_paths.get_all_errors()
-    ],
-    "requires_permission": False,
-  },
-  "batch_commit": {
-    "func": batch_commit.batch_commit,
-    "requires_permission": True,
-  },
-  "format_proposal": {
-    "func": format_proposal.format_proposal,
-    "requires_permission": False,
-  },
+    "gather_git_context": {
+        "func": gather_context.gather_git_context,
+        "requires_permission": False,
+    },
+    "read_file": {
+        "func": read_file,
+        "requires_permission": False,
+    },
+    "edit_file": {
+        "func": edit_file,
+        "requires_permission": True,
+    },
+    "list_files": {
+        "func": list_files,
+        "requires_permission": False,
+    },
+    "check_standards": {
+        "func": lambda: [asdict(e) for e in check_standards.get_all_errors()],
+        "requires_permission": False,
+    },
+    "check_no_absolute_paths": {
+        "func": lambda: [
+            asdict(e) for e in check_no_absolute_paths.get_all_errors()
+        ],
+        "requires_permission": False,
+    },
+    "batch_commit": {
+        "func": batch_commit.batch_commit,
+        "requires_permission": True,
+    },
+    "format_proposal": {
+        "func": format_proposal.format_proposal,
+        "requires_permission": False,
+    },
 }
 
 TOOLS = [
-  {
-    "type": "function",
-    "name": "gather_git_context",
-    "description": (
-      "Gathers detailed git context including log, status, and diffs. "
-      "This is a read-only operation and does not require user permission."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {}
-    }
-  },
-  {
-    "type": "function",
-    "name": "read_file",
-    "description": (
-      "Reads the content of a file. "
-      "This is a read-only operation and does not require user permission."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The path to the file to read."
-        }
-      },
-      "required": ["path"]
-    }
-  },
-  {
-    "type": "function",
-    "name": "edit_file",
-    "description": (
-      "Edits a file by replacing a range of lines (0-indexed). "
-      "start is inclusive, end is exclusive. For insertion, use start=end. "
-      "Content should include any necessary trailing newlines. "
-      "Requires explicit user permission as it modifies the file system."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The path to the file to edit."
+    {
+        "type": "function",
+        "name": "gather_git_context",
+        "description": (
+            "Gathers detailed git context including log, status, and diffs."
+            " This is a read-only operation and does not require user"
+            " permission."
+        ),
+        "parameters": {"type": "object", "properties": {}},
+    },
+    {
+        "type": "function",
+        "name": "read_file",
+        "description": (
+            "Reads the content of a file. This is a read-only operation and"
+            " does not require user permission."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "The path to the file to read.",
+                }
+            },
+            "required": ["path"],
         },
-        "start": {
-          "type": "integer",
-          "description": "The 0-based start line index (inclusive)."
+    },
+    {
+        "type": "function",
+        "name": "edit_file",
+        "description": (
+            "Edits a file by replacing a range of lines (0-indexed). start is"
+            " inclusive, end is exclusive. For insertion, use start=end."
+            " Content should include any necessary trailing newlines. Requires"
+            " explicit user permission as it modifies the file system."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "The path to the file to edit.",
+                },
+                "start": {
+                    "type": "integer",
+                    "description": "The 0-based start line index (inclusive).",
+                },
+                "end": {
+                    "type": "integer",
+                    "description": "The 0-based end line index (exclusive).",
+                },
+                "content": {
+                    "type": "string",
+                    "description": "The new content to insert in the range.",
+                },
+            },
+            "required": ["path", "start", "end", "content"],
         },
-        "end": {
-          "type": "integer",
-          "description": "The 0-based end line index (exclusive)."
+    },
+    {
+        "type": "function",
+        "name": "list_files",
+        "description": (
+            "Lists all files tracked by git using 'git ls-files'. This is a"
+            " read-only operation and does not require user permission."
+        ),
+        "parameters": {"type": "object", "properties": {}},
+    },
+    {
+        "type": "function",
+        "name": "check_standards",
+        "description": (
+            "Runs repository-wide standards compliance checks (license headers,"
+            " shebangs, Python style, etc.). Returns a list of errors."
+        ),
+        "parameters": {"type": "object", "properties": {}},
+    },
+    {
+        "type": "function",
+        "name": "check_no_absolute_paths",
+        "description": (
+            "Scans for unauthorized absolute paths in tracked files. "
+            "Returns a list of violations."
+        ),
+        "parameters": {"type": "object", "properties": {}},
+    },
+    {
+        "type": "function",
+        "name": "batch_commit",
+        "description": (
+            "Stages all changes, runs tests, commits with a message, and"
+            " pushes. Requires explicit user permission as it modifies the"
+            " repository."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": (
+                        "The commit message explaining why the change is made."
+                    ),
+                }
+            },
+            "required": ["message"],
         },
-        "content": {
-          "type": "string",
-          "description": "The new content to insert in the range."
-        }
-      },
-      "required": ["path", "start", "end", "content"]
-    }
-  },
-  {
-    "type": "function",
-    "name": "list_files",
-    "description": (
-      "Lists all files tracked by git using 'git ls-files'. "
-      "This is a read-only operation and does not require user permission."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {}
-    }
-  },
-  {
-    "type": "function",
-
-    "name": "check_standards",
-    "description": (
-        "Runs repository-wide standards compliance checks (license headers, "
-        "shebangs, Python style, etc.). Returns a list of errors."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {}
-    }
-  },
-  {
-    "type": "function",
-    "name": "check_no_absolute_paths",
-    "description": (
-        "Scans for unauthorized absolute paths in tracked files. "
-        "Returns a list of violations."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {}
-    }
-  },
-  {
-    "type": "function",
-    "name": "batch_commit",
-    "description": (
-        "Stages all changes, runs tests, commits with a message, and pushes. "
-        "Requires explicit user permission as it modifies the repository."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "The commit message explaining why the change is made."
-        }
-      },
-      "required": ["message"]
-    }
-  },
-  {
-    "type": "function",
-    "name": "format_proposal",
-    "description": (
-        "Formats a structured change proposal into a standard Markdown "
-        "template. Useful for preparing formal suggestions for review."
-    ),
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "title": {
-                "type": "string",
-                "description": "Title of the proposal"
+    },
+    {
+        "type": "function",
+        "name": "format_proposal",
+        "description": (
+            "Formats a structured change proposal into a standard Markdown "
+            "template. Useful for preparing formal suggestions for review."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "type": "string",
+                            "description": "Title of the proposal",
+                        },
+                        "suggestion": {
+                            "type": "string",
+                            "description": "Short summary of the suggestion",
+                        },
+                        "existing_code": {
+                            "type": "string",
+                            "description": "Code snippet of the current state",
+                        },
+                        "issue": {
+                            "type": "string",
+                            "description": (
+                                "Description of the problem being solved"
+                            ),
+                        },
+                        "proposed_code": {
+                            "type": "string",
+                            "description": (
+                                "Code snippet of the proposed change"
+                            ),
+                        },
+                        "improvement": {
+                            "type": "string",
+                            "description": (
+                                "Detailed explanation of why this is better"
+                            ),
+                        },
+                        "alternatives": {
+                            "type": "string",
+                            "description": "Other approaches considered",
+                        },
+                    },
+                    "required": [
+                        "title",
+                        "suggestion",
+                        "existing_code",
+                        "issue",
+                        "proposed_code",
+                        "improvement",
+                        "alternatives",
+                    ],
+                }
             },
-            "suggestion": {
-                "type": "string",
-                "description": "Short summary of the suggestion"
-            },
-            "existing_code": {
-                "type": "string",
-                "description": "Code snippet of the current state"
-            },
-            "issue": {
-                "type": "string",
-                "description": "Description of the problem being solved"
-            },
-            "proposed_code": {
-                "type": "string",
-                "description": "Code snippet of the proposed change"
-            },
-            "improvement": {
-                "type": "string",
-                "description": "Detailed explanation of why this is better"
-            },
-            "alternatives": {
-                "type": "string",
-                "description": "Other approaches considered"
-            }
-          },
-          "required": [
-              "title", "suggestion", "existing_code", "issue", "proposed_code",
-              "improvement", "alternatives"
-          ]
-        }
-      },
-      "required": ["data"]
-    }
-  },
+            "required": ["data"],
+        },
+    },
 ]
+
 
 def main() -> None:
   # Check for GEMINI_API_KEY.
@@ -346,11 +335,14 @@ def main() -> None:
 
   # Load Project Overview from README.md.
   if os.path.exists("README.md"):
-    try:
-      with open("README.md", "r") as f:
-        system_instruction += "# Project Overview\n\n" + f.read() + "\n\n"
-    except Exception as e:
-      print(f"Warning: Could not read README.md: {e}")
+    # Show abbreviated result on success.
+    if tool_name == "format_proposal":
+      print(f"\n{result}\n")
+    else:
+      result_str = json.dumps(result).replace("\n", " ")
+      if len(result_str) > 100:
+        result_str = result_str[:97] + "..."
+      print(f"  [Tool Success] {tool_name}: {result_str}")
 
   # Load the terminology definitions from TERMS.md.
   if os.path.exists("TERMS.md"):
@@ -362,6 +354,7 @@ def main() -> None:
 
   # Load all skills from skills/*/SKILL.md
   import glob
+
   skill_files = glob.glob("skills/*/SKILL.md")
   loaded_skills = []
   if skill_files:
@@ -370,8 +363,9 @@ def main() -> None:
       try:
         skill_name = os.path.basename(os.path.dirname(skill_path))
         with open(skill_path, "r") as f:
-          system_instruction += f"\n## Skill: {skill_name}\n\n" + \
-                                f.read() + "\n"
+          system_instruction += (
+              f"\n## Skill: {skill_name}\n\n" + f.read() + "\n"
+          )
         loaded_skills.append(skill_name)
       except Exception as e:
         print(f"Warning: Could not read skill at {skill_path}: {e}")
@@ -410,11 +404,11 @@ def main() -> None:
 
       # Create initial interaction
       interaction = client.interactions.create(
-        model=model_id,
-        input=user_input,
-        system_instruction=system_instruction,
-        previous_interaction_id=previous_interaction_id,
-        tools=TOOLS
+          model=model_id,
+          input=user_input,
+          system_instruction=system_instruction,
+          previous_interaction_id=previous_interaction_id,
+          tools=TOOLS,
       )
 
       # Handle multi-step interaction (tool calls)
@@ -458,23 +452,23 @@ def main() -> None:
                 if input(prompt).strip().lower() != "y":
                   print(f"  [Tool Denied] {tool_name}")
                   tool_results.append({
-                    "type": "function_result",
-                    "name": tool_name,
-                    "call_id": tool_id,
-                    "is_error": True,
-                    "result": {
-                      "error": "User denied permission to run this tool."
-                    }
+                      "type": "function_result",
+                      "name": tool_name,
+                      "call_id": tool_id,
+                      "is_error": True,
+                      "result": {
+                          "error": "User denied permission to run this tool."
+                      },
                   })
                   continue
 
               try:
                 result = config["func"](**tool_args)
                 tool_results.append({
-                  "type": "function_result",
-                  "name": tool_name,
-                  "call_id": tool_id,
-                  "result": result
+                    "type": "function_result",
+                    "name": tool_name,
+                    "call_id": tool_id,
+                    "result": result,
                 })
                 # Show abbreviated result on success
                 result_str = json.dumps(result).replace("\n", " ")
@@ -484,30 +478,30 @@ def main() -> None:
               except Exception as e:
                 print(f"  [Tool Error] {tool_name}: {e}")
                 tool_results.append({
-                  "type": "function_result",
-                  "name": tool_name,
-                  "call_id": tool_id,
-                  "is_error": True,
-                  "result": {"error": str(e)}
+                    "type": "function_result",
+                    "name": tool_name,
+                    "call_id": tool_id,
+                    "is_error": True,
+                    "result": {"error": str(e)},
                 })
             else:
               print(f"  [Tool Error] Tool '{tool_name}' not found.")
               tool_results.append({
-                "type": "function_result",
-                "name": tool_name,
-                "call_id": tool_id,
-                "is_error": True,
-                "result": {"error": f"Tool '{tool_name}' not found."}
+                  "type": "function_result",
+                  "name": tool_name,
+                  "call_id": tool_id,
+                  "is_error": True,
+                  "result": {"error": f"Tool '{tool_name}' not found."},
               })
 
         # Send tool results back
         if tool_results:
           interaction = client.interactions.create(
-            model=model_id,
-            input=tool_results,
-            system_instruction=system_instruction,
-            previous_interaction_id=interaction.id,
-            tools=TOOLS
+              model=model_id,
+              input=tool_results,
+              system_instruction=system_instruction,
+              previous_interaction_id=interaction.id,
+              tools=TOOLS,
           )
         else:
           # Should not happen if status is requires_action
@@ -523,6 +517,7 @@ def main() -> None:
       print(f"\nError during interaction: {e}")
       # Reset session on error to avoid broken chains
       previous_interaction_id = None
+
 
 if __name__ == "__main__":
   main()
